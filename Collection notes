@@ -37,3 +37,25 @@ Comparable interface is present in java.lang package.	                          
 It provides single sorting sequences.                                           	It provides multiple sorting sequences.
 This method can sort the data according to the natural sorting order.           	This method sorts the data according to the customized sorting order.
 It affects the original class. i.e., the actual class is altered.                 	It doesn’t affect the original class, i.e., the actual class is not altered.
+
+
+7. What is the difference between failfast and failsafe?
+
+        Failfast	                                                                        Failsafe
+It does not allow collection modification while iterating.	                It allows collection modification while iterating.
+It can throw ConcurrentModificationException	                            It can’t throw any exception.
+It uses the original collection to traverse the elements.	                It usescollection copy to traverse the elements.
+There is no requirement of extra memory.	                                There is a requirement of extra memory.
+
+
+8. What is the difference between Hashmap and Hashtable?
+
+        Hashmap	                                                        Hashtable
+It is not synchronized.	                                                It is synchronized.
+HashMap allows one key as a null value.                             	HashTable does not allow null values.
+Iterator is used to traverse HashMap.	                                Either Iterator or Enumerator is used for traversing a HashTable.
+It can be used for both HashTable, HashMap and is fail-fast.	        It can be used with HashTable and is fail-safe.
+HashMap perform faster than the HashTable.	                            Hashtable is not much faster as compared to HashMap.
+
+
+
