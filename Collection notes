@@ -1,0 +1,13 @@
+1. What is the Collection framework in Java?
+Collection Framework is a grouping of classes and interfaces that is used to store and manage the objects.
+
+2. Distinguish between ArrayList and Vector in the Java collection framework.
+
+  ArrayList	                                  Vector
+ArrayList is cannot be synchronized.	      Vector can be is synchronized.
+It is fast                                  It is slow.      
+ArrayList is not thread-safe.	              Vector is a thread-safe.
+It can increase its size by 50%.	          It can increase its size by doubling the size of the array.
+It is not a legacy class.	                  It is a legacy class.
+
+3. 
