@@ -5,7 +5,7 @@ Collection Framework is a grouping of classes and interfaces that is used to sto
 
     ArrayList	                                  Vector
 ArrayList is cannot be synchronized.	      Vector can be is synchronized.
-It is fast                                  It is slow.      
+It is fast                                    It is slow.      
 ArrayList is not thread-safe.	              Vector is a thread-safe.
 It can increase its size by 50%.	          It can increase its size by doubling the size of the array.
 It is not a legacy class.	                  It is a legacy class.
@@ -23,7 +23,7 @@ It can perform only remove operation.                                           
     Iterator	                                                                                       Enumeration
 The Iterator can traverse both legacies as well as non-legacy elements.	                      Enumeration can traverse only legacy elements.
 The Iterator is fail-fast.	                                                                  Enumeration is not fail-fast.
-The Iterator is very slow compare to Enumeration.	                                            Enumeration is fast compare to Iterator.
+The Iterator is very slow compare to Enumeration.	                                          Enumeration is fast compare to Iterator.
 The Iterator can perform remove operation while traversing the collection.	                  The Enumeration can perform only traverse operation on the collection.
 
 5. Explain override equals() method
