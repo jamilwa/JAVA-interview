@@ -14,8 +14,12 @@ It is not a legacy class.	                  It is a legacy class.
 
     Iterator	                                                                                ListIterator
 The Iterator can traverse the array elements in the forward direction.	            ListIterator can traverse the array elements in backward as well as forward directions.
-It can be used in Queue, List, and Set.                               	            It can be used in List.
+It can be used in Map, List, and Set.                               	            It can be used in List.
 It can perform only remove operation.                                             	It can perform add, remove, and set operation while traversing the collection.
+Iterator cannot modify or replace elements                                          ListIterator can modify or replace an element with the help of set(E e)
+Indexes cannot be obtained by using Iterator.                                       nextIndex() and previousIndex() helps to obtain indexes of elements at any time.
+Cannot add elements and it throws ConcurrentModificationException                   Can add elements to a collection at any time
+methods of Iterator are next(), remove() and hasNext()                              methods of ListIterator are next(), previous(), hasNext(), hasPrevious(), add(E e)
 
 
 4. What is the difference between Iterator and Enumeration?
