@@ -16,7 +16,7 @@ It is not a legacy class.	                  It is a legacy class.
 The Iterator can traverse the array elements in the forward direction.	            ListIterator can traverse the array elements in backward as well as forward directions.
 It can be used in Map, List, and Set.                               	            It can be used in List.
 It can perform only remove operation.                                             	It can perform add, remove, and set operation while traversing the collection.
-Iterator cannot modify or replace elements                                          ListIterator can modify or replace an element with the help of set(E e)
+Iterator cannot modify or replace elements                                          can modify or replace an element with the help of set(E e)
 Indexes cannot be obtained by using Iterator.                                       nextIndex() and previousIndex() helps to obtain indexes of elements at any time.
 Cannot add elements and it throws ConcurrentModificationException                   Can add elements to a collection at any time
 methods of Iterator are next(), remove() and hasNext()                              methods of ListIterator are next(), previous(), hasNext(), hasPrevious(), add(E e)
@@ -31,7 +31,8 @@ The Iterator is very slow compare to Enumeration.	                              
 The Iterator can perform remove operation while traversing the collection.	                  The Enumeration can perform only traverse operation on the collection.
 
 5. Explain override equals() method
-The equals method is used to check the similarity between two objects. In case if the programmer wants to check an object based on the property, then it needs to be overridden.
+The equals method is used to check the similarity between two objects. In case if the programmer wants to check an object based on the property, then it 
+needs to be overridden.
 
 6. What is the difference between Comparable and Comparator?
 
@@ -41,15 +42,6 @@ Comparable interface is present in java.lang package.	                          
 It provides single sorting sequences.                                           	It provides multiple sorting sequences.
 This method can sort the data according to the natural sorting order.           	This method sorts the data according to the customized sorting order.
 It affects the original class. i.e., the actual class is altered.                 	It doesn’t affect the original class, i.e., the actual class is not altered.
-
-
-7. What is the difference between failfast and failsafe?
-
-        Failfast	                                                                        Failsafe
-It does not allow collection modification while iterating.	                It allows collection modification while iterating.
-It can throw ConcurrentModificationException	                            It can’t throw any exception.
-It uses the original collection to traverse the elements.	                It usescollection copy to traverse the elements.
-There is no requirement of extra memory.	                                There is a requirement of extra memory.
 
 
 8. What is the difference between Hashmap and Hashtable?
