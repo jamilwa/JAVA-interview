@@ -1,58 +1,118 @@
 
 	1. Whenever we have to sort objects in customized way or compare objects then we have to use two things. Comparable interface and Comparator( both are functional interface)
-	2. Comparable Example
-		 public class Person implements Comparable<Person> {
-			private String name
-			private int age
-			
-			public Person(String name, int age) {
-				this.name = name
-				this.age = age
-			}
 
-			getters for name and age and we are setting values using constructor above
-			
-			@Override
-			public int compareTo(Person p) {
-				return this.age - p.age
-			}
+	2. Example without comparable(natural ordering) and comparator
+		public class Player {
+   		 private int ranking;
+  		  private String name;
+  		  private int age;
+    
+ 		   // constructor, getters, setters  
+		}	
 
-			@Override
-			public String toString(){
-				return Person{ +
-					"name=" + name +
-					 "age=" + age +
-					'}' ;
-					
+		
+		public static void main(String[] args) {
+    			List<Player> footballTeam = new ArrayList<>();
+    			Player player1 = new Player(59, "John", 20);
+    			Player player2 = new Player(67, "Roger", 22);
+    			Player player3 = new Player(45, "Steven", 24);
+    			footballTeam.add(player1);
+    			footballTeam.add(player2);
+    			footballTeam.add(player3);
 
+    			System.out.println("Before Sorting : " + footballTeam);
+    			Collections.sort(footballTeam);
+    			System.out.println("After Sorting : " + footballTeam);
+		}
 
-		public class Test {
-			public static void main(String [] args) {
-
-				Set<Person> s = new TreeSet<>()
-				set.add(new Person("rohan" , 22))
-				set.add(new Person("riya" , 19))
-				set.add(new Person("neha" , 26))
-				set.add(new Person("amit" , 40))
-	//	output : elements will be sorted by age  
+		Output:
+		// As expected, this results in a compile-time error: The method sort(List<T>) in the type Collections  is not applicable for the arguments (ArrayList<Player>)
 
 
-	3. Comparator Example 
-		The Person class will be coming from external source like jar file. 
 
-			
-		public class Test {
-			public static void main(String [] args) {
 
-				Comparator<Person> c = (o1,o2) -> o1.getAge() - o2.getAge()
-					
-				Set<Person> s = new TreeSet<>(c)
-				set.add(new Person("rohan" , 22))
-				set.add(new Person("riya" , 19))
-				set.add(new Person("neha" , 26))
-				set.add(new Person("amit" , 40))
 
-	//	output : elements will be sorted by age . 
+	3. Comparable Example 
+
+		public class Player implements Comparable<Player> {
+		  private int ranking;
+  		  private String name;
+  		  private int age;
+    
+ 		   // constructor, getters, setters  
+		}
+    			
+
+    		@Override
+    		public int compareTo(Player otherPlayer) {
+        	return Integer.compare(getRanking(),otherPlayer.getRanking());
+    			}
+
+
+
+		public static void main(String[] args) {
+    			List<Player> footballTeam = new ArrayList<>();
+    			Player player1 = new Player(59, "John", 20);
+    			Player player2 = new Player(67, "Roger", 22);
+    			Player player3 = new Player(45, "Steven", 24);
+    			footballTeam.add(player1);
+    			footballTeam.add(player2);
+    			footballTeam.add(player3);
+
+    			System.out.println("Before Sorting : " + footballTeam);
+    			Collections.sort(footballTeam);
+    			System.out.println("After Sorting : " + footballTeam);
+		}
+
+
+		
+		Output:
+		Before Sorting : [John, Roger, Steven]
+		After Sorting : [Steven, John, Roger]
+
+
+
+	4. Comparator Example
+		
+		public class PlayerRankingComparator implements Comparator<Player> {
+		  private int ranking;
+  		  private String name;
+  		  private int age;
+    
+ 		   // constructor, getters, setters  
+		}
+
+
+    		@Override
+    		public int compare(Player firstPlayer, Player secondPlayer) {
+       		return Integer.compare(firstPlayer.getRanking(), secondPlayer.getRanking());
+    		}
+
+		
+
+		public static void main(String[] args) {
+    			List<Player> footballTeam = new ArrayList<>();
+    			Player player1 = new Player(59, "John", 20);
+    			Player player2 = new Player(67, "Roger", 22);
+    			Player player3 = new Player(45, "Steven", 24);
+    			footballTeam.add(player1);
+    			footballTeam.add(player2);
+    			footballTeam.add(player3);
+
+			Comparator byRanking = (Player player1, Player player2) -> Integer.compare(player1.getRanking(), player2.getRanking());
+			Collections.sort(footballTeam, byRanking);
+
+
+    			System.out.println("Before Sorting : " + footballTeam);
+    			Collections.sort(footballTeam);
+    			System.out.println("After Sorting : " + footballTeam);
+		}
+
+		
+		
+
+
+
 
 	// Comparable has comparTo(T o)	.  this is used when we have class in same project, so that we can use this operator
 	// Comparator has compare(T o1, T o2)	this is used when we dont have class in the project, we r getting it externally from jar
