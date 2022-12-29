@@ -1,0 +1,58 @@
+
+	1. Whenever we have to sort objects in customized way or compare objects then we have to use two things. Comparable interface and Comparator( both are functional interface)
+	2. Comparable Example
+		 public class Person implements Comparable<Person> {
+			private String name
+			private int age
+			
+			public Person(String name, int age) {
+				this.name = name
+				this.age = age
+			}
+
+			getters for name and age and we are setting values using constructor above
+			
+			@Override
+			public int compareTo(Person p) {
+				return this.age - p.age
+			}
+
+			@Override
+			public String toString(){
+				return Person{ +
+					"name=" + name +
+					 "age=" + age +
+					'}' ;
+					
+
+
+		public class Test {
+			public static void main(String [] args) {
+
+				Set<Person> s = new TreeSet<>()
+				set.add(new Person("rohan" , 22))
+				set.add(new Person("riya" , 19))
+				set.add(new Person("neha" , 26))
+				set.add(new Person("amit" , 40))
+	//	output : elements will be sorted by age  
+
+
+	3. Comparator Example 
+		The Person class will be coming from external source like jar file. 
+
+			
+		public class Test {
+			public static void main(String [] args) {
+
+				Comparator<Person> c = (o1,o2) -> o1.getAge() - o2.getAge()
+					
+				Set<Person> s = new TreeSet<>(c)
+				set.add(new Person("rohan" , 22))
+				set.add(new Person("riya" , 19))
+				set.add(new Person("neha" , 26))
+				set.add(new Person("amit" , 40))
+
+	//	output : elements will be sorted by age . 
+
+	// Comparable has comparTo(T o)	.  this is used when we have class in same project, so that we can use this operator
+	// Comparator has compare(T o1, T o2)	this is used when we dont have class in the project, we r getting it externally from jar

@@ -1,0 +1,53 @@
+	1. Map is part of collection framework but not part of collection hierarchy
+		a. Key should be unique, if duplicate key is used while map.put(key, value) then previos value of key 
+			will b overridden by new value of key    
+		b. value can be duplicate
+		
+	2. Hashmap
+		a. map doesnt maintain order, hashmap initial capacity is 16, using this value node array of size 16 is created. we can have 1 null key whose index will be zero in bucket
+		b. hashcode is generated for keys using their ascii codes
+		c. the hashcode is used to generate and index using modulo 10 etc.
+		d. this index is used to determine location of the value to be stored in bucket/node type array
+		e. Node is a nested class within hashmap class. A node array is created with size 16 because default initial capacity of node array is 16
+		f. The node structure is like     [ hashcode, key, value, null ]
+		. when collision occurs due to getting same index from hashcode, then a linkedlist is created on same index & elements are stored
+		. maximum 8 collisions are allowed to create linked list in a single index, if collisions > 8, then a Balanced tree is created
+		 
+		
+
+
+	3. LinkedHashMap 
+		a. map maintain order based on key
+
+	4. TreeMap
+		a. sort elements based on key
+		b. Map<Integer, String> m = new TreeMap<Integer, String>(Collections.reverseOrder)  // will sort elements in descending 
+
+	5. Custom Sorting in map occurs like below
+		public class Employee implements Comparable<Employee>{       /// if we want to use custom sorting then we have to use comparable/comparator interface
+			private String name;
+			private int empid;
+
+		Set values using constructor
+		getters for getting values
+		
+		override hashcode() method      /// for set and map we should always override hashcode and equals method
+		override equals() method
+		implement compareTo() method like below
+			public int compareTo(Employee e) {
+				return this.empid - e.empid
+				}
+
+		
+
+		public class demo {
+			public static void main(String[] args) {
+				
+			Map<Employee, String> m = new Map<Employee, Integer>();
+			m.put(new Employee("john", 101), "john")
+			m.put(new Employee("ravi", 102), "ravi")
+			m.put(new Employee("yaman", 105), "yaman")
+			m.put(new Employee("riya", 103), "riya")
+
+
+			
