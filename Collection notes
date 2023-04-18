@@ -10,6 +10,16 @@ ArrayList is not thread-safe.	              Vector is a thread-safe.
 It can increase its size by 50%.	          It can increase its size by doubling the size of the array.
 It is not a legacy class.	                  It is a legacy class.
 
+3.              Array                                                                          Arraylist 
+    Array is static in size.	                                                ArrayList is dynamic in size.
+    It is mandatory to provide the size of an array while initializing it       We can create an instance of ArrayList without specifying its size.
+    It performs fast in comparison to ArrayList because of fixed size.	        ArrayList is internally uses array. The resize operation in ArrayList slows down the performance.
+    can store both objects and primitives type.	                                cant store primitive type. It automatically converts primitive type to object.
+    We use for loop or for each loop to iterate over an array.	                We use an iterator to iterate over ArrayList.
+    provides a length variable which denotes the length of an array.	        provides the size() method to determine the size of ArrayList.
+    can add elements in an array by using the assignment operator.	            the add() method to add elements in the ArrayList.
+
+
 3. Differentiate between Iterator and ListIterator
 
     Iterator	                                                                                ListIterator
