@@ -1,33 +1,11 @@
 
-	1. Whenever we have to sort objects in customized way or compare objects then we have to use two things. Comparable interface and Comparator( both are functional interface)
+	1. Whenever we have to sort objects in customized way or compare objects then we have to use two things. Comparable interface and Comparator( both are 			functional interface)
 
-	2. Example without comparable(natural ordering) and comparator
-		public class Player {
-   		 private int ranking;
-  		  private String name;
-  		  private int age;
-    
- 		   // constructor, getters, setters  
-		}	
-
+	2. Comparator interface is used to order the objects of a user-defined class. This interface contains 2 methods compare(Object obj1, Object obj2) and 			equals(Object element).  
+	 How do the sort() method of Collections class work? 
+		Internally the Sort method does call Compare method of the classes it is sorting. To compare two elements, it asks “Which is greater?” Compare method 		      returns -1, 0, or 1 to say if it is less than, equal, or greater to the other. It uses this result to then determine if they should be swapped for 		 their sort.
 		
-		public static void main(String[] args) {
-    			List<Player> footballTeam = new ArrayList<>();
-    			Player player1 = new Player(59, "John", 20);
-    			Player player2 = new Player(67, "Roger", 22);
-    			Player player3 = new Player(45, "Steven", 24);
-    			footballTeam.add(player1);
-    			footballTeam.add(player2);
-    			footballTeam.add(player3);
-
-    			System.out.println("Before Sorting : " + footballTeam);
-    			Collections.sort(footballTeam);
-    			System.out.println("After Sorting : " + footballTeam);
-		}
-
-		Output:
-		// As expected, this results in a compile-time error: The method sort(List<T>) in the type Collections  is not applicable for the arguments (ArrayList<Player>)
-
+		
 
 
 
