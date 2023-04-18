@@ -23,7 +23,7 @@ It is not a legacy class.	                  It is a legacy class.
     the elements from the old array to the new array. the default capacity of an empty ArrayList is 0 and not 10 in Java 8. Once the first item is added,
     the DEFAULT_CAPACITY which is 10 is then used.
     example
-    ArrayList<String> ar = new ArrayList<>()                           // the default size is 0
+    ArrayList<String> ar = new ArrayList<>()                           // the default constructor capacity is 10 
     ar.add("1")                                                          the size is 1 now.
     
     
