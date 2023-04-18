@@ -19,7 +19,11 @@ It is not a legacy class.	                  It is a legacy class.
     provides a length variable which denotes the length of an array.	        provides the size() method to determine the size of ArrayList.
     can add elements in an array by using the assignment operator.	            the add() method to add elements in the ArrayList.
 
-
+4. The ArrayList size increases dynamically because whenever the ArrayList class requires to resize then it will create a new array of bigger size and copies all 
+    the elements from the old array to the new array. example
+    ArrayList<String> are = new ArrayList<>()                           // the default size is 10
+    
+    
 3. Differentiate between Iterator and ListIterator
 
     Iterator	                                                                                ListIterator
