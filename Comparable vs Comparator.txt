@@ -4,24 +4,22 @@
 	2. Comparator interface is used to order the objects of a user-defined class. This interface contains 2 methods compare(Object obj1, Object obj2) and 			equals(Object element).  
 	   How do the sort() method of Collections class work? 
 		Internally the Sort method does call Compare method of the classes it is sorting. To compare two elements, it asks “Which is greater?”
-		Compare method returns -1, 0, or 1 to say if it is less than, equal, or greater to the other. It uses this result to then determine if they should be 		      swapped for their sort.
+		Compare method returns -1, 0, or 1 to say if it is less than, equal, or greater to the other. It uses this result to then determine if they should be 		      swapped for their sort. 
 		
 		Example:
 		class Student {
- 			int rollno;
-    			String name, address;
+ 			String Name;
+	    		int Age;
  			
-    			public Student(int rollno, String name, String address)
+    			public Student(int Age, String Name)
     			{
- 			
-    			    this.rollno = rollno;
-    			    this.name = name;
-    			    this.address = address;
-    			}
+			    this.Age = Age;
+    			    this.Name = Name;
+    			 }
  			
     			public String toString()
     			{
- 				return this.rollno + " " + this.name + " "+ this.address;
+ 				return this.Age + " " + this.Name;
     			}
 			
  
@@ -33,7 +31,7 @@
 		    public int compare(Student a, Student b)
 		    {
 		 
-		        return a.rollno - b.rollno;
+		        return a.Age - b.Age;
 		    }
 		}
 		 
@@ -44,7 +42,7 @@
 		    public int compare(Student a, Student b)
 		    {
 		 
-		        return a.name.compareTo(b.name);
+		        return a.Name.compareTo(b.Name);
 		    }
 		
  
@@ -57,10 +55,10 @@
 		 
 		        ArrayList<Student> ar = new ArrayList<Student>();
 		 
-		        ar.add(new Student(111, "Mayank", "london"));
-		        ar.add(new Student(131, "Anshul", "nyc"));
-		        ar.add(new Student(121, "Solanki", "jaipur"));
-		        ar.add(new Student(101, "Aggarwal", "Hongkong"));
+		        ar.add(new Student(111, "Mayank"));
+		        ar.add(new Student(131, "Anshul"));
+		        ar.add(new Student(121, "Solanki"));
+		        ar.add(new Student(101, "Aggarwal"));
 		 
 		        // Sorting student entries by roll number
 		        Collections.sort(ar, new Sortbyroll());
@@ -69,8 +67,86 @@
 		        Collections.sort(ar, new Sortbyname());
 		 
 		        
+	3. By changing the return value inside the compare method, you can sort in any order that you wish to, for example: For descending order just change the 		positions of ‘a’ and ‘b’ in the above compare method.
+	
+	4. In the previous example, we have discussed how to sort the list of objects on the basis of a single field using the Comparable and Comparator interface But, 	   what if we have a requirement to sort ArrayList objects in accordance with more than one field like firstly, sort according to the student name and 		   secondly, sort according to student age.
+	
+	// Class 1
+	// Helper class representing a Student
+	class Student {
+	 
+	    String Name;
+	    int Age;
+	 
+	    public Student(String Name, Integer Age)
+	    {
+	        this.Name = Name;
+	        this.Age = Age;
+	    }
+	 
+	    // Getter setter methods
+	    public String getName() { return Name; }
+	 
+	    public void setName(String Name) { this.Name = Name; }
+	 
+	    public Integer getAge() { return Age; }
+	 
+	    public void setAge(Integer Age) { this.Age = Age; }
+	 
+	    @Override 
+	    public String toString()
+	    {
+	        return "Customer{"
+	            + "Name=" + Name + ", Age=" + Age + '}';
+	    }
+
+ 
+	// Class 2
+	class CustomerSortingComparator
+	    implements Comparator<Student> {
+	 
+	    @Override
+	    public int compare(Student customer1, Student customer2)
+	    {
+	        // Comparing customers
+	        int NameCompare = customer1.getName().compareTo(
+	            customer2.getName());
+	 
+	        int AgeCompare = customer1.getAge().compareTo(
+	            customer2.getAge());
+	 
+	        // 2nd level comparison
+	        return (NameCompare == 0) ? AgeCompare
+	                                  : NameCompare;
 
 
+	
+	class GFG {
+	    public static void main(String[] args)
+	    {	
+	    	List<Student> ar = new ArrayList<>();
+	 	
+		ar.add(new Student("Ajay", 27))
+		ar.add(new Student("Sneha", 23))
+		ar.add(new Student("Simran", 37))
+		ar.add(new Student("Ajay", 22))
+		ar.add(new Student("Ajay", 29))
+		ar.add(new Student("Sneha", 22))
+		
+	        // Iterating using Iterator
+	        // before Sorting ArrayList
+	        Iterator<Student> custIterator = ar.iterator();
+		
+		while (custIterator.hasNext()) {
+		   System.out.println(custIterator.next());
+		}
+
+		Collections.sort(ar, new CustomerSortingComparator());
+		
+		// after Sorting ArrayList
+		for (Student customer : al) {
+		    System.out.println(customer);
+		
 
 
 	3. Comparable Example 
