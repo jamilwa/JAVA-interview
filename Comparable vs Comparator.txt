@@ -150,7 +150,9 @@
 		
 
 
-	3. Comparable Example 
+	3. The Comparable interface is used to compare an object of the same class with an instance of that class.  it provides the compareTo method that takes a     		 parameter of the object of that class. 
+	
+	    Comparable Example 
 
 		public class Player implements Comparable<Player> {
 		  private int ranking;
@@ -170,65 +172,18 @@
 
 		public static void main(String[] args) {
     			List<Player> footballTeam = new ArrayList<>();
-    			Player player1 = new Player(59, "John", 20);
-    			Player player2 = new Player(67, "Roger", 22);
-    			Player player3 = new Player(45, "Steven", 24);
-    			footballTeam.add(player1);
-    			footballTeam.add(player2);
-    			footballTeam.add(player3);
-
-    			System.out.println("Before Sorting : " + footballTeam);
-    			Collections.sort(footballTeam);
-    			System.out.println("After Sorting : " + footballTeam);
-		}
-
+    			
+			footballTeam.add(new Player(59, "John", 20));
+    			footballTeam.add(new Player(67, "Roger", 22));
+    			footballTeam.add(new Player(45, "Steven", 24));
+			
+			Collections.sort(footballTeam);
+    	
 
 		
 		Output:
 		Before Sorting : [John, Roger, Steven]
 		After Sorting : [Steven, John, Roger]
-
-
-
-	4. Comparator Example
-		
-		public class PlayerRankingComparator implements Comparator<Player> {
-		  private int ranking;
-  		  private String name;
-  		  private int age;
-    
- 		   // constructor, getters, setters  
-		}
-
-
-    		@Override
-    		public int compare(Player firstPlayer, Player secondPlayer) {
-       		return Integer.compare(firstPlayer.getRanking(), secondPlayer.getRanking());
-    		}
-
-		
-
-		public static void main(String[] args) {
-    			List<Player> footballTeam = new ArrayList<>();
-    			Player player1 = new Player(59, "John", 20);
-    			Player player2 = new Player(67, "Roger", 22);
-    			Player player3 = new Player(45, "Steven", 24);
-    			footballTeam.add(player1);
-    			footballTeam.add(player2);
-    			footballTeam.add(player3);
-
-			Comparator byRanking = (Player player1, Player player2) -> Integer.compare(player1.getRanking(), player2.getRanking());
-			Collections.sort(footballTeam, byRanking);
-
-
-    			System.out.println("Before Sorting : " + footballTeam);
-    			Collections.sort(footballTeam);
-    			System.out.println("After Sorting : " + footballTeam);
-		}
-
-		
-		
-
 
 
 
