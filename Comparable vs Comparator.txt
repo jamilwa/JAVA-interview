@@ -1,6 +1,9 @@
 
 	1. Whenever we have to sort objects in customized way or compare objects then we have to use two things. Comparable interface and
-		Comparator( both are functional interface)
+		Comparator( both are functional interface(has only one abstract method))
+		A marker interface is an interface that doesn't have any methods or constants inside it. It provides run-time type 
+		information about objects, so the compiler and JVM have additional information about the object. A marker interface 
+		is also called a tagging interface.
 
 	2. Comparator interface is used to order the objects of a user-defined class. This interface contains 2 methods compare(Object obj1, Object obj2) and 			equals(Object element).  
 	   How do the sort() method of Collections class work? 
