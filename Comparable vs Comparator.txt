@@ -1,5 +1,6 @@
 
-	1. Whenever we have to sort objects in customized way or compare objects then we have to use two things. Comparable interface and Comparator( both are 			functional interface)
+	1. Whenever we have to sort objects in customized way or compare objects then we have to use two things. Comparable interface and
+		Comparator( both are functional interface)
 
 	2. Comparator interface is used to order the objects of a user-defined class. This interface contains 2 methods compare(Object obj1, Object obj2) and 			equals(Object element).  
 	   How do the sort() method of Collections class work? 
