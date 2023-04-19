@@ -6,7 +6,7 @@
 	2. Hashmap
 		a. map doesnt maintain order, hashmap initial capacity is 16, using this value node array of size 16 is created. we can have 1 null key whose index will be zero in bucket
 		b. hashcode is generated for keys using their ascii codes
-		c. the hashcode is used to generate and index using modulo 10 etc.
+		c. index is generated from hashcode using modulo 10 etc.
 		d. this index is used to determine location of the value to be stored in bucket/node type array
 		e. Node is a nested class within hashmap class. A node array is created with size 16 because default initial capacity of node array is 16
 		f. The node structure is like     [ hashcode, key, value, null ]
