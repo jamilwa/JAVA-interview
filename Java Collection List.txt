@@ -8,7 +8,7 @@ Collection framework
 		list3.add(13)
 		list3.add(24)
 	
-	 	Sout(list3)					  // lets print the list. output will be [45,13,24]. This is because every class in collection has overridden toString method
+	d. 	Sout(list3)					  // lets print the list. output will be [45,13,24]. This is because every class in collection has overridden toString method
 	e. Integer[] arr = {45,13,24}  or int[] arr = {45,13,24}	
 		 sout(arr) 					  // if we print arr then output will be some gibberish value like  java.lang.Integer;@kjfu54848  or [I@345fkdjf
 								  // but in wrapper class like Integer or primitive type like int dont override toString method, 
