@@ -57,9 +57,9 @@ It affects the original class. i.e., the actual class is altered.               
 
         Hashmap	                                                        Hashtable
 It is not synchronized.	                                                It is synchronized.
-HashMap allows one key as a null value.                             	HashTable does not allow null values.
+HashMap allows one null key                             	            HashTable does not allow null key.
 Iterator is used to traverse HashMap.	                                Either Iterator or Enumerator is used for traversing a HashTable.
-It is fail-fast.	                                                    It is fail-safe.
+It is fail-fast.                                                        It is fail-safe.
 HashMap perform faster than the HashTable.	                            Hashtable is not much faster as compared to HashMap.
 
 
