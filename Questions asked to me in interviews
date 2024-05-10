@@ -34,5 +34,26 @@
     VOLATILE meaning a variables value may be modified by different threads. its value will always be read from and written to main memory, ensuring visibility of changes
     across threads.
     They address different aspects of concurrency control and are used in different scenarios depending on the requirements of the application.
+
+4. Difference between collection and stream
+5. expain MAP and REDUCE method from streams.
+    Important Points/Observations of Java Stream
+    1. A stream consists of a source followed by zero or more intermediate methods combined together and a terminal method to process the objects obtained from the source.
+    2. Stream is used to compute elements as per the pipelined methods without altering the original value of the object.
+
+    MAP : it is used to transform each element of a stream into another element. 
+    example : List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+              List<Integer> squaredNumbers = numbers.stream()
+                                     .map(n -> n * n)
+                                     .collect(Collectors.toList());
+              System.out.println(squaredNumbers); // Output: [1, 4, 9, 16, 25]
+
+    REDUCE : it is used to reduce the elements of a stream to a single value. It takes two parameters: an identity value and a BinaryOperator. The identity value is the 
+             initial value for the reduction operation, and the BinaryOperator specifies how two elements should be combined.    
+            It returns an Optional since the stream might be empty.
+    example: List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+             Optional<Integer> sum = numbers.stream()
+                               .reduce((a, b) -> a + b);
+            sum.ifPresent(System.out::println); // Output: 15
     
 
