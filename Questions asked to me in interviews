@@ -113,3 +113,10 @@
     }
     
 
+7. What is functional programming
+8. what do you mean by orchestrate in microservices
+    orchestration" refers to the coordination and management of multiple microservices to achieve a specific business goal or process. Orchestration involves controlling
+    the flow of data and requests between different microservices, ensuring that they work together harmoniously to fulfill complex functionalities or workflows.
+    Common orchestration tools and frameworks used in microservices architectures include Kubernetes, Docker Swarm, Apache Mesos, and cloud-native platforms like 
+    AWS ECS (Elastic Container Service) and Azure Kubernetes Service (AKS).
+    
