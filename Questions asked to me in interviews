@@ -1,1 +1,14 @@
+1. What are SOLID Principles
+    The SOLID principles are a set of design principles for writing maintainable and scalable object-oriented software. These are guidelines to aid developers in creating 
+    software that is easy to understand, maintain, and extend.
+
+    Single Responsibility Principle : a class should have only one responsibility. making them easier to understand, test, and maintain.
+    Open/Closed Principle : software entities (classes, modules, functions, etc.) should be open for extension but closed for modification. This means that you should be
+                                able to extend the behavior of a module without modifying its source code. This is achieved through the use of abstraction and polymorphism.
+    Liskov Substitution Principle : a subclass should be able to substitute its parent class without changing the behavior by the client code.
+    Interface Segregation Principle : segregation of interfaces into smaller, customizeable to the needs of the clients. This prevents clients from being burdened with
+                                            methods they don't need, promoting cleaner and more maintainable code.
+    Dependency Inversion Principle : The Dependency Inversion Principle advocates that high-level modules should not depend on low-level modules; both should depend on
+                                  abstractions. Additionally, abstractions should not depend on details; rather, details should depend on abstractions. This principle helps 
+                                  to decouple modules and promote flexibility, extensibility, and easier testing.
 
