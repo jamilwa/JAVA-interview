@@ -56,7 +56,7 @@
                                .reduce((a, b) -> a + b);
             sum.ifPresent(System.out::println); // Output: 15
 
-6. Program denoting map(), filterr(), sorted(), collect(), forEach() and reduce()  methods of Stream API.
+6. Program denoting map(), filterr(), sorted(), collect(), forEach() and reduce()  methods of Stream API. (MaFi SorCore For)
     // create a list of integers
         List<Integer> number = Arrays.asList(2, 3, 4, 5); 
  
