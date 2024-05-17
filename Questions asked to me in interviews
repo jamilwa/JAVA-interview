@@ -120,10 +120,10 @@
     Common orchestration tools and frameworks used in microservices architectures include Kubernetes, Docker Swarm, Apache Mesos, and cloud-native platforms like 
     AWS ECS (Elastic Container Service) and Azure Kubernetes Service (AKS).
 
-9. serialVersionUID" in a Java class. This variable is often used in Java serialization to ensure that the version of the class being deserialized matches the version 
-    that was serialized. The "serialVersionUID" serves as a version control mechanism for serialized objects. It's a unique identifier for each class that implements 
-    the Serializable interface. If the serialVersionUID of the serialized object does not match the serialVersionUID of the class at the time of deserialization, then
-    an InvalidClassException is thrown. By explicitly declaring the serialVersionUID in the code, you can control the serialization version of the class, ensuring 
+9. serialVersionUID", This variable is used in serialization to ensure that the version of the class being deserialized matches the version of the class
+    that was serialized. If the serialVersionUID of the serialized object does not match the serialVersionUID of the class at the time of deserialization, then
+    an InvalidClassException is thrown. It serves as a version control mechanism for serialized objects. It's a unique identifier for each class that implements 
+    the Serializable interface. By explicitly declaring the serialVersionUID in the code, you can control the serialization version of the class, ensuring 
     compatibility between different versions of the class. The value "1L" is simply an arbitrary identifier for the first version of the class. If you make changes to
     the class that affect its serialization compatibility, you would typically increment this value to indicate a new version.
     
