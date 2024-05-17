@@ -1,1 +1,15 @@
+1. Maybe<UserAddress> userAddress = address               // if blockingGet() is not used then it will return object of type Maybe<UserAddress>.
+2. UserAddress userAddress = address.blockingGet()        // if blockingGet() is used then it will return just object of type UserAddress.     
 
+Error: The annotation @Autowired is disabled for this location
+	Fix: @Autowired can't be used for local variable, you should add it outside method scope, as field
+	Error: Failed to configure a datasource: 'url' attribute is not specified and no embedded datasource could be configured
+	Fix: Correct your dependencies
+	Error: web server failed to start. Port 8080 was already in use.
+	Fix: Go to CMD and type the command netstat -a, you will get to know which process is running in port 8080. you can chagne the default port of your app in application.properties
+	by adding following line: server.port=8090   or  kill the process which is using port 8080
+	Steps to kill a process
+	netstat -ano | findstr 8080
+	taskkill /F /PID processIdNumber
+
+	execute jar file by the command  java.exe -jar "lombok.jar"
