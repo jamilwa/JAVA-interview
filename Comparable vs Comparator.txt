@@ -107,24 +107,24 @@
 	    @Override 
 	    public String toString()
 	    {
-	        return "Customer{"
+	        return "Student{"
 	            + "Name=" + Name + ", Age=" + Age + '}';
 	    }
 
  
 	// Class 2
-	class CustomerSortingComparator
+	class StudentSortingComparator
 	    implements Comparator<Student> {
 	 
 	    @Override
-	    public int compare(Student customer1, Student customer2)
+	    public int compare(Student s1, Student s2)
 	    {
-	        // Comparing customers
-	        int NameCompare = customer1.getName().compareTo(
-	            customer2.getName());
+	        // Comparing Students
+	        int NameCompare = s1.getName().compareTo(
+	            s2.getName());
 	 
-	        int AgeCompare = customer1.getAge().compareTo(
-	            customer2.getAge());
+	        int AgeCompare = s1.getAge().compareTo(
+	            s2.getAge());
 	 
 	        // 2nd level comparison
 	        return (NameCompare == 0) ? AgeCompare
@@ -152,11 +152,11 @@
 		   System.out.println(custIterator.next());
 		}
 
-		Collections.sort(ar, new CustomerSortingComparator());
+		Collections.sort(ar, new StudentSortingComparator());
 		
 		// after Sorting ArrayList
-		for (Student customer : al) {
-		    System.out.println(customer);
+		for (Student s : al) {
+		    System.out.println(s);
 		
 
 
@@ -165,8 +165,7 @@
 	
 	    Comparable Example 
 
-		public class Player implements Comparable<Player> {
-		  private int ranking;
+		public class Student implements Comparable<Student> {
   		  private String name;
   		  private int age;
     
@@ -175,20 +174,20 @@
     			
 
     		@Override
-    		public int compareTo(Player otherPlayer) {
-        	return Integer.compare(getRanking(),otherPlayer.getRanking());
+    		public int compareTo(Student otherStudent) {
+        	return Integer.compare(getRanking(),otherStudent.getRanking());
     			}
 
 
 
 		public static void main(String[] args) {
-    			List<Player> footballTeam = new ArrayList<>();
+    			List<Student> studentTeam = new ArrayList<>();
     			
-			footballTeam.add(new Player(59, "John", 20));
-    			footballTeam.add(new Player(67, "Roger", 22));
-    			footballTeam.add(new Player(45, "Steven", 24));
+			studentTeam.add(new Player("John", 20));
+    			studentTeam.add(new Player("Roger", 22));
+    			studentTeam.add(new Player("Steven", 24));
 			
-			Collections.sort(footballTeam);
+			Collections.sort(studentTeam);
     	
 
 		
