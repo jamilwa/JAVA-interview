@@ -33,9 +33,9 @@
  
 		// Class 2
 		// Helper class implementing Comparator interface
-		class Sortbyroll implements Comparator<Student> {
+		class SortbyAge implements Comparator<Student> {
 		 
-		    // Sorting in ascending order of roll number
+		    // Sorting in ascending order of Age number
 		    public int compare(Student a, Student b)
 		    {
 		 
@@ -69,7 +69,7 @@
 		        ar.add(new Student(101, "Aggarwal"));
 		 
 		        // Sorting student entries by roll number
-		        Collections.sort(ar, new Sortbyroll());
+		        Collections.sort(ar, new SortbyAge());
 		 
 		        // Sorting student entries by name
 		        Collections.sort(ar, new Sortbyname());
