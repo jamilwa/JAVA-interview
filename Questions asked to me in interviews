@@ -129,3 +129,14 @@
     
 9. A stored procedure is a set of SQL statements that can be stored in the database and executed as a single unit. Stored procedures are used to encapsulate 
     repetitive tasks, complex logic, or frequently executed queries, and can be invoked by applications, scripts, or even other stored procedures
+        example: 
+            CREATE PROCEDURE GetCustomerList
+            AS
+            BEGIN
+                SELECT CustomerID, FirstName, LastName, Email
+                FROM Customers
+                ORDER BY LastName, FirstName;
+           END;
+
+
+    To execute this stored procedure, you would use the following SQL command: EXEC GetCustomerList;
