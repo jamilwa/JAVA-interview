@@ -127,3 +127,5 @@
     compatibility between different versions of the class. The value "1L" is simply an arbitrary identifier for the first version of the class. If you make changes to
     the class that affect its serialization compatibility, you would typically increment this value to indicate a new version.
     
+9. A stored procedure is a set of SQL statements that can be stored in the database and executed as a single unit. Stored procedures are used to encapsulate 
+    repetitive tasks, complex logic, or frequently executed queries, and can be invoked by applications, scripts, or even other stored procedures
