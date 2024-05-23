@@ -186,6 +186,9 @@ System.out.println("Average of all numbers : " + stats.getAverage());
 
 Stream INTERMEDIATE methods are   MaFiSoDi FlaSk PeeLi.
 
+Stream Terminal methods are
+CoFi ToFi CoRe For No AlAny
+
 
 6. Default method
 
