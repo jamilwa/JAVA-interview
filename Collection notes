@@ -12,9 +12,9 @@ It is not a legacy class.	                  It is a legacy class.
 
 3.              Array                                                                          Arraylist 
     Array is static in size.	                                                ArrayList is dynamic in size.
-    It is mandatory to provide the size of an array while initializing it       We can create an instance of ArrayList without specifying its size.
-    It performs fast in comparison to ArrayList because of fixed size.	        ArrayList is internally uses array. The resize operation in ArrayList slows down the performance.
-    can store both objects and primitives type.	                                cant store primitive type. It automatically converts primitive type to object.
+    It is mandatory to provide the size of an array while initializing it       We can create an instance of ArrayList without specifying its size. initial capacity is 10
+    It performs fast because of fixed size.	                                    The resize operation slows down the performance.
+    stores both objects and primitives type.	                                doesn't store primitive type. It automatically converts primitive type to object.
     provides a length variable which denotes the length of an array.	        provides the size() method to determine the size of ArrayList.
     can add elements in an array by using the assignment operator.	            the add() method to add elements in the ArrayList.
 
