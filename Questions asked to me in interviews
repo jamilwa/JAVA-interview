@@ -140,3 +140,14 @@
 
 
     To execute this stored procedure, you would use the following SQL command: EXEC GetCustomerList;
+10. what is @qualifier 
+11. how to add custom methods to string class
+12. how many ways to create objects 
+13. which data type used to stop a thread.  ans boolean 
+14. how to create mockito mock object for database
+15. what is point cut
+16. what is reflection
+17. Learn design patterns
+28. Singleton design pattern. example 
+29. what is aggregation and association
+30. 
