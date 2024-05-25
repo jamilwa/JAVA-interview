@@ -151,6 +151,21 @@
 
 11. how to add custom methods to string class
 12. how many ways to create objects 
+     1. Using reflection
+         example:  MyClass obj = (MyClass) Class.forName("MyClass").newInstance();
+     2. Using clone() method
+         example: MyClass obj1 = new MyClass();
+                  MyClass obj2 = (MyClass) obj1.clone();
+     3. Using factory methods
+          example: MyClass obj = MyClassFactory.createMyClass();
+     4. Using deserialization
+          example: ObjectInputStream in = new ObjectInputStream(new FileInputStream("file.ser"));
+                   MyClass obj = (MyClass) in.readObject();
+     5. Using dependency injection frameworks (like Spring)
+           example: ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+                    MyClass obj = (MyClass) context.getBean("myClass");
+
+
 13. which data type used to stop a thread.  ans boolean 
 14. how to create mockito mock object for database
 15. what is point cut
