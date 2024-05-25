@@ -140,7 +140,15 @@
 
 
     To execute this stored procedure, you would use the following SQL command: EXEC GetCustomerList;
+
 10. what is @qualifier 
+      In the Java Spring Framework, @Qualifier is an annotation used to resolve the ambiguity between
+      multiple beans of the same type. It helps specify which bean should be injected when there are multiple candidates.
+    Example:
+        @Autowired
+        @Qualifier("specificBean")
+        private MyService myService;
+
 11. how to add custom methods to string class
 12. how many ways to create objects 
 13. which data type used to stop a thread.  ans boolean 
