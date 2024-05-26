@@ -150,6 +150,55 @@
         private MyService myService;
 
 11. how to add custom methods to string class
+        In Java, you cannot directly add methods to existing classes such as String because it is a final class. However, you can achieve similar functionality by
+        creating a utility class with static methods that operate on String objects. This approach is common in Java for extending the functionality of built-in classes.
+
+                        public class StringUtils {
+                            // Custom method to reverse a string
+                            public static String reverse(String str) {
+                                return new StringBuilder(str).reverse().toString();
+                            }
+                        
+                            // Custom method to check if a string is a palindrome
+                            public static boolean isPalindrome(String str) {
+                                String reversed = reverse(str);
+                                return str.equals(reversed);
+                            }
+
+                            // Custom method to capitalize the first letter of each word in a string
+                            public static String capitalizeWords(String str) {
+                                String[] words = str.split("\\s+");
+                                StringBuilder capitalized = new StringBuilder();
+                                
+                                for (String word : words) {
+                                    if (word.length() > 0) {
+                                        capitalized.append(Character.toUpperCase(word.charAt(0)))
+                                                   .append(word.substring(1).toLowerCase())
+                                                   .append(" ");
+                                    }
+                                }
+                                
+                                return capitalized.toString().trim();
+                          
+
+                Using the Custom Methods. You can now use the methods defined in the StringUtils class to perform operations on String objects.
+                    public class Main {
+                            public static void main(String[] args) {
+                                String original = "hello world";
+                                
+                                // Reverse the string
+                                String reversed = StringUtils.reverse(original);
+                                System.out.println("Reversed: " + reversed); // Output: "dlrow olleh"
+                                
+                                // Check if the string is a palindrome
+                                boolean isPalindrome = StringUtils.isPalindrome("madam");
+                                System.out.println("Is palindrome: " + isPalindrome); // Output: true
+                                
+                                // Capitalize the first letter of each word
+                                String capitalized = StringUtils.capitalizeWords(original);
+                                System.out.println("Capitalized: " + capitalized); // Output: "Hello World"
+
+
 12. how many ways to create objects 
      1. Using reflection
          example:  MyClass obj = (MyClass) Class.forName("MyClass").newInstance();
