@@ -293,15 +293,18 @@
         or AKS (Azure Kubernetes Service). 
         Create Deployment and Service YAML files:
     6. Deploy to Kubernetes
-        Configure Monitoring and Logging. Tools you can use:
+        kubectl apply -f deployment.yaml
+        kubectl apply -f service.yaml
+
+    7. Configure Monitoring and Logging. Tools you can use:
             Prometheus and Grafana: For monitoring.
             ELK Stack (Elasticsearch, Logstash, Kibana): For logging.
             Jaeger or Zipkin: For distributed tracing
-    7. Set Up CI/CD Pipeline
+    8. Set Up CI/CD Pipeline
         Automate the build, test, and deployment process using a CI/CD pipeline.
         CI/CD Tools: Jenkins, GitLab CI, GitHub Actions, CircleCI, etc.
         Pipeline Example (Jenkinsfile):
-    8. Post-Deployment Steps
+    9. Post-Deployment Steps
         Health Checks: Ensure the services are running correctly.
         Scaling: Adjust the number of replicas based on the load.
         Security: Set up security measures like network policies, secrets management, etc.
