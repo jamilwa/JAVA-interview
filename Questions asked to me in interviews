@@ -219,6 +219,59 @@
 14. how to create mockito mock object for database
 15. what is point cut
 16. what is reflection
+        Reflection is found in Java Reflection API, which allows programs to inspect and manipulate the runtime behavior of applications. you can examine or modify
+        the structure and properties of classes, methods, and fields, Constructors, Annotations at runtime, even if they are private. This capability is particularly
+        useful for tasks like debugging, testing, and building frameworks or libraries that need to operate on classes dynamically.
+
+                                    import java.lang.reflect.Field;
+
+                                                class Person {
+                                                    private String name;
+                                                    private int age;
+                                                
+                                                    public Person(String name, int age) {
+                                                        this.name = name;
+                                                        this.age = age;
+                                                    }
+                                                
+                                                    // Getters
+                                                    public String getName() {
+                                                        return name;
+                                                    }
+                                                
+                                                    public int getAge() {
+                                                        return age;
+                                                    }
+                                                }
+                                                
+                                                public class Main {
+                                                    public static void main(String[] args) {
+                                                        try {
+                                                            Person person = new Person("John", 30);
+                                                
+                                                            // Get the Class object
+                                                            Class<?> personClass = person.getClass();
+                                                
+                                                            // Access and modify the private field 'name'
+                                                            Field nameField = personClass.getDeclaredField("name");
+                                                            nameField.setAccessible(true); // Make the private field accessible
+                                                            System.out.println("Original Name: " + nameField.get(person)); // Output: John
+                                                            nameField.set(person, "Jane");
+                                                            System.out.println("Modified Name: " + nameField.get(person)); // Output: Jane
+                                                
+                                                            // Access and modify the private field 'age'
+                                                            Field ageField = personClass.getDeclaredField("age");
+                                                            ageField.setAccessible(true);
+                                                            System.out.println("Original Age: " + ageField.get(person)); // Output: 30
+                                                            ageField.setInt(person, 25);
+                                                            System.out.println("Modified Age: " + ageField.get(person)); // Output: 25
+                                                
+                                                        } catch (NoSuchFieldException | IllegalAccessException e) {
+                                                            e.printStackTrace();
+
+
+
+
 17. Learn design patterns
 28. Singleton design pattern. example 
 29. what is aggregation and association
