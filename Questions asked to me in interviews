@@ -338,4 +338,8 @@
 
 
 32. what is dynamic dispatch 
-
+    Dynamic dispatch, also known as dynamic method dispatch or runtime polymorphism, is a mechanism by which a call to an overridden method is resolved at
+    runtime rather than at compile-time. 
+    How Dynamic Dispatch Works ?
+    When a method is called on an object, the Java Virtual Machine (JVM) determines the actual method to execute based on the runtime type of the object,
+    not the reference type. This enables the correct method to be called even when the reference type is of a superclass.
