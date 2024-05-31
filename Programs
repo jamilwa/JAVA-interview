@@ -4,7 +4,7 @@
    int n = String.valueOf(num).length();                                // it converts number to String so that we can get number of digits in a number.
 4. "I am jamil".replaceAll("\\s+", "");                                 // replaces all whitespace characters like spaces, tabs, new line characters.
 5.  Arrays.sort(arr)                                                    // used to sort array
-6.  Arrays.sort(numbers, Collections.reverseOrder())                    // Sorting the array in descending order
+6.  Arrays.sort(numbers, Collections.reverseOrder())     note: it works on object like Integer not on int.            // Sorting the array in descending order
 6.  Collections.sort(ArrayList)                                         // Sorting the list
 7.  Collections.sort(ArrayList, Collections.reverseOrder());            // Sorting the list in descending order 
 8. 
