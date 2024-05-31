@@ -5,3 +5,4 @@
 4. "I am jamil".replaceAll("\\s+", "");       // replaces all whitespace characters like spaces, tabs, new line characters.
 5.  Arrays.sort(arr)                          // used to sort array
 6.  Collections.sort(ArrayList)               // Sorting the list
+7.  Collections.sort(ArrayList, Collections.reverseOrder());            // Sorting the list in descending order 
