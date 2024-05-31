@@ -3,3 +3,5 @@
 3. int num = 12345;
    int n = String.valueOf(num).length();    // it converts number to String so that we can get number of digits in a number.
 4. "I am jamil".replaceAll("\\s+", "");       // replaces all whitespace characters like spaces, tabs, new line characters.
+5.  Arrays.sort(arr)        // used to sort array
+6. 
