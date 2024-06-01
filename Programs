@@ -10,3 +10,5 @@
 8.  Collections.sort(personList, Comparator.comparing(Person::getName));  // Sorting the list of Person objects based on name
 9.  Collections.sort(personList, Comparator.comparing(Person::getName).thenComparing(Person::getAge));    // Sorting the list of Person objects based on name and then age
 10. Collections.sort(personList, Comparator.comparing(Person::getName, Comparator.reverseOrder()).thenComparing(Person::getAge, Comparator.reverseOrder()));            // Sorting the list of Person objects based on name and then age in descending order
+11. str.matches("\\d+")             // it matches strings which contains only digits 
+12. 
