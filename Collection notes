@@ -19,13 +19,10 @@ It is not a legacy class.	                  It is a legacy class.
     can add elements in an array by using the assignment operator.	            the add() method to add elements in the ArrayList.
 
 4. The ArrayList size increases dynamically by 50% because whenever the ArrayList class requires to resize then it will create a new array of bigger size and copies all 
-    the elements from the old array to the new array. the default capacity of an empty ArrayList is 0 and not 10 in Java 8. Once the first item is added,
-    the DEFAULT_CAPACITY which is 10 is then used.
+    the elements from the old array to the new array. the DEFAULT_CAPACITY is 10.
     example
-    ArrayList<String> ar = new ArrayList<>()                           // the default constructor capacity is 10 
-    ar.add("1")    
-    
-    
+    ArrayList<String> ar = new ArrayList<>()                           // the default constructor capacity is 10.  
+     
     
 3. Differentiate between Iterator and ListIterator
 
