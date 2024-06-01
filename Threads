@@ -7,3 +7,11 @@
     sleep() Method: The sleep() method is a static method defined in the Thread class and is used to pause the execution of a thread for a specified amount of time.
     When a thread calls the sleep() method, it does not release the lock on any object, and other threads cannot acquire the lock during the sleep period.
     The sleep() method is typically used for introducing delays in the execution of a thread.
+3. Serialization vs Synchronization 
+    Serialization: Purpose: Serialization is the process of converting an object into a byte stream to store or transmit it over a network. It is used for object persistence, data transfer, and remote communication. 
+                   Mechanism: In Java, serialization is achieved by implementing the Serializable interface. Objects of classes that implement Serializable can be serialized using Java's built-in serialization mechanism.
+                   Example: Saving an object to a file, sending an object over a network, or storing an object in a database are common use cases of serialization.
+    Synchronization: Purpose: Synchronization is the process of controlling access to shared resources in a multi-threaded environment to prevent data corruption and ensure thread safety.
+                     Mechanism: In Java, synchronization is achieved using the synchronized keyword, locks, and other synchronization mechanisms provided by the java.util.concurrent package.
+                     Example: Synchronizing access to critical sections of code, shared variables, or resources to prevent race conditions and maintain data consistency among multiple threads.
+4. wait()  vs notify()   vs   notifyAll ()
