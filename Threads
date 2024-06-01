@@ -1,0 +1,21 @@
+Context switching is a process that occurs in computing when the operating system (OS) switches the processor from executing one thread or process to another. This switch involves saving the state of the currently running thread or process so that it can be resumed later, and loading the state of the new thread or process to be executed next.
+
+Here are some key points about context switching:
+
+1. **Thread or Process Switching**: Context switching can occur between threads of the same process or between processes running on the same or different cores of a CPU.
+
+2. **State Information**: The state information of a thread or process includes the values of the CPU registers, program counter, stack pointer, and other relevant information needed to resume execution.
+
+3. **Interrupts**: Context switches are often triggered by interrupts, such as timer interrupts, I/O interrupts, or signals from other processes.
+
+4. **Preemption**: In preemptive multitasking systems, the OS can preempt a running thread or process to allow another thread or process to run. This preemptive behavior leads to frequent context switches.
+
+5. **Overhead**: Context switching involves overhead due to the need to save and restore the state of threads or processes. Excessive context switching can impact system performance.
+
+6. **Scheduling**: Context switching is an essential part of the scheduling mechanism in operating systems, allowing multiple threads or processes to share the CPU efficiently.
+
+7. **Concurrency**: Context switching enables the illusion of concurrency in systems with a single CPU core by rapidly switching between different threads or processes.
+
+8. **Thread Synchronization**: Context switches can also occur when a thread voluntarily yields the CPU, such as when waiting for a resource or synchronization point.
+
+Overall, context switching is a fundamental concept in operating systems that allows for multitasking, concurrency, and efficient CPU utilization by enabling the OS to switch between different threads or processes running on a system.
