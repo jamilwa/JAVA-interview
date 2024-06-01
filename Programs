@@ -22,6 +22,13 @@
 10. Collections.sort(personList, Comparator.comparing(Person::getName, Comparator.reverseOrder())
       .thenComparing(Person::getAge, Comparator.reverseOrder()));                 // Sorting the list of Person objects based on name and then age in descending order
 
+11.    Collections.reverse(ArrayList);                                              // Reversing the list
+       Collections.shuffle(ArrayList);                                              // Shuffling the list
+       Collections.binarySearch(ArrayList, 5);                                      // Binary search
+       Collections.frequency(ArrayList, 5);                                         // Frequency of an element
+       Collections.unmodifiableCollection(numbers);                                 // Creating an unmodifiable collection
+       Collections.synchronizedCollection(numbers);                                 // Creating a synchronized collection
+
 11. str.matches("\\d+")                                                          // it matches strings which contains only digits 
 
 12. Character class methods are   
