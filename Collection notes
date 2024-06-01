@@ -72,5 +72,7 @@ faster than HashTable.	                                                slower th
 10. easy-to-remember acronym for common ArrayList methods in Java could be "CRUD". Here's what each letter represents:
     C: add() - Adds an element to the ArrayList.R: get() - Retrieves an element from the ArrayList based on its index.U: set() - Updates an element in the ArrayList at a specified index.D: remove() - Deletes an element
 
-11. 
+11. what is hashing? 
+    hashing refers to the process of converting an object or data structure into a numerical value, known as a hash code, using a hashing algorithm. 
+    Hashing is commonly used for indexing data in HashMap, ensuring data integrity, and optimizing search operations.
 
