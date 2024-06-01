@@ -219,7 +219,7 @@
 14. how to create mockito mock object for database
 15. what is point cut
 16. what is reflection
-        Reflection is found in Java Reflection API, which allows programs to inspect and manipulate the runtime behavior of applications. you can examine or modify
+        Reflection is found in Java Reflection API, which allows programs to inspect and manipulate the runtime behavior of applications. you can modify
         the structure and properties of classes, methods, and fields, Constructors, Annotations at runtime, even if they are private. This capability is particularly
         useful for tasks like debugging, testing, and building frameworks or libraries that need to operate on classes dynamically.
 
