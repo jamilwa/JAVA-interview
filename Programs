@@ -1,21 +1,35 @@
-1. for(char c=97; c<= 122; c++)                                         // will print small abcd
-2. for(char c=65; c<= 90; c++)                                          // will print capital abcd
+1. for(char c=97; c<= 122; c++)                                                  // will print small abcd
+
+2. for(char c=65; c<= 90; c++)                                                   // will print capital abcd
+
 3. int num = 12345;
-   int n = String.valueOf(num).length();                                // it converts number to String so that we can get number of digits in a number.
-4. "I am jamil".replaceAll("\\s+", "");                                 // replaces all whitespace characters like spaces, tabs, new line characters.
-5.  Arrays.sort(arr)                                                    // used to sort array
-6.  Arrays.sort(numbers, Collections.reverseOrder())     note: it works on object like Integer not on int.            // Sorting the array in descending order
-6.  Collections.sort(ArrayList)                                         // Sorting the list
-7.  Collections.sort(ArrayList, Collections.reverseOrder());            // Sorting the list in descending order 
-8.  Collections.sort(personList, Comparator.comparing(Person::getName));  // Sorting the list of Person objects based on name
+   int n = String.valueOf(num).length();                                         // it converts number to String so that we can get number of digits in a number.
+
+4. "I am jamil".replaceAll("\\s+", "");                                          // replaces all whitespace characters like spaces, tabs, new line characters.
+
+5.  Arrays.sort(arr)                                                             // used to sort array
+
+6.  Arrays.sort(numbers, Collections.reverseOrder())                             // Sorting the array in descending order. note: it works on object like Integer not on int.
+
+6.  Collections.sort(ArrayList)                                                  // Sorting the list
+
+7.  Collections.sort(ArrayList, Collections.reverseOrder());                     // Sorting the list in descending order 
+
+8.  Collections.sort(personList, Comparator.comparing(Person::getName));         // Sorting the list of Person objects based on name
+
 9.  Collections.sort(personList, Comparator.comparing(Person::getName).thenComparing(Person::getAge));    // Sorting the list of Person objects based on name and then age
-10. Collections.sort(personList, Comparator.comparing(Person::getName, Comparator.reverseOrder()).thenComparing(Person::getAge, Comparator.reverseOrder()));            // Sorting the list of Person objects based on name and then age in descending order
-11. str.matches("\\d+")             // it matches strings which contains only digits 
+
+10. Collections.sort(personList, Comparator.comparing(Person::getName, Comparator.reverseOrder())
+      .thenComparing(Person::getAge, Comparator.reverseOrder()));                 // Sorting the list of Person objects based on name and then age in descending order
+
+11. str.matches("\\d+")                                                          // it matches strings which contains only digits 
+
 12. Character class methods are   
         isDigit(char ch): Returns true if the specified character is a digit.
         isLetter(char ch): Returns true if the specified character is a letter.
         isLetterOrDigit(char ch): Returns true if the specified character is a letter or a digit.
         isWhitespace(char ch): Returns true if the specified character is a whitespace character.
+13. for(Map.Entry<String, Integer> entry : map.entrySet())                                          // iterating map.
 
 
 
