@@ -7,9 +7,9 @@
 
 4. "I am jamil".replaceAll("\\s+", "");                                          // replaces all whitespace characters like spaces, tabs, new line characters.
 
-5.  Arrays.sort(arr)                                                             // used to sort array
+5.  Arrays.sort(arr[])                                                             // used to sort array
 
-6.  Arrays.sort(numbers, Collections.reverseOrder())                             // Sorting the array in descending order. note: it works on object like Integer not on int.
+6.  Arrays.sort(numbers[], Collections.reverseOrder())                             // Sorting the array in descending order. note: it works on object like Integer not on int.
 
 6.  Collections.sort(ArrayList)                                                  // Sorting the list
 
