@@ -15,7 +15,7 @@
 2. Explain why equals and hashcode method should be overridden.
     By default, the equals() method compares object references (memory addresses), which might not be suitable for your specific use case. Overriding equals() allows you
     to define your own logic for comparing object equality based on your application's requirements.
-
+ 
     If two objects are equal according to the equals() method, their hashCode() values must be equal as well. if two objects have the same hashCode() values,
     it doesn't mean they are equal. Therefore, when overriding equals(), you should also override hashCode() to ensure consistency and symmetry.
     because HashSet, HashMap, and Hashtable rely on the hashCode() method.
