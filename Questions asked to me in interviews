@@ -24,8 +24,7 @@
     SYNCHRONIZE ensures that only one thread can execute the synchronized block or method at any given time, preventing race conditions and ensuring thread safety.
     VOLATILE means a variables value may be modified by different threads. its value will always be read from and written to main memory, ensuring visibility of changes
     across threads.
-    They address different aspects of concurrency control and are used in different scenarios depending on the requirements of the application.
-
+    
 4. Difference between collection and stream
 5. expain MAP and REDUCE method from streams.
     Important Points/Observations of Java Stream
