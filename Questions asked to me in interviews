@@ -13,21 +13,12 @@
                                   to decouple modules and promote flexibility, extensibility, and easier testing.
 
 2. Explain why equals and hashcode method should be overridden.
-    overriding the equals() and hashCode() methods is essential to ensure consistent and correct behavior when working with object equality and collections in Java. 
-    It allows you to define custom equality semantics tailored to your application's needs and ensures the proper functioning of hash-based collections.
-    The equals() and hashCode() methods are fundamental to Java and play a crucial role, especially when dealing with collections like HashSet, HashMap, and Hashtable.
-    
     By default, the equals() method compares object references (memory addresses), which might not be suitable for your specific use case. Overriding equals() allows you
     to define your own logic for comparing object equality based on your application's requirements.
 
     If two objects are equal according to the equals() method, their hashCode() values must be equal as well. if two objects have the same hashCode() values,
     it doesn't mean they are equal. Therefore, when overriding equals(), you should also override hashCode() to ensure consistency and symmetry.
-
-    If you override equals() but not hashCode(), you might encounter unexpected behavior as objects that are considered equal might not be stored or retrieved correctly. 
-    HashSet, HashMap, and Hashtable rely on the hashCode() method.
-
-    If hashCode() is not overridden, it might lead to performance issues such as hash collisions when dealing with large collections, the performance of operations 
-    like insertion, deletion, and retrieval depends on the efficiency of the hashCode() method. 
+    because HashSet, HashMap, and Hashtable rely on the hashCode() method.
 
 3.  Explain SYNCHRONIZE and VOLATILE keyword
     SYNCHRONIZE ensures that only one thread can execute the synchronized block or method at any given time, preventing race conditions and ensuring thread safety.
