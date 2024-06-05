@@ -3,7 +3,7 @@
 2. for(char c=65; c<= 90; c++)                                                   // will print capital abcd
 
 3. int num = 12345;
-   int n = String.valueOf(num).length();                                         // it converts number to String so that we can get number of digits in a number.
+   int n = String.valueOf(num).length();                                         // it converts number to String so that we can get number of digits of a number.
 
 4. "I am jamil".replaceAll("\\s+", "");                                          // replaces all whitespace characters like spaces, tabs, new line characters.
 
