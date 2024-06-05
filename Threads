@@ -7,8 +7,8 @@
     both wait() and sleep() methods are used for pausing the execution of a thread, but they have different behaviors:
 
     wait() : is defined in the Object class and is used for inter-thread communication. When a thread calls the wait() method on an object, it releases the lock
-    on the object and enters the waiting state until another thread notifies it. The wait() method must be called from within a synchronized block or method to avoid 
-    IllegalMonitorStateException. To wake up a waiting thread, another thread must call the notify() or notifyAll() method on the same object.
+    on the object and enters the waiting state until another thread notifies it calling the notify() or notifyAll() method on the same object. The wait() method 
+    must be called from within a synchronized block or method to avoid IllegalMonitorStateException.
 
     sleep() : The sleep() method is a static method defined in the Thread class and is used to pause the execution of a thread for a specified amount of time.
     When a thread calls the sleep() method, it does not release the lock on any object, and other threads cannot acquire the lock during the sleep period.
