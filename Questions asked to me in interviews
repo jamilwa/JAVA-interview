@@ -328,3 +328,8 @@
     How Dynamic Dispatch Works ?
     When a method is called on an object, the Java Virtual Machine (JVM) determines the actual method to execute based on the runtime type of the object,
     not the reference type. This enables the correct method to be called even when the reference type is of a superclass.
+
+33. what is the new feauture added to hashmap in java 8
+34. how do you see logs and how do  you create it for microservices
+35. difference between stored procedure and functions
+36. 
