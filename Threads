@@ -5,30 +5,36 @@
     between different threads or processes running on a system.
 2. Compare Wait()  and Sleep()
     both wait() and sleep() methods are used for pausing the execution of a thread, but they have different behaviors:
-    wait() Method: is defined in the Object class and is used for inter-thread communication in Java. When a thread calls the wait() method on an object,
-    it releases the lock on the object and enters the waiting state until another thread notifies it.The wait() method must be called from within a synchronized block or 
-    method to avoid IllegalMonitorStateException.To wake up a waiting thread, another thread must call the notify() or notifyAll() method on the same object.
+
+    wait() Method: is defined in the Object class and is used for inter-thread communication. When a thread calls the wait() method on an object, it releases the lock
+    on the object and enters the waiting state until another thread notifies it. The wait() method must be called from within a synchronized block or method to avoid 
+    IllegalMonitorStateException. To wake up a waiting thread, another thread must call the notify() or notifyAll() method on the same object.
+
     sleep() Method: The sleep() method is a static method defined in the Thread class and is used to pause the execution of a thread for a specified amount of time.
     When a thread calls the sleep() method, it does not release the lock on any object, and other threads cannot acquire the lock during the sleep period.
     The sleep() method is typically used for introducing delays in the execution of a thread.
+
 3. Serialization vs Synchronization 
     Serialization: Purpose: Serialization is the process of converting an object into a byte stream to store or transmit it over a network. It is used for object persistence,
                                 data transfer, and remote communication. 
-                   Mechanism: In Java, serialization is achieved by implementing the Serializable interface. Objects of classes that implement Serializable can be serialized
-                                using Java's built-in serialization mechanism.
+                   Mechanism: serialization is achieved by implementing the Serializable interface. 
                    Example: Saving an object to a file, sending an object over a network, or storing an object in a database are common use cases of serialization.
+
     Synchronization: Purpose: Synchronization is the process of controlling access to shared resources in a multi-threaded environment to prevent data corruption and 
                                 ensure thread safety.
-                     Mechanism: In Java, synchronization is achieved using the synchronized keyword, locks, and other synchronization mechanisms provided by the 
+                     Mechanism: synchronization is achieved using the synchronized keyword, locks, and other synchronization mechanisms provided by the 
                                 java.util.concurrent package.
                      Example: Synchronizing access to critical sections of code, shared variables, or resources to prevent race conditions and maintain data consistency
                                 among multiple threads.
+
 4. wait()  vs notify()   vs   notifyAll ()
     In Java, wait(), notify(), and notifyAll() are methods used for inter-thread communication in the context of synchronization. Here's a brief explanation of each:
 
 wait(): This method is used by a thread to voluntarily give up the monitor and go to sleep until another thread invokes the notify() method or the notifyAll() method
         for the same object. The wait() method must be called from within a synchronized context.
+
 notify(): This method is used to wake up a single thread that is waiting on the object. If multiple threads are waiting on the object, only one of them will be chosen
         to wake up. The choice of which thread to wake up is not specified and is dependent on the JVM implementation.
+
 notifyAll(): This method is used to wake up all the threads that are waiting on the object. When notifyAll() is called, all threads waiting on the object are awakened.
         However, only one thread can acquire the monitor at a time.
