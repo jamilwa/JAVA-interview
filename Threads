@@ -3,6 +3,7 @@
     involves saving the state of the currently running thread or process so that it can be resumed later, and loading the state of the new thread or process to be 
     executed next. context switching is a fundamental concept in operating systems that allows for multitasking, concurrency, and efficient CPU utilization by enabling
     the OS to switch between different threads or processes running on a system.
+
 2. Compare Wait()  and Sleep()
     both wait() and sleep() methods are used for pausing the execution of a thread, but they have different behaviors:
 
