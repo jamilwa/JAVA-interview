@@ -28,7 +28,7 @@
 4. Difference between collection and stream
 5. expain MAP and REDUCE method from streams.
     Important Points/Observations of Java Stream
-    1. A stream consists of a source followed by zero or more intermediate methods combined together and a terminal method to process the objects obtained from the source.
+    1. A stream consists of a source followed by zero or more intermediate methods and a terminal method to process the objects obtained from the source.
     2. Stream is used to compute elements as per the pipelined methods without altering the original value of the object.
 
     MAP : it is used to transform each element of a stream into another element. 
