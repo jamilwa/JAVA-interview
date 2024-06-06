@@ -333,3 +333,8 @@
 34. how do you see logs and how do  you create it for microservices
 35. difference between stored procedure and functions
 36. difference between map and flatmap
+37. how does load balancing occur ?
+38. if 5 microservices are there how many db will you use and how many ec2 instances will be needed
+39. when request comes who will pick up first land balancer or api gateway 
+40. what is api version and how can it be backtracked 
+41. 
