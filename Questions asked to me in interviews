@@ -285,6 +285,13 @@ SQL functions can be used in `SELECT`, `INSERT`, `UPDATE`, and `DELETE` statemen
 17. Learn design patterns
 28. Singleton design pattern. example 
 29. what is aggregation and association
+      Sure, I'd be happy to explain aggregation, association, and composition in terms of "has-a" and "is-a" relationships.
+
+1. Association: An association represents a "uses-a" relationship between two classes. In other words, one class uses another class to perform some functionality. For example, a Student class may have an association with a Course class, where a Student object takes a Course. In this case, we can say that a Student "uses" a Course, but a Course doesn't "have" a Student.
+2. Aggregation: An aggregation represents a "has-a" relationship between two classes, where the child object can exist independently of the parent object. In other words, the child object is not exclusively owned by the parent object. For example, a Team class may have an aggregation with a Player class, where a Team object has multiple Player objects. In this case, we can say that a Team "has-a" Player, but a Player can also exist independently of a Team.
+3. Composition: A composition also represents a "has-a" relationship between two classes, but it is a stronger relationship than aggregation. In composition, the child object is exclusively owned by the parent object and cannot exist independently. For example, a Car class may have a composition with an Engine class, where a Car object "has-a" Engine. In this case, an Engine cannot exist independently of a Car.
+
+To summarize, association represents a "uses-a" relationship, aggregation represents a "has-a" relationship where the child object can exist independently, and composition represents a "has-a" relationship where the child object cannot exist independently.
 30. steps to deploy microservices 
     1. Prepare Your Application
         writing unit and integration tests. 
