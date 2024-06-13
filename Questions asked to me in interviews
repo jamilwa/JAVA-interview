@@ -126,6 +126,31 @@
 
     To execute this stored procedure, you would use the following SQL command: EXEC GetCustomerList;
 
+9a.  An SQL function is a set of SQL statements that can be executed as a single unit that performs a specific task in a database management system (DBMS).
+
+There are two types of SQL functions:
+
+1. **Scalar functions**: These functions return a single value, such as a string, number, or date. Examples of scalar functions include `UPPER()`, `LOWER()`, `SUM()`, `AVG()`, `COUNT()`, and `NOW()`.
+
+Here's an example of using the `UPPER()` function to convert a string to uppercase:
+```sql
+SELECT UPPER('hello world');
+```
+The result of this query would be `HELLO WORLD`.
+
+2. **Table-valued functions**: These functions return a table as a result. Examples of table-valued functions include `CUSTOMER_ORDERS()` or `EMPLOYEE_SALARIES()`.
+
+Here's an example of using a table-valued function to retrieve a list of orders for a specific customer:
+```sql
+SELECT * FROM CUSTOMER_ORDERS(123);
+```
+The result of this query would be a table containing all the orders for the customer with ID 123.
+
+SQL functions can be used in `SELECT`, `INSERT`, `UPDATE`, and `DELETE` statements to perform various operations on the data stored in a database.
+
+
+
+
 10. what is @qualifier 
       In the Java Spring Framework, @Qualifier is an annotation used to resolve the ambiguity between
       multiple beans of the same type. It helps specify which bean should be injected when there are multiple candidates.
