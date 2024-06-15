@@ -37,6 +37,34 @@
         isLetterOrDigit(char ch): Returns true if the specified character is a letter or a digit.
         isWhitespace(char ch): Returns true if the specified character is a whitespace character.
 13. for(Map.Entry<String, Integer> entry : map.entrySet())                                          // iterating map.
+14. find palindrome in array using Java 8
+    import java.util.Arrays;
+
+public class PalindromeFinder {
+    public static void main(String[] args) {
+        String[] array = {"racecar", "hello", "level", "world"};
+        System.out.println("Palindromes in the array: " + findPalindromes(array));
+    }
+
+    public static String[] findPalindromes(String[] array) {
+        return Arrays.stream(array)
+                .filter(PalindromeFinder::isPalindrome)
+                .toArray(String[]::new);
+    }
+
+    public static boolean isPalindrome(String word) {
+        int left = 0;
+        int right = word.length() - 1;
+
+        while (left < right) {
+            if (word.charAt(left++) != word.charAt(right--)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
 
 
 
