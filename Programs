@@ -37,6 +37,7 @@
         isLetterOrDigit(char ch): Returns true if the specified character is a letter or a digit.
         isWhitespace(char ch): Returns true if the specified character is a whitespace character.
 13. for(Map.Entry<String, Integer> entry : map.entrySet())                                          // iterating map.
+
 14. find palindrome in array using Java 8
     import java.util.Arrays;
 
@@ -66,7 +67,32 @@
           }
       }
 
-15. 
+15. find the non repeating character in a string 
+            public static char firstNonRepeatedCharacter(String input) {
+              Map<Character, Integer> charCount = new HashMap<>();
+              for (char ch : input.toCharArray()) {
+                  charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
+              }
+      
+              // Step 2: Find the first character with a count of 1
+              for (char ch : input.toCharArray()) {
+                  if (charCount.get(ch) == 1) {
+                      return ch;
+                  }
+              }
+      
+              return '\0'; // return null character if all characters are repeated
+          }
 
+
+         // just modify the second for loop like below to find duplicate characters in a string
+            for (char ch : input.toCharArray()) {
+                  if (charCount.get(ch) > 1) {
+                      return ch;
+                  }
+              }
+
+16. 
+    
 
 
