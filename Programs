@@ -92,7 +92,15 @@
                   }
               }
 
-16. 
+
+      // if both character and their count is needed then used map.entrySet in the 2nd for loop like below
+         for(Map.Entry<String, Integer> entry : map.entrySet()) 
+
+
+      // same above logic can be used to find non repeating words and duplicate words in a sentence with few modifications
+
+
+16.
     
 
 
