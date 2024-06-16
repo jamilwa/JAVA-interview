@@ -129,4 +129,17 @@
                            generatePermutations(remaining, ans + ch);
                        }
 
-18.
+18.  to find vowels and consonants from a string
+            public static int[] countVowelsAndConsonants(String input) {
+              int vowelsCount = 0, consonantsCount = 0;
+      
+              for (char c : input.toLowerCase().toCharArray()) {
+                  if (c >= 'a' && c <= 'z') { // Ensure character is a letter
+                      if ("aeiou".indexOf(c) != -1) {
+                          vowelsCount++;
+                      } else {
+                          consonantsCount++;
+                      }
+
+
+19.
