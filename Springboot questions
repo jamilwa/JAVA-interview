@@ -4,4 +4,12 @@ A. Different bean scopes
  3. Request : creates a bean instance for a single HTTP request.
  4. Session : creates a bean instance for an HTTP Session.
  5. Application : creates the bean instance for a ServletContext.
- 6. websocket : creates it for a particular WebSocket session 
+ 6. websocket : creates it for a particular WebSocket session.
+
+B. The three main types of dependency injection in Spring Boot are:
+Constructor injection
+The injector supplies the dependency through the client class constructor. This is the most recommended technique in the Spring Framework. 
+Setter injection
+The injector method injects the dependency to the setter method exposed by the client. This technique provides flexibility for changes at runtime. 
+Field injection
+The injector directly injects dependencies into class fields. This is a concise but potentially less flexible approach
