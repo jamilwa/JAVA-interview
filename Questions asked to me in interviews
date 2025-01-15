@@ -1,23 +1,23 @@
-1. What are SOLID Principles
-    The SOLID principles are a set of design principles for writing maintainable and scalable object-oriented software. These are guidelines to aid developers in creating 
-    software that is easy to understand, maintain, and extend.
+1. What are SOLID Principles 
+    The SOLID principles are a set of design principles for writing maintainable and scalable code. These are guidelines for developers to create software 
+    that is easy to understand, Test, maintain, and scale.
 
     Single Responsibility Principle : a class should have only one responsibility. making them easier to understand, test, and maintain.
-    Open/Closed Principle : software entities (classes, modules, functions, etc.) should be open for extension but closed for modification. This means that you should be
+    Open/Closed Principle : classes, modules, functions, etc. should be open for extension but closed for modification. This means that you should be
                                 able to extend the behavior of a module without modifying its source code. This is achieved through the use of abstraction and polymorphism.
     Liskov Substitution Principle : a subclass should be able to substitute its parent class without changing the behavior by the client code.
-    Interface Segregation Principle : segregation of interfaces into smaller, customizeable to the needs of the clients. This prevents clients from being burdened with
+    Interface Segregation Principle : segregate interfaces into smaller, customizeable to the needs of the clients. This prevents clients from being burdened with
                                             methods they don't need, promoting cleaner and more maintainable code.
-    Dependency Inversion Principle : The Dependency Inversion Principle advocates that high-level modules should not depend on low-level modules; both should depend on
-                                  abstractions. Additionally, abstractions should not depend on details; rather, details should depend on abstractions. This principle helps 
-                                  to decouple modules and promote flexibility, extensibility, and easier testing.
+    Dependency Inversion Principle :  high-level modules should not depend on low-level modules; both should depend on abstractions. Additionally, abstractions should
+                                      not depend on details; rather, details should depend on abstractions. This principle helps 
+                                      to decouple modules and promote flexibility, extensibility, and easier testing.
 
 2. Explain why equals and hashcode method should be overridden.
-    By default, the equals() method compares object references (memory addresses), which might not be suitable for your specific use case. Overriding equals() allows you
+    By default, the equals() method compares the content equality of two strings, which might not be suitable for your specific use case. Overriding equals() allows you
     to define your own logic for comparing object equality based on your application's requirements.
  
     If two objects are equal according to the equals() method, their hashCode() values must be equal as well. if two objects have the same hashCode() values,
-    it doesn't mean they are equal. Therefore, when overriding equals(), you should also override hashCode() to ensure consistency and symmetry.
+    it doesn't mean they are equal. Therefore, when overriding equals(), you should also override hashCode() to ensure consistency.
     because HashSet, HashMap, and Hashtable rely on the hashCode() method.
 
 3.  Explain SYNCHRONIZE and VOLATILE keyword
