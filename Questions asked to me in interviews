@@ -107,10 +107,9 @@
 
 9. serialVersionUID", is used in serialization to ensure that the version of the class being deserialized matches the version of the class
     that was serialized. If the serialVersionUID of the serialized object does not match the serialVersionUID of the class at the time of deserialization, then
-    an InvalidClassException is thrown. It serves as a version control mechanism for serialized objects. It's a unique identifier for each class that implements 
-    the Serializable interface. By explicitly declaring the serialVersionUID in the code, you can control the serialization version of the class, ensuring 
-    compatibility between different versions of the class. The value "1L" is simply an arbitrary identifier for the first version of the class. If you make changes to
-    the class that affect its serialization compatibility, you would typically increment this value to indicate a new version.
+    an InvalidClassException is thrown. It serves as a version control mechanism for serialized objects. By explicitly declaring the serialVersionUID in the code,
+    you can control the serialization version of the class. The value "1L" is simply an identifier for the first version of the class. If you make changes to
+    the class that affect its serialization, you should increment this value to indicate a new version.
     
 9. A stored procedure is a set of SQL statements that can be stored in the database and executed as a single unit. Stored procedures are used to encapsulate 
     repetitive tasks, complex logic, or frequently executed queries, and can be invoked by applications, scripts, or even other stored procedures
