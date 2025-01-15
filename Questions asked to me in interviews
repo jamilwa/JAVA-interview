@@ -442,6 +442,7 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
             using factory methods like
                 IntStream.range(int startInclusive, int endExclusive) or 
                 IntStream.rangeClosed(int startInclusive, int endInclusive) 
+                IntStream.of(numbers[])
              or by converting other data structures like arrays or collections using
                 Arrays.stream(int[] array) or 
                 Collection.stream().mapToInt().
