@@ -26,6 +26,10 @@
     across threads.
     
 4. Difference between collection and stream
+        Stream: It doesn’t store data, it operates on the source data structure i.e collection.	
+                it use functional interfaces like lambda.
+                Streams are not modifiable i.e one can’t add or remove elements from streams.	
+                Streams are iterated internally by just mentioning the operations.	
 5. expain MAP and REDUCE method from streams. 
     1. A stream consists of a source followed by zero or more intermediate methods and a terminal method to process the objects obtained from the source.
   
