@@ -437,3 +437,7 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
                                   .sum();
         System.out.println("Sum of Squares: " + squaredSum);
         
+42.   How do you create an IntStream in Java?
+            You can create an IntStream in Java using factory methods like IntStream.range(int startInclusive, int endExclusive) or 
+            IntStream.rangeClosed(int startInclusive, int endInclusive) to create a stream of integers within a specified range, or by converting other data structures
+            like arrays or collections using Arrays.stream(int[] array) or Collection.stream().mapToInt().
