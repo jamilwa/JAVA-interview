@@ -43,20 +43,16 @@
     REDUCE : it is used to reduce the elements of a stream to a single value. It takes two parameters: an identity value and a BinaryOperator. The identity value is the 
              initial value for the reduction operation, and the BinaryOperator specifies how two elements should be combined.    
             It returns an Optional since the stream might be empty.
-    example: List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-             Optional<Integer> sum = numbers.stream()
-                               .reduce((a, b) -> a + b);
+    example: Optional<Integer> sum = numbers.stream()
+                                       .reduce((a, b) -> a + b);
             sum.ifPresent(System.out::println); // Output: 15
 
-6. Program denoting map(), filterr(), sorted(), collect(), forEach() and reduce()  methods of Stream API. (MaFi SorCore For)
-    // create a list of integers
-        List<Integer> number = Arrays.asList(2, 3, 4, 5); 
- 
+6. Program denoting map(), filter(), sorted(), collect(), forEach() and reduce()  methods of Stream API. (collect map forEach sorted red filter)
+       
         // demonstration of map method
-        List<Integer> square 
-          = number.stream()
-            .map(x -> x * x)
-            .collect(Collectors.toList());
+        List<Integer> square  = number.stream()
+                    .map(x -> x * x)
+                    .collect(Collectors.toList());
  
         // create a list of String
         List<String> names = Arrays.asList(
@@ -68,16 +64,13 @@
             .filter(s -> s.startsWith("S"))
             .collect(Collectors.toList());
        
-        System.out.println(result);
- 
+
         // demonstration of sorted method
         List<String> show 
           = names.stream()
             .sorted()
             .collect(Collectors.toList());
        
-        System.out.println(show);
- 
         
         // collect method returns a set
         Set<Integer> squareSet
@@ -85,8 +78,7 @@
             .map(x -> x * x)
             .collect(Collectors.toSet());
        
-        System.out.println(squareSet);
- 
+
         // demonstration of forEach method
         number.stream()
             .map(x -> x * x)
@@ -98,8 +90,6 @@
             .filter(x -> x % 2 == 0)
             .reduce(0, (ans, i) -> ans + i);
  
-        System.out.println(even);
-    }
     
 
 7. What is functional programming
