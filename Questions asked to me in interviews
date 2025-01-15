@@ -105,7 +105,7 @@
     Common orchestration tools and frameworks used in microservices architectures include Kubernetes, Docker Swarm, Apache Mesos, and cloud-native platforms like 
     AWS ECS (Elastic Container Service) and Azure Kubernetes Service (AKS).
 
-9. serialVersionUID", This variable is used in serialization to ensure that the version of the class being deserialized matches the version of the class
+9. serialVersionUID", is used in serialization to ensure that the version of the class being deserialized matches the version of the class
     that was serialized. If the serialVersionUID of the serialized object does not match the serialVersionUID of the class at the time of deserialization, then
     an InvalidClassException is thrown. It serves as a version control mechanism for serialized objects. It's a unique identifier for each class that implements 
     the Serializable interface. By explicitly declaring the serialVersionUID in the code, you can control the serialization version of the class, ensuring 
