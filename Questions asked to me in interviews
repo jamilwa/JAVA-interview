@@ -375,4 +375,65 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
 38. if 5 microservices are there how many db will you use and how many ec2 instances will be needed
 39. when request comes who will pick up first land balancer or api gateway 
 40. what is api version and how can it be backtracked 
-41. 
+41. why do we use IntStream
+        the Stream API is designed to work with objects, not primitive types directly. However, the Stream API provides special primitive-type streams to handle
+        primitive values such as 
+                1. IntStream: A stream of primitive ints.
+                2. LongStream: A stream of primitive longs.
+                3. DoubleStream
+
+                example:   int[] intArray = {1, 2, 3, 4, 5};
+                           // Using IntStream
+                              IntStream intStream = Arrays.stream(intArray);
+                           // Example operations on IntStream
+                              int sum = intStream.sum();
+        You can convert a regular Stream to a primitive-type stream using methods like mapToInt, mapToLong, or mapToDouble.
+                example:  List<Integer> numbersList = Arrays.asList(1, 2, 3, 4, 5);
+                          IntStream intStream = numbersList.stream().mapToInt(Integer::intValue);
+
+        Conversely, you can convert a primitive-type stream to a regular Stream using methods like boxed().
+                example:     // Convert IntStream to Stream<Integer>
+                            IntStream intStream = Arrays.stream(intArray);
+                            List<Integer> resultList = intStream.boxed().collect(Collectors.toList());
+
+
+            example showcasing various methods available in Java 8 for working with IntStream
+                    int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+        // 1. forEach
+        IntStream.of(numbers).forEach(System.out::println);
+
+        // 2. sum
+        int sum = IntStream.of(numbers).sum();
+
+        // 3. average
+        OptionalDouble average = IntStream.of(numbers).average();
+        System.out.println("Average: " + average.orElse(0.0));
+
+        // 4. min
+        OptionalInt min = IntStream.of(numbers).min();
+        System.out.println("Min: " + min.orElse(0));
+
+        // 5. max
+        OptionalInt max = IntStream.of(numbers).max();
+
+        // 6. count
+        long count = IntStream.of(numbers).count();
+        System.out.println("Count: " + count);
+
+        // 7. summaryStatistics
+        IntSummaryStatistics stats = IntStream.of(numbers).summaryStatistics();
+        System.out.println("Stats: " + stats);
+
+        // 8. filter and collect
+        int[] evenNumbers = IntStream.of(numbers)
+                                     .filter(n -> n % 2 == 0)
+                                     .toArray();
+        IntStream.of(evenNumbers).forEach(System.out::print);
+
+        // 9. map and sum
+        int squaredSum = IntStream.of(numbers)
+                                  .map(n -> n * n)
+                                  .sum();
+        System.out.println("Sum of Squares: " + squaredSum);
+        
