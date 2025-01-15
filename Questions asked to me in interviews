@@ -441,3 +441,9 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
             You can create an IntStream in Java using factory methods like IntStream.range(int startInclusive, int endExclusive) or 
             IntStream.rangeClosed(int startInclusive, int endInclusive) to create a stream of integers within a specified range, or by converting other data structures
             like arrays or collections using Arrays.stream(int[] array) or Collection.stream().mapToInt().
+43.  why do we use interface instead of abstract classes
+            implemented by multiple, potentially unrelated classes, without specifying the implementation details, allowing for greater flexibility and the ability for 
+            a class to inherit behavior from multiple sources through multiple interface implementations; whereas an abstract class is better suited for sharing common
+            code among closely related classes where some implementation details can be provided to subclasses.
+
+44. 
