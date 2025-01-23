@@ -184,4 +184,18 @@
 
 
 
-21.  
+21.  method to split a string at capital letters and then capitalize each word first letter and add underscore.
+         example:  input =   "inThisWorld"
+                   output =  "in_This_World"
+
+      public static String formatString(String str){
+            String[] strCapsArray = str.split("(?=[A-Z])");    // splits string at capital letters without missing the letter.
+   
+            String newStr = strCapsArray[0];
+            for(int i = 1; i < strCapsArray.length; i++){
+                strCapsArray[i].substring(0, 1).toUpperCase().concat(strCapsArray[i].substring(1));
+                newStr = newStr+"_"+strCapsArray[i];
+             }
+                
+          return newStr;
+        }
