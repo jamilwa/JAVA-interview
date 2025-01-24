@@ -77,6 +77,7 @@
               String str2 = "Hello";
               str1.equals(str2);  // Output: true
               str1.equalsIgnoreCase(str2)
+             
               str.charAt(1));                      // Output: e
               str.substring(7);                   // From index 7 to the end
               str.substring(0, 5);               // From index 0 to 5 (exclusive)
@@ -85,7 +86,24 @@
               str.toLowerCase();
               str.trim();                     // it removes trailing and beginning spaces.
               str.replace('o', '0'); // Replace 'o' with '0'
-         
+             
+              String str = "123-456-789";
+              System.out.println(str.replaceAll("\\d", "X"));  // Output: XXX-XXX-XXX
+              str.contains("World"));  // Output: true
+              str.startsWith("Hello"));  // Output: true
+              str.isEmpty()  // Output: false
+
+              String result = String.join("-", "Java", "is", "fun");
+              Output: Java-is-fun
+
+
+             StringBuilder sb = new StringBuilder("Hello");
+             sb.append(", World!");  // Output: Hello, World!
+
+
+
+
+
 
 
 
