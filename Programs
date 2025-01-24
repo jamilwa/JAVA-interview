@@ -99,6 +99,18 @@
 
              StringBuilder sb = new StringBuilder("Hello");
              sb.append(", World!");  // Output: Hello, World!
+             sb.insert(6, "Beautiful ") // Output: Hello Beautiful World!
+             sb.replace(7, 11, "Java") // Output: Hello, Java!
+             sb.delete(5, 7) // Output: HelloWorld!
+             sb.deleteCharAt(5);  // Output: Hello World!
+             sb.reverse()  // Output: olleH
+             sb.capacity());  // Output: 21 (Default is 16 + string length)
+             sb.setCharAt(1, 'a');   // Output: Hallo
+StringBuilder sb = new StringBuilder("Hello, World!");
+String str = sb.toString();
+System.out.println(str);  // Output: Hello, World!
+
+
 
 
 
