@@ -31,14 +31,41 @@
 
 11. str.matches("\\d+")                                                          // it matches strings which contains only digits 
 
+12. Arrays class methods are
+               import java.util.Arrays;
+
+               int[] numbers = {1, 2, 3, 4, 5};
+               System.out.println("Array: " + Arrays.toString(numbers)); // Output: [1, 2, 3, 4, 5]
+
+               Arrays.sort(numbers);
+
+               int[] copy = Arrays.copyOf(numbers, 3);
+               System.out.println("Copied Array: " + Arrays.toString(copy)); // Output: [1, 2, 3]
+
+               int[][] matrix = {
+                                 {1, 2, 3},
+                                 {4, 5, 6}
+                                };
+               String result = Arrays.deepToString(matrix);
+               System.out.println("Matrix: " + result); // Output: [[1, 2, 3], [4, 5, 6]]   
+               
+
+               int[] array1 = {1, 2, 3};
+               int[] array2 = {1, 2, 3};
+               boolean isEqual = Arrays.equals(array1, array2);
+
+               int index = Arrays.binarySearch(numbers, 3);
+
+
 12. Character class methods are  
       char ch = 'a';
 
-        boolean isLowerCase = Character.isLowerCase(ch)         // Returns true if the specified character is a lowercase letter.
-        char upperCh = Character.toUpperCase(ch);           // 'A'
-        boolean isLetter = Character.isLetter(ch);             // Returns true if the specified character is a letter.
-        boolean isDigit = Character.isDigit(ch);              // Returns true if the specified character is a digit.
-        boolean isWhitespace = Character.isWhitespace(ch);   //  Returns true if the specified character is a whitespace character.
+        boolean isLowerCase = Character.isLowerCase(ch)                  // Returns true if the specified character is a lowercase letter.
+        char upperCh = Character.toUpperCase(ch);                       // 'A'
+        boolean isLetter = Character.isLetter(ch);                     // Returns true if the specified character is a letter.
+        boolean isDigit = Character.isDigit(ch);                      // Returns true if the specified character is a digit.
+        boolean isLetterOrDigit = Character.isLetterOrDigit(ch);     //  Returns true if the character is a digit or letter.
+        boolean isWhitespace = Character.isWhitespace(ch);          //  Returns true if the specified character is a whitespace character.
 
 13. for(Map.Entry<String, Integer> entry : map.entrySet())                                          // iterating map.
 
