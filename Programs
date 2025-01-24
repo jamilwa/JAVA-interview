@@ -56,6 +56,40 @@
 
                int index = Arrays.binarySearch(numbers, 3);
 
+13.  List methods 
+      ArrayList<String> list = new ArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add(1, "Orange"); // Insert "Orange" at index 1
+
+
+      list.clear();                          // Clear the list
+      list.contains("Apple");               // Check if "Apple" is in the list
+      list.size()                          // returns size of the list.
+      list.remove(0);                     // Remove the first element
+      list.set(1, "Orange");             // Replace "Banana" with "Orange"
+      list.get(0);                      // Get the first element
+      
+
+14.  String, StringBuilder and StringBuffer  methods with example
+              String str = "Hello, World!";
+              str.charAt(1));                      // Output: e
+              str.substring(7);                   // From index 7 to the end
+              str.substring(0, 5);               // From index 0 to 5 (exclusive)
+              str.indexOf("World");             // Output: 7
+              str.lastIndexOf("l");            //  Output: 10
+              str.toLowerCase();
+              str.trim();                     // it removes trailing and beginning spaces.
+              str.replace('o', '0'); // Replace 'o' with '0'
+         
+
+
+
+
+
+
+
+
 
 12. Character class methods are  
       char ch = 'a';
