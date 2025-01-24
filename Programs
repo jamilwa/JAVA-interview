@@ -31,11 +31,15 @@
 
 11. str.matches("\\d+")                                                          // it matches strings which contains only digits 
 
-12. Character class methods are   
-        isDigit(char ch): Returns true if the specified character is a digit.
-        isLetter(char ch): Returns true if the specified character is a letter.
-        isLetterOrDigit(char ch): Returns true if the specified character is a letter or a digit.
-        isWhitespace(char ch): Returns true if the specified character is a whitespace character.
+12. Character class methods are  
+      char ch = 'a';
+
+        boolean isLowerCase = Character.isLowerCase(ch)         // Returns true if the specified character is a lowercase letter.
+        char upperCh = Character.toUpperCase(ch);           // 'A'
+        boolean isLetter = Character.isLetter(ch);             // Returns true if the specified character is a letter.
+        boolean isDigit = Character.isDigit(ch);              // Returns true if the specified character is a digit.
+        boolean isWhitespace = Character.isWhitespace(ch);   //  Returns true if the specified character is a whitespace character.
+
 13. for(Map.Entry<String, Integer> entry : map.entrySet())                                          // iterating map.
 
 14. find palindrome in array using Java 8
