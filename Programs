@@ -73,6 +73,10 @@
 
 14.  String, StringBuilder and StringBuffer  methods with example
               String str = "Hello, World!";
+              String str1 = "Hello";
+              String str2 = "Hello";
+              str1.equals(str2);  // Output: true
+              str1.equalsIgnoreCase(str2)
               str.charAt(1));                      // Output: e
               str.substring(7);                   // From index 7 to the end
               str.substring(0, 5);               // From index 0 to 5 (exclusive)
