@@ -164,10 +164,9 @@
 12. Arrays class methods are
                import java.util.Arrays;
 
-               int[] numbers = {1, 2, 3, 4, 5};
-               System.out.println("Array: " + Arrays.toString(numbers)); // Output: [1, 2, 3, 4, 5]
-
-               Arrays.sort(numbers);
+               int[] numbers = {1, 2, 3, 7, 4, 5};
+               Arrays.toString(numbers));             // Output: [1, 2, 3, 7, 4, 5]
+               Arrays.sort(numbers);                    // Output: [1, 2, 3, 4, 5, 7]
 
                int[] copy = Arrays.copyOf(numbers, 3);
                System.out.println("Copied Array: " + Arrays.toString(copy)); // Output: [1, 2, 3]
