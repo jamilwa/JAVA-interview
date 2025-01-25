@@ -110,9 +110,14 @@
 
 15.   Integer class methods
       String str = "123";
-      int num = Integer.parseInt(str);  // Output: 123.      Converts a String to a primitive int.
+      int num = Integer.parseInt(str);           // Output: 123.      Converts a String to a primitive int.
+      Integer num = Integer.valueOf("123");      // Output: 123.     Converts a String to an Integer object.
+      Integer.toString(100)                      // Output: "100".
+      
+   
 
-Integer num = Integer.valueOf(str);  // Output: 456
+      
+
 
 
       
