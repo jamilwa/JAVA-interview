@@ -152,6 +152,11 @@
 10. Collections.sort(personList, Comparator.comparing(Person::getName, Comparator.reverseOrder())
       .thenComparing(Person::getAge, Comparator.reverseOrder()));                 // Sorting the list of Person objects based on name and then age in descending order
 
+10.  List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+        // Custom comparator to sort by length of names
+        Comparator<String> byLength = Comparator.comparingInt(String::length);
+
+
 11.    Collections.reverse(ArrayList);                                              // Reversing the list
        Collections.shuffle(ArrayList);                                              // Shuffling the list
        Collections.binarySearch(ArrayList, 5);                                      // Binary search
