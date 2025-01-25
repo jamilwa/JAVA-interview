@@ -170,25 +170,26 @@
                import java.util.Arrays;
 
                int[] numbers = {1, 2, 3, 7, 4, 5};
-               Arrays.toString(numbers));             // Output: [1, 2, 3, 7, 4, 5]
-               Arrays.sort(numbers);                    // Output: [1, 2, 3, 4, 5, 7]
+               Arrays.toString(numbers));                             // Output: [1, 2, 3, 7, 4, 5]
+               Arrays.sort(numbers);                                // Output: [1, 2, 3, 4, 5, 7]
+               Arrays.sort(numbers[], Comparator.reverseOrder())   // Sorting the array in descending order. note: it works on object like Integer not on int.
+
 
                int[] copy = Arrays.copyOf(numbers, 3);
-               System.out.println("Copied Array: " + Arrays.toString(copy)); // Output: [1, 2, 3]
+               Arrays.toString(copy));                         // Output: [1, 2, 3]
 
                int[][] matrix = {
                                  {1, 2, 3},
                                  {4, 5, 6}
                                 };
-               String result = Arrays.deepToString(matrix);
-               System.out.println("Matrix: " + result); // Output: [[1, 2, 3], [4, 5, 6]]   
+               Arrays.deepToString(matrix);                    // Output: [[1, 2, 3], [4, 5, 6]]   
                
 
                int[] array1 = {1, 2, 3};
                int[] array2 = {1, 2, 3};
-               boolean isEqual = Arrays.equals(array1, array2);
+               Arrays.equals(array1, array2);                    // output: true
 
-               int index = Arrays.binarySearch(numbers, 3);
+               Arrays.binarySearch(numbers, 3);                  // output:  2 which is the index position of the value 3
 
 13.  List methods 
       ArrayList<String> list = new ArrayList<>();
