@@ -96,13 +96,33 @@ public class Main {
 
         
 
- 
+
+	3. if Comparator is not to be used for sort by name then by age then we can make use of below code
+	
+	class EmployeeComparator implements Comparator<Employee> {
+	 
+	    @Override
+	    public int compare(Employee e1, Employee e2)
+	    {
+		// 1st level comparison
+	        int NameCompare = e1.getName().compareTo(e2.getName());
+	        int AgeCompare = e1.getAge().compareTo(e2.getAge());
+	 
+	        // 2nd level comparison
+	        return (NameCompare == 0) ? AgeCompare : NameCompare;
+
+
+
+	and in main class use below
+		Collections.sort(employees, new EmployeeComparator());
+
+
 		        
-	3. By changing the return value inside the compare method, you can sort in any order that you wish to, for example: For descending order just change the 
+	4. By changing the return value inside the compare method, you can sort in any order that you wish to, for example: For descending order just change the 
 		positions of ‘a’ and ‘b’ in the above compare method.
 	
 	
-	3. The Comparable interface is used to compare an object of the same class with an instance of that class.  it provides the compareTo method that takes a 
+	5. The Comparable interface is used to compare an object of the same class with an instance of that class.  it provides the compareTo method that takes a 
 		parameter of the object of that class. 
 	
 	    Comparable Example 
