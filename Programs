@@ -195,7 +195,7 @@
       ArrayList<String> list = new ArrayList<>();
         list.add("Apple");
         list.add("Banana");
-        list.add(1, "Orange"); // Insert "Orange" at index 1
+        list.add(1, "Orange"); // Insert "Orange" at index 1 and moves banana to index 2 position.
 
 
       list.clear();                          // Clear the list
