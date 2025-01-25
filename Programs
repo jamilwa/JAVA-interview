@@ -108,6 +108,15 @@
              sb.setCharAt(1, 'a');   // Output: Hallo
              sb.toString();  // Output: Hello, World!
 
+15.   Integer class methods
+      String str = "123";
+      int num = Integer.parseInt(str);  // Output: 123.      Converts a String to a primitive int.
+
+Integer num = Integer.valueOf(str);  // Output: 456
+
+
+      
+
 
 
 
