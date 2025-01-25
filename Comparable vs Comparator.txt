@@ -97,7 +97,7 @@ public class Main {
         
 
 
-	3. if Comparator is not to be used for sort by name then by age then we can make use of below code
+	3. if Comparator is not to be used for sorting by name & then by age, then we can make use of below code to do sorting
 	
 	class EmployeeComparator implements Comparator<Employee> {
 	 
@@ -118,8 +118,10 @@ public class Main {
 
 
 		        
-	4. By changing the return value inside the compare method, you can sort in any order that you wish to, for example: For descending order just change the 
-		positions of ‘a’ and ‘b’ in the above compare method.
+	4. if Comparator is not to be used for sorting by name & then by age in descending order then we can do it By changing the return value inside the 
+		compare method.
+		for example: For descending order just change the 
+		positions of ‘e1’ and ‘e2’ in the number 3 code compare method.
 	
 	
 	5. The Comparable interface is used to compare an object of the same class with an instance of that class.  it provides the compareTo method that takes a 
