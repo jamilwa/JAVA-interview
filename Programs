@@ -106,7 +106,8 @@
              sb.reverse()  // Output: olleH
              sb.capacity());  // Output: 21 (Default is 16 + string length)
              sb.setCharAt(1, 'a');   // Output: Hallo
-             String str = sb.toString();  // Output: Hello, World!
+             sb.toString();  // Output: Hello, World!
+
 
 
 
