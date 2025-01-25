@@ -1,154 +1,3 @@
-1. for(char c=97; c<= 122; c++)                                                  // will print small abcd
-
-2. for(char c=65; c<= 90; c++)                                                   // will print capital abcd
-
-3. int num = 12345;
-   int n = String.valueOf(num).length();                                         // it converts number to String so that we can get number of digits of a number.
-
-4. "I am jamil".replaceAll("\\s+", "");                                          // replaces all whitespace characters like spaces, tabs, new line characters.
-
-5.  Arrays.sort(arr[])                                                             // used to sort array
-
-6.  Arrays.sort(numbers[], Collections.reverseOrder())                             // Sorting the array in descending order. note: it works on object like Integer not on int.
-
-6.  Collections.sort(ArrayList)                                                  // Sorting the list
-
-7.  Collections.sort(ArrayList, Collections.reverseOrder());                     // Sorting the list in descending order 
-
-8.  Collections.sort(personList, Comparator.comparing(Person::getName));         // Sorting the list of Person objects based on name
-
-9.  Collections.sort(personList, Comparator.comparing(Person::getName).thenComparing(Person::getAge));    // Sorting the list of Person objects based on name and then age
-
-10. Collections.sort(personList, Comparator.comparing(Person::getName, Comparator.reverseOrder())
-      .thenComparing(Person::getAge, Comparator.reverseOrder()));                 // Sorting the list of Person objects based on name and then age in descending order
-
-11.    Collections.reverse(ArrayList);                                              // Reversing the list
-       Collections.shuffle(ArrayList);                                              // Shuffling the list
-       Collections.binarySearch(ArrayList, 5);                                      // Binary search
-       Collections.frequency(ArrayList, 5);                                         // Frequency of an element
-       Collections.unmodifiableCollection(numbers);                                 // Creating an unmodifiable collection
-       Collections.synchronizedCollection(numbers);                                 // Creating a synchronized collection
-
-11. str.matches("\\d+")                                                          // it matches strings which contains only digits 
-
-12. Arrays class methods are
-               import java.util.Arrays;
-
-               int[] numbers = {1, 2, 3, 4, 5};
-               System.out.println("Array: " + Arrays.toString(numbers)); // Output: [1, 2, 3, 4, 5]
-
-               Arrays.sort(numbers);
-
-               int[] copy = Arrays.copyOf(numbers, 3);
-               System.out.println("Copied Array: " + Arrays.toString(copy)); // Output: [1, 2, 3]
-
-               int[][] matrix = {
-                                 {1, 2, 3},
-                                 {4, 5, 6}
-                                };
-               String result = Arrays.deepToString(matrix);
-               System.out.println("Matrix: " + result); // Output: [[1, 2, 3], [4, 5, 6]]   
-               
-
-               int[] array1 = {1, 2, 3};
-               int[] array2 = {1, 2, 3};
-               boolean isEqual = Arrays.equals(array1, array2);
-
-               int index = Arrays.binarySearch(numbers, 3);
-
-13.  List methods 
-      ArrayList<String> list = new ArrayList<>();
-        list.add("Apple");
-        list.add("Banana");
-        list.add(1, "Orange"); // Insert "Orange" at index 1
-
-
-      list.clear();                          // Clear the list
-      list.contains("Apple");               // Check if "Apple" is in the list
-      list.size()                          // returns size of the list.
-      list.remove(0);                     // Remove the first element
-      list.set(1, "Orange");             // Replace "Banana" with "Orange"
-      list.get(0);                      // Get the first element
-      
-
-14.  String, StringBuilder and StringBuffer  methods with example
-              String str = "Hello, World!";
-              String str1 = "Hello";
-              String str2 = "Hello";
-              str1.equals(str2);  // Output: true
-              str1.equalsIgnoreCase(str2)
-             
-              str.charAt(1));                      // Output: e
-              str.substring(7);                   // From index 7 to the end
-              str.substring(0, 5);               // From index 0 to 5 (exclusive)
-              str.indexOf("World");             // Output: 7
-              str.lastIndexOf("l");            //  Output: 10
-              str.toLowerCase();
-              str.trim();                     // it removes trailing and beginning spaces.
-              str.replace('o', '0'); // Replace 'o' with '0'
-             
-              String str = "123-456-789";
-              System.out.println(str.replaceAll("\\d", "X"));  // Output: XXX-XXX-XXX
-              str.contains("World"));  // Output: true
-              str.startsWith("Hello"));  // Output: true
-              str.isEmpty()  // Output: false
-
-              String result = String.join("-", "Java", "is", "fun");
-              Output: Java-is-fun
-
-
-             StringBuilder sb = new StringBuilder("Hello");
-             sb.append(", World!");  // Output: Hello, World!
-             sb.insert(6, "Beautiful ") // Output: Hello Beautiful World!
-             sb.replace(7, 11, "Java") // Output: Hello, Java!
-             sb.delete(5, 7) // Output: HelloWorld!
-             sb.deleteCharAt(5);  // Output: Hello World!
-             sb.reverse()  // Output: olleH
-             sb.capacity());  // Output: 21 (Default is 16 + string length)
-             sb.setCharAt(1, 'a');   // Output: Hallo
-             sb.toString();  // Output: Hello, World!
-
-15.   Integer class methods
-      String str = "123";
-      int num = Integer.parseInt(str);           // Output: 123.      Converts a String to a primitive int.
-      Integer num = Integer.valueOf("123");      // Output: 123.     Converts a String to an Integer object.
-      Integer.toString(100)                      // Output: "100".
-      
-   
-
-      
-
-
-
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-12. Character class methods are  
-      char ch = 'a';
-
-        boolean isLowerCase = Character.isLowerCase(ch)                  // Returns true if the specified character is a lowercase letter.
-        char upperCh = Character.toUpperCase(ch);                       // 'A'
-        boolean isLetter = Character.isLetter(ch);                     // Returns true if the specified character is a letter.
-        boolean isDigit = Character.isDigit(ch);                      // Returns true if the specified character is a digit.
-        boolean isLetterOrDigit = Character.isLetterOrDigit(ch);     //  Returns true if the character is a digit or letter.
-        boolean isWhitespace = Character.isWhitespace(ch);          //  Returns true if the specified character is a whitespace character.
-
-13. for(Map.Entry<String, Integer> entry : map.entrySet())                                          // iterating map.
 
 14. find palindrome in array using Java 8
     import java.util.Arrays;
@@ -297,3 +146,140 @@
                 
           return newStr;
         }
+
+
+
+
+1. for(char c=97; c<= 122; c++)                                                  // will print small abcd
+
+2. for(char c=65; c<= 90; c++)                                                   // will print capital abcd
+
+3. int num = 12345;
+   int n = String.valueOf(num).length();                                         // it converts number to String so that we can get number of digits of a number.
+
+4. "I am jamil".replaceAll("\\s+", "");                                          // replaces all whitespace characters like spaces, tabs, new line characters.
+
+5.  Arrays.sort(arr[])                                                             // used to sort array
+
+6.  Arrays.sort(numbers[], Collections.reverseOrder())                             // Sorting the array in descending order. note: it works on object like Integer not on int.
+
+6.  Collections.sort(ArrayList)                                                  // Sorting the list
+
+7.  Collections.sort(ArrayList, Collections.reverseOrder());                     // Sorting the list in descending order 
+
+8.  Collections.sort(personList, Comparator.comparing(Person::getName));         // Sorting the list of Person objects based on name
+
+9.  Collections.sort(personList, Comparator.comparing(Person::getName).thenComparing(Person::getAge));    // Sorting the list of Person objects based on name and then age
+
+10. Collections.sort(personList, Comparator.comparing(Person::getName, Comparator.reverseOrder())
+      .thenComparing(Person::getAge, Comparator.reverseOrder()));                 // Sorting the list of Person objects based on name and then age in descending order
+
+11.    Collections.reverse(ArrayList);                                              // Reversing the list
+       Collections.shuffle(ArrayList);                                              // Shuffling the list
+       Collections.binarySearch(ArrayList, 5);                                      // Binary search
+       Collections.frequency(ArrayList, 5);                                         // Frequency of an element
+       Collections.unmodifiableCollection(numbers);                                 // Creating an unmodifiable collection
+       Collections.synchronizedCollection(numbers);                                 // Creating a synchronized collection
+
+11. str.matches("\\d+")                                                          // it matches strings which contains only digits 
+
+12. Arrays class methods are
+               import java.util.Arrays;
+
+               int[] numbers = {1, 2, 3, 4, 5};
+               System.out.println("Array: " + Arrays.toString(numbers)); // Output: [1, 2, 3, 4, 5]
+
+               Arrays.sort(numbers);
+
+               int[] copy = Arrays.copyOf(numbers, 3);
+               System.out.println("Copied Array: " + Arrays.toString(copy)); // Output: [1, 2, 3]
+
+               int[][] matrix = {
+                                 {1, 2, 3},
+                                 {4, 5, 6}
+                                };
+               String result = Arrays.deepToString(matrix);
+               System.out.println("Matrix: " + result); // Output: [[1, 2, 3], [4, 5, 6]]   
+               
+
+               int[] array1 = {1, 2, 3};
+               int[] array2 = {1, 2, 3};
+               boolean isEqual = Arrays.equals(array1, array2);
+
+               int index = Arrays.binarySearch(numbers, 3);
+
+13.  List methods 
+      ArrayList<String> list = new ArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add(1, "Orange"); // Insert "Orange" at index 1
+
+
+      list.clear();                          // Clear the list
+      list.contains("Apple");               // Check if "Apple" is in the list
+      list.size()                          // returns size of the list.
+      list.remove(0);                     // Remove the first element
+      list.set(1, "Orange");             // Replace "Banana" with "Orange"
+      list.get(0);                      // Get the first element
+      
+
+14.  String, StringBuilder and StringBuffer  methods with example
+              String str = "Hello, World!";
+              String str1 = "Hello";
+              String str2 = "Hello";
+              str1.equals(str2);  // Output: true
+              str1.equalsIgnoreCase(str2)
+             
+              str.charAt(1));                      // Output: e
+              str.substring(7);                   // From index 7 to the end
+              str.substring(0, 5);               // From index 0 to 5 (exclusive)
+              str.indexOf("World");             // Output: 7
+              str.lastIndexOf("l");            //  Output: 10
+              str.toLowerCase();
+              str.trim();                     // it removes trailing and beginning spaces.
+              str.replace('o', '0'); // Replace 'o' with '0'
+             
+              String str = "123-456-789";
+              System.out.println(str.replaceAll("\\d", "X"));  // Output: XXX-XXX-XXX
+              str.contains("World"));  // Output: true
+              str.startsWith("Hello"));  // Output: true
+              str.isEmpty()  // Output: false
+
+              String result = String.join("-", "Java", "is", "fun");
+              Output: Java-is-fun
+
+
+             StringBuilder sb = new StringBuilder("Hello");
+             sb.append(", World!");  // Output: Hello, World!
+             sb.insert(6, "Beautiful ") // Output: Hello Beautiful World!
+             sb.replace(7, 11, "Java") // Output: Hello, Java!
+             sb.delete(5, 7) // Output: HelloWorld!
+             sb.deleteCharAt(5);  // Output: Hello World!
+             sb.reverse()  // Output: olleH
+             sb.capacity());  // Output: 21 (Default is 16 + string length)
+             sb.setCharAt(1, 'a');   // Output: Hallo
+             sb.toString();  // Output: Hello, World!
+
+15.   Integer class methods
+      String str = "123";
+      int num = Integer.parseInt(str);           // Output: 123.      Converts a String to a primitive int.
+      Integer num = Integer.valueOf("123");      // Output: 123.     Converts a String to an Integer object.
+      Integer.toString(100)                      // Output: "100".
+      Integer.compare(5, 10));                   // Output: -1
+      Integer.max(10, 20));                      // Output: 20
+      Integer.sum(10, 20));                      // Output: 30
+      Integer.toBinaryString(10));
+      Integer.toHexString(255));                // Output: "ff"
+      Integer.toOctalString(8));                // Output: "10"
+      
+12. Character class methods are  
+      char ch = 'a';
+
+        boolean isLowerCase = Character.isLowerCase(ch)                  // Returns true if the specified character is a lowercase letter.
+        char upperCh = Character.toUpperCase(ch);                       // 'A'
+        boolean isLetter = Character.isLetter(ch);                     // Returns true if the specified character is a letter.
+        boolean isDigit = Character.isDigit(ch);                      // Returns true if the specified character is a digit.
+        boolean isLetterOrDigit = Character.isLetterOrDigit(ch);     //  Returns true if the character is a digit or letter.
+        boolean isWhitespace = Character.isWhitespace(ch);          //  Returns true if the specified character is a whitespace character.
+
+13. for(Map.Entry<String, Integer> entry : map.entrySet())                                          // iterating map.
