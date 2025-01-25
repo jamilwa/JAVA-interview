@@ -15,65 +15,88 @@
 		they should be swapped for their sort. 
 		
 		Example:
-		class Student {
- 			String Name;
-	    		int Age;
- 			
-    			public Student(int Age, String Name)
-    			{
-			    this.Age = Age;
-    			    this.Name = Name;
-    			 }
- 			
-    			public String toString()
-    			{
- 				return this.Age + " " + this.Name;
-    			}
-			
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Employee {
+    String name;
+    int age;
+
+    Employee(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+            this.age = age;
+    }
+
+
+    @Override
+    public String toString() {
+        return name + " (" + age + ")";
+    }
+}
+
+class AgeComparator implements Comparator<Employee> {
+    @Override
+    public int compare(Employee e1, Employee e2) {
+        return Integer.compare(e1.age, e2.age); // Compare by age
+    }
+}
+
+class NameComparator implements Comparator<Employee> {
+    @Override
+    public int compare(Employee e1, Employee e2) {
+        // Compare by name in lexicographical order
+        return e1.name.compareTo(e2.name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List<Employee> employees = Arrays.asList(
+            new Employee("Alice", 30),
+            new Employee("Charlie", 35),
+            new Employee("Bob", 25),
+            new Employee("Bob", 20)
+
+            
+        );
+
+        Collections.sort(employees, new NameComparator());     				// is used if there are no setters and getters, but only constructor is there.
+		System.out.println(employees); 						// output [Alice (30), Bob (25), Bob (20), Charlie (35)]
+
+        Collections.sort(employees, Comparator.comparing(Employee::getName)); 
+		System.out.println(employees); 						// output [Alice (30), Bob (25), Bob (20), Charlie (35)]
+
+        Collections.sort(employees, Comparator.comparing(Employee::getName).thenComparing(Employee::getAge));        
+		System.out.println(employees); 						// output [Alice (30), Bob (20), Bob (25), Charlie (35)]
+
+        Collections.sort(employees, Comparator.comparing(Employee::getName, Comparator.reverseOrder())
+      .thenComparing(Employee::getAge, Comparator.reverseOrder())); 
+		System.out.println(employees); 						// output [Charlie (35), Bob (25), Bob (20), Alice (30)]
+
+
+    }
+}
+
+        
+
  
-		// Class 2
-		// Helper class implementing Comparator interface
-		class SortbyAge implements Comparator<Student> {
-		 
-		    // Sorting in ascending order of Age number
-		    public int compare(Student a, Student b)
-		    {
-		 
-		        return a.Age - b.Age;
-		    }
-		}
-		 
-		// Class 3
-		class Sortbyname implements Comparator<Student> {
-		 
-		    // Sorting in ascending order of name
-		    public int compare(Student a, Student b)
-		    {
-		 
-		        return a.Name.compareTo(b.Name);
-		    }
-		
- 
-		// Class 4
-		// Main class
-		class GFG {
-		 
-		    public static void main(String[] args)
-		    {
-		 
-		        ArrayList<Student> ar = new ArrayList<Student>();
-		 
-		        ar.add(new Student(111, "Mayank"));
-		        ar.add(new Student(131, "Anshul"));
-		        ar.add(new Student(121, "Solanki"));
-		        ar.add(new Student(101, "Aggarwal"));
-		 
-		        // Sorting student entries by roll number
-		        Collections.sort(ar, new SortbyAge());
-		 
-		        // Sorting student entries by name
-		        Collections.sort(ar, new Sortbyname());
-		 
 		        
 	3. By changing the return value inside the compare method, you can sort in any order that you wish to, for example: For descending order just change the 
 		positions of ‘a’ and ‘b’ in the above compare method.
