@@ -195,7 +195,7 @@
       ArrayList<String> list = new ArrayList<>();
         list.add("Apple");
         list.add("Banana");
-        list.add(1, "Orange"); // Insert "Orange" at index 1 and moves banana to index 2 position.
+        list.add(1, "Orange");                  // Insert "Orange" at index 1 and moves banana to index 2 position.
 
 
       list.clear();                          // Clear the list
@@ -213,35 +213,34 @@
               str1.equals(str2);  // Output: true
               str1.equalsIgnoreCase(str2)
              
-              str.charAt(1));                      // Output: e
-              str.substring(7);                   // From index 7 to the end
-              str.substring(0, 5);               // From index 0 to 5 (exclusive)
-              str.indexOf("World");             // Output: 7
-              str.lastIndexOf("l");            //  Output: 10
+              str.charAt(1));                          // Output: e
+              str.substring(7);                       // From index 7 to the end
+              str.substring(0, 5);                   // From index 0 to 5 (exclusive)
+              str.indexOf("World");                 // Output: 7
+              str.lastIndexOf("l");                //  Output: 10
               str.toLowerCase();
-              str.trim();                     // it removes trailing and beginning spaces.
-              str.replace('o', '0'); // Replace 'o' with '0'
+              str.trim();                         // it removes trailing and beginning spaces.
+              str.replace('o', '0');             // Replace 'o' with '0'
              
               String str = "123-456-789";
-              System.out.println(str.replaceAll("\\d", "X"));  // Output: XXX-XXX-XXX
-              str.contains("World"));  // Output: true
-              str.startsWith("Hello"));  // Output: true
-              str.isEmpty()  // Output: false
+              str.replaceAll("\\d", "X"));                  // Output: XXX-XXX-XXX
+              str.contains("World"));                      // Output: true
+              str.startsWith("Hello"));                   // Output: true
+              str.isEmpty()                              // Output: false
 
-              String result = String.join("-", "Java", "is", "fun");
-              Output: Java-is-fun
+              String.join("-", "Java", "is", "fun");       // Output: Java-is-fun
 
 
              StringBuilder sb = new StringBuilder("Hello");
-             sb.append(", World!");  // Output: Hello, World!
-             sb.insert(6, "Beautiful ") // Output: Hello Beautiful World!
-             sb.replace(7, 11, "Java") // Output: Hello, Java!
-             sb.delete(5, 7) // Output: HelloWorld!
-             sb.deleteCharAt(5);  // Output: Hello World!
-             sb.reverse()  // Output: olleH
-             sb.capacity());  // Output: 21 (Default is 16 + string length)
-             sb.setCharAt(1, 'a');   // Output: Hallo
-             sb.toString();  // Output: Hello, World!
+             sb.append(", World!");                                              // Output: Hello, World!
+             sb.insert(6, "Beautiful ")                                         // Output: Hello Beautiful World!
+             sb.replace(7, 11, "Java")                                         // Output: Hello, Java!
+             sb.delete(5, 7)                                                  // Output: HelloWorld!
+             sb.deleteCharAt(5);                                             // Output: Hello World!
+             sb.reverse()                                                   // Output: olleH
+             sb.capacity());                                               // Output: 21 (Default is 16 + string length)
+             sb.setCharAt(1, 'a');                                        // Output: Hallo
+             sb.toString();                                              // Output: Hello, World!
 
 15.   Integer class methods
       String str = "123";
