@@ -1,4 +1,6 @@
-1. API Gateway Pattern
+-----------------------Integration Patterns------------------
+
+1. API Gateway Pattern (Used in GAP project)
          In microservices, clients may need to communicate with multiple services (e.g., User, Order, Product). Exposing all services directly can cause:
             1. Tight Coupling: Clients must know the location and details of every microservice.
             2. Repeated Effort: Concerns like authentication, rate-limiting, and logging are repeated in every service.
@@ -40,53 +42,30 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 
 
+ -------------Cross-Cutting Concern Patterns----------------
+2. Externalized Configuration (Used in GAP project)
+Problem : A service typically calls other services and databases as well. For each environment like dev, QA, UAT, and/or prod, the endpoint URL or other configuration
+         properties might be different. A change in any of those properties might require a re-build as well as re-deploy of the service. How do we avoid code 
+         modification for configuration changes?
+Solution : Externalized configuration, including endpoint URLs and credentials, will mitigate the problem. The application should load them either at startup or
+         on the fly. The Spring Cloud config server provides the option to externalize the properties to GitHub and load them as environment properties. 
+         These can be accessed by the application on startup or can be refreshed without a server restart.
 
-2. Circuit Breaker Pattern
-Why Use Circuit Breakers?
-To prevent cascading failures when one service becomes unresponsive.
-Circuit breakers monitor service calls and "open" to block traffic when failure rates are high.
-Using Resilience4j for circuit breaker functionality.
-
-pom.xml
-    <dependency>
-      <groupId>io.github.resilience4j</groupId>
-      <artifactId>resilience4j-spring-boot2</artifactId>
-      <version>1.7.1</version>
-    </dependency>
-
-
-OrderService.java
-@Service
-public class OrderService {
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @CircuitBreaker(name = "userService", fallbackMethod = "userServiceFallback")
-    public String getUserData() {
-        return restTemplate.getForObject("http://localhost:8081/users", String.class);
-    }
-
-    public String userServiceFallback(Exception e) {
-        return "User Service is currently unavailable. Please try again later.";
-    }
-}
+3. Service Registry and Discovery Pattern (Used in GAP project)  
+Problem : When microservices come into the picture, we need to address a few issues in terms of calling services:
+         With container technology, IP addresses are dynamically allocated to the service instances. Every time the address changes, a consumer service can break 
+         and require manual changes. Each service URL has to be remembered by the consumer and become tightly coupled. So how does the consumer or router know all 
+         the available service instances and locations?
+Solution : A service registry needs to be created, which will log the metadata of each producer service. A service instance should register to the registry when 
+         starting and should de-register when shutting down. Therefore, the consumer or router should query the registry and find out the location of the service. 
+         The registry also needs to conduct a health check of the producer service to ensure that only working instances of the services are available and able to 
+         be consumed through it. 
+         There are two types of service discovery:
+         1. client-side. example: Netflix Eureka.
+         2. server-side. example: AWS ALB
 
 
-application.yml
-  resilience4j:
-    circuitbreaker:
-      configs:
-        default:
-          failure-rate-threshold: 50
-          wait-duration-in-open-state: 5000ms
-      instances:
-        userService:
-          base-config: default
-
-
-
-3. Service Registry and Discovery Pattern
-Using Eureka Server for service registry and discovery.
+example: Eureka Server
 
   pom.xml
     <dependency>
@@ -130,9 +109,60 @@ application.yml
             service-url:
               defaultZone: http://localhost:8761/eureka/
 
-    
 
-4. Database per Service Pattern
+
+4. Circuit Breakers (Used in GAP project)
+
+Problem : A service generally calls other services to retrieve data, and there is a chance that the downstream service may be down. There are two problems with this:
+         first, the request will keep going to the down service, exhausting network resources and slowing performance.
+         Second, the user experience will be poor and unpredictable. How do we avoid cascading service failures and handle failures gracefully?
+Solution : When the number of consecutive failures crosses a threshold, the circuit breaker trips To prevent cascading failures when one service becomes unresponsive.
+           and for the duration of a timeout period, all attempts to invoke the remote service will fail immediately. After the timeout expires, the circuit breaker 
+           allows a limited number of test requests to pass through. If those requests succeed, the circuit breaker resumes normal operation. Otherwise, if there 
+           is a failure, the timeout period begins again.
+    example : Resilience4j, Netflix Hystrix.         
+
+
+pom.xml
+    <dependency>
+      <groupId>io.github.resilience4j</groupId>
+      <artifactId>resilience4j-spring-boot2</artifactId>
+      <version>1.7.1</version>
+    </dependency>
+
+
+OrderService.java
+@Service
+public class OrderService {
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @CircuitBreaker(name = "userService", fallbackMethod = "userServiceFallback")
+    public String getUserData() {
+        return restTemplate.getForObject("http://localhost:8081/users", String.class);
+    }
+
+    public String userServiceFallback(Exception e) {
+        return "User Service is currently unavailable. Please try again later.";
+    }
+}
+
+
+application.yml
+  resilience4j:
+    circuitbreaker:
+      configs:
+        default:
+          failure-rate-threshold: 50
+          wait-duration-in-open-state: 5000ms
+      instances:
+        userService:
+          base-config: default
+
+
+
+----------------------------Database Patterns------------------------------
+5. Database per Service Pattern  (Used in GAP project)
 Why Separate Databases?
          Microservices are loosely coupled, and sharing a database violates that principle. Different services have different data storage requirements.
 Solution: One database per microservice must be designed. It must be private to that service only, and it should be accessed by the microservice API only.
@@ -141,13 +171,13 @@ Solution: One database per microservice must be designed. It must be private to 
          Failure isolation (issues in one database don’t affect others).
          Some business transactions need to query data that is owned by multiple services.
 
-5. Command Query Responsibility Segregation (CQRS)
+6. Command Query Responsibility Segregation (CQRS)
          Once we implement database-per-service, there is a requirement to query, which requires joint data from multiple services — it's not possible.
 Solution: CQRS suggests splitting the application into two parts — the command side and the query side. The command side handles the Create, Update, and Delete requests.
           The query side handles the query component by using materialized views. The event sourcing design pattern is generally used along with it to create events for
           any data change. As such, materialized views are kept up to date by subscribing to the stream of events.
 
-6. Saga Pattern
+7. Saga Pattern
 Problem : When each service has its own database and a business transaction spans multiple services, how do we ensure data consistency across services? 
          For example, for an e-commerce application where customers have a credit limit, the application must ensure that a new order will not exceed the customer’s
          credit limit. Since Orders and Customers are in different databases, the application cannot simply use a local ACID transaction.
@@ -158,18 +188,37 @@ Solution : A Saga represents a high-level business process that consists of seve
          2. Orchestration – An orchestrator (object) takes responsibility for a saga’s decision-making and sequencing business logic.
 
 
-7.  Event-Driven Pattern
+8.  Event-Driven Pattern (Used in GAP project)
 Why Use Event-Driven Architecture?
 Decouples services by using asynchronous communication.
 Services do not directly call each other; instead, they publish or subscribe to events using a message broker (e.g., RabbitMQ, Kafka).
 Improves system resilience and scalability.
 
-
-8. Log Aggregation
+------------------Observability Patterns --------------------------
+9. Log Aggregation  (Used in GAP project)
    Problem: Consider a use case where an application consists of multiple service instances that are running on multiple machines. Requests often span multiple
          service instances. Each service instance generates a log file in a standardized format. How can we understand the application behavior through logs for a 
          particular request?
    Solution : We need a centralized logging service that aggregates logs from each service instance. Users can search and analyze the logs. They can configure alerts
               that are triggered when certain messages appear in the logs. For example, PCF does have Loggeregator, which collects logs from each component
               (router, controller, diego, etc...) of the PCF platform along with applications. AWS Cloud Watch also does the same.
+
+
+10. Performance Metrics   (Used in GAP project)
+         Problem: When the service portfolio increases due to microservice architecture, it becomes critical to keep a watch on the transactions so that patterns can
+                  be monitored and alerts sent when an issue happens. How should we collect metrics to monitor application perfomance?
+         Solution: A metrics service is required to gather statistics about individual operations. It should aggregate the metrics of an application service,
+                  which provides reporting and alerting. There are two models for aggregating metrics:
+         
+         Push – The service pushes metrics to the metrics service, e.g., New Relic, AppDynamics, etc.
+         Pull – The metrics services pulls metrics from the service, e.g., Prometheus.
+
+11. Health Check  (Used in GAP project)
+Problem : When a microservices architecture is implemented, there is a chance that a service might be up yet not able to handle transactions. In that case,
+         how do you ensure a request doesn't go to those failed instances? We can address this via a load balancing pattern implementation.
+Solution : Each service needs to have an endpoint that can be used to check the health of the application, such as /health. This API should check the status of
+         the host, the connection to other services/infrastructure, and any specific logic.
+
+         Spring Boot Actuator does implement a /health endpoint and the implementation can be customized.
+
 
