@@ -147,11 +147,29 @@ Solution: CQRS suggests splitting the application into two parts — the command
           The query side handles the query component by using materialized views. The event sourcing design pattern is generally used along with it to create events for
           any data change. As such, materialized views are kept up to date by subscribing to the stream of events.
 
+6. Saga Pattern
+Problem : When each service has its own database and a business transaction spans multiple services, how do we ensure data consistency across services? 
+         For example, for an e-commerce application where customers have a credit limit, the application must ensure that a new order will not exceed the customer’s
+         credit limit. Since Orders and Customers are in different databases, the application cannot simply use a local ACID transaction.
+Solution : A Saga represents a high-level business process that consists of several sub-requests, which each update data within a single service. 
+         Each request has a compensating request that is executed when the request fails. It can be implemented in two ways:
+         1. Choreography – When there is no central coordination, each service produces and listens to another service’s events and decides if an action should be
+                           taken or not.
+         2. Orchestration – An orchestrator (object) takes responsibility for a saga’s decision-making and sequencing business logic.
 
-6.  Event-Driven Pattern
+
+7.  Event-Driven Pattern
 Why Use Event-Driven Architecture?
 Decouples services by using asynchronous communication.
 Services do not directly call each other; instead, they publish or subscribe to events using a message broker (e.g., RabbitMQ, Kafka).
 Improves system resilience and scalability.
 
-7. 
+
+8. Log Aggregation
+   Problem: Consider a use case where an application consists of multiple service instances that are running on multiple machines. Requests often span multiple
+         service instances. Each service instance generates a log file in a standardized format. How can we understand the application behavior through logs for a 
+         particular request?
+   Solution : We need a centralized logging service that aggregates logs from each service instance. Users can search and analyze the logs. They can configure alerts
+              that are triggered when certain messages appear in the logs. For example, PCF does have Loggeregator, which collects logs from each component
+              (router, controller, diego, etc...) of the PCF platform along with applications. AWS Cloud Watch also does the same.
+
