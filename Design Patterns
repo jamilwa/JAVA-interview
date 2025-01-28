@@ -1,0 +1,124 @@
+1. API Gateway Pattern
+   Using Spring Cloud Gateway as the API Gateway.
+
+   @SpringBootApplication
+   @EnableDiscoveryClient
+   public class ApiGatewayApplication {
+      public static void main(String[] args) {
+        SpringApplication.run(ApiGatewayApplication.class, args);
+      }
+    }
+
+
+
+application.yml
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/users/**
+        - id: order-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/orders/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+
+
+2. Circuit Breaker Pattern
+Using Resilience4j for circuit breaker functionality.
+
+pom.xml
+    <dependency>
+      <groupId>io.github.resilience4j</groupId>
+      <artifactId>resilience4j-spring-boot2</artifactId>
+      <version>1.7.1</version>
+    </dependency>
+
+
+OrderService.java
+@Service
+public class OrderService {
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @CircuitBreaker(name = "userService", fallbackMethod = "userServiceFallback")
+    public String getUserData() {
+        return restTemplate.getForObject("http://localhost:8081/users", String.class);
+    }
+
+    public String userServiceFallback(Exception e) {
+        return "User Service is currently unavailable. Please try again later.";
+    }
+}
+
+
+application.yml
+  resilience4j:
+    circuitbreaker:
+      configs:
+        default:
+          failure-rate-threshold: 50
+          wait-duration-in-open-state: 5000ms
+      instances:
+        userService:
+          base-config: default
+
+
+
+3. Service Registry and Discovery Pattern
+Using Eureka Server for service registry and discovery.
+
+  pom.xml
+    <dependency>
+       <groupId>org.springframework.cloud</groupId>
+       <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+    </dependency>
+
+
+  EurekaServerApplication.java
+              @SpringBootApplication
+              @EnableEurekaServer
+              public class EurekaServerApplication {
+                  public static void main(String[] args) {
+                  SpringApplication.run(EurekaServerApplication.class, args);
+                }
+              }
+
+
+  application.yml
+    server:
+      port: 8761
+
+    eureka:
+      client:
+        register-with-eureka: false
+        fetch-registry: false
+
+
+Registering Services
+Add the following dependency to both User and Order services:
+          <dependency>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+          </dependency>
+
+
+
+application.yml
+        eureka:
+          client:
+            service-url:
+              defaultZone: http://localhost:8761/eureka/
+
+    
+
