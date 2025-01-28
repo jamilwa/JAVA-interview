@@ -134,18 +134,24 @@ application.yml
 
 4. Database per Service Pattern
 Why Separate Databases?
-Microservices are loosely coupled, and sharing a database violates that principle.
-Independent databases ensure:
-Scalability (services can scale independently).
-Data autonomy (each service owns its schema).
-Failure isolation (issues in one database don’t affect others).
-Each microservice manages its own database schema and operations
+         Microservices are loosely coupled, and sharing a database violates that principle. Different services have different data storage requirements.
+Solution: One database per microservice must be designed. It must be private to that service only, and it should be accessed by the microservice API only.
+         It cannot be accessed by other services directly. It helps to address below concerns like
+         Scalability (services can scale independently).
+         Failure isolation (issues in one database don’t affect others).
+         Some business transactions need to query data that is owned by multiple services.
+
+5. Command Query Responsibility Segregation (CQRS)
+         Once we implement database-per-service, there is a requirement to query, which requires joint data from multiple services — it's not possible.
+Solution: CQRS suggests splitting the application into two parts — the command side and the query side. The command side handles the Create, Update, and Delete requests.
+          The query side handles the query component by using materialized views. The event sourcing design pattern is generally used along with it to create events for
+          any data change. As such, materialized views are kept up to date by subscribing to the stream of events.
 
 
-5.  Event-Driven Pattern
+6.  Event-Driven Pattern
 Why Use Event-Driven Architecture?
 Decouples services by using asynchronous communication.
 Services do not directly call each other; instead, they publish or subscribe to events using a message broker (e.g., RabbitMQ, Kafka).
 Improves system resilience and scalability.
 
-
+7. 
