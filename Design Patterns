@@ -1,6 +1,14 @@
 1. API Gateway Pattern
+         In microservices, clients may need to communicate with multiple services (e.g., User, Order, Product). Exposing all services directly can cause:
+            1. Tight Coupling: Clients must know the location and details of every microservice.
+            2. Repeated Effort: Concerns like authentication, rate-limiting, and logging are repeated in every service.
+         The API Gateway acts as a single entry point that aggregates and routes requests to the relevant microservices while handling common concerns.
    Using Spring Cloud Gateway as the API Gateway.
+   pom.xml
+       <artifactId>spring-cloud-starter-gateway</artifactId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 
+main.java      
    @SpringBootApplication
    @EnableDiscoveryClient
    public class ApiGatewayApplication {
@@ -8,7 +16,6 @@
         SpringApplication.run(ApiGatewayApplication.class, args);
       }
     }
-
 
 
 application.yml
@@ -20,11 +27,11 @@ spring:
     gateway:
       routes:
         - id: user-service
-          uri: http://localhost:8081
+          uri: lb://USER-SERVICE
           predicates:
             - Path=/users/**
         - id: order-service
-          uri: http://localhost:8082
+          uri: lb://ORDER-SERVICE
           predicates:
             - Path=/orders/**
 eureka:
@@ -35,6 +42,9 @@ eureka:
 
 
 2. Circuit Breaker Pattern
+Why Use Circuit Breakers?
+To prevent cascading failures when one service becomes unresponsive.
+Circuit breakers monitor service calls and "open" to block traffic when failure rates are high.
 Using Resilience4j for circuit breaker functionality.
 
 pom.xml
@@ -121,4 +131,20 @@ application.yml
               defaultZone: http://localhost:8761/eureka/
 
     
+
+4. Database per Service Pattern
+Why Separate Databases?
+Microservices are loosely coupled, and sharing a database violates that principle.
+Independent databases ensure:
+Scalability (services can scale independently).
+Data autonomy (each service owns its schema).
+Failure isolation (issues in one database don’t affect others).
+Each microservice manages its own database schema and operations
+
+
+5.  Event-Driven Pattern
+Why Use Event-Driven Architecture?
+Decouples services by using asynchronous communication.
+Services do not directly call each other; instead, they publish or subscribe to events using a message broker (e.g., RabbitMQ, Kafka).
+Improves system resilience and scalability.
 
