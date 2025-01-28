@@ -42,6 +42,20 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 
 
+
+
+NOTE: Rate limiting -  is a mechanism that controls the number of requests an API can handle within a given time period.
+It's used to ensure that APIs perform well, provide a good user experience, and protect the system from overload. 
+         How it works: Rate limits are calculated in requests per second (RPS). 
+                       If a client exceeds the rate limit, the server may respond with an error message, say no to the request, or delay its response. 
+                       Rate limiting can be used to prevent a single user or group of users from monopolizing a resource.          
+         Benefits: Rate limiting helps ensure that resources are available to all users.
+                   It can protect against malicious activity and improve the security posture of a company.
+
+How to implement rate limiting in Spring Boot:
+Spring Cloud Gateway:
+Use the built-in "Rate Limiting Filter" in Spring Cloud Gateway, which integrates with Redis to manage rate limits. 
+
  -------------Cross-Cutting Concern Patterns----------------
 2. Externalized Configuration (Used in GAP project)
 Problem : A service typically calls other services and databases as well. For each environment like dev, QA, UAT, and/or prod, the endpoint URL or other configuration
