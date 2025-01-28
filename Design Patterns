@@ -75,6 +75,12 @@ Problem : A service typically calls other services and databases as well. For ea
 Solution : Externalized configuration, including endpoint URLs and credentials, will mitigate the problem. The application should load them either at startup or
          on the fly. The Spring Cloud config server provides the option to externalize the properties to GitHub and load them as environment properties. 
          These can be accessed by the application on startup or can be refreshed without a server restart.
+         
+         Spring Boot supports various external sources for these configurations, such as:
+                  Properties files (.properties)
+                  YAML files (.yml)
+                  Environment variables
+                  Command-line arguments
 
 3. Service Registry and Discovery Pattern (Used in GAP project)  
 Problem : When microservices come into the picture, we need to address a few issues in terms of calling services:
