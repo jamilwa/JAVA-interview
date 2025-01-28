@@ -148,3 +148,4 @@ Decouples services by using asynchronous communication.
 Services do not directly call each other; instead, they publish or subscribe to events using a message broker (e.g., RabbitMQ, Kafka).
 Improves system resilience and scalability.
 
+
