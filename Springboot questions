@@ -221,4 +221,17 @@ C. Here are some common **Spring Boot interview questions and answers** suitable
 
 ---
 
-These questions cover a range of topics that reflect both foundational knowledge and the practical experience expected from an 8-year professional. Let me know if you'd like more details on any topic!
+21. Lazy loading in Spring Boot is a technique that delays the creation of beans until they are requested. This saves system resources and improves performance. 
+How it works
+When the Spring container starts up, it doesn't create all beans immediately 
+Instead, it waits until the bean is needed in the application context 
+This approach is more efficient because it loads only the main entity at first, fetching related entities only when needed 
+Benefits
+Startup time: Lazy loading can significantly improve application startup time 
+Memory consumption: Lazy loading can improve memory consumption, especially when there are a large number of beans 
+Resource consumption: Lazy loading can reduce resource consumption, which can lead to lower operational costs 
+How to configure lazy loading 
+You can use the @Lazy annotation to configure lazy loading for a class
+
+22. What is lazy loading in JPA?
+By default, JPA uses lazy loading for relationships when you specify . So, when you query a object, it loads the person's data but doesn't immediately load the associated address. Only when you access the attribute of a object, like , JPA triggers a database query to load the associated address.
