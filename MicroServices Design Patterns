@@ -101,12 +101,7 @@ Solution : Externalized configuration, including endpoint URLs and credentials, 
                   environment = environment name
                   environmentVariables.SPRING_CLOUD_CONFIG_URI = "url of the config file in github"
                   environmentVariables.SPRING_PROFILES_ACTIVE = "stage"
-                  
-
-
-
-
-                  
+                               
 
 3. Service Registry and Discovery Pattern (Used in GAP project)  
 Problem : When microservices come into the picture, we need to address a few issues in terms of calling services:
