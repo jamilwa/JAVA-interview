@@ -451,4 +451,12 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
             a class to inherit behavior from multiple sources through multiple interface implementations; whereas an abstract class is better suited for sharing common
             code among closely related classes where some implementation details can be provided to subclasses.
 
-44. 
+44. Difference between THROW and THROWS 
+
+                THROW                                                                                                    THROWS
+ used to explicitly throw an exception.	                                                        Used to declare multiple exceptions that a method might throw.
+ Used within a method try catch block followed by an exception object.	                        Used in method signature followed by the exception classes.
+ Can handle only one exception at a time.	                                                    Can declare multiple exceptions separated by commas.
+ Stops execution of the current method and looks for a catch block.	                            Allows the method to propagate the exception to the caller.
+ Checked exceptions not propagated using throw only keyword                                     Checked exceptions are propagated using Throws keyword.
+
