@@ -124,6 +124,24 @@ L. How do you handle database connection pooling in Spring Boot?
    connections rather than creating a new one for every database 
    operation. This improves performance and resource management,
    especially in applications that require frequent database access.
+
+   Key Concepts of Database Connection Pools
+    1. Connection Pooling: Instead of opening and closing a database 
+       connection for each request, a connection pool maintains a set
+       of active connections. When an application needs a connection,
+       it can borrow one from the pool, and when it's done, it returns
+       it to the pool for reuse.
+
+     2. Performance: Connection pooling reduces the overhead of establishing 
+        a new connection each time a database operation is performed. This is
+        particularly beneficial in high-load scenarios where many requests are
+        made to the database.
+
+     3. Resource Management: By limiting the number of active connections, 
+        connection pools help manage database resources effectively,
+        preventing issues like connection exhaustion.
+
+
     - Spring Boot uses HikariCP as the default connection pool.  
     - Customize the pool in `application.properties`:  
       ```properties
