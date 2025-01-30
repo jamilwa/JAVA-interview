@@ -84,7 +84,7 @@ F. How does Spring Boot manage dependencies?
 
 G. What are Spring Boot starters? Name a few commonly used starters. 
    - Starters are pre-defined dependency packages that simplify dependency management.  
-   - Examples:  
+   - Examples:  JPA, Actuator,  Web, Security, DevTools.
      - `spring-boot-starter-web`: For building web applications.  
      - `spring-boot-starter-data-jpa`: For JPA-based data access.  
      - `spring-boot-starter-security`: For security configurations.  
