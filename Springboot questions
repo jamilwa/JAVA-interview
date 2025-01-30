@@ -13,7 +13,30 @@ Dependency Injection (DI) it allows us to achieve the principle of Inversion Of 
         focus mainly on the business logic.
 
 1. Constructor injection : The injector supplies the dependency through the client class constructor. This is the most recommended technique in the Spring Framework. 
+ @RestController
+@RequestMapping("/api")
+public class RESTController {
+    private final SmartPhone mySmartPhone;
+
+    //* Constructor Injection  *//
+    @Autowired
+    public RESTController(SmartPhone theSmartPhone)
+    {
+        this.mySmartPhone = theSmartPhone;
+    }
+
+    @GetMapping("/smartphone/name")
+    public String getSmartPhoneName()
+    {
+        return mySmartPhone.getName();
+}
+}
+
 2. Setter injection : The injector method injects the dependency to the setter method exposed by the client. This technique provides flexibility for changes at runtime. 
+
+
+
+
 3. Field injection: The injector directly injects dependencies into class fields. This is a concise but potentially less flexible approach
 
 
