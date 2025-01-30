@@ -463,6 +463,7 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
 45. what are ACID properties
         To maintain database consistency both before and after a transaction, specific properties, known as ACID properties must be followed.
         Atomicity: either the entire transaction takes place at once or doesn’t happen at all. There is no midway i.e. transactions do not occur partially.
+                   If any part of the transaction fails, the entire transaction is rolled back to its original state, ensuring data consistency and integrity.
                    Atomicity is also known as the ‘All or nothing rule
 
                     It involves the following two operations.
@@ -480,7 +481,8 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
 
                         
         Consistency: ensures that a database remains in a valid state before and after a transaction.  Referring to the example above,
-                    The total amount before and after the transaction must be maintained. 
+                    The total amount before and after the transaction must be maintained.  Constraints, such as unique keys and foreign keys,
+                    must be maintained to ensure data consistency.
                                              X           Y
                     Total before T occurs = 500    +    200 =  700
                     Total after T occurs =  400    +    300 =  700
