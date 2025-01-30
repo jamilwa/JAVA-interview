@@ -113,7 +113,7 @@ J. How do you handle transactions in Spring Boot?
       }
  
 K. How do you optimize a Spring Boot application for performance? 
-
+      performance J E A.     J for JPA, E For Enables caching, A for Actuator 
     - Use caching with `@EnableCaching` and cache providers like EhCache or Redis.  
     - Enable lazy loading in JPA.  
     - Use profiling tools like Spring Boot Actuator or Micrometer to identify bottlenecks.  
