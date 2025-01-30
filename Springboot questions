@@ -118,7 +118,12 @@ K. How do you optimize a Spring Boot application for performance?
     - Enable lazy loading in JPA.  
     - Use profiling tools like Spring Boot Actuator or Micrometer to identify bottlenecks.  
 
-L. How do you handle database connection pooling in Spring Boot?**  
+L. How do you handle database connection pooling in Spring Boot? 
+   a database connection pool is a mechanism that manages a pool of 
+   database connections, allowing applications to reuse existing 
+   connections rather than creating a new one for every database 
+   operation. This improves performance and resource management,
+   especially in applications that require frequent database access.
     - Spring Boot uses HikariCP as the default connection pool.  
     - Customize the pool in `application.properties`:  
       ```properties
