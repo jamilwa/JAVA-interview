@@ -460,3 +460,52 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
  Stops execution of the current method and looks for a catch block.	                            Allows the method to propagate the exception to the caller.
  Checked exceptions not propagated using throw only keyword                                     Checked exceptions are propagated using Throws keyword.
 
+45. what are ACID properties
+        To maintain database consistency both before and after a transaction, specific properties, known as ACID properties must be followed.
+        Atomicity: either the entire transaction takes place at once or doesn’t happen at all. There is no midway i.e. transactions do not occur partially.
+                   Atomicity is also known as the ‘All or nothing rule
+
+                    It involves the following two operations.
+                        — Abort : If a transaction aborts, changes made to the database are not visible.
+                        — Commit : If a transaction commits, changes made are visible.
+
+                    example: transaction T consisting of T1 and T2 : Transfer of 100 from account X to account Y .
+                                
+                        BEFORE:         X - 500                             Y - 200
+                        Transaction T     T1                                  T2
+                                        READ(X)                            READ(Y)
+                                        X = X - 100                        Y = Y + 100
+                                        WRITE(X)                           WRITE(Y)
+                        AFTER :         X = 400                            Y = 300
+
+                        
+        Consistency: ensures that a database remains in a valid state before and after a transaction.  Referring to the example above,
+                    The total amount before and after the transaction must be maintained. 
+                                             X           Y
+                    Total before T occurs = 500    +    200 =  700
+                    Total after T occurs =  400    +    300 =  700
+                    Therefore, the database is consistent . Inconsistency occurs in case T1 completes but T2 fails.
+
+
+      Isolation: ensures that multiple transactions can occur concurrently without leading to the inconsistency of the database state. Transactions occur 
+                 independently without interference. Changes occurring in a particular transaction will not be visible to any other transaction until that particular
+                 change in that transaction is written to memory or has been committed. This property ensures that when multiple transactions run at the same time, 
+                 the result will be the same as if they were run one after another in a specific order.
+                 example :      Let X = 500,             Y = 500.
+                                Consider two transactions T and T"
+                                READ(X)                    READ(X)
+                                X = X * 100                READ(Y)
+                                WRITE(X)                   Z = X + Y
+                                READ(Y)                    WRITE(Z)
+                                Y = Y - 50
+                                WRITE(Y)
+
+                    Suppose T has been executed till Read (Y) and then T’’ starts. T’’ reads the correct value of X but the incorrect value of Y and sum computed by
+                    T’’: (X+Y = 50, 000+500=50, 500) is thus not consistent with the sum at end of the transaction:
+                    T: (X+Y = 50, 000 + 450 = 50, 450). This results in database inconsistency, due to a loss of 50 units. 
+                    Hence, transactions must take place in isolation and changes should be visible only after they have been made to the main memory.
+
+
+Durability: This property ensures that once the transaction has completed execution, the updates and modifications to the database are stored in and written 
+            to disk and they persist even if a system failure occurs.
+
