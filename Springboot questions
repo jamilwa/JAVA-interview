@@ -1,5 +1,6 @@
 A. Different bean scopes
- 1. Singleton : The default scope in Spring Boot, where the Spring container creates and manages a single instance of a bean per Spring IoC container. This is memory efficient because the bean is reused across the application. 
+ 1. Singleton : The default scope in Spring Boot, where the Spring container creates and manages a single instance of a bean per Spring IoC container. 
+                This is memory efficient because the bean is reused across the application. 
  2. Prototype : The framework manages the type of bean, but creates a new instance of that class each time it's requested.
  3. Request : creates a bean instance for a single HTTP request.
  4. Session : creates a bean instance for an HTTP Session.
