@@ -2,7 +2,7 @@
 Microservices Design patterns 
 -----------------------Integration Patterns------------------
 
-1. API Gateway Pattern (Used in GAP project)
+1. API Gateway Pattern (Used in GAP project)        GED : short for Gateway Enable Discovery Client
          In microservices, clients may need to communicate with multiple services (e.g., User, Order, Product). Exposing all services directly means:
              Clients must know the location details of every microservice.
             Repeated Effort: Concerns like authentication, rate-limiting, and logging are repeated in every service.
@@ -144,7 +144,7 @@ application.yml
 
 
 
-4. Circuit Breakers (Used in GAP project)
+4. Circuit Breakers (Used in GAP project)    CBR     Circuit Breaker Resilience4j
 
 Problem : A service generally calls other services to retrieve data, and there is a chance that the downstream service may be down. There are two problems with this:
          first, the request will keep going to the down service, exhausting network resources and slowing performance.
@@ -226,6 +226,36 @@ Why Use Event-Driven Architecture?
 Decouples services by using asynchronous communication.
 Services do not directly call each other; instead, they publish or subscribe to events using a message broker (e.g., RabbitMQ, Kafka).
 Improves system resilience and scalability.
+
+CustomClassRabbitMQConfiguration.java
+
+@Configuration
+@EnableRabbit
+public class CustomClassRabbitMQConfiguration {
+         private final ConnectionFactory cnf;
+         private final RabbitMqConfigurationBuilder rcb;
+         private final ConfigurableBeanFactory cbf;
+
+// constructor
+
+@Value("${rabbitListener.concurrentConsumes.maxValue}")
+private int maxConcurrentConsumers;
+
+@Value("${rabbitListener.concurrentConsumes.minValue}")
+private int minConcurrentConsumers;
+
+@Bean
+public SimpleRabbitListenerContainerFactory customClassRabbitListenerContainerFactory(){
+         return rcb.buildConnectionFactory(cnf, maxConcurrentConsumers, minConcurrentConsumers);
+}
+
+
+MessageListenerService.java 
+@RabbitListener(queues = {"queue names"}, containerFactory = "customClassRabbitListenerContainerFactory")
+@Trace(dispatcher = true)
+public void consume(Message<customClassMessage> message) {
+
+}
 
 ------------------Observability Patterns --------------------------
 9. Log Aggregation  (Used in GAP project)
