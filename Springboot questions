@@ -13,8 +13,7 @@ Dependency Injection (DI) it allows us to achieve the principle of Inversion Of 
         focus mainly on the business logic.
 
 1. Constructor injection : The injector supplies the dependency through the client class constructor. This is the most recommended technique in the Spring Framework. 
- @RestController
-@RequestMapping("/api")
+
 public class RESTController {
     private final SmartPhone mySmartPhone;
 
@@ -34,119 +33,70 @@ public class RESTController {
 
 2. Setter injection : The injector method injects the dependency to the setter method exposed by the client. This technique provides flexibility for changes at runtime. 
 
+public class RESTController {
+    private SmartPhone mySmartPhone;
+
+    //* Setter Injection *//
+    @Autowired
+    public void setSmartPhone(SmartPhone theSmartPhone) {
+        this.mySmartPhone = theSmartPhone;
+    }
+
+    @GetMapping("/smartphone/name")
+    public String getSmartPhoneName() {
+        return mySmartPhone.getSmartPhoneName();
+    }
+}
 
 
 
 3. Field injection: The injector directly injects dependencies into class fields. This is a concise but potentially less flexible approach
 
 
+C. What is Spring Boot, and how is it different from the Spring Framework?**  
+   - Spring Boot simplifies Spring development by embedded server 
+   - Simplified dependency management with `starter` dependencies. 
+   - Production-ready features like metrics, health checks, and externalized configuration.  
+   - Reduced boilerplate with annotations and auto-configuration.  
 
-### **Core Spring Boot Concepts**
-1. **Q: What is Spring Boot, and how is it different from the Spring Framework?**  
-   **A:**  
-   - Spring Boot simplifies Spring development by providing auto-configuration, embedded servers, and opinionated defaults to reduce boilerplate code.  
    - Key differences:  
      - Spring requires explicit configuration; Spring Boot uses auto-configuration.  
      - Spring does not include an embedded server; Spring Boot supports embedded Tomcat, Jetty, and Undertow.  
 
-2. **Q: What is the role of the `@SpringBootApplication` annotation?**  
-   **A:**  
+D. What is the role of the `@SpringBootApplication` annotation?**  
    - It's a combination of:  
      1. `@Configuration`: Marks the class as a source of bean definitions.  
      2. `@EnableAutoConfiguration`: Enables Spring Boot's auto-configuration.  
      3. `@ComponentScan`: Enables component scanning for Spring components.  
 
----
-
-### **Spring Boot Features**
-3. **Q: What are the advantages of using Spring Boot?**  
-   **A:**  
-   - Simplified dependency management with `starter` dependencies.  
-   - Embedded server for easy testing and deployment.  
-   - Production-ready features like metrics, health checks, and externalized configuration.  
-   - Reduced boilerplate with annotations and auto-configuration.  
-
-4. **Q: Explain the concept of auto-configuration in Spring Boot. How does it work?**  
-   **A:**  
-   - Auto-configuration uses `@EnableAutoConfiguration` and conditions defined in `META-INF/spring.factories` files to automatically configure Spring beans.  
+E. Explain the concept of auto-configuration in Spring Boot. How does it work? 
+    - Auto-configuration uses `@EnableAutoConfiguration` and conditions defined in `META-INF/spring.factories` files to automatically configure Spring beans.  
    - Example: If `spring-boot-starter-web` is included, Spring Boot configures a DispatcherServlet, Jackson for JSON, and more.  
 
----
 
-### **Dependency Management**
-5. **Q: How does Spring Boot manage dependencies?**  
-   **A:**  
+F. How does Spring Boot manage dependencies? 
    - It uses a parent POM (`spring-boot-starter-parent`) that defines dependency versions to ensure compatibility.  
    - You can override versions by specifying them in your `pom.xml` or `build.gradle`.  
 
-6. **Q: What are Spring Boot starters? Name a few commonly used starters.**  
-   **A:**  
+G. What are Spring Boot starters? Name a few commonly used starters. 
    - Starters are pre-defined dependency packages that simplify dependency management.  
    - Examples:  
      - `spring-boot-starter-web`: For building web applications.  
      - `spring-boot-starter-data-jpa`: For JPA-based data access.  
      - `spring-boot-starter-security`: For security configurations.  
 
----
 
-### **Microservices & Rest APIs**
-7. **Q: How do you create a RESTful API in Spring Boot?**  
-   **A:**  
-   - Use `@RestController` and `@RequestMapping` to define endpoints.  
-   - Example:  
-     ```java
-     @RestController
-     @RequestMapping("/api")
-     public class MyController {
-         @GetMapping("/hello")
-         public String sayHello() {
-             return "Hello, World!";
-         }
-     }
-     ```  
-
-8. **Q: How do you handle exceptions in a Spring Boot application?**  
-   **A:**  
-   - Use `@ControllerAdvice` with `@ExceptionHandler` to centralize exception handling.  
-   - Example:  
-     ```java
-     @ControllerAdvice
-     public class GlobalExceptionHandler {
-         @ExceptionHandler(ResourceNotFoundException.class)
-         public ResponseEntity<String> handleNotFoundException(ResourceNotFoundException ex) {
-             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-         }
-     }
-     ```  
-
----
-
-### **Configuration and Properties**
-9. **Q: How do you externalize configurations in Spring Boot?**  
-   **A:**  
-   - Use `application.properties` or `application.yml`.  
-   - Example:  
-     ```properties
-     server.port=8081
-     spring.datasource.url=jdbc:mysql://localhost:3306/db
-     ```  
-
-10. **Q: How do you secure sensitive configuration data?**  
-    **A:**  
+H.  How do you secure sensitive configuration data?**  
     - Use environment variables.  
     - Leverage external configuration tools like Spring Cloud Config or HashiCorp Vault.  
     - Use Jasypt for encrypting properties.  
 
----
-
-### **Database and Persistence**
-11. **Q: What is Spring Data JPA, and how does it simplify database access?**  
-    **A:**  
+I.  What is Spring Data JPA, and how does it simplify database access?**  
     - Spring Data JPA provides a repository abstraction over JPA.  
     - Example: The `JpaRepository` interface provides pre-defined methods for CRUD operations, so you don't have to write SQL.  
 
-12. **Q: How do you handle transactions in Spring Boot?**  
-    **A:**  
+J. How do you handle transactions in Spring Boot?
+
     - Use `@Transactional` to demarcate transactional boundaries.  
     - Example:  
       ```java
@@ -157,53 +107,27 @@ public class RESTController {
               // Code here will execute within a transaction
           }
       }
-      ```  
+ 
+K. How do you optimize a Spring Boot application for performance? 
 
----
-
-### **Performance and Optimization**
-13. **Q: How do you optimize a Spring Boot application for performance?**  
-    **A:**  
     - Use caching with `@EnableCaching` and cache providers like EhCache or Redis.  
     - Enable lazy loading in JPA.  
     - Use profiling tools like Spring Boot Actuator or Micrometer to identify bottlenecks.  
 
-14. **Q: How do you handle database connection pooling in Spring Boot?**  
-    **A:**  
+L. How do you handle database connection pooling in Spring Boot?**  
     - Spring Boot uses HikariCP as the default connection pool.  
     - Customize the pool in `application.properties`:  
       ```properties
       spring.datasource.hikari.maximum-pool-size=10
       spring.datasource.hikari.minimum-idle=2
       ```  
-
----
-
-### **Spring Boot Actuator**
-15. **Q: What is Spring Boot Actuator, and why is it used?**  
-    **A:**  
+M. What is Spring Boot Actuator, and why is it used?**  
     - Actuator provides production-ready features like health checks, metrics, and application monitoring.  
     - Common endpoints:  
       - `/actuator/health`: Application health.  
       - `/actuator/metrics`: Application metrics.  
 
----
-
-### **Spring Boot with Cloud**
-16. **Q: How do you implement service discovery in a Spring Boot microservice?**  
-    **A:**  
-    - Use Spring Cloud Netflix Eureka. Annotate the application with `@EnableEurekaClient` and configure the Eureka server URL in `application.properties`.  
-
-17. **Q: What is Spring Cloud Config, and how is it used?**  
-    **A:**  
-    - It externalizes configuration management across multiple services.  
-    - Configure a Spring Cloud Config server to serve configurations stored in Git or another repository.  
-
----
-
-### **Advanced Topics**
-18. **Q: How do you secure a Spring Boot application?**  
-    **A:**  
+N. How do you secure a Spring Boot application?**  
     - Use Spring Security with `@EnableWebSecurity`.  
     - Define roles and permissions.  
     - Example:  
@@ -223,8 +147,7 @@ public class RESTController {
       }
       ```  
 
-19. **Q: What is a custom health indicator in Spring Boot Actuator?**  
-    **A:**  
+O. What is a custom health indicator in Spring Boot Actuator?**  
     - Implement a custom health check by extending `AbstractHealthIndicator`.  
     - Example:  
       ```java
@@ -237,12 +160,10 @@ public class RESTController {
       }
       ```  
 
-20. **Q: How do you integrate Spring Boot with Kafka or RabbitMQ?**  
-    **A:**  
+P. How do you integrate Spring Boot with Kafka or RabbitMQ?**  
     - Use Spring Kafka or Spring AMQP (for RabbitMQ).  
     - Define consumers and producers using configuration beans or annotations like `@KafkaListener` and `@RabbitListener`.  
 
----
 
 21. Lazy loading in Spring Boot is a technique that delays the creation of beans until they are requested. This saves system resources and improves performance. 
 How it works
