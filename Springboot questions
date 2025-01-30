@@ -71,6 +71,10 @@ D. What is the role of the `@SpringBootApplication` annotation?**
 
 E. Explain the concept of auto-configuration in Spring Boot. How does it work? 
     - Auto-configuration uses `@EnableAutoConfiguration` and conditions defined in `META-INF/spring.factories` files to automatically configure Spring beans.  
+    The most important goal of Spring Boot is to help you build production-ready applications quickly. 
+    Spring Boot Starter Projects help you to quickly define dependencies for your projects. Spring Boot Auto Configuration would automatically provide configuration 
+         based on the dependencies And Spring Boot DevTools will help you to make application changes without having to manually restart the server 
+    Spring Boot provides default loggings. Spring Boot provides features like profiles, configuration properties, and Spring Boot actuator as we
    - Example: If `spring-boot-starter-web` is included, Spring Boot configures a DispatcherServlet, Jackson for JSON, and more.  
 
 
