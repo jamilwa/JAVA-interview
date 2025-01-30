@@ -3,9 +3,9 @@ Microservices Design patterns
 -----------------------Integration Patterns------------------
 
 1. API Gateway Pattern (Used in GAP project)
-         In microservices, clients may need to communicate with multiple services (e.g., User, Order, Product). Exposing all services directly can cause:
-            1. Tight Coupling: Clients must know the location and details of every microservice.
-            2. Repeated Effort: Concerns like authentication, rate-limiting, and logging are repeated in every service.
+         In microservices, clients may need to communicate with multiple services (e.g., User, Order, Product). Exposing all services directly means:
+             Clients must know the location and details of every microservice.
+            Repeated Effort: Concerns like authentication, rate-limiting, and logging are repeated in every service.
 The API Gateway acts as a single entry point that aggregates and routes requests to the relevant microservices while handling common concerns.
 Authentication and Authorization: Implement filters in the gateway to handle user authentication and authorization checks before forwarding requests to backend services. 
 Load Balancing: Configure the gateway to load balance requests across multiple instances of a backend service. 
