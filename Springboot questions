@@ -257,4 +257,9 @@ How to configure lazy loading
 You can use the @Lazy annotation to configure lazy loading for a class
 
 22. What is lazy loading in JPA?
-By default, JPA uses lazy loading for relationships when you specify . So, when you query a object, it loads the person's data but doesn't immediately load the associated address. Only when you access the attribute of a object, like , JPA triggers a database query to load the associated address.
+   By default, JPA uses lazy loading for relationships when you specify . So, when you query a object, it loads the person's data but doesn't immediately load 
+   the associated address. Only when you access the attribute of a object, like , JPA triggers a database query to load the associated address.
+
+23. What is fail-fast and fail-safe in Spring Boot?
+    Fail-safe iterators means they will not throw any exception even if the collection is modified while iterating over it. Whereas Fail-fast iterators throw
+    an exception( ConcurrentModificationException ) if the collection is modified while iterating over it.
