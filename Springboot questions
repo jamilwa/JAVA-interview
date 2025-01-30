@@ -264,12 +264,51 @@ You can use the @Lazy annotation to configure lazy loading for a class
     Fail-safe iterators means they will not throw any exception even if the collection is modified while iterating over it. Whereas Fail-fast iterators throw
     an exception( ConcurrentModificationException ) if the collection is modified while iterating over it.
 
-24.  @ControllerAdvice is a Spring Framework annotation that allows for centralized exception handling, model binding, and data pre- and post-processing.
-     It's used to define a class that handles exceptions across an entire Spring MVC application
-
-     The @ControllerAdvice annotation defines a class that's called when an exception occurs. The class can contain multiple methods, each with the @ExceptionHandler
+24.  @RestControllerAdvice is a Spring Framework annotation that allows for global exception handling. It's used to define a class that handles exceptions across an entire
+     application. 
+     The @RestControllerAdvice annotation defines a class that's called when an exception occurs. The class can contain multiple methods, each with the @ExceptionHandler
      annotation methods to handle a specific exception. 
      The @ExceptionHandler method can return a ResponseEntity object, which represents an HTTP response
 
      Benefits : Centralized exception handling makes code more maintainable and easier to read
                 It allows for a consistent response to users
+
+
+     example: 
+
+UserNotFoundException.java
+
+public class UserNotFoundException extends RuntimeException {
+    public UserNotFoundException(String message) {
+        super(message);
+    }
+}
+
+
+GlobalExceptionHandler.java
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleUserNotFoundException(UserNotFoundException ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", LocalDateTime.now());
+        response.put("status", HttpStatus.NOT_FOUND.value());
+        response.put("error", "Not Found");
+        response.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", LocalDateTime.now());
+        response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        response.put("error", "Internal Server Error");
+        response.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
