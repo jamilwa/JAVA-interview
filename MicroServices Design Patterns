@@ -257,6 +257,18 @@ public void consume(Message<customClassMessage> message) {
 
 }
 
+
+application-deafult.properties
+         spring.rabbitmq.host =  host name here
+         spring.rabbitmq.username = 
+         spring.rabbitmq.password = 
+         spring.rabbitmq.port = 5672
+         spring.rabbitmq.virtual-host = development 
+
+         spring.rabbitListener.concurrentConsumers.maxValue = 1
+         spring.rabbitListener.concurrentConsumers.minValue = 1
+         
+
 ------------------Observability Patterns --------------------------
 9. Log Aggregation  (Used in GAP project)
    Problem: Consider a use case where an application consists of multiple service instances that are running on multiple machines. Requests often span multiple
