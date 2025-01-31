@@ -84,12 +84,6 @@
             .map(x -> x * x)
             .forEach(y -> System.out.println(y));
  
-        // demonstration of reduce method
-        int even 
-          = number.stream()
-            .filter(x -> x % 2 == 0)
-            .reduce(0, (ans, i) -> ans + i);
- 
     
 
 7. What is functional programming
