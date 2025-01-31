@@ -40,8 +40,9 @@ Optional return keyword − The compiler automatically returns the value if the 
 
 Following are the important points to be considered in the above example.
 
-Lambda expressions are used primarily to define inline implementation of a functional interface, i.e. an interface with a single method only
-Lambda expression eliminates the need of anonymous class and gives a very simple functional programming capability to Java.
+1. What is Functional Programming
+	a programming style that uses pure functions to solve problems. It emphasizes writing concise, readable code that's easier to 	maintain and scale
+Lambda expressions are used to define implementation of a functional interface. it eliminates the need of anonymous class and gives a functional programming capability to Java.
 
 
 
