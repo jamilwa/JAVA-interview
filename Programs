@@ -126,6 +126,13 @@
         }
 
 
+22. reverse a string, without using builtin methods
+        String input = "ansari";
+        char[] inputArr = input.toCharArray();
+        String reversed = "";
+        for(int i = inputArr.length-1 ; i>=0; i--){
+            reversed=reversed+(inputArr[i]);
+        }
 
 
 1. for(char c=97; c<= 122; c++)                                                  // will print small abcd
