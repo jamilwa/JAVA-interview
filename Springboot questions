@@ -192,7 +192,7 @@ P. How do you integrate Spring Boot with Kafka or RabbitMQ?**
     an exception( ConcurrentModificationException ) if the collection is modified while iterating over it.
 
 
-24.  @RestControllerAdvice is a Spring Framework annotation that allows for global exception handling. It defines a class that is called when an exception occurs,
+24.  @RestControllerAdvice is a Spring Framework annotation used for global exception handling. It defines a class that is called when an exception occurs,
      it handles exceptions across an entire application. it can contain multiple methods, each with the @ExceptionHandler annotation to handle a specific exception. 
     
      The @ExceptionHandler method can return a ResponseEntity object, which represents an HTTP response.
