@@ -90,23 +90,51 @@ G. What are Spring Boot starters? Name a few commonly used starters.
 
 H.  How do you secure sensitive configuration data?**  
     - Use environment variables.  
-    - Leverage external configuration tools like Spring Cloud Config or HashiCorp Vault.  
+    - External configuration tools like Spring Cloud Config or HashiCorp Vault.  
     - Use Jasypt for encrypting properties.  
 
 I.  
 J. How do you handle transactions in Spring Boot?
+     The @Transactional annotation is used to define the scope of a single database transaction. It simplifies transaction management, allowing developers to focus
+     on business logic while ensuring data integrity and consistency in database operations. The @Transactional annotation works best on public methods. 
 
-    - Use `@Transactional` to demarcate transactional boundaries.  
-    - Example:  
-      ```java
-      @Service
-      public class MyService {
-          @Transactional
-          public void performTransaction() {
-              // Code here will execute within a transaction
-          }
-      }
- 
+      Features of @Transactional
+      1. Transaction Management: When a method annotated with @Transactional is called, Spring will start a new transaction. If the method completes successfully,
+                                 the transaction will be committed. If an exception occurs, the transaction will be rolled back, ensuring that the database remains
+                                 in a consistent state.
+      2. Propagation: It supports different propagation behaviors, which determine how transactions are handled when a method is called within another transactional
+                      context. The default propagation level is Propagation.REQUIRED, which means that if a transaction already exists, the method will join that
+                      transaction; otherwise, a new transaction will be created.
+      3. Isolation Levels: You can specify the isolation level of the transaction, which controls how transaction integrity is visible to other transactions. 
+                           Common isolation levels include READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ, and SERIALIZABLE.
+      4. Rollback Rules: By default, Spring will roll back the transaction for unchecked exceptions (subclasses of RuntimeException) and errors. 
+                         You can customize this behavior using the rollbackFor and noRollbackFor attributes.
+      5. Timeout: You can specify a timeout for the transaction, after which it will be rolled back if it has not completed.
+      6. Read-Only Transactions: You can mark a transaction as read-only, which can help optimize performance for operations that do not modify the database.
+
+      Example : use the @Transactional annotation in a Spring service class
+
+            @Service
+            public class UserService {
+
+              @Autowired
+              private UserRepository userRepository;
+
+              @Transactional
+              public User createUser (User user) {
+                   // This method will be executed within a transaction
+                   return userRepository.save(user);
+              }
+
+              @Transactional(readOnly = true)
+              public User getUser (Long id) {
+                  // This method is marked as read-only
+                  return userRepository.findById(id).orElse(null);
+              }
+           }
+
+
+
 K. How do you optimize a Spring Boot application for performance? 
       performance J E A.     J for JPA, E For Enables caching, A for Actuator 
       - Enable lazy loading in JPA.  
