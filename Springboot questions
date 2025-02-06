@@ -54,14 +54,10 @@ public class RESTController {
 
 
 C. What is Spring Boot, and how is it different from the Spring Framework?**  
-   - Spring Boot simplifies Spring development by embedded server 
+   - Spring Boot simplifies Spring development by embedded server like Tomcat, Jetty, and Undertow.
    - Simplified dependency management with `starter` dependencies. 
    - Production-ready features like metrics, health checks, and externalized configuration.  
    - Reduced boilerplate with annotations and auto-configuration.  
-
-   - Key differences:  
-     - Spring requires explicit configuration; Spring Boot uses auto-configuration.  
-     - Spring does not include an embedded server; Spring Boot supports embedded Tomcat, Jetty, and Undertow.  
 
 D. What is the role of the `@SpringBootApplication` annotation?**  
    - It's a combination of:  
