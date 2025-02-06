@@ -170,7 +170,7 @@ P. How do you integrate Spring Boot with Kafka or RabbitMQ?**
     - Define consumers and producers using configuration beans or annotations like `@KafkaListener` and `@RabbitListener`.  
 
 
-21. Lazy loading in Spring Boot is a technique that delays the creation of beans until they are requested. This saves system resources and improves performance. 
+21. Lazy loading in Spring Boot is a technique that delays the creation of beans until they are requested. This saves system resources and optimize performance. 
    How it works: When the Spring container starts up, it doesn't create all beans immediately Instead, it waits until the bean is needed in the application context 
                  This approach is more efficient because it loads only the main entity at first, fetching related entities only when needed 
    Benefits :    Startup time: Lazy loading can significantly improve application startup time 
@@ -183,8 +183,35 @@ P. How do you integrate Spring Boot with Kafka or RabbitMQ?**
 
 
 22. What is lazy loading in JPA?
-   By default, JPA uses lazy loading for relationships when you specify . So, when you query a object, it loads the person's data but doesn't immediately load 
-   the associated address. Only when you access the attribute of a object, JPA triggers a database query to load the associated address.
+   In Java Persistence API (JPA), lazy loading is a design pattern used to optimize performance and resource usage when dealing with entity relationships.
+   When you define relationships between entities (like a Person entity and an Address entity), JPA allows you to specify how these relationships should be loaded.
+   By default, JPA uses lazy loading which means that related entities are not loaded from the database until they are explicitly accessed.
+
+   example:
+           @Entity
+           public class Person {
+              
+           @Id
+           private Long id;
+           private String name;
+
+           @OneToOne(fetch = FetchType.LAZY)
+           private Address address;
+
+           // Getters and setters
+          }
+
+          
+          @Entity
+          public class Address {
+          
+          @Id
+          private Long id;
+          private String street;
+          private String city;
+
+          // Getters and setters
+       }
 
 
 23. What is fail-fast and fail-safe in Spring Boot?
