@@ -197,8 +197,7 @@ P. How do you integrate Spring Boot with Kafka or RabbitMQ?**
     
      The @ExceptionHandler method can return a ResponseEntity object, which represents an HTTP response.
 
-     Benefits : Centralized exception handling makes code more maintainable and easier to read
-                It allows for a consistent response to users
+     Benefits : Centralized exception handling makes code more maintainable and readable. It provides a consistent response to users.
 
 example: 
 
