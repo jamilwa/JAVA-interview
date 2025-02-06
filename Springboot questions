@@ -171,19 +171,16 @@ P. How do you integrate Spring Boot with Kafka or RabbitMQ?**
 
 
 21. Lazy loading in Spring Boot is a technique that delays the creation of beans until they are requested. This saves system resources and optimize performance. 
-   How it works: When the Spring container starts up, it doesn't create all beans immediately Instead, it waits until the bean is needed in the application context 
-
-   Benefits :    Startup time: Lazy loading can significantly improve application startup time 
-
-   Memory consumption:  Lazy loading can improve memory consumption, especially when there are a large number of beans.
-
-   Resource consumption:  Lazy loading can reduce resource consumption, which can lead to lower operational costs. 
-   
-   How to configure lazy loading : use the @Lazy annotation to configure lazy loading for a class
+    How it works: When the Spring container starts up, it doesn't create all beans immediately Instead, it waits until the bean is needed in the application context 
+    Benefits : 
+       Startup time: Lazy loading can significantly improve application startup time 
+       Memory consumption:  Lazy loading can improve memory consumption, especially when there are a large number of beans.
+       Resource consumption:  Lazy loading can reduce resource consumption, which can lead to lower operational costs. 
+       How to configure lazy loading : use the @Lazy annotation to configure lazy loading for a class
 
 
 22. What is lazy loading in JPA?
-   In Java Persistence API (JPA), lazy loading is a design pattern used to optimize performance and resource usage when dealing with entity relationships.
+   In Java Persistence API (JPA), lazy loading is a design pattern used to optimize performance and resource consumption when dealing with entity relationships.
    When you define relationships between entities (like a Person entity and an Address entity), JPA allows you to specify how these relationships should be loaded.
    By default, JPA uses lazy loading which means that related entities are not loaded from the database until they are explicitly accessed.
 
