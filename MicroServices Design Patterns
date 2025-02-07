@@ -4,7 +4,7 @@ Microservices Design patterns
 
 1. API Gateway Pattern (Used in GAP project)        GED : short for Gateway Enable Discovery Client
          The API Gateway acts as a single entry point that aggregates and routes requests to the relevant microservices while handling common concerns.
-         In microservices, clients may need to communicate with multiple services (e.g., User, Order, Product). Exposing all services directly means:
+         Clients need to communicate with multiple services (e.g., User, Order, Product). Exposing all services directly means:
              Clients must know the location details of every microservice.
             Repeated Effort: Concerns like authentication, rate-limiting, and logging are repeated in every service.
 Authentication and Authorization: Implement filters in the gateway to handle user authentication and authorization checks before forwarding requests to backend services. 
