@@ -23,34 +23,28 @@
       
 
 15. find the non repeating character in a string 
-            public static char firstNonRepeatedCharacter(String input) {
-              Map<Character, Integer> charCount = new HashMap<>();
-              for (char ch : input.toCharArray()) {
-                  charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
-              }
-      
-              // Step 2: Find the first character with a count of 1
-              for (char ch : input.toCharArray()) {
-                  if (charCount.get(ch) == 1) {
-                      return ch;
-                  }
-              }
-      
-              return '\0'; // return null character if all characters are repeated
-          }
+            public static void duplicateChar(String input){
+                String newStr = input.replaceAll("\\s+", "").toLowerCase();
+                Map<Character, Integer> charCount = new HashMap<>();
+                
+                for (char ch : newStr.toCharArray()) {
+                    charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
+                }
+
+            // Step 2: Find the repeated characters
+                for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+                    if (entry.getValue() > 1) {
+                        System.out.println(entry.getKey());
+                    }
+                }
 
 
-         // just modify the second for loop like below to find duplicate characters in a string
-            for (char ch : input.toCharArray()) {
-                  if (charCount.get(ch) > 1) {
-                      return ch;
-                  }
-              }
-
-
-      // if both character and their count is needed then used map.entrySet in the 2nd for loop like below
-         for(Map.Entry<Character, Integer> entry : map.entrySet()) 
-
+         // just modify the second for loop like below to find unique characters in a string
+            for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+                    if (entry.getValue() == 1) {
+                        System.out.println(entry.getKey());
+                    }
+                }
 
       // same above logic can be used to find non repeating words and duplicate words in a sentence with few modifications
 
