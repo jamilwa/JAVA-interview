@@ -60,9 +60,8 @@ NOTE: Rate limiting -  is a mechanism that controls the number of requests an AP
          It's used to protect the system from overload, ensuring that APIs perform well and provide a good user experience. 
          How it works: Rate limits are calculated in requests per second (RPS). 
                        If a client exceeds the rate limit, the server may respond with an error message, say no to the request, or delay its response. 
-         Benefit:  It can protect against malicious activity and improve the security posture of a company.
-
-                  Rate limiting helps ensure that resources are available to all users.
+         Benefit:  protects against malicious activity and improve the security of a company.
+                   helps to ensure that resources are available to all users.
 
 How to implement rate limiting in Spring Boot:
 Spring Cloud Gateway:
