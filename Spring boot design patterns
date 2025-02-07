@@ -5,11 +5,14 @@ What are Design Patterns?
 
 Commonly Used Design Patterns in Spring
 
-1. Dependency Injection (DI) Pattern : Dependency Injection is a creational pattern where an object receives its dependencies from an external source rather than creating them itself. In Spring, this is achieved through XML configuration, annotations, or Java-based configuration.
+1. Dependency Injection (DI) Pattern : Dependency Injection is a creational pattern where an object receives its dependencies from an external source rather than 
+    creating them itself. In Spring, this is achieved through XML configuration, annotations, or Java-based configuration.
 
 Benefits of Dependency Injection Pattern in Spring:
 
-Loose Coupling: Objects are less dependent on each other, making the system more modular.Easier Testing: Dependencies can be easily mocked or stubbed out.Enhanced Maintainability: Changes to a dependency do not require changes to the dependent class.
+Loose Coupling:     Objects are less dependent on each other, making the system more modular.
+Easier Testing:     Dependencies can be easily mocked or stubbed out.
+Enhanced Maintainability:     Changes to a dependency do not require changes to the dependent class.
 
 In the below example, "UserService" depends on "UserRepository", and Spring injects this dependency.
 
@@ -86,8 +89,8 @@ class GFG {
       The concept is to copy an existing object rather than creating a new instance from scratch, something that may include costly operations.
 
 5. Builder Method Design Pattern
-      To “Separate the construction of a complex object from its representation so that the same construction process can create different representations.” Builder pattern is used
-      It helps in constructing a complex object step by step and the final step will return the object.
+      To “Separate the construction of a complex object from its representation so that the same construction process can create different representations.”
+      Builder pattern is used. It helps in constructing a complex object step by step and the final step will return the object.
 
 
 
