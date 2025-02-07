@@ -292,7 +292,7 @@ application-deafult.properties
          service instances. Each service instance generates a log file in a standardized format. How can we understand the application behavior through logs for a 
          particular request?
    Solution : We need a centralized logging service that aggregates logs from each service instance. Users can search and analyze the logs. They can configure alerts
-              that are triggered when certain messages appear in the logs. For example, PCF does have Loggeregator, which collects logs from each component
+              that are triggered when certain messages appear in the logs. For example, PCF(Pivotal Cloud Foundry) does have Loggeregator, which collects logs from each component
               (router, controller, diego, etc...) of the PCF platform along with applications. AWS Cloud Watch also does the same.
 
 
