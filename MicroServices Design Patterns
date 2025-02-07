@@ -3,10 +3,10 @@ Microservices Design patterns
 -----------------------Integration Patterns------------------
 
 1. API Gateway Pattern (Used in GAP project)        GED : short for Gateway Enable Discovery Client
+         The API Gateway acts as a single entry point that aggregates and routes requests to the relevant microservices while handling common concerns.
          In microservices, clients may need to communicate with multiple services (e.g., User, Order, Product). Exposing all services directly means:
              Clients must know the location details of every microservice.
             Repeated Effort: Concerns like authentication, rate-limiting, and logging are repeated in every service.
-The API Gateway acts as a single entry point that aggregates and routes requests to the relevant microservices while handling common concerns.
 Authentication and Authorization: Implement filters in the gateway to handle user authentication and authorization checks before forwarding requests to backend services. 
 Load Balancing: Configure the gateway to load balance requests across multiple instances of a backend service. 
 Caching: Cache frequently accessed data at the gateway level to improve performance. 
@@ -14,7 +14,6 @@ Error Handling: Implement error handling mechanisms in the gateway to gracefully
 
 Key points about the API Gateway pattern:
          Single Entry Point: Clients interact with only one endpoint (the gateway) to access various backend services. 
-         Centralized Security: Security concerns like authentication and authorization can be handled at the gateway level. 
          Flexibility: The gateway can be used to implement custom logic for different clients or API versions. 
    
 Example: Spring Cloud Gateway.
