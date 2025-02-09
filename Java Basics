@@ -62,11 +62,11 @@ then object of Dog can be referred by either Dog or Animal class.
      Abstract classes are useful for shared behavior for a group of related classes, promoting code reuse.
 
  9) Can you use abstract and final both with a method?
- No, because we need to override the abstract method to provide its implementation, whereas we
- can't override the final method. 
+       No, because we need to override the abstract method to provide its implementation, whereas we can't override the final method. 
+
 10) Is it possible to instantiate the abstract class?
- No, the abstract class can never be instantiated. If its instantiated then the purpose of abstract 
-class is defeated.
+    No, the abstract class can never be instantiated. If its instantiated then the purpose of abstract class is defeated.
+
 11) What is the interface?
  The interface is a blueprint for a class that has static constants and abstract methods. It can be 
 used to achieve full abstraction and multiple inheritance. There can be only abstract methods in 
