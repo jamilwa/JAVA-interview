@@ -133,11 +133,11 @@ then object of Dog can be referred by either Dog or Animal class.
                                 together to create contiguous free space.
 
      Important Methods Related to Garbage Collection
-          1. System.gc(): The System.gc() method is a request to the JVM to perform garbage collection. However, The JVM may choose to ignore this request and the JVM 
-                          is not obligated to perform garbage collection immediately or at all.
+          1. System.gc(): The System.gc() method is a request to the JVM to perform garbage collection. However, it depends upon the JVM whether to perform it or not.
           2. finalize():  This is a protected method of the Object class that can be overridden by a class to perform cleanup operations before an object is 
                           garbage collected. The finalize() method is called by the garbage collector when it determines that there are no more references to the object.
-                       example:
+                          It is used to perform cleanup processing.
+              example:
               @Override
                protected void finalize() throws Throwable {
                        try {
@@ -146,7 +146,82 @@ then object of Dog can be referred by either Dog or Animal class.
                        } finally {
                             super.finalize(); 
       
+15) How is garbage collection controlled?
+    Garbage collection is managed by JVM. We can externally call the System.gc() or Runtime.getRuntime().gc() for the garbage collection. 
+ 
+16) How can an object be unreferenced?
+        1) By nulling a reference. 
+        2) By assigning a reference to another. 
+              Employee e=new Employee(); 
+              Employee e1=new Employee();
+              Employee e2=new Employee(); 
+              e=null;       // by nulling a reference
+              e1=e2;        //By assigning a reference to another. now the first object referred by e1 is available for garbage collection
+        3) By anonymous object.
+              new Employee();
+
+
+17)  What are the FileInputStream and FileOutputStream?
+      FileInputStream : It is a class used to read raw byte streams from a file. It is used for reading binary data, such as images, audio files, or any other type 
+                        of file that is not text-based.
+      FileOutputStream : It is a class used to write raw byte streams to a file. It is used for writing binary data, such as images, audio files, or any other type 
+                        of file that is not text-based.
+
      
+example 
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class FileInputStreamExample {
+    public static void main(String[] args) {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream("example.txt"); 
+            int data;
+            while ((data = fis.read()) != -1) {                  // Read until the end of the file
+                System.out.print((char) data);                  // Print the byte as a character
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fis != null) {
+                    fis.close();                             // Closes the input stream and releases any system resources associated with it.
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+      -----------------------------------------------------------------------------------------      
+
+     FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream("output.txt"); 
+            String data = "Hello, World!";
+            fos.write(data.getBytes());            // Write the string as bytes to the file
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fos != null) {
+                    fos.close(); // Close the stream
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+
+
+public class FileOutputStreamExample { 
+public static void main(String args[]){
+ try{ 
+FileOutputStream fout=new FileOutputStream("D:\\testout.txt"); 
+fout.write(65); 
+fout.close(); 
+System.out.println("success..."); 
+}catch(Exception e){
+ System.out.println(e);
 
 
 
@@ -226,60 +301,13 @@ System.out.println(s2);//compiler writes here s2.toString()
 Output: 101 Raj lucknow 
  102 Vijay ghaziabad 
 24) 
- Garbage collection is a process of reclaiming the unused runtime objects. It is performed for 
-memory management. In other words, we can say that It is the process of removing unused 
-objects from the memory to free up space and make this space available for Java Virtual 
-Machine. Due to garbage collection java gives 0 as output to a variable whose value is not set, 
-i.e., the variable has been defined but not initialized.
- 25) What is gc()?
- The gc() method is used to invoke the garbage collector for cleanup processing. This method is 
-found in System and Runtime classes. This function explicitly makes the Java Virtual Machine 
-free up the space occupied by the unused objects so that it can be utilized or reused. 
-example 
-public class TestGarbage1{ 
-public void finalize(){
- System.out.println("object is garbage collected");} 
-public static void main(String args[]){ 
-TestGarbage1 s1=new TestGarbage1(); 
-TestGarbage1 s2=new TestGarbage1();
- s1=null; s2=null; System.gc(); 
-26) How is garbage collection controlled?
- Garbage collection is managed by JVM. It is performed when there is not enough space in the 
-memory and memory is running low. We can externally call the System.gc() for the garbage 
-collection. However, it depends upon the JVM whether to perform it or not.
- 27) How can an object be unreferenced?
- 1) By nulling a reference. 
-example 
-2) By assigning a reference to another. 
-Employee e=new Employee(); 
-Employee e1=new Employee();
- Employee e2=new Employee(); 
-e=null;
- e1=e2;//now the first object referred by e1 is available for garbage collection
- 3) By anonymous object.
- new Employee();
- 28) What is the purpose of the finalize() method?
- The finalize() method is invoked just before the object is garbage collected. It is used to perform
- cleanup processing. The Garbage collector of JVM collects only those objects that are created 
-by new keyword. The cleanup processing is the process to free up all the resources, objects 
-created without new keyword, network which was previously used and no longer needed.  
-finalize method is present in the object class. Here, we must note that garbage collection is not 
-guaranteed. 
-29) What are the FileInputStream and FileOutputStream?
- Java FileOutputStream is used for writing data to a file. You can write byte-oriented as well as 
-characteroriented data through the FileOutputStream class. However, for character-oriented 
-data, it is preferred to use FileWriter than FileOutputStream. 
-example 
-public class FileOutputStreamExample { 
-public static void main(String args[]){
- try{ 
-FileOutputStream fout=new FileOutputStream("D:\\testout.txt"); 
-fout.write(65); 
-fout.close(); 
-System.out.println("success..."); 
-}catch(Exception e){
- System.out.println(e);
- 30) What is the purpose of using BufferedInputStream and BufferedOutputStream classes?
+26) 27) 
+
+
+
+
+
+29)  30) What is the purpose of using BufferedInputStream and BufferedOutputStream classes?
  Java BufferedOutputStream adds more efficiency than to write data directly into a stream.
  It internally uses a buffer to store data. So, it makes the performance fast. Whereas, Java 
 BufferedInputStream class is used to read information from the stream. It internally uses the 
