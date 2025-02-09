@@ -98,8 +98,7 @@ then object of Dog can be referred by either Dog or Animal class.
     a new string instance is created and placed in the pool.
 
     String Literals: When you create a string using double quotes, it is stored in the String Pool.
-    Using the new Keyword: When you create a string using the new keyword, a new string object is created in the heap, even if an identical string exists in the 
-                           String Pool.
+    The new Keyword: When you create a string using the new keyword, a new string object is created in the heap, even if an identical string exists in the String Pool.
 
 
 
