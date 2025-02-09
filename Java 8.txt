@@ -99,7 +99,7 @@ as multi-core processors are available at ease, a Java developer has to write pa
 
 A stream gets/computes elements on demand. It never stores the elements. Stream takes Collections, Arrays, or I/O resources as input source
 
-Stream supports aggregate operations like filter, map, limit, reduce, find, match,
+Stream supports aggregate operations like filter, map, flatmap, limit, reduce, find, match,
 
 Stream operations do the iterations internally over the source elements provided, in contrast to Collections where explicit iteration is required.
 
@@ -127,6 +127,23 @@ List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
 
 //get list of unique squares
 List<Integer> squaresList = numbers.stream().map( i -> i*i).distinct().collect(Collectors.toList());
+
+flatMap is a method in the Java Stream API that allows you to transform and flatten nested structures into a single stream.
+It is useful for dealing with collections of collections or when you want to transform elements into multiple outputs.
+The resulting stream from flatMap contains all the elements from the nested streams, flattened into a single stream
+
+		List<List<Integer>> listOfLists = Arrays.asList(
+                Arrays.asList(1, 2, 3),
+                Arrays.asList(4, 5),
+                Arrays.asList(6, 7, 8, 9)
+        	);
+
+        // Using flatMap to flatten the list of lists
+        List<Integer> flattenedList = listOfLists.stream()
+                .flatMap(List::stream) // Flattening the lists
+                .collect(Collectors.toList()); // Collecting into a single list
+
+        System.out.println(flattenedList); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
 filter
