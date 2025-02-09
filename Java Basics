@@ -254,7 +254,68 @@ public class FileInputStreamExample {
                          bos.flush(); // Flush the buffer to the file
                 } catch (IOException e) {
                        e.printStackTrace();
+
         
+19) What is FileReader and FileWriter
+    FileReader is a class used to read character files. It makes it easy to read text data from a file by converting bytes into characters using the default 
+    character encoding.
+    Key Features:
+        Character-Oriented: It reads data as characters, making it suitable for text files.
+        Extends InputStreamReader: FileReader is a subclass of InputStreamReader, which means it can read bytes and decode them into characters.
+    Common Methods:
+         int read(): Reads a single character from the file and returns it as an integer. Returns -1 if the end of the file is reached.
+         int read(char[] cbuf): Reads characters into a specified character array.
+         void close(): Closes the file reader and releases any system resources associated with it
+
+example
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileReaderExample {
+    public static void main(String[] args) {
+        try (FileReader fr = new FileReader("example.txt")) {
+            int data;
+            while ((data = fr.read()) != -1) { // Read until the end of the file
+                System.out.print((char) data); // Print the character
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+-------------------------------------------------------------------
+FileWriter is a class used to write character files. It allows you to write text data to a file by converting characters into bytes using the default character encoding.
+Key Features:
+    Character-Oriented: It writes data as characters, making it suitable for text files.
+    Extends OutputStreamWriter: FileWriter is a subclass of OutputStreamWriter, which means it can write characters and encode them into bytes.
+Common Methods:
+   void write(int c): Writes a single character to the file.
+   void write(char[] cbuf): Writes an array of characters to the file.
+   void write(String str): Writes a string to the file.
+   void close(): Closes the file writer and releases any system resources associated with it.
+
+example:
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class FileWriterExample {
+    public static void main(String[] args) {
+        try (FileWriter fw = new FileWriter("output.txt")) {
+            String data = "Hello, World!";
+            fw.write(data); // Write the string to the file
+        } catch (IOException e) {
+            e.printStackTrace();
+
+
+20)
+
+
+
+
+
+
+
+
+
+
 
 11) How to make a read-only class in Java?
  A class can be made read-only by making all of the fields private. The read-only class will have 
@@ -335,10 +396,6 @@ Output: 101 Raj lucknow
 
 
 29)  30) 
- Java BufferedOutputStream adds more efficiency than to write data directly into a stream.
- It internally uses a buffer to store data. So, it makes the performance fast. Whereas, Java 
-BufferedInputStream class is used to read information from the stream. It internally uses the 
-buffer mechanism to make the performance fast. 
 31) In Java, How many ways you can take input from the console?
  1. Using BufferedReader class: It provides an efficient reading as the input gets buffered. 
 example. 
