@@ -1,65 +1,66 @@
-JAVA  INTERVIEW QUESTIONS
+
  1. What is Static Keyword in Java
- Static keyword is mainly used for memory management. Memory allocation 
-for static variable happens only once when the class is loaded in the 
-memory.
-  It can be used with variables, methods, blocks and nested classes. 
- Static variables are initialized only once at the start of the execution. 
-If not initialized then default value is assigned. 
- A single copy is shared by all instances of the class. 
- A static variable/method can be accessed directly by the class name 
-and doesn't need any object. JVM executes static blocks before the 
-main method.
-  You cannot access a non static member from a static member
-  This and Super cannot be used for static members
-  cannot override static method.
+      Memory Management:  Static variables are allocated memory only once when the class is loaded, which helps in conserving memory when multiple instances of a class
+                          are created.
+
+     The static keyword can be applied to:
+     Variables: Static variables are initialized only once at the start of the execution of the program. If not explicitly initialized, they are assigned default 
+                values (e.g., 0 for integers, null for objects). They are also known as class variables. 
+                A single copy of a static variable is shared among all instances of the class.
+     Methods: Static methods and variables can be accessed directly using the class name and doesn't need any object. 
+     Blocks: Static blocks are executed when the class is loaded, before the main method is executed. They are also Known as static initialization blocks.
+     Nested Classes: Static nested classes can be defined within a class.
+
+     THIS and SUPER cannot be used in static contexts because they refer to instance-specific data. THIS refers to the current object, and SUPER refers to the superclass
+     of the current object.
+
+     Static methods cannot be overridden. If a subclass defines a static method with the same name and parameters as a static method in the superclass, 
+     it is known as method hiding, not overriding. The method that gets called is determined by the reference type, not the object type. 
+
+
  2. How many types of variables are found in java
- 1) Local Variable
- A variable declared inside the body of the method is called local variable. A 
-local variable cannot be defined with "static" keyword. It is necessary to 
-initialize local variables because they don't get any default value 
-instance variables. 
-2) Instance Variable
- like 
-A variable declared inside the class but outside the body of the method, is 
-called instance variable.
- 3) Static variable
- A variable which is declared as static is called static variable. It cannot be 
-local. 
-Example to understand the types of variables in java
- 1. class A{  
-2. int data=50;//instance variable  
-3. static int m=100;//static variable  
-4. void method(){  
-5. int n=90;//local variable  
-6. }  
-7. }//end of class  
-4) What is Java instanceOf operator?
- The instanceof in Java is also known as type comparison operator because it compares the 
-instance with type. It returns either true or false. If we apply the instanceof operator with any 
-variable that has a null value, it returns false. 
+     1. Instance Variables: declared inside the class but outside the method. Belong to an instance of a class; each object has its own copy.
+     2. Static Variables:  A variable which is declared as static is called static variable. It cannot be local. Belong to the class itself; shared among all instances.
+     3. Local Variables: A variable declared inside the body of a method, constructor, or block is called a local variable. Local variables are only accessible within
+                        the method, constructor, or block where they are defined. Local variables must be initialized before they are used.
+     4. Parameters: Passed to methods or constructors; treated as local variables within those methods.
+ 
+3) What is Java instanceOf operator?
+     The instanceof operator in Java is a binary operator used to test whether an object is an instance of a specific class or interface. It helps determine the type
+     of an object at runtime, which is particularly useful in scenarios involving polymorphism and type checking. It returns either true or false. 
+     NULL CHECK : If we apply the instanceof operator with any variable that has a null value, it returns false. 
+     TYPE CHECK : used for type checking before performing type casting. This helps avoid ClassCastException at runtime. 
+     INHERITANCE : this checks not only the direct type of the object but also its superclasses. For example, if B is a subclass of A, then an object of type B
+                   will return true when checked against A. 
+     INTERFACES : It can also be used to check if an object implements a specific interface.
+
 example. 
-class Simple1{ 
-public static void main(String args[]){
- Simple1 s=new Simple1(); 
-System.out.println(s instanceof Simple1);//true 
+      class Simple1{ 
+        public static void main(String args[]){
+        Simple1 s=new Simple1(); 
+        System.out.println(s instanceof Simple1);//true 
+
 Note : An object of subclass type is also a type of parent class. For example, if Dog extends Animal 
 then object of Dog can be referred by either Dog or Animal class. 
-5) What is the abstraction?
- Abstraction is a process of hiding the implementation details and showing only functionality to 
-the user.  Abstraction enables you to focus on what the object does instead of how it does it. 
-There are two ways to achieve the abstraction. 
-i.
- Abstract Class 
-ii. Interface 
-7) What is the difference between abstraction and encapsulation?
- Abstraction hides the implementation details whereas encapsulation wraps code and data into a 
-single unit.
+
+4) What is the abstraction?
+    Abstraction is a process of hiding the implementation details and showing only functionality to the user.  Abstraction enables you to focus on what the object does
+   instead of how it does it. It can be achieved through abstract classes and interfaces in Java.
+
+5) What is the difference between abstraction and encapsulation?
+    Abstraction hides the implementation details whereas encapsulation wraps code and data into a single unit.
+    The main purpose of encapsulation is to protect the internal state of an object and ensure that it can only be modified in controlled ways. 
+    This enhances data integrity and security.
+    Encapsulation is achieved using:
+    Access Modifiers: Keywords like private, protected, and public that control the visibility of class members (variables and methods).
+    Getters and Setters: Public methods that allow controlled access to private variables.
+
  8) What is the abstract class?
- A class that is declared as abstract is known as an abstract class. It needs to be extended and its 
-method implemented. It cannot be instantiated. It can have abstract methods, non-abstract 
-methods, constructors, and static methods. It can also have the final methods which will force 
-the subclass not to change the body of the method.
+     A class that is declared as abstract is known as an abstract class. It needs to be extended and its method implemented. It cannot be instantiated. 
+     It can have abstract methods, non-abstract methods, constructors, and static methods. It can also have the final methods which will force the subclass 
+     not to change the body of the method.
+     Abstract classes are useful for shared behavior for a group of related classes, promoting code reuse.
+
  9) Can you use abstract and final both with a method?
  No, because we need to override the abstract method to provide its implementation, whereas we
  can't override the final method. 
