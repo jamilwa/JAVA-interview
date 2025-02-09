@@ -19,9 +19,9 @@ It is not a legacy class.	                  It is a legacy class.
     stores both objects and primitives type.	                                doesn't store primitive type. It automatically converts primitive type to object.
     length variable to determine the size of an array.	                        size() method to determine the size of ArrayList.
     can add elements in an array by using the assignment operator.	        the add() method to add elements in the ArrayList.
+                                                                                ArrayList internally uses array. 
 
-
-         Arrays class methods are
+Arrays class methods are
                import java.util.Arrays;
 
                int[] numbers = {1, 2, 3, 7, 4, 5};
@@ -48,6 +48,10 @@ It is not a legacy class.	                  It is a legacy class.
                Arrays.binarySearch(numbers, 3);                  // output:  2 which is the index position of the value 3
 
 List methods 
+        a. List<String> list1 = Arrays.asList("jamil", "ansari")            // we use classes to implement an interface, LHS should always be an interface and RHS a class
+	b. Collection<String> list2 = Arrays.asList("jamil", "ansari")      // we can either use the interface or its parent interface to implement it. Collection is parent of all interfaces
+	c. ArrayList<Integer> list3 = new ArrayList<>()                     // this is empty list with size zero
+	
         ArrayList<String> list = new ArrayList<>();
         list.add("Apple");                        // Adds an element to the end of the list
         list.add("Banana");
@@ -61,10 +65,14 @@ List methods
       list.set(1, "Orange");             // Replace "Banana" with "Orange"
       list.get(0);                      // Get the first element
 
-4. The ArrayList size increases dynamically by 50% because whenever the ArrayList class requires to resize then it will create a new array of bigger size and copies all 
+4. The ArrayList size increases dynamically by 50% because whenever the ArrayList class requires to resize then it will create a new array of 50% bigger size and copies all 
     the elements from the old array to the new array. the DEFAULT_CAPACITY is 10.
     example
-    ArrayList<String> ar = new ArrayList<>()                           // the default constructor capacity is 10.  
+    ArrayList<String> ar = new ArrayList<>()                           // the default constructor capacity is 10. 
+
+   if we know the initial capacity of the arrayList then its better to mention it in the ArrayList declaration, like below so that it doesnt become due to resizing.
+        ArrayList<Integer> list3 = new ArrayList<>(50)      // it will add elements to same array instead of creating new array untill its size reaches to 50.
+
      
     
 5. Differentiate between Iterator and ListIterator interfaces.
