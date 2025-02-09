@@ -49,7 +49,7 @@ It is not a legacy class.	                  It is a legacy class.
 
 List methods 
         ArrayList<String> list = new ArrayList<>();
-        list.add("Apple");
+        list.add("Apple");                        // Adds an element to the end of the list
         list.add("Banana");
         list.add(1, "Orange");                  // Insert "Orange" at index 1 and moves banana to index 2 position.
 
@@ -67,33 +67,21 @@ List methods
     ArrayList<String> ar = new ArrayList<>()                           // the default constructor capacity is 10.  
      
     
-3. Differentiate between Iterator and ListIterator
+5. Differentiate between Iterator and ListIterator interfaces.
 
     Iterator	                                                                                ListIterator
 The Iterator can traverse the array elements in the forward direction.	            ListIterator can traverse the array elements in backward as well as forward directions.
-It can be used in Map, List, and Set.                               	            It can be used in List.
-It can perform only remove operation.                                             	It can perform add, remove, and set operation while traversing the collection.
-Iterator cannot modify or replace elements                                          can modify or replace an element with the help of set(E e)
+used in Map, List, and Set.                               	                    used in List like ArrayList, LinkedList.
+It can perform only remove() operation after calling next()                         It can perform add, remove, and set operation while traversing the collection.
+Iterator cannot add or replace elements throws ConcurrentModificationException      can add or replace an element with the help of add(E e), set(E e) methods.
 Indexes cannot be obtained by using Iterator.                                       nextIndex() and previousIndex() helps to obtain indexes of elements at any time.
-Cannot add elements and it throws ConcurrentModificationException                   Can add elements to a collection at any time
-methods of Iterator are next(), remove() and hasNext()                              methods of ListIterator are next(), previous(), hasNext(), hasPrevious(), add(E e)
+methods of Iterator are next(), remove() and hasNext()                              methods of ListIterator are next(), previous(), hasNext(), hasPrevious(), add(E e), set(E e)
 example:   Iterator<String> itr = ar.iterator();                                    example: ListIterator<String> itr = ar.listIterator();
            while(itr.hasNext()){                                                             while (itr.hasNext()) {
                 System.out.println(itr.next());                                                  System.out.println(itr.next());                                                 
 
 
-4. 
-5. What is the difference between Comparable and Comparator?
-
-      Comparable	                                                                                             Comparator
-Comparable provides compareTo() method to sort elements in Java.	                Comparator provides compare() method to sort elements in Java.
-Comparable interface is present in java.lang package.	                            Comparator interface is present in java. util package.
-It provides single sorting sequences.                                           	It provides multiple sorting sequences.
-This method can sort the data according to the natural sorting order.           	This method sorts the data according to the customized sorting order.
-It affects the original class. i.e., the actual class is altered.                 	It doesn’t affect the original class, i.e., the actual class is not altered.
-
-
-8. What is the difference between Hashmap and Hashtable?
+6. What is the difference between Hashmap and Hashtable?
 
         Hashmap	                                                        Hashtable
 It is not synchronized.	                                                It is synchronized.
@@ -102,19 +90,19 @@ Iterator is used to traverse HashMap.	                                Either Ite
 It is fail-fast.                                                        It is fail-safe.
 faster than HashTable.	                                                slower than HashMap.
 
-9. An easy-to-remember acronym for common Set methods in Java could be "AIS". Here's what each letter represents:
+7. An easy-to-remember acronym for common Set methods in Java could be "AIS". Here's what each letter represents:
    A: add() - Adds an element to the set.
    I: isEmpty() - Checks if the set is empty.
    S: size() - Returns the number of elements in the set.
 
-10. easy-to-remember acronym for common ArrayList methods in Java could be "CRUD". Here's what each letter represents:
+8. easy-to-remember acronym for common ArrayList methods in Java could be "CRUD". Here's what each letter represents:
     C: add() - Adds an element to the ArrayList.R: get() - Retrieves an element from the ArrayList based on its index.U: set() - Updates an element in the ArrayList at a specified index.D: remove() - Deletes an element
 
-11. what is hashing? 
+09. what is hashing? 
     hashing refers to the process of converting an object or data structure into a numerical value, known as a hash code, using a hashing algorithm. 
     Hashing is commonly used for indexing data in HashMap, ensuring data integrity, and optimizing search operations.
 
-12.   Access modifiers
+10.   Access modifiers
         Private : The member is accessible only within its own class.    POC
         Default (Package-Private): The member is accessible only within its own package.    DOP
         Protected: The member is accessible within its own package and by subclasses of other packages.  ProtOPSOP
