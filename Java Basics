@@ -211,7 +211,7 @@ public class FileInputStreamExample {
 
 
 18) What is the purpose of using BufferedInputStream and BufferedOutputStream classes?
-        BufferedInputStream is a subclass of FileInputStream which adds more efficiency to another input stream by buffering the input. The main purposes of using 
+        BufferedInputStream is a subclass of FilterInputStream which adds more efficiency to another input stream by buffering the input. The main purposes of using 
         BufferedInputStream are:
          1. Performance Improvement:  Reading data one byte at a time from a file or network can be inefficient due to frequent I/O operations. BufferedInputStream 
                             reads a larger block of data into a buffer (an array of bytes) at once, reducing the number of I/O operations and improving performance.
