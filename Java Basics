@@ -100,6 +100,39 @@ then object of Dog can be referred by either Dog or Animal class.
     String Literals: When you create a string using double quotes, it is stored in the String Pool.
     The new Keyword: When you create a string using the new keyword, a new string object is created in the heap, even if an identical string exists in the String Pool.
 
+    The statement String str3 = new String("Hello");   creates two objects in memory:
+        One in the String Pool (for the literal "Hello").
+        One in the heap (for the new String("Hello")).
+
+13)  Difference between StringBuffer and StringBuilder
+       StringBuffer is thread-safe and suitable for multi-threaded environments but is slower due to synchronization.
+       StringBuilder is not thread-safe but is faster and more efficient for single-threaded applications.
+
+14)  What is Garbage Collection?
+     Garbage Collection (GC) in Java is an automatic memory management process that helps in reclaiming memory by removing objects that are no longer in use or reachable
+     in a program. This process is crucial for preventing memory leaks and ensuring efficient memory usage in applications. 
+     GC is automatic, meaning that developers do not need to manually free memory. The Java Virtual Machine (JVM) handles this process, allowing developers to focus
+     on application logic rather than memory management.
+     The Garbage Collector is a part of the JVM responsible for identifying and removing unreachable objects. It runs periodically and can be triggered by various
+     factors, such as memory pressure or explicit requests from the application.
+
+     Types of Garbage Collection
+         1.  Serial Garbage Collector: A simple, single-threaded garbage collector that is suitable for small applications with a single thread. It pauses all 
+             application threads during garbage collection.
+         2. Parallel Garbage Collector: A multi-threaded garbage collector that uses multiple threads to perform garbage collection in parallel. It is suitable
+            for applications that require high throughput.
+
+     Garbage Collection Process - The garbage collection process generally involves the following steps:
+         Marking: The garbage collector identifies which objects are reachable and which are not. It traverses the object graph starting from root references 
+                  (e.g., static fields, local variables) and marks all reachable objects.
+
+      
+     Memory Management:  In Java, memory is divided into several areas, primarily the Heap and the Stack. The Heap is where objects are allocated, while the Stack is
+                         used for method calls and local variables. When an object is created, memory is allocated for it in the Heap. Once the object is no longer needed 
+                         (i.e., there are no references to it), it becomes eligible for garbage collection.
+
+
+
 
 
 
@@ -144,10 +177,7 @@ Example
  out.println("and an area of " + (PI * pow(2.5, 2)) + " sq. cm");
  you dont have to write Math.PI or Math.pow etc. 
 
-19) What is String Pool?
- String pool is the space reserved in the heap memory that can be used to store the strings.  Therefore, it saves the memory by avoiding the duplicacy. 
-20) What are the differences between String and StringBuffer?
-21) What are the differences between StringBuffer and StringBuilder?
+21) 
  22) How can we create an immutable class in Java?
  We can create an immutable class by defining a final class having all of its members as final. 
 example. 
@@ -178,7 +208,7 @@ System.out.println(s2);//compiler writes here s2.toString()
 } } 
 Output: 101 Raj lucknow 
  102 Vijay ghaziabad 
-24) What is Garbage Collection?
+24) 
  Garbage collection is a process of reclaiming the unused runtime objects. It is performed for 
 memory management. In other words, we can say that It is the process of removing unused 
 objects from the memory to free up space and make this space available for Java Virtual 
