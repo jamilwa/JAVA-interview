@@ -25,9 +25,10 @@ It is not a legacy class.	                  It is a legacy class.
                import java.util.Arrays;
 
                int[] numbers = {1, 2, 3, 7, 4, 5};
-               Arrays.toString(numbers));                             // Output: [1, 2, 3, 7, 4, 5]
-               Arrays.sort(numbers);                                // Output: [1, 2, 3, 4, 5, 7]
-               Arrays.sort(numbers[], Comparator.reverseOrder())   // Sorting the array in descending order. note: it works on object like Integer not on int.
+    String     Arrays.toString(numbers));                      // Output: [1, 2, 3, 7, 4, 5]
+    void       Arrays.sort(numbers);                          // Output: [1, 2, 3, 4, 5, 7]
+               Arrays.sort(numbers[], Comparator.reverseOrder())           // Sorting the array in descending order. note: it works on object like Integer not on int.
+               Arrays.sort(numbers, 3,5);                                 // sorts only numbers falling between fromIndex 3 and toIndex 5
 
 
                int[] copy = Arrays.copyOf(numbers, 3);
