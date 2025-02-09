@@ -342,45 +342,87 @@ public class FileWriterExample {
            String n=c.readLine(); 
            System.out.println("Welcome "+n);
 
+21)  What is serialization?
+     Serialization in Java is a mechanism of writing the state of an object into a byte stream. It is used primarily in Hibernate, RMI, JPA, EJB and JMS technologies.
+     It is mainly used to travel object's state on the network (which is known as marshaling). Serializable interface is used to perform serialization. It is helpful
+     when you require to save the state of a program to storage such as the file. At a later point of time, the content of this file can be restored using deserialization.
+     It is also required to implement RMI(Remote Method Invocation). With the help of RMI, it is possible to invoke the method of a Java object on one machine to another
+     machine.
+
+22) How can you make a class serializable in Java?
+ A class can become serializable by implementing the Serializable interface.
+
+23) Can a Serialized object be transferred via network?
+ Yes, we can transfer a serialized object via network because the serialized object is stored in the memory in the form of bytes and can be transmitted over the network.
+ We can also write the serialized object to the disk or the database 
+
+24) What is Deserialization?
+ Deserialization is the process of reconstructing the object from the serialized state. It is the reverse operation of serialization. An ObjectInputStream deserializes 
+ objects and primitive data written using an ObjectOutputStream. 
+
+example
+    class Depersist{ 
+    public static void main(String args[]) throws Exception{ 
+          ObjectInputStream in=new ObjectInputStream(new FileInputStream("f.txt")); 
+          Student s=(Student)in.readObject(); 
+          System.out.println(s.id+" "+s.name);
+          in.close(); 
+
+25) What is the transient keyword?
+ If you define any data member as transient, it will not be serialized. By determining transient keyword, the value of variable need not persist when it is restored.
+
+26) What are wrapper classes?
+    Wrapper classes are classes that allow primitive types to be accessed as objects. In other words, we can say that wrapper classes are built-in java classes which
+    allow the conversion of objects to primitives and primitives to objects. The process of converting primitives to objects is called autoboxing, and the process of
+    converting objects to primitives is called unboxing.
+
+27) What are autoboxing and unboxing? When does it occur?
+     The autoboxing is the process of converting primitive data type to the corresponding wrapper class object, eg., int to Integer. The unboxing is the process of
+     converting wrapper class object to primitive data type. For eg., integer to int. Unboxing and autoboxing occur automatically in Java. However, we can externally
+     convert one into another by using the methods like valueOf() or xxxValue(). It can occur whenever a wrapper class object is expected, and primitive data type
+    is provided or vice versa. Adding primitive types into Collection like ArrayList in Java. 
+    Creating an instance of parameterized classes ,e.g., ThreadLocal which expect Type. Java automatically converts primitive to object whenever one is required and
+    another is provided in the method calling. When a primitive type is assigned to an object type.
+
+28)  What is the purpose of the strictfp keyword?
+    Java strictfp keyword ensures that you will get the same result on every platform if you perform operations in the floating-point variable. The precision may differ
+    from platform to platform that is why java programming language has provided the strictfp keyword so that you get the same result on every platform. So, now you have
+    better control over the floating-point arithmetic.  
 
 
+29) How to make a read-only class in Java?
+    A class can be made read-only by making all of the fields private. The read-only class will have only getter methods which return the private property of the class
+    to the main method. We cannot modify this property because there is no setter method available in the class. 
 
-
-
-
-
-
-
-
-11) How to make a read-only class in Java?
- A class can be made read-only by making all of the fields private. The read-only class will have 
-only getter methods which return the private property of the class to the main method. We 
-cannot modify this property because there is no setter method available in the class. 
 example. 
 public class Student{ 
 private String college="AKG"; 
 public String getCollege(){
- return college;  
-14) How to make a write-only class in Java?
- A class can be made write-only by making all of the fields private. The write-only class will 
-have only setter methods which set the value passed from the main method to the private fields. 
-We cannot read the properties of the class because there is no getter method in this class.
- example. 
+return college;
+
+30) How to make a write-only class in Java?
+    A class can be made write-only by making all of the fields private. The write-only class will have only setter methods which set the value passed from the main method
+    to the private fields. We cannot read the properties of the class because there is no getter method in this class.
+ 
+example. 
 public class Student{ 
 private String college;
- public void setCollege(String college){ 
+public void setCollege(String college){ 
 this.college=college; 
-15) What is the package?
- A package is a group of similar type of classes, interfaces, and sub-packages. It provides access 
-protection and removes naming collision. The packages in Java can be categorized into two 
-forms, inbuilt package, and user-defined package. There are many built-in packages such as 
-Java, lang, awt, javax, swing, net, io, util, sql, etc. 
-16) Can I import same package/class twice?
- One can import the same package or the same class multiple times. However, the JVM will 
-internally load the class only once no matter how many times you import the same class. 
-17) What is the static import?
- Static import  allows public static members (fields and methods) of another class, to be used 
-in Java code without specifying the class in which the field has been defined. 
+
+
+31) What is the package?
+    A package is a group of similar type of classes, interfaces, and sub-packages. It provides access protection and removes naming collision. The packages in Java can
+    be categorized into two forms, inbuilt package, and user-defined package. There are many built-in packages such as Java, lang, awt, javax, swing, net, io, util, sql.
+
+32) Can I import same package/class twice?
+    One can import the same package or the same class multiple times. However, the JVM will internally load the class only once no matter how many times you import the
+    same class. 
+
+33) What is the static import?
+    Static import  allows public static members (fields and methods) of another class, to be used in Java code without specifying the class in which the field has 
+    been defined. 
+
 Example
  import static java.lang.Math.*;
  import static java.lang.System.out;
@@ -392,9 +434,8 @@ Example
  out.println("and an area of " + (PI * pow(2.5, 2)) + " sq. cm");
  you dont have to write Math.PI or Math.pow etc. 
 
-21) 
- 22) How can we create an immutable class in Java?
- We can create an immutable class by defining a final class having all of its members as final. 
+34)  How can we create an immutable class in Java?
+     We can create an immutable class by defining a final class having all of its members as final. 
 example. 
 public final class Employee{ 
 final String pancardNumber; 
@@ -402,10 +443,10 @@ public Employee(String pancardNumber){
  this.pancardNumber=pancardNumber; } 
 public String getPancardNumber(){
  return pancardNumber; 
-23) What is the purpose of toString() method in Java?
- The toString() method returns the string representation of an object. If you print any object, java
- compiler internally invokes the toString() method on the object. By overriding the toString() 
-method of the Object class, we can return the values of the object as desired. 
+
+35) What is the purpose of toString() method in Java?
+    The toString() method returns the string representation of an object. If you print any object, java compiler internally invokes the toString() method on the object.
+    By overriding the toString() method of the Object class, we can return the values of the object as desired. 
 example. 
 class Student{
  int rollno; 
@@ -423,43 +464,9 @@ System.out.println(s2);//compiler writes here s2.toString()
 } } 
 Output: 101 Raj lucknow 
  102 Vijay ghaziabad 
-24) 
-26) 27) 
 
 
-
-
-
-29)  30) 
-31)  
-32) What is serialization?
- Serialization in Java is a mechanism of writing the state of an object into a byte stream. It is 
-used primarily in Hibernate, RMI, JPA, EJB and JMS technologies. It is mainly used to travel 
-object's state on the network (which is known as marshaling). Serializable interface is used to 
-perform serialization. It is helpful when you require to save the state of a program to storage 
-such as the file. At a later point of time, the content of this file can be restored using 
-deserialization. It is also required to implement RMI(Remote Method Invocation). With the help
- of RMI, it is possible to invoke the method of a Java object on one machine to another machine.
- 33) How can you make a class serializable in Java?
- A class can become serializable by implementing the Serializable interface.
- 34) Can a Serialized object be transferred via network?
- Yes, we can transfer a serialized object via network because the serialized object is stored in the 
-memory in the form of bytes and can be transmitted over the network. We can also write the 
-serialized object to the disk or the database 
-35) What is Deserialization?
- Deserialization is the process of reconstructing the object from the serialized state. It is the 
-reverse operation of serialization. An ObjectInputStream deserializes objects and primitive data 
-written using an ObjectOutputStream. 
-class Depersist{ 
-public static void main(String args[]) throws Exception{ 
-ObjectInputStream in=new ObjectInputStream(new FileInputStream("f.txt")); 
-Student s=(Student)in.readObject(); 
-System.out.println(s.id+" "+s.name);
- in.close(); 
-36) What is the transient keyword?
- If you define any data member as transient, it will not be serialized. By determining transient 
-keyword, the value of variable need not persist when it is restored. 
-37) How do I convert a numeric IP address like 192.18.97.39 into a hostname like java.sun.com?
+36) How do I convert a numeric IP address like 192.18.97.39 into a hostname like java.sun.com?
  By InetAddress.getByName("192.18.97.39").getHostName() where 192.18.97.39 is the IP 
 address. 
 example. 
@@ -471,32 +478,8 @@ try{ InetAddress ip=InetAddress.getByName("195.201.10.8");
 System.out.println("Host Name: "+ip.getHostName());
  }catch(Exception e){
  System.out.println(e)
-38) What are wrapper classes?
- Wrapper classes are classes that allow primitive types to be accessed as objects. In other 
-words, we can say that wrapper classes are built-in java classes which allow the 
-conversion of objects to primitives and primitives to objects. The process of converting 
-primitives to objects is called autoboxing, and the process of  converting objects to 
-primitives is called unboxing.
- 39) What are autoboxing and unboxing? When does it occur?
- The autoboxing is the process of converting primitive data type to the corresponding wrapper 
-class object, eg., int to Integer. The unboxing is the process of converting wrapper class object 
-to primitive data type. For eg., integer to int. Unboxing and autoboxing occur automatically in 
-Java. However, we can externally convert one into another by using the methods like valueOf() 
-or xxxValue(). It can occur whenever a wrapper class object is expected, and primitive data type
- is provided or vice versa. Adding primitive types into Collection like ArrayList in Java. 
-Creating an instance of parameterized classes ,e.g., ThreadLocal which expect Type. Java 
-automatically converts primitive to object whenever one is required and another is provided in 
-the method calling. When a primitive type is assigned to an object type.
- 40) What is the purpose of the strictfp keyword?
- Java strictfp keyword ensures that you will get the same result on every platform if you perform
- operations in the floating-point variable. The precision may differ from platform to platform 
-that is why java programming language has provided the strictfp keyword so that you get the 
-same result on every platform. So, now you have better control over the floating-point 
-arithmetic.  
-41) What is a singleton class?
- Singleton class is the class which can not be instantiated more than once. To make a class 
-singleton, we either make its constructor private or use the static getInstance method. 
-42) Write a Java program that prints all the values given at command-line.
+
+37) Write a Java program that prints all the values given at command-line.
  Program class A{ 
 public static void main(String args[]){
  for(int i=0;i < args.length; i++){
