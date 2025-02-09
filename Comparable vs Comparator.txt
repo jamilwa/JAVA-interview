@@ -1,3 +1,11 @@
+0.  
+      Comparable	                                                                                             Comparator
+Comparable provides compareTo() method to sort elements in Java.	                Comparator provides compare() method to sort elements in Java.
+Comparable interface is present in java.lang package.	                                Comparator interface is present in java. util package.
+It provides single sorting sequences.                                           	It provides multiple sorting sequences.
+This method can sort the data according to the natural sorting order.           	This method sorts the data according to the customized sorting order.
+It affects the original class. i.e., the actual class is altered.                 	It doesn’t affect the original class, i.e., the actual class is not altered.
+
 
 	1. Whenever we have to sort objects in customized way or compare objects then we have to use two things. Comparable interface and
 		Comparator( both are functional interface(has only one abstract method))
