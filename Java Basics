@@ -164,18 +164,19 @@ then object of Dog can be referred by either Dog or Animal class.
 17)  What are the FileInputStream and FileOutputStream?
       FileInputStream : It is a class used to read raw byte streams from a file. It is used for reading binary data, such as images, audio files, or any other type 
                         of file that is not text-based.
-      FileOutputStream : It is a class used to write raw byte streams to a file. It is used for writing binary data, such as images, audio files, or any other type 
-                        of file that is not text-based.
-
-     
+      Key Features:
+            Byte-Oriented: It reads data in the form of bytes, making it suitable for binary files.
+            Input Stream: It extends the InputStream class, which provides methods for reading bytes.
+      Common Methods:
+            int read(): Reads the next byte of data from the input stream. Returns -1 if the end of the file is reached.
+            int read(byte[] b): Reads a certain number of bytes from the input stream into an array.
+            void close(): Closes the input stream and releases any system resources associated with it.
+           
 example 
-
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class FileInputStreamExample {
-    public static void main(String[] args) {
-        FileInputStream fis = null;
+FileInputStream fis = null;
         try {
             fis = new FileInputStream("example.txt"); 
             int data;
@@ -191,7 +192,20 @@ public class FileInputStreamExample {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-      -----------------------------------------------------------------------------------------      
+     ------ -----------------------------------------------------------------------------------------      
+FileOutputStream : It is a class used to write raw byte streams to a file. It is used for writing binary data, such as images, audio files, or any other type 
+                   of file that is not text-based.
+Key Features:
+    Byte-Oriented: It writes data in the form of bytes, making it suitable for binary files.
+    Output Stream: It extends the OutputStream class, which provides methods for writing bytes.
+Common Methods:
+    void write(int b): Writes the specified byte to the output stream.
+    void write(byte[] b): Writes an array of bytes to the output stream.
+    void close(): Closes the output stream and releases any system resources associated with it.
+
+example
+import java.io.FileOutputStream;
+import java.io.IOException;
 
      FileOutputStream fos = null;
         try {
@@ -222,9 +236,7 @@ public class FileInputStreamExample {
           import java.io.BufferedInputStream;
           import java.io.FileInputStream;
           import java.io.IOException;
-
-          public class BufferedInputStreamExample {
-          public static void main(String[] args) {
+            
                  try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream("example.txt"))) {
                           int data;
                           while ((data = bis.read()) != -1) {
@@ -246,9 +258,7 @@ public class FileInputStreamExample {
         import java.io.FileOutputStream;
         import java.io.IOException;
 
-        public class BufferedOutputStreamExample {
-               public static void main(String[] args) {
-               try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("output.txt"))) {
+                try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("output.txt"))) {
                          String data = "Hello, World!";
                          bos.write(data.getBytes()); // Write the string as bytes to the buffer
                          bos.flush(); // Flush the buffer to the file
