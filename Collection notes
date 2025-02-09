@@ -7,16 +7,56 @@
 ArrayList is cannot be synchronized.	          Vector can be is synchronized (only one thread at a time can access the code)
 It is fast                                        It is slow.      
 ArrayList is not thread-safe.	                  Vector is a thread-safe.
-It can increase its size by 50%.	              It can increase its size by doubling the size of the array.
-It is not a legacy class.	                      It is a legacy class.
+It can increase its size by 50%.	          It can increase its size by doubling the size of the array.
+It is not a legacy class.	                  It is a legacy class.
 
 3.              Array                                                                          Arraylist 
     Array is static in size.	                                                ArrayList is dynamic in size.
     It is mandatory to provide the size of an array while initializing it       We can create an instance of ArrayList without specifying its size. initial capacity is 10
-    It performs fast because of fixed size.	                                    The resize operation slows down the performance.
+    It performs fast because of fixed size.	                                The resize operation slows down the performance.
     stores both objects and primitives type.	                                doesn't store primitive type. It automatically converts primitive type to object.
     provides a length variable which denotes the length of an array.	        provides the size() method to determine the size of ArrayList.
-    can add elements in an array by using the assignment operator.	            the add() method to add elements in the ArrayList.
+    can add elements in an array by using the assignment operator.	        the add() method to add elements in the ArrayList.
+
+
+         Arrays class methods are
+               import java.util.Arrays;
+
+               int[] numbers = {1, 2, 3, 7, 4, 5};
+               Arrays.toString(numbers));                             // Output: [1, 2, 3, 7, 4, 5]
+               Arrays.sort(numbers);                                // Output: [1, 2, 3, 4, 5, 7]
+               Arrays.sort(numbers[], Comparator.reverseOrder())   // Sorting the array in descending order. note: it works on object like Integer not on int.
+
+
+               int[] copy = Arrays.copyOf(numbers, 3);
+               Arrays.toString(copy));                         // Output: [1, 2, 3]
+
+               int[][] matrix = {
+                                 {1, 2, 3},
+                                 {4, 5, 6}
+                                };
+               Arrays.deepToString(matrix);                    // Output: [[1, 2, 3], [4, 5, 6]]   
+               
+
+               int[] array1 = {1, 2, 3};
+               int[] array2 = {1, 2, 3};
+               Arrays.equals(array1, array2);                    // output: true
+
+               Arrays.binarySearch(numbers, 3);                  // output:  2 which is the index position of the value 3
+
+List methods 
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add(1, "Orange");                  // Insert "Orange" at index 1 and moves banana to index 2 position.
+
+
+      list.clear();                          // Clear the list
+      list.contains("Apple");               // Check if "Apple" is in the list
+      list.size()                          // returns size of the list.
+      list.remove(0);                     // Remove the first element
+      list.set(1, "Orange");             // Replace "Banana" with "Orange"
+      list.get(0);                      // Get the first element
 
 4. The ArrayList size increases dynamically by 50% because whenever the ArrayList class requires to resize then it will create a new array of bigger size and copies all 
     the elements from the old array to the new array. the DEFAULT_CAPACITY is 10.
