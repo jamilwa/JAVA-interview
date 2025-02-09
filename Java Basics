@@ -110,11 +110,14 @@ then object of Dog can be referred by either Dog or Animal class.
 
 14)  What is Garbage Collection?
      Garbage Collection (GC) in Java is an automatic memory management process that helps in reclaiming memory by removing objects that are no longer in use or reachable
-     in a program. This process is crucial for preventing memory leaks and ensuring efficient memory usage in applications. 
+     in a program. This process is to ensure efficient memory usage in applications. 
      GC is automatic, meaning that developers do not need to manually free memory. The Java Virtual Machine (JVM) handles this process, allowing developers to focus
      on application logic rather than memory management.
      The Garbage Collector is a part of the JVM responsible for identifying and removing unreachable objects. It runs periodically and can be triggered by various
      factors, such as memory pressure or explicit requests from the application.
+     Memory Management:  In Java, memory is divided into several areas, primarily the Heap and the Stack. The Heap is where objects are allocated, while the Stack is
+                         used for method calls and local variables. When an object is created, memory is allocated for it in the Heap. Once there are no references to
+                         that object, it becomes eligible for garbage collection. 
 
      Types of Garbage Collection
          1.  Serial Garbage Collector: A simple, single-threaded garbage collector that is suitable for small applications with a single thread. It pauses all 
@@ -125,11 +128,25 @@ then object of Dog can be referred by either Dog or Animal class.
      Garbage Collection Process - The garbage collection process generally involves the following steps:
          Marking: The garbage collector identifies which objects are reachable and which are not. It traverses the object graph starting from root references 
                   (e.g., static fields, local variables) and marks all reachable objects.
+         Sweeping: After marking, the garbage collector sweeps through the heap and collects all unmarked (unreachable) objects, reclaiming their memory.
+         Compacting (optional): In some garbage collection algorithms, the memory is compacted to reduce fragmentation. This involves moving reachable objects
+                                together to create contiguous free space.
 
+     Important Methods Related to Garbage Collection
+          1. System.gc(): The System.gc() method is a request to the JVM to perform garbage collection. However, The JVM may choose to ignore this request and the JVM 
+                          is not obligated to perform garbage collection immediately or at all.
+          2. finalize():  This is a protected method of the Object class that can be overridden by a class to perform cleanup operations before an object is 
+                          garbage collected. The finalize() method is called by the garbage collector when it determines that there are no more references to the object.
+                       example:
+              @Override
+               protected void finalize() throws Throwable {
+                       try {
+                              // Cleanup code, e.g., closing resources
+                              System.out.println("Object is being garbage collected");
+                       } finally {
+                            super.finalize(); 
       
-     Memory Management:  In Java, memory is divided into several areas, primarily the Heap and the Stack. The Heap is where objects are allocated, while the Stack is
-                         used for method calls and local variables. When an object is created, memory is allocated for it in the Heap. Once the object is no longer needed 
-                         (i.e., there are no references to it), it becomes eligible for garbage collection.
+     
 
 
 
