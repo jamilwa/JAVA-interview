@@ -167,45 +167,7 @@
 
 11. str.matches("\\d+")                                                          // it matches strings which contains only digits 
 
-12. Arrays class methods are
-               import java.util.Arrays;
-
-               int[] numbers = {1, 2, 3, 7, 4, 5};
-               Arrays.toString(numbers));                             // Output: [1, 2, 3, 7, 4, 5]
-               Arrays.sort(numbers);                                // Output: [1, 2, 3, 4, 5, 7]
-               Arrays.sort(numbers[], Comparator.reverseOrder())   // Sorting the array in descending order. note: it works on object like Integer not on int.
-
-
-               int[] copy = Arrays.copyOf(numbers, 3);
-               Arrays.toString(copy));                         // Output: [1, 2, 3]
-
-               int[][] matrix = {
-                                 {1, 2, 3},
-                                 {4, 5, 6}
-                                };
-               Arrays.deepToString(matrix);                    // Output: [[1, 2, 3], [4, 5, 6]]   
-               
-
-               int[] array1 = {1, 2, 3};
-               int[] array2 = {1, 2, 3};
-               Arrays.equals(array1, array2);                    // output: true
-
-               Arrays.binarySearch(numbers, 3);                  // output:  2 which is the index position of the value 3
-
-13.  List methods 
-      ArrayList<String> list = new ArrayList<>();
-        list.add("Apple");
-        list.add("Banana");
-        list.add(1, "Orange");                  // Insert "Orange" at index 1 and moves banana to index 2 position.
-
-
-      list.clear();                          // Clear the list
-      list.contains("Apple");               // Check if "Apple" is in the list
-      list.size()                          // returns size of the list.
-      list.remove(0);                     // Remove the first element
-      list.set(1, "Orange");             // Replace "Banana" with "Orange"
-      list.get(0);                      // Get the first element
-      
+12.   
 
 14.  String, StringBuilder and StringBuffer  methods with example
               String str = "Hello, World!";
