@@ -210,24 +210,51 @@ public class FileInputStreamExample {
             }
 
 
+18) What is the purpose of using BufferedInputStream and BufferedOutputStream classes?
+        BufferedInputStream is a subclass of FileInputStream which adds more efficiency to another input stream by buffering the input. The main purposes of using 
+        BufferedInputStream are:
+         1. Performance Improvement:  Reading data one byte at a time from a file or network can be inefficient due to frequent I/O operations. BufferedInputStream 
+                            reads a larger block of data into a buffer (an array of bytes) at once, reducing the number of I/O operations and improving performance.
+         2. The mark() and reset() methods, allowing you to mark a position in the stream and return to it later. This is useful when you need to read data multiple
+                            times without re-reading from the underlying stream.
 
+          example
+          import java.io.BufferedInputStream;
+          import java.io.FileInputStream;
+          import java.io.IOException;
 
+          public class BufferedInputStreamExample {
+          public static void main(String[] args) {
+                 try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream("example.txt"))) {
+                          int data;
+                          while ((data = bis.read()) != -1) {
+                                 System.out.print((char) data); // Print the byte as a character
+                          }
+                  } catch (IOException e) {
+                       e.printStackTrace();
 
-public class FileOutputStreamExample { 
-public static void main(String args[]){
- try{ 
-FileOutputStream fout=new FileOutputStream("D:\\testout.txt"); 
-fout.write(65); 
-fout.close(); 
-System.out.println("success..."); 
-}catch(Exception e){
- System.out.println(e);
+-----------------------------------------------------------------------------------------------------------------
+       BufferedOutputStream 
+        1. Performance Improvement: Writing data one byte at a time can be inefficient due to frequent I/O operations. BufferedOutputStream writes data to a buffer
+                                    first and only flushes the buffer to the underlying output stream when it is full or when explicitly requested. 
+                                    This reduces the number of I/O operations and improves performance.
+        2. Automatic Flushing: It can be configured to automatically flush the buffer when a certain condition is met (e.g., when a newline character is written).
+                                    This ensures that data is written to the underlying stream promptly.
+        
+        Example
+        import java.io.BufferedOutputStream;
+        import java.io.FileOutputStream;
+        import java.io.IOException;
 
-
-
-
-
-
+        public class BufferedOutputStreamExample {
+               public static void main(String[] args) {
+               try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("output.txt"))) {
+                         String data = "Hello, World!";
+                         bos.write(data.getBytes()); // Write the string as bytes to the buffer
+                         bos.flush(); // Flush the buffer to the file
+                } catch (IOException e) {
+                       e.printStackTrace();
+        
 
 11) How to make a read-only class in Java?
  A class can be made read-only by making all of the fields private. The read-only class will have 
@@ -307,7 +334,7 @@ Output: 101 Raj lucknow
 
 
 
-29)  30) What is the purpose of using BufferedInputStream and BufferedOutputStream classes?
+29)  30) 
  Java BufferedOutputStream adds more efficiency than to write data directly into a stream.
  It internally uses a buffer to store data. So, it makes the performance fast. Whereas, Java 
 BufferedInputStream class is used to read information from the stream. It internally uses the 
