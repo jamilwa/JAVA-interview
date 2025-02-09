@@ -315,7 +315,32 @@ public class FileWriterExample {
             e.printStackTrace();
 
 
-20)
+20)  In Java, How many ways you can take input from the console?
+ 1. Using BufferedReader class: It provides an efficient reading as the input gets buffered. 
+ example. 
+          System.out.println("Enter the name of the person"); 
+         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
+         String name = reader.readLine(); 
+         System.out.println(name); 
+
+2. Using Scanner class: The Java Scanner class breaks the input into tokens using a delimiter that is whitespace by default. Java Scanner class extends Object class
+                        and implements Iterator and Closeable interfaces. 
+   example. 
+           String str = "Hello/"; 
+           Scanner scanner = new Scanner(str); 
+           System.out.println("Boolean Result: "+scanner.hasNextBoolean()); 
+           scanner.useDelimiter("/");   //Change the delimiter of this scanner
+           while(scanner.hasNext() { 
+              System.out.println(scanner.next()); } 
+              scanner.close(); 
+
+3. Using Console class: The Java Console class is used to get input from the console. It provides methods to read texts and passwords. If you read the password
+                        using the Console class, it will not be displayed to the user. The java.io.Console class is attached to the system console internally. 
+      example. 
+           Console c=System.console(); 
+           System.out.println("Enter your name: "); 
+           String n=c.readLine(); 
+           System.out.println("Welcome "+n);
 
 
 
@@ -406,40 +431,7 @@ Output: 101 Raj lucknow
 
 
 29)  30) 
-31) In Java, How many ways you can take input from the console?
- 1. Using BufferedReader class: It provides an efficient reading as the input gets buffered. 
-example. 
-public class Person { 
-public static void main(String[] args) throws IOException {
- System.out.println("Enter the name of the person"); 
-BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
-String name = reader.readLine(); 
-System.out.println(name); 
-2. Using Scanner class: The Java Scanner class breaks the input into tokens using a delimiter 
-that is whitespace by default. Java Scanner class extends Object class and implements    
-            Iterator and Closeable interfaces. 
-example. 
-public class ScannerClassExample2 { 
-public static void main(String args[]){ 
-String str = "Hello/"; 
-Scanner scanner = new Scanner(str); 
-System.out.println("Boolean Result: "+scanner.hasNextBoolean()); 
-scanner.useDelimiter("/");   //Change the delimiter of this scanner
- while(scanner.hasNext() { 
-System.out.println(scanner.next()); } 
-scanner.close(); 
-3. Using Console class: The Java Console class is used to get input from the console. It provides
- methods to read texts and passwords. If you read the password using the Console class, 
-            it
- will not be displayed to the user. The java.io.Console class is attached to the system     
-            console internally. 
-example. 
-class ReadStringTest{ 
-public static void main(String args[]){ 
-Console c=System.console(); 
-System.out.println("Enter your name: "); 
-String n=c.readLine(); 
-System.out.println("Welcome "+n); 
+31)  
 32) What is serialization?
  Serialization in Java is a mechanism of writing the state of an object into a byte stream. It is 
 used primarily in Hibernate, RMI, JPA, EJB and JMS technologies. It is mainly used to travel 
