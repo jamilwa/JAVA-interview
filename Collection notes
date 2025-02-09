@@ -20,6 +20,7 @@ It is not a legacy class.	                  It is a legacy class.
     length variable to determine the size of an array.	                        size() method to determine the size of ArrayList.
     can add elements in an array by using the assignment operator.	        the add() method to add elements in the ArrayList.
                                                                                 ArrayList internally uses array. 
+    throws ArrayIndexOutofBoundException					throws IndexOutofBoundException
 
 Arrays class methods are
                import java.util.Arrays;
@@ -64,6 +65,7 @@ List methods
       list.remove(0);                     // Remove the first element
       list.set(1, "Orange");             // Replace "Banana" with "Orange"
       list.get(0);                      // Get the first element
+      list.addAll(list3)       		// to copy one list to another list
 
 4. The ArrayList size increases dynamically by 50% because whenever the ArrayList class requires to resize then it will create a new array of 50% bigger size and copies all 
     the elements from the old array to the new array. the DEFAULT_CAPACITY is 10.
