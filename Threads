@@ -123,6 +123,9 @@ Here are some common multithreading interview questions in Java, along with thei
           Using higher level concurrency utilities from the  java.util.concurrent  package.
 
 12. What is the  volatile  keyword in Java?
-     The  volatile  keyword is used to indicate that a variable's value will be modified by different threads. It ensures that the value of the variable is always
-     read from the main memory, not from the thread's local cache, thus providing visibility of changes made by one thread to others.
+     A volatile variable's value will be modified by different threads. the value of the variable is always read from the main memory, not from the thread's local cache,
+     thus providing visibility of changes made by one thread to others.
 
+13. Explain SYNCHRONIZE keyword
+    SYNCHRONIZE ensures that only one thread can execute the synchronized block or method at any given time, preventing race conditions and ensuring thread safety,
+    across threads.
