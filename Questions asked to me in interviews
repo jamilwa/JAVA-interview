@@ -21,10 +21,7 @@
     it doesn't mean they are equal. Therefore, when overriding equals(), you should also override hashCode() to ensure consistency.
     because HashSet, HashMap, and Hashtable rely on the hashCode() method.
 
-3.  Explain SYNCHRONIZE and VOLATILE keyword
-    SYNCHRONIZE ensures that only one thread can execute the synchronized block or method at any given time, preventing race conditions and ensuring thread safety.
-    VOLATILE means a variables value may be modified by different threads. its value will always be read from and written to main memory, ensuring visibility of changes
-    across threads.
+3.  
     
 4. Difference between collection and stream
         Stream: It doesn’t store data, it operates on the source data structure i.e collection.	
@@ -48,44 +45,7 @@
                                        .reduce((a, b) -> a + b);
             sum.ifPresent(System.out::println); // Output: 15
 
-6. Program denoting map(), filter(), sorted(), collect(), forEach() and reduce()  methods of Stream API. (collect map forEach sorted red filter)
-       
-        // demonstration of map method
-        List<Integer> square  = number.stream()
-                    .map(x -> x * x)
-                    .collect(Collectors.toList());
- 
-        // create a list of String
-        List<String> names = Arrays.asList(
-            "Reflection", "Collection", "Stream");
- 
-        // demonstration of filter method
-        List<String> result
-          = names.stream()
-            .filter(s -> s.startsWith("S"))
-            .collect(Collectors.toList());
-       
-
-        // demonstration of sorted method
-        List<String> show 
-          = names.stream()
-            .sorted()
-            .collect(Collectors.toList());
-       
-        
-        // collect method returns a set
-        Set<Integer> squareSet
-          = numbers.stream()
-            .map(x -> x * x)
-            .collect(Collectors.toSet());
-       
-
-        // demonstration of forEach method
-        number.stream()
-            .map(x -> x * x)
-            .forEach(y -> System.out.println(y));
- 
-    
+6. 
 
 7. What is functional programming
         So far Java was supporting object-oriented programming. Java 8 has started supporting the functional style of programming. This makes code more concise, 
@@ -124,23 +84,23 @@
 
 There are two types of SQL functions:
 
-1. **Scalar functions**: These functions return a single value, such as a string, number, or date. Examples of scalar functions include `UPPER()`, `LOWER()`, `SUM()`, `AVG()`, `COUNT()`, and `NOW()`.
+1. Scalar functions: These functions return a single value, such as a string, number, or date. Examples of scalar functions include UPPER(), LOWER(), SUM(), AVG(), COUNT(), and NOW().
 
-Here's an example of using the `UPPER()` function to convert a string to uppercase:
-```sql
+Here's an example of using the UPPER() function to convert a string to uppercase:
+sql
 SELECT UPPER('hello world');
-```
-The result of this query would be `HELLO WORLD`.
 
-2. **Table-valued functions**: These functions return a table as a result. Examples of table-valued functions include `CUSTOMER_ORDERS()` or `EMPLOYEE_SALARIES()`.
+The result of this query would be HELLO WORLD.
+
+2. Table-valued functions: These functions return a table as a result. Examples of table-valued functions include CUSTOMER_ORDERS() or EMPLOYEE_SALARIES().
 
 Here's an example of using a table-valued function to retrieve a list of orders for a specific customer:
-```sql
+sql
 SELECT * FROM CUSTOMER_ORDERS(123);
-```
+
 The result of this query would be a table containing all the orders for the customer with ID 123.
 
-SQL functions can be used in `SELECT`, `INSERT`, `UPDATE`, and `DELETE` statements to perform various operations on the data stored in a database.
+SQL functions can be used in SELECT, INSERT, UPDATE, and DELETE statements to perform various operations on the data stored in a database.
 
 
 
@@ -475,7 +435,7 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
                         AFTER :         X = 400                            Y = 300
 
                         
-        Consistency: ensures that a database remains in a valid state before and after a transaction.  Referring to the example above,
+       Consistency: ensures that a database remains in a valid state before and after a transaction.  Referring to the example above,
                     The total amount before and after the transaction must be maintained.  Constraints, such as unique keys and foreign keys,
                     must be maintained to ensure data consistency.
                                              X           Y
@@ -503,7 +463,7 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
                     Hence, transactions must take place in isolation and changes should be visible only after they have been made to the main memory.
 
 
-Durability: This property ensures that once the transaction has completed execution, the updates and modifications to the database are stored in and written 
+        Durability: This property ensures that once the transaction has completed execution, the updates and modifications to the database are stored in and written 
             to disk and they persist even if a system failure occurs.
 
 46. How headers are added in Swagger
