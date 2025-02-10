@@ -202,10 +202,9 @@ System.out.println("Lowest number in List : " + stats.getMin());
 System.out.println("Sum of all numbers : " + stats.getSum());
 System.out.println("Average of all numbers : " + stats.getAverage());
 
-Stream INTERMEDIATE methods are   MaFiSoDi FlaSk PeeLi.
+Stream INTERMEDIATE methods are   MaFiSoDi FlaSk PeeLi  (map, filter, sorted, distinct, Flatmap, Skip, Peek, Limited)
 
-Stream Terminal methods are
-CoFi ToFi CoRe For No AlAny
+Stream Terminal methods are CoFi ToFi CoRe For No AlAny  (Collect, )
 
 
 6. Default method
