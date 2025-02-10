@@ -506,6 +506,27 @@ Durability: This property ensures that once the transaction has completed execut
             to disk and they persist even if a system failure occurs.
 
 46. How headers are added in Swagger
+    To add headers in Swagger for Java Spring Boot microservices, use Springdoc OpenAPI. You can define header parameters in your controller methods using annotations
+    or configure them globally for all endpoints. 
+        1. Add Dependencies: Ensure you have the Springdoc OpenAPI dependency in your pom.xml
+                  org.springdoc:springdoc-openapi-ui:1.5.9
+        2. Define Global Headers: define global headers in your application properties or configuration class.
+                @Bean
+                public OpenAPI customOpenAPI() {
+                    return new OpenAPI()
+                                .components(new Components()
+                                .addHeaders("AUTH-TOKEN", new Header().description("Basic Auth Token").required(true)));
+        3. Adding Headers in Controller Methods: you can also specify headers directly in your controller methods using the @RequestHeader annotation.
+                @RestController
+                @RequestMapping("/api")
+                public class MyController {
+
+                    @GetMapping("/example")
+                    public ResponseEntity<String> example(@RequestHeader("AUTH-TOKEN") String authToken) {
+                        // Your logic here
+                        return ResponseEntity.ok("Header received: " + authToken);
+    
+
 47. Different memory types
     1. Heap Memory : The heap is the runtime data area from which memory for all class instances and arrays is allocated. It is shared among all threads.
                      Objects created using the new keyword are stored in the heap. The garbage collector manages heap memory, reclaiming memory from objects that are no
@@ -582,10 +603,6 @@ Optional<String> optionalValue = Optional.ofNullable(getValue());
         return null; // or return "Hello, World!";
     }
 }
-
-
-
-
 
 
 51. Steps to follow while converting monolithic to microserice
