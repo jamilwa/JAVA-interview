@@ -506,8 +506,86 @@ Durability: This property ensures that once the transaction has completed execut
             to disk and they persist even if a system failure occurs.
 
 46. How headers are added in Swagger
-47. difference between Callable and Runnable
-48. Different memory types
+47. Different memory types
+    1. Heap Memory : The heap is the runtime data area from which memory for all class instances and arrays is allocated. It is shared among all threads.
+                     Objects created using the new keyword are stored in the heap. The garbage collector manages heap memory, reclaiming memory from objects that are no
+                     longer reachable.
+      Characteristics: Dynamic memory allocation, Can grow and shrink as needed, Subject to garbage collection.
+
+    2. Stack Memory : The stack is used for storing local variables and method call information. Each thread has its own stack.
+                      When a method is called, a new block is created on the stack for that method's local variables and parameters. When the method execution is complete,
+                      the block is popped off the stack.
+      Characteristics: Memory allocation is static and follows a Last In, First Out (LIFO) order, Faster access compared to heap memory, Limited in size, leading to 
+                       potential StackOverflowError if too many method calls are made. 
+
 49. java 8 use cases in your project
 50. Optinal use case in project
+    the Optional class is a container object that may or may not contain a non-null value. It was introduced in Java 8 as part of the java.util package to provide a 
+    more expressive way to handle the absence of values, thereby reducing the likelihood of NullPointerException and improving code readability.
+    
+    Key Features of Optional
+        1. Avoiding Null References: It is designed to represent optional values that can be absent. Instead of returning null to indicate the absence of a value,
+                                     a method can return an Optional object.
+        2. Type-Safe: It is a generic class, meaning it can hold any type of object. This provides type safety and eliminates the need for casting.
+        3. Functional Programming: It supports functional programming paradigms, allowing you to use lambda expressions and method references.
+
+    Creating an Optional - You can create an Optional instance in several ways:
+        1. Empty Optional: To create an empty Optional, use the Optional.empty() method.    ex: Optional<String> emptyOptional = Optional.empty();
+        2. Of a Non-Null Value: To create an Optional containing a non-null value, use the Optional.of(value) method. If the value is null, it will 
+                                throw a NullPointerException.   ex: Optional<String> optionalValue = Optional.of("Hello");
+        3. Of Nullable Value: To create an Optional that can accept a null value, use the Optional.ofNullable(value) method. If the value is null, it will create
+                              an empty Optional.     ex: Optional<String> optionalNullable = Optional.ofNullable(null); // This will be empty
+
+    Common Methods of Optional
+        1. isPresent(): Returns true if there is a value present, otherwise false.  example
+                if (optionalValue.isPresent()) {
+                        System.out.println(optionalValue.get());
+                    }
+
+        2. ifPresent(Consumer<? super T> action): Executes the given action if a value is present.  example
+                optionalValue.ifPresent(value -> System.out.println(value));
+
+        3. get(): Returns the value if present, otherwise throws NoSuchElementException. Use this method with caution.  example
+                    String value = optionalValue.get(); // Throws exception if empty
+
+        4. orElse(T other): Returns the value if present; otherwise, returns the provided default value.
+                    String value = optionalValue.orElse("Default Value");
+
+        5. orElseGet(Supplier<? extends T> other): Returns the value if present; otherwise, invokes the provided supplier and returns the result.
+                    String value = optionalValue.orElseGet(() -> "Generated Default Value");
+
+        6. orElseThrow(Supplier<? extends X> exceptionSupplier):  Returns the value if present; otherwise, throws an exception created by the provided supplier.
+                    String value = optionalValue.orElseThrow(() -> new IllegalArgumentException("Value not present"));
+        7. map(Function<? super T, ? extends U> mapper): If a value is present, applies the provided mapping function to it and returns an Optional describing the result.
+                                                        If no value is present, returns an empty Optional.
+                    Optional<Integer> length = optionalValue.map(String::length);
+
+        8. flatMap(Function<? super T, Optional<U>> mapper): Similar to map(), but the mapping function must return an Optional itself.
+                    Optional<String> upperCaseValue = optionalValue.flatMap(value -> Optional.of(value.toUpperCase()));
+
+
+example
+import java.util.Optional;
+
+Optional<String> optionalValue = Optional.ofNullable(getValue());
+
+        // Check if a value is present
+        optionalValue.ifPresent(value -> System.out.println("Value: " + value));
+
+        // Provide a default value if not present
+        String result = optionalValue.orElse("Default Value");
+        System.out.println("Result: " + result);
+    }
+
+    public static String getValue() {
+        // Simulating a method that may return null
+        return null; // or return "Hello, World!";
+    }
+}
+
+
+
+
+
+
 51. Steps to follow while converting monolithic to microserice
