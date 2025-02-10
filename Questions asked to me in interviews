@@ -2,14 +2,15 @@
     The SOLID principles are a set of design principles for writing maintainable and scalable code. These are guidelines for developers to create software 
     that is easy to understand, Test, maintain, and scale.
 
-    Single Responsibility Principle : a class should have only one responsibility. making them easier to understand, test, and maintain.
-    Open/Closed Principle : classes, modules, functions, etc. should be open for extension but closed for modification. This means that you should be
-                                able to extend the behavior of a module without modifying its source code. This is achieved through the use of abstraction and polymorphism.
-    Liskov Substitution Principle : a subclass should be able to substitute its parent class without changing the behavior by the client code.
-    Interface Segregation Principle : segregate interfaces into smaller, customizeable to the needs of the clients. This prevents clients from being burdened with
+    Single Responsibility Principle : a class should focus on a single task or functionality. making them easier to understand, test, and maintain.
+    Open/Closed Principle : classes, modules, functions, etc. should be open for extension but closed for modification. This means that you should be able to add new
+                            functionality to a class without changing its existing code. This is achieved through abstraction, such as using interfaces or abstract classes.
+    Liskov Substitution Principle : a subclass should be able to substitute its parent class without changing the behavior of the program. a subclass can be used 
+                                    interchangeably with its superclass. It promotes the use of inheritance and polymorphism.
+    Interface Segregation Principle : Create smaller, customizable interfaces to the needs of the clients. This prevents clients from being burdened with
                                             methods they don't need, promoting cleaner and more maintainable code.
-    Dependency Inversion Principle :  high-level modules should not depend on low-level modules; both should depend on abstractions. Additionally, abstractions should
-                                      not depend on details; rather, details should depend on abstractions. This principle helps 
+    Dependency Inversion Principle :  high-level modules should not depend on low-level modules; both should depend on abstractions. Abstractions should not depend on
+                                      details, details should depend on abstractions. This principle helps 
                                       to decouple modules and promote flexibility, extensibility, and easier testing.
 
 2. Explain why equals and hashcode method should be overridden.
