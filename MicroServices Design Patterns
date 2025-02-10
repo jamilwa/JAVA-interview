@@ -314,3 +314,54 @@ Solution : Each service needs to have an endpoint that can be used to check the 
          Spring Boot Actuator does implement a /health endpoint and the implementation can be customized.
 
 
+12. Spring Security
+    1.  Add JWT Dependencies
+    2. Create Entity classes
+    3. Create a security config class
+
+         example
+         @Configuration
+         @EnableWebSecurity
+         public class SecurityConfig {
+             @Bean
+             public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                 http.csrf().disable()
+                     .authorizeRequests()
+                     .antMatchers("/auth/**").permitAll()
+                     .anyRequest().authenticated()
+                     .and()
+                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        return http.build();
+
+   4. Create JWT Utility Class - Implement a utility class to handle JWT creation and validation:
+          @Component
+          public class JwtService {
+             private static final String SECRET = "your_secret_key";
+             public String generateToken(String username) {
+                 // Token generation logic
+               }
+
+             public Boolean validateToken(String token, UserDetails userDetails) {
+                 // Token validation logic
+
+     5. Create Authentication Filter - Implement a filter to intercept requests and validate JWT:
+         @Component
+         public class JwtAuthFilter extends OncePerRequestFilter {
+              @Autowired
+              private JwtService jwtService;
+
+              @Override
+              protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        // JWT extraction and validation logic
+        filterChain.doFilter(request, response);
+
+
+     6. Create Controller for Authentication - Implement a controller to handle user login and token generation
+                  @RestController
+                  @RequestMapping("/auth")
+                  public class UserController {
+                      @PostMapping("/login")
+                      public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
+                          // Authentication logic and token generation
+             
