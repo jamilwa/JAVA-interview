@@ -63,3 +63,72 @@
         // Task code here
         return 42; // Example return value
     
+Here are some common multithreading interview questions in Java, along with their answers:
+
+5. What is a thread in Java?
+   A thread is a lightweight process that allows concurrent execution of two or more parts of a program. In Java, a thread is an instance of the `Thread` class or a class that implements the `Runnable` interface.
+
+### 2. How do you create a thread in Java?
+**Answer:** You can create a thread in Java in two ways:
+1. By extending the `Thread` class:
+   ```java
+   class MyThread extends Thread {
+       public void run() {
+           // code to be executed
+       }
+   }
+   MyThread thread = new MyThread();
+   thread.start();
+   ```
+
+2. By implementing the `Runnable` interface:
+   ```java
+   class MyRunnable implements Runnable {
+       public void run() {
+           // code to be executed
+       }
+   }
+   Thread thread = new Thread(new MyRunnable());
+   thread.start();
+   ```
+
+### 3. What is the difference between `start()` and `run()` methods?
+**Answer:** The `start()` method is used to begin the execution of a thread. It invokes the `run()` method in a new thread of execution. The `run()` method contains the code that defines the thread's task. If you call `run()` directly, it will execute in the current thread, not in a new thread.
+
+### 4. What is the lifecycle of a thread?
+**Answer:** The lifecycle of a thread includes the following states:
+- **New:** The thread is created but not yet started.
+- **Runnable:** The thread is ready to run and waiting for CPU time.
+- **Blocked:** The thread is blocked waiting for a monitor lock.
+- **Waiting:** The thread is waiting indefinitely for another thread to perform a particular action.
+- **Timed Waiting:** The thread is waiting for another thread to perform an action for up to a specified waiting time.
+- **Terminated:** The thread has completed its execution.
+
+### 5. What is synchronization in Java?
+**Answer:** Synchronization is a mechanism that ensures that only one thread can access a resource at a time. It is used to prevent thread interference and memory consistency errors. In Java, synchronization can be achieved using the `synchronized` keyword, which can be applied to methods or blocks of code.
+
+### 6. What is the difference between `synchronized` method and `synchronized` block?
+**Answer:**
+- A `synchronized` method locks the entire object, meaning only one thread can execute any synchronized method of that object at a time.
+- A `synchronized` block allows you to lock a specific section of code, which can improve performance by allowing other threads to execute non-synchronized methods of the same object.
+
+### 7. What is a deadlock?
+**Answer:** A deadlock is a situation in multithreading where two or more threads are blocked forever, each waiting for the other to release a resource. This can occur when two threads hold locks on different resources and each thread is waiting for the other to release its lock.
+
+### 8. How can you prevent deadlock?
+**Answer:** Deadlock can be prevented by:
+- Avoiding nested locks.
+- Using a timeout when trying to acquire locks.
+- Ensuring that all threads acquire locks in a consistent order.
+- Using higher-level concurrency utilities from the `java.util.concurrent` package.
+
+### 9. What is the `volatile` keyword in Java?
+**Answer:** The `volatile` keyword is used to indicate that a variable's value will be modified by different threads. It ensures that the value of the variable is always read from the main memory, rather than from the thread's local cache, thus providing visibility of changes made by one thread to others.
+
+### 10. What are the differences between `wait()`, `notify()`, and `notifyAll()` methods?
+**Answer:**
+- `wait()`: Causes the current thread to wait until another thread invokes `notify()` or `notifyAll()` on the same object.
+- `notify()`: Wakes up a single thread that is waiting on the object's monitor.
+- `notifyAll()`: Wakes up all threads that are waiting on the object's monitor.
+
+These questions cover fundamental concepts of multithreading in Java and can help you prepare for interviews.
