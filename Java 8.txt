@@ -237,3 +237,42 @@ URL − Output is mapped to set of characters lying in A-Za-z0-9+_. Output is UR
 
 MIME − Output is mapped to MIME friendly format. Output is represented in lines of no more than 76 characters each, 
 and uses a carriage return '\r' followed by a linefeed '\n' as the line separator. No line separator is present to the end of the encoded output.
+
+Program denoting map(), filter(), sorted(), collect(), forEach() and reduce()  methods of Stream API. (collect map forEach sorted red filter)
+       
+        // demonstration of map method
+        List<Integer> square  = number.stream()
+                    .map(x -> x * x)
+                    .collect(Collectors.toList());
+ 
+        // create a list of String
+        List<String> names = Arrays.asList(
+            "Reflection", "Collection", "Stream");
+ 
+        // demonstration of filter method
+        List<String> result
+          = names.stream()
+            .filter(s -> s.startsWith("S"))
+            .collect(Collectors.toList());
+       
+
+        // demonstration of sorted method
+        List<String> show 
+          = names.stream()
+            .sorted()
+            .collect(Collectors.toList());
+       
+        
+        // collect method returns a set
+        Set<Integer> squareSet
+          = numbers.stream()
+            .map(x -> x * x)
+            .collect(Collectors.toSet());
+       
+
+        // demonstration of forEach method
+        number.stream()
+            .map(x -> x * x)
+            .forEach(y -> System.out.println(y));
+ 
+    
