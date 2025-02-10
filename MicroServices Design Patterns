@@ -292,8 +292,8 @@ application-deafult.properties
          service instances. Each service instance generates a log file in a standardized format. How can we understand the application behavior through logs for a 
          particular request?
    Solution : We need a centralized logging service that aggregates logs from each service instance. Users can search and analyze the logs. They can configure alerts
-              that are triggered when certain messages appear in the logs. For example, PCF(Pivotal Cloud Foundry) does have Loggeregator, which collects logs from each component
-              (router, controller, diego, etc...) of the PCF platform along with applications. AWS Cloud Watch also does the same.
+              that are triggered when certain messages appear in the logs. For example, PCF(Pivotal Cloud Foundry) does have Loggeregator, which collects logs from 
+              each component (router, controller, diego, etc...) of the PCF platform along with applications. AWS Cloud Watch also does the same.
 
 
 10. Performance Metrics   (Used in GAP project)
@@ -327,7 +327,7 @@ Solution : Each service needs to have an endpoint that can be used to check the 
              public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                  http.csrf().disable()
                      .authorizeRequests()
-                     .antMatchers("/auth/**").permitAll()
+                     .antMatchers("/", "/login", "/contact").permitAll()
                      .anyRequest().authenticated()
                      .and()
                      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -365,3 +365,24 @@ Solution : Each service needs to have an endpoint that can be used to check the 
                       public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
                           // Authentication logic and token generation
              
+13. What is CSRF in spring secutiry
+    CSRF stands for Cross-Site Request Forgery, which is a type of security vulnerability that allows an attacker to trick a user into executing unwanted 
+    actions on a web application in which they are authenticated
+
+    How CSRF Works
+         User Authentication: A user logs into a web application (e.g., a banking site) and receives an authentication cookie.
+         Malicious Site: The user visits a malicious website while still logged into the web application.
+         Unwanted Request: The malicious site sends a request to the web application (e.g., transferring money) using the user's credentials (the browser
+                           automatically includes the authentication cookie).
+         Execution: The web application processes the request as if it were a legitimate action initiated by the user, potentially leading to unauthorized actions.
+
+   CSRF Protection in Spring Security
+         Spring Security provides built-in support to protect against CSRF attacks. When CSRF protection is enabled, Spring Security requires a CSRF token to be
+         included in state-changing requests (like POST, PUT, DELETE). Here’s how it works:
+         
+         CSRF Token Generation: When a user accesses a web application, Spring Security generates a unique CSRF token and associates it with the user's session.
+         Token Inclusion: The CSRF token must be included in any state-changing request. This can be done by adding it as a hidden field in forms or as a request 
+                           header in AJAX calls.
+         Token Validation: When the server receives a state-changing request, it checks the CSRF token against the one stored in the user's session. If the tokens
+                           match, the request is processed; if not, the request is rejected.
+
