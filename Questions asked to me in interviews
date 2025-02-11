@@ -247,7 +247,7 @@ SQL functions can be used in SELECT, INSERT, UPDATE, and DELETE statements to pe
 
 To summarize, association represents a "uses-a" relationship, aggregation represents a "has-a" relationship where the child object can exist independently, 
     and composition represents a "has-a" relationship where the child object cannot exist independently.
-30. steps to deploy microservices 
+30. steps to deploy microservices   (App, DEnv, Containerize, Push to Container registry, Infrastructure, Deploye to Kubernets, Monitor & logging)
     1. Prepare Your Application
         writing unit and integration tests. 
         Using a build tool like Maven or Gradle to manage dependencies and build the project.
