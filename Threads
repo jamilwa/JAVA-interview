@@ -95,8 +95,8 @@
    
 
 7. What is the difference between  start()  and  run()  methods?
-    The  start()  method is used to begin the execution of a thread. It invokes the  run()  method in a new thread of execution. 
-    The  run()  method contains the code that defines the thread's task. If you call  run()  directly, it will execute in the current thread, not in a new thread.
+    The  start()  method is used to begin the execution of a thread. It invokes the  run() method which executes the code in a new thread. 
+    The  run()  method contains the code that defines the thread's task. If you call  run()  directly, it will execute the code in the current thread.
 
 8. What is the lifecycle of a thread?       NeWRu BloW TiwTer.
    New: The thread is created but not yet started.
