@@ -53,7 +53,7 @@ eureka:
 
 
 NOTE: Rate limiting -  is a mechanism that controls the number of requests an API can handle within a given time period.
-         It's used to protect the system from overload, ensuring that APIs perform well and provide a good user experience. 
+         It's used to ensur that APIs perform well and protect the system from overload to provide a good user experience. 
          How it works: Rate limits are calculated in requests per second (RPS). 
                        If a client exceeds the rate limit, the server may respond with an error message, say no to the request, or delay its response. 
          Benefit:  protects against malicious activity and improve the security of a company.
