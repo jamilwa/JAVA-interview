@@ -23,8 +23,8 @@
         However, only one thread can acquire the monitor at a time.
 
 3. Serialization vs Synchronization 
-    Serialization: Purpose: Serialization is the process of converting an object into a byte stream to store or transmit it over a network. It is used for object persistence,
-                                data transfer, and remote communication. 
+    Serialization: Purpose: Serialization is the process of converting an object into a byte stream to store or transmit it over a network. It is used for object 
+                            persistence, data transfer, and remote communication. 
                    Mechanism: serialization is achieved by implementing the Serializable interface. 
                    Example: Saving an object to a file, sending an object over a network, or storing an object in a database are common use cases of serialization.
 
@@ -37,9 +37,9 @@
 
 4. difference between Callable and Runnable
     The Runnable interface does not return a result. Its run() method has a void return type. If you need to return a result from a Runnable, you need to use 
-    shared variables(variables that can be accessed by multiple threads, like instance variales or static variables). The run() method cannot throw checked exceptions.
-    If you need to handle exceptions, you must catch them within the run() method. 
-    You can submit a Runnable task to an ExecutorService using the execute() method. This method does not return a result.
+    shared variables(variables that can be accessed by multiple threads, like instance variales or static variables). The run() method cannot throw checked
+    exceptions. If you need to handle exceptions, you must catch them within the run() method. You can submit a Runnable task to an ExecutorService using the
+    execute() method. This method does not return a result.
 
     example
     public class MyRunnable implements Runnable {
