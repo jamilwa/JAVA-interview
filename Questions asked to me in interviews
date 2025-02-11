@@ -157,7 +157,7 @@ SQL functions can be used in SELECT, INSERT, UPDATE, and DELETE statements to pe
                                 System.out.println("Capitalized: " + capitalized); // Output: "Hello World"
 
 
-12. how many ways to create objects 
+12. how many ways to create objects    ObC FRDDi
      1. Using reflection
          example:  MyClass obj = (MyClass) Class.forName("MyClass").newInstance();
      2. Using clone() method
