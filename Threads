@@ -101,8 +101,8 @@
 8. What is the lifecycle of a thread?       NeWRu BloW TiwTer.
    New:      The thread is created but not yet started. A thread enters this state when an instance of the Thread class is created using the new keyword.
    Runnable: The thread is ready to run and waiting for CPU time. A thread enters this state when the start() method is called on a thread instance
-   Blocked:  The thread is blocked waiting for a monitor lock. A thread enters this state when it attempts to access a synchronized resource that is
-             currently locked by another thread
+   Blocked:  The thread is waiting for a monitor lock to enter a synchronized block or method. A thread enters this state when it attempts to access a synchronized
+             resource that is currently locked by another thread.
    Waiting:  The thread is waiting indefinitely for another thread to perform a particular action(e.g., notify, notifyAll, or join). 
              In this state, the thread does not consume CPU resources.
    Timed Waiting:  it is waiting for another thread to perform an action for a specified waiting time. After the time expires, the thread will wake up automatically.
