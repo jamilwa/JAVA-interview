@@ -64,7 +64,6 @@
         // Task code here
         return 42; // Example return value
     
-Here are some common multithreading interview questions in Java, along with their answers:
 
 5. What is a thread in Java?
     A thread is a lightweight process that allows concurrent execution of two or more parts of a program. In Java, a thread is an instance of the  Thread  class
