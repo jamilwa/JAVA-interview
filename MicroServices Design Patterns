@@ -12,10 +12,6 @@ Load Balancing: Configure the gateway to load balance requests across multiple i
 Caching: Cache frequently accessed data at the gateway level to improve performance. 
 Error Handling: Implement error handling mechanisms in the gateway to gracefully handle errors from backend services and provide appropriate responses to the client. 
 
-Key points about the API Gateway pattern:
-         Single Entry Point: Clients interact with only one endpoint (the gateway) to access various backend services. 
-         Flexibility: The gateway can be used to implement custom logic for different clients or API versions. 
-   
 Example: Spring Cloud Gateway.
 
    pom.xml
