@@ -47,13 +47,7 @@
 
 6. 
 
-7. What is functional programming
-        So far Java was supporting object-oriented programming. Java 8 has started supporting the functional style of programming. This makes code more concise, 
-        less complex, maintainable, and easier to test compared to the legacy style of coding. A Lambda expression is an anonymous method
-        that has only a parameter list and a body. The return type is always inferred based on the context. Lambda expressions work in parallel with the functional interface
-
-       it allows you to write code that is more concise. By defining functions as values and passing them around as arguments or return values, developers
-       can create more modular and reusable code.
+7. 
 8. what do you mean by orchestrate in microservices
     orchestration" refers to the coordination and management of multiple microservices to achieve a specific business goal or process. Orchestration involves controlling
     the flow of data and requests between different microservices, ensuring that they work together harmoniously to fulfill complex functionalities or workflows.
