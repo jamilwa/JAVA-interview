@@ -21,7 +21,7 @@ It is not a legacy class.	                  It is a legacy class.
     can add elements in an array by using the assignment operator.	        the add() method to add elements in the ArrayList.
     throws ArrayIndexOutofBoundException					throws IndexOutofBoundException
 
-Arrays class methods are
+Arrays class methods are    (ABiC)
                import java.util.Arrays;
 
                int[] numbers = {1, 2, 3, 7, 4, 5};
