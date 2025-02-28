@@ -40,7 +40,55 @@ Following are the important points to be considered in the above example.
 	a programming style that uses pure functions to solve problems. It emphasizes writing concise, readable code that's easier to 	maintain and scale
 	Lambda expressions are used to define implementation of a functional interface. it eliminates the need of anonymous class and gives a functional programming 		capability to Java.
 
+	Types of Functional Interfaces
+	Java provides several built-in functional interfaces in the java.util.function package.
+	1. Predicate<T>
+		Description: Represents a boolean-valued function of one argument. It is used for testing conditions.
+		Method: boolean test(T t)
+		
+		Example:
+			Predicate<String> isEmpty = str -> str.isEmpty();
+			System.out.println(isEmpty.test("")); // true
 
+	2. Function<T, R>
+		Description: Represents a function that takes one argument and produces a result.
+		Method: R apply(T t)
+		
+		Example:
+			Function<String, Integer> stringLength = str -> str.length();
+			System.out.println(stringLength.apply("Hello")); // 5
+
+	3. Consumer<T>
+		Description: Represents an operation that takes a single input argument and returns no result. It is used for operations that consume data.
+		Method: void accept(T t)
+		
+		Example:
+			Consumer<String> print = str -> System.out.println(str);
+			print.accept("Hello, World!"); // Prints: Hello, World!
+
+	4. Supplier<T>
+		Description: Represents a supplier of results. It does not take any arguments and returns a result.
+		Method: T get()
+
+		Example:
+			Supplier<String> supplier = () -> "Hello, Supplier!";
+			System.out.println(supplier.get()); // Hello, Supplier!
+
+	5. UnaryOperator<T>
+		Description: Represents a function that takes a single argument of type T and returns a result of the same type.
+		Method: T apply(T t)
+
+		Example:
+			UnaryOperator<Integer> square = x -> x * x;
+			System.out.println(square.apply(5)); // 25
+
+	6. BinaryOperator<T>
+		Description: Represents a function that takes two arguments of the same type and returns a result of the same type.
+		Method: T apply(T t1, T t2)
+
+		Example:
+			BinaryOperator<Integer> add = (a, b) -> a + b;
+			System.out.println(add.apply(5, 10)); // 15
 
 
 2. Method references 
