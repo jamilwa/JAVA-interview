@@ -7,22 +7,20 @@ This method can sort the data according to the natural sorting order.           
 It affects the original class. i.e., the actual class is altered.                 	It doesn’t affect the original class, i.e., the actual class is not altered.
 
 
-	1. Whenever we have to sort objects in customized way or compare objects then we have to use two things. Comparable interface and
-		Comparator( both are functional interface(has only one abstract method))
-		A marker interface is an interface that doesn't have any methods or constants inside it. It provides run-time type 
-		information about objects, so the compiler and JVM have additional information about the object. A marker interface 
-		is also called a tagging interface. the marker interface in Java is used to indicate something to the compiler, JVM,
-		or any other tool, but Annotation is a better way of doing the same thing
+1. Whenever we have to sort objects in customized way or compare objects then we have to use two things. Comparable interface and Comparator( both are functional 		interface(has only one abstract method)
+
+2. A marker interface is an interface that doesn't have any methods or constants inside it. It provides run-time type information about objects, so the compiler and JVM 	have additional information about the object. A marker interface is also called a tagging interface. the marker interface in Java is used to indicate something to 	the compiler, JVM, but Annotation is a better way of doing the same thing
 
 
-	2. Comparator interface is used to order the objects of a user-defined class. This interface contains 2 methods 
-		compare(Object obj1, Object obj2) and equals(Object element).  
-	   How do the sort() method of Collections class work? 
-		Internally the Sort method does call Compare method of the classes it is sorting. To compare two elements, it asks “Which is greater?”
-		Compare method returns -1, 0, or 1 to say if it is less than, equal, or greater to the other. It uses this result to then determine if
-		they should be swapped for their sort. 
+3. Comparator interface is used to order the objects of a user-defined class. This interface contains 2 methods 
+	compare(Object obj1, Object obj2) and equals(Object element).  
+
+4. How do the sort() method of Collections class work? 
+	Internally the Sort method does call Compare method of the classes it is sorting. To compare two elements, it asks “Which is greater?”
+	Compare method returns -1, 0, or 1 to say if it is less than, equal, or greater to the other. It uses this result to then determine if
+	they should be swapped for their sort. 
 		
-		Example:
+Example:
 import java.util.*;
 import java.lang.*;
 import java.io.*;
@@ -81,8 +79,7 @@ public class Main {
             new Employee("Charlie", 35),
             new Employee("Bob", 25),
             new Employee("Bob", 20)
-
-            
+         
         );
 
         Collections.sort(employees, new NameComparator());     				// is used if there are no setters and getters, but only constructor is there.
