@@ -124,10 +124,44 @@ public class Java8Tester {
 
 3. Nashorn, JavaScript Engine − A Java-based engine to execute JavaScript code.
 
-4. Optional 
+4. Optional - In Java, the Optional class is a container object that may or may not contain a non-null value. It was introduced in Java 8 as part of the java.util package 	to help developers avoid NullPointerExceptions and to provide a more expressive way to handle optional values.
 
-Optional is a container object used to contain not-null objects. Optional object is used to represent null with absent value. 
-This class facilitate code to handle values as ‘available’ or ‘not available’ instead of checking null values.
+	Creating an Optional: -You can create an Optional instance in several ways:
+	1. Empty Optional:  				Optional<String> emptyOptional = Optional.empty();
+	2. Optional with a Non-null Value:		Optional<String> nonNullOptional = Optional.of("Hello, World!");
+	3. Optional that Allows Null Values:		Optional<String> nullableOptional = Optional.ofNullable(null); // This will create an empty Optional
+
+
+	Common Methods of Optional
+	1. isPresent(): Checks if a value is present.
+		Optional<String> optional = Optional.of("Hello");
+		if (optional.isPresent()) {
+    			System.out.println(optional.get()); // Prints: Hello
+		}
+	
+	2. ifPresent(Consumer<? super T> action): Executes the given action if a value is present.
+		optional.ifPresent(value -> System.out.println(value)); // Prints: Hello
+
+	3. get(): Returns the value if present; otherwise, it throws NoSuchElementException.
+		String value = optional.get(); // Returns "Hello"
+
+	4. orElse(T other): Returns the value if present; otherwise, returns the provided default value.
+		String value = emptyOptional.orElse("Default Value"); // Returns "Default Value"
+
+	5. orElseGet(Supplier<? extends T> other): Returns the value if present; otherwise, invokes the provided supplier and returns the result.
+		String value = emptyOptional.orElseGet(() -> "Generated Value"); // Returns "Generated Value"
+
+	6. orElseThrow(Supplier<? extends X> exceptionSupplier): Returns the value if present; otherwise, throws an exception created by the provided supplier.
+		String value = emptyOptional.orElseThrow(() -> new IllegalArgumentException("Value is absent"));
+
+	7. map(Function<? super T, ? extends U> mapper): If a value is present, applies the provided mapping function to it and returns an Optional describing the result.
+		Optional<Integer> lengthOptional = optional.map(String::length); // Returns Optional[5]
+
+	8. flatMap(Function<? super T, Optional<U>> mapper): Similar to map, but the mapping function must return an Optional
+		Optional<String> optionalValue = Optional.of("Hello");
+		Optional<Integer> lengthOptional = optionalValue.flatMap(value -> Optional.of(value.length())); // Returns Optional[5]
+
+
 
 
 Syntax     public final class Optional<T> extends Object
