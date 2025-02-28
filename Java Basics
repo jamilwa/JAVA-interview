@@ -30,7 +30,7 @@
      4. Parameters: Passed to methods or constructors; treated as local variables within those methods.
 
      Encapsulation and Data Hiding: Instance and local variables support encapsulation, allowing for better control over how data is accessed and modified.
-     Memory Efficiency: Static and local variables help manage memory more efficiently by reducing redundancy and ensuring that memory is allocated only when needed.
+     Memory Efficiency: Static and local variables help manage memory more efficiently by ensuring that memory is allocated only when needed.
  
 3) What is Java instanceOf operator?
      The instanceof operator in Java is a binary operator used to test whether an object is an instance of a specific class or interface. It helps determine the type
