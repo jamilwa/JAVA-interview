@@ -84,7 +84,7 @@ then object of Dog can be referred by either Dog or Animal class.
  Private Methods:  Methods that can be used within the interface to share code between default methods.
 
 10) What is a marker interface?
-    A marker interface in Java is an interface that does not contain any methods or fields. Its primary purpose is to provide metadata about a class to the 
+    A marker interface is an interface that does not contain any methods or fields. Its primary purpose is to provide metadata about a class to the 
     Java runtime or to other parts of the program. The syntax for it is like below
        public interface Serializable{ } 
 
@@ -100,7 +100,7 @@ then object of Dog can be referred by either Dog or Animal class.
 
 12) What is String Pool?
     The String Pool in Java, also known as the String Intern Pool, is a special memory area in the Java heap where Java stores string literals. is used to optimize
-    memory usage and improve performance when working with strings. The main advantage of using the String pool is whenever we create a string literal; the JVM checks 
+    memory usage and improve performance. The main advantage of using the String pool is whenever we create a string literal; the JVM checks 
     the "string constant pool" first. If the string already exists in the pool, a reference to the pooled instance is returned. If the string doesn't exist in the pool,
     a new string instance is created and placed in the pool.
 
@@ -120,8 +120,7 @@ then object of Dog can be referred by either Dog or Animal class.
      in a program. This process is to ensure efficient memory usage in applications. 
      GC is automatic, meaning that developers do not need to manually free memory. The Java Virtual Machine (JVM) handles this process, allowing developers to focus
      on application logic rather than memory management.
-     The Garbage Collector is a part of the JVM responsible for identifying and removing unreachable objects. It runs periodically and can be triggered by various
-     factors, such as memory pressure or explicit requests from the application.
+     Garbage Collection (GC) runs periodically and can be triggered by various factors, such as memory pressure or explicit requests from the application.
      Memory Management:  In Java, memory is divided into several areas, primarily the Heap and the Stack. The Heap is where objects are allocated, while the Stack is
                          used for method calls and local variables. When an object is created, memory is allocated for it in the Heap. Once there are no references to
                          that object, it becomes eligible for garbage collection. 
@@ -133,8 +132,7 @@ then object of Dog can be referred by either Dog or Animal class.
             for applications that require high throughput.
 
      Garbage Collection Process - The garbage collection process generally involves the following steps:
-         Marking: The garbage collector identifies which objects are reachable and which are not. It traverses the object graph starting from root references 
-                  (e.g., static fields, local variables) and marks all reachable objects.
+         Marking: The garbage collector identifies which objects are reachable and marks all reachable objects.
          Sweeping: After marking, the garbage collector sweeps through the heap and collects all unmarked (unreachable) objects, reclaiming their memory.
          Compacting (optional): In some garbage collection algorithms, the memory is compacted to reduce fragmentation. This involves moving reachable objects
                                 together to create contiguous free space.
@@ -143,7 +141,7 @@ then object of Dog can be referred by either Dog or Animal class.
           1. System.gc(): The System.gc() method is a request to the JVM to perform garbage collection. However, it depends upon the JVM whether to perform it or not.
           2. finalize():  This is a protected method of the Object class that can be overridden by a class to perform cleanup operations before an object is 
                           garbage collected. The finalize() method is called by the garbage collector when it determines that there are no more references to the object.
-                          It is used to perform cleanup processing.
+
               example:
               @Override
                protected void finalize() throws Throwable {
@@ -187,7 +185,7 @@ FileInputStream fis = null;
         try {
             fis = new FileInputStream("example.txt"); 
             int data;
-            while ((data = fis.read()) != -1) {                  // Read until the end of the file
+            while ((data = fis.read()) != -1) {                  // -1 means Read until the end of the file
                 System.out.print((char) data);                  // Print the byte as a character
             }
         } catch (IOException e) {
@@ -292,8 +290,8 @@ public class FileReaderExample {
     public static void main(String[] args) {
         try (FileReader fr = new FileReader("example.txt")) {
             int data;
-            while ((data = fr.read()) != -1) { // Read until the end of the file
-                System.out.print((char) data); // Print the character
+            while ((data = fr.read()) != -1) {        // -1 means Read until the end of the file
+                System.out.print((char) data);       // Print the character
             }
         } catch (IOException e) {
             e.printStackTrace();
