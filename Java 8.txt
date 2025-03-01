@@ -162,6 +162,24 @@ public class Java8Tester {
 		Optional<Integer> lengthOptional = optionalValue.flatMap(value -> Optional.of(value.length())); // Returns Optional[5]
 
 
+example
+import java.util.Optional;
+
+Optional<String> optionalValue = Optional.ofNullable(getValue());
+
+        // Check if a value is present
+        optionalValue.ifPresent(value -> System.out.println("Value: " + value));
+
+        // Provide a default value if not present
+        String result = optionalValue.orElse("Default Value");
+        System.out.println("Result: " + result);
+    }
+
+    public static String getValue() {
+        // Simulating a method that may return null
+        return null; // or return "Hello, World!";
+    }
+}
 
 
 Syntax     public final class Optional<T> extends Object
