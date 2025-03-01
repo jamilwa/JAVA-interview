@@ -7,11 +7,12 @@
                             functionality to a class without changing its existing code. This is achieved through abstraction, such as using interfaces or abstract classes.
     Liskov Substitution Principle : a subclass should be able to substitute its parent class without changing the behavior of the program. a subclass can be used 
                                     interchangeably with its superclass. It promotes the use of inheritance and polymorphism.
-    Interface Segregation Principle : Create smaller, customizable interfaces to the needs of the clients. This prevents clients from being burdened with
+    Interface Segregation Principle : Create smaller, customizable interfaces to the needs of the classes. This prevents classes from being burdened with
                                             methods they don't need, promoting cleaner and more maintainable code.
     Dependency Inversion Principle :  high-level modules should not depend on low-level modules; both should depend on abstractions. Abstractions should not depend on
-                                      details, details should depend on abstractions. This principle helps 
-                                      to decouple modules and promote flexibility, extensibility, and easier testing.
+                                      details, details should depend on abstractions. This principle helps to decouple modules and promote flexibility, extensibility,
+                                      and easier testing.
+
 
 2. Explain why equals and hashcode method should be overridden.
     By default, the equals() method compares the content equality of two strings, which might not be suitable for your specific use case. Overriding equals() allows you
