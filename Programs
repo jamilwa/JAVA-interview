@@ -17,7 +17,15 @@ Java 8 programs
 
 2. Find Odd Even
      Map<Boolean, List<Integer>> oddEvenNumbersMap = 
-                listOfIntegers.stream().collect(Collectors.partitioningBy(i -> i % 2 == 0));
+                listOfIntegers.stream()
+                .collect(Collectors.partitioningBy(i -> i % 2 == 0));
+
+
+                    or
+    by using groupingBy instead of partitioningBy
+        Map<String, List<Integer>> oddEvenNumbersMap = 
+                listOfIntegers.stream()
+                .collect(Collectors.groupingBy(i -> (i % 2 == 0) ? "Even" : "Odd"));
 
 3. 
 
@@ -79,7 +87,7 @@ Java 8 programs
 
 17.  find all permutations of a string 
                   public static void generatePermutations(String str, String ans) {
-                       if (str.length() == 0) {
+                       if (str.isEmpty()) {
                            System.out.println(ans);
                            return;
                        }
