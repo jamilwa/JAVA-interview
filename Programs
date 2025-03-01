@@ -1,3 +1,29 @@
+Java 8 programs
+1.  to find frequency of each character from a string
+    import java.util.Map;
+    import java.util.stream.Collectors;
+    
+        String inputString = "hello world";
+
+        Map<Character, Integer> charCountMap = inputString.chars()        // this converts the string into an IntStream of character
+            .mapToObj(c -> (char) c)                                     // Convert int to Character
+            .collect(Collectors.toMap(
+                c -> c,                                                 // Key: character itself
+                c -> 1,                                                // Value: initial count of 1
+                Integer::sum                                          // Merge function to sum counts
+            ));
+
+        System.out.println(charCountMap);
+
+2. Find Odd Even
+     Map<Boolean, List<Integer>> oddEvenNumbersMap = 
+                listOfIntegers.stream().collect(Collectors.partitioningBy(i -> i % 2 == 0));
+
+3. 
+
+
+
+
 
 14. find palindrome in array using Java 8
     import java.util.Arrays;
