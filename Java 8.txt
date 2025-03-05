@@ -284,7 +284,7 @@ Stream INTERMEDIATE methods are   MaFiSoDi FlaSk PeeLi  (map, filter, sorted, di
 
 Stream Terminal methods are
 
-List of Terminal Operations in Streams
+List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, forEa)
 	1. forEach(Consumer<? super T> action): Performs an action for each element of the stream. This is a terminal operation that consumes the elements of the stream.
 		stream.forEach(System.out::println);
 	2. forEachOrdered(Consumer<? super T> action): Similar to forEach, but guarantees that the action is performed in the encounter order of the stream.
