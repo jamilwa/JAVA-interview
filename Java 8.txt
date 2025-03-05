@@ -124,7 +124,7 @@ public class Java8Tester {
 
 3. Nashorn, JavaScript Engine − A Java-based engine to execute JavaScript code.
 
-4. Optional - In Java, the Optional class is a container object that may or may not contain a non-null value. It was introduced in Java 8 as part of the java.util package 	to help developers avoid NullPointerExceptions and to provide a more expressive way to handle optional values.
+4. Optional - Optional class is a container object that may or may not contain a value. It was introduced as part of the java.util package to help developers avoid 		NullPointerExceptions and to provide a more expressive way to handle optional values.
 
 	Creating an Optional: -You can create an Optional instance in several ways:
 	1. Empty Optional:  				Optional<String> emptyOptional = Optional.empty();
@@ -162,24 +162,6 @@ public class Java8Tester {
 		Optional<Integer> lengthOptional = optionalValue.flatMap(value -> Optional.of(value.length())); // Returns Optional[5]
 
 
-example
-import java.util.Optional;
-
-Optional<String> optionalValue = Optional.ofNullable(getValue());
-
-        // Check if a value is present
-        optionalValue.ifPresent(value -> System.out.println("Value: " + value));
-
-        // Provide a default value if not present
-        String result = optionalValue.orElse("Default Value");
-        System.out.println("Result: " + result);
-    }
-
-    public static String getValue() {
-        // Simulating a method that may return null
-        return null; // or return "Hello, World!";
-    }
-}
 
 
 Syntax     public final class Optional<T> extends Object
@@ -300,7 +282,45 @@ System.out.println("Average of all numbers : " + stats.getAverage());
 
 Stream INTERMEDIATE methods are   MaFiSoDi FlaSk PeeLi  (map, filter, sorted, distinct, Flatmap, Skip, Peek, Limited)
 
-Stream Terminal methods are CoFi ToFi CoRe For No AlAny  (Collect, )
+Stream Terminal methods are
+
+List of Terminal Operations in Streams
+	1. forEach(Consumer<? super T> action): Performs an action for each element of the stream. This is a terminal operation that consumes the elements of the stream.
+		stream.forEach(System.out::println);
+	2. forEachOrdered(Consumer<? super T> action): Similar to forEach, but guarantees that the action is performed in the encounter order of the stream.
+		stream.forEachOrdered(System.out::println);
+	3. toArray(): Returns an array containing the elements of the stream.
+		Object[] array = stream.toArray();
+	4. toArray(IntFunction<A[]> generator): Returns an array containing the elements of the stream, using the provided generator to create the array.
+		String[] array = stream.toArray(String[]::new);
+	5. reduce(T identity, BinaryOperator<T> accumulator): Performs a reduction on the elements of the stream using an associative accumulation function and 
+		returns an Optional.
+		int sum = stream.reduce(0, Integer::sum);
+	6. reduce(BinaryOperator<T> accumulator): Performs a reduction on the elements of the stream using an associative accumulation function and returns an Optional.
+		Optional<Integer> sum = stream.reduce(Integer::sum);
+	7. collect(Collector<? super T, A, R> collector): Performs a mutable reduction operation on the elements of the stream using a Collector.
+		List<String> list = stream.collect(Collectors.toList());
+	8. count(): Returns the count of elements in the stream as a long.
+		long count = stream.count();
+	9. sum(): Returns the sum of the elements in the stream (for numeric streams).
+		int sum = intStream.sum();
+	10. min(Comparator<? super T> comparator): Returns the minimum element of the stream according to the provided comparator.
+		Optional<String> min = stream.min(String::compareTo);
+	11. max(Comparator<? super T> comparator): Returns the maximum element of the stream according to the provided comparator.
+		Optional<String> max = stream.max(String::compareTo);
+	12. anyMatch(Predicate<? super T> predicate): Returns true if any elements of the stream match the given predicate.
+		boolean hasEven = stream.anyMatch(n -> n % 2 == 0);
+	13. allMatch(Predicate<? super T> predicate): Returns true if all elements of the stream match the given predicate.
+		boolean allEven = stream.allMatch(n -> n % 2 == 0);
+	14. noneMatch(Predicate<? super T> predicate): Returns true if no elements of the stream match the given predicate.noneMatch(Predicate<? super T> predicate)
+		boolean noEven = stream.noneMatch(n -> n % 2 == 0);
+	15. findFirst(): Returns an Optional describing the first element of the stream, or an empty Optional if the stream is empty.
+		Optional<String> first = stream.findFirst();
+	16. findAny(): Returns an Optional describing some element of the stream, or an empty Optional if the stream is empty. This is particularly useful in
+		parallel streams.
+		Optional<String> any = stream.findAny();
+	17. iterator(): Returns an Iterator for the elements of the stream.
+		Iterator<String> iterator = stream.iterator();
 
 
 6. Default method
