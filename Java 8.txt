@@ -284,15 +284,36 @@ List<String> names = Arrays.asList("abc", "", "bc", "efg", "abcd","", "jkl");
 
 String mergedString = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(", "));
 
+// Summarizing statistics
+        IntSummaryStatistics stats = numbers.stream()
+            .collect(Collectors.summarizingInt(Integer::intValue));
+
+
 IntSummaryStatistics stats = numbers.stream().mapToInt((x) -> x).summaryStatistics();
 
-System.out.println("Highest number in List : " + stats.getMax());
+
+
+System.out.println("Count: " + stats.getCount());
 System.out.println("Lowest number in List : " + stats.getMin());
 System.out.println("Sum of all numbers : " + stats.getSum());
 System.out.println("Average of all numbers : " + stats.getAverage());
 
 Stream INTERMEDIATE methods are   MaFiSoDi FlaSk PeeLi  (map, filter, sorted, distinct, Flatmap, Skip, Peek, Limited)
 Intermediate operations are lazy, meaning they are not executed until a terminal operation is invoked.
+
+The peek method in the Java Stream API is a useful tool for debugging and inspecting the elements flowing through a stream. It allows you to perform actions on each element without modifying the stream, making it easier to understand and trace the transformations applied to the data.
+
+	example
+	List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
+
+        // Using peek to debug the stream
+        names.stream()
+            .filter(name -> name.length() > 3) // Filter names longer than 3 characters
+            .peek(name -> System.out.println("Filtered name: " + name)) // Peek to see filtered names
+            .map(String::toUpperCase) // Convert names to uppercase
+            .peek(name -> System.out.println("Uppercased name: " + name)) // Peek to see uppercased names
+            .forEach(System.out::println); // Terminal operation to print the final result
+
 
 Stream Terminal methods are
 
