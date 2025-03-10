@@ -132,7 +132,7 @@ public class Java8Tester {
 	3. Optional that Allows Null Values:		Optional<String> nullableOptional = Optional.ofNullable(null); // This will create an empty Optional
 
 
-	Common Methods of Optional  (GetOrElseMapIsFlatIf)
+	Common Methods of Optional  (Get IfOrElse MapIsFlat)
 	1. isPresent(): Checks if a value is present.
 		Optional<String> optional = Optional.of("Hello");
 		if (optional.isPresent()) {
@@ -281,6 +281,7 @@ System.out.println("Sum of all numbers : " + stats.getSum());
 System.out.println("Average of all numbers : " + stats.getAverage());
 
 Stream INTERMEDIATE methods are   MaFiSoDi FlaSk PeeLi  (map, filter, sorted, distinct, Flatmap, Skip, Peek, Limited)
+Intermediate operations are lazy, meaning they are not executed until a terminal operation is invoked.
 
 Stream Terminal methods are
 
