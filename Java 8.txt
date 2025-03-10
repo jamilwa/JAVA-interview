@@ -289,15 +289,6 @@ String mergedString = strings.stream().filter(string -> !string.isEmpty()).colle
             .collect(Collectors.summarizingInt(Integer::intValue));
 
 
-IntSummaryStatistics stats = numbers.stream().mapToInt((x) -> x).summaryStatistics();
-
-
-
-System.out.println("Count: " + stats.getCount());
-System.out.println("Lowest number in List : " + stats.getMin());
-System.out.println("Sum of all numbers : " + stats.getSum());
-System.out.println("Average of all numbers : " + stats.getAverage());
-
 Stream INTERMEDIATE methods are   MaFiSoDi FlaSk PeeLi  (map, filter, sorted, distinct, Flatmap, Skip, Peek, Limited)
 Intermediate operations are lazy, meaning they are not executed until a terminal operation is invoked.
 
@@ -317,7 +308,7 @@ The peek method in the Java Stream API is a useful tool for debugging and inspec
 
 Stream Terminal methods are
 
-List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, forEa)
+List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, SummrayforEa)
 	1. forEach(Consumer<? super T> action): Performs an action for each element of the stream. This is a terminal operation that consumes the elements of the stream.
 		stream.forEach(System.out::println);
 	2. forEachOrdered(Consumer<? super T> action): Similar to forEach, but guarantees that the action is performed in the encounter order of the stream.
@@ -354,6 +345,15 @@ List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, forEa)
 		Optional<String> any = stream.findAny();
 	17. iterator(): Returns an Iterator for the elements of the stream.
 		Iterator<String> iterator = stream.iterator();
+	18. summaryStatistics()
+
+		IntSummaryStatistics stats = numbers.stream().mapToInt((x) -> x).summaryStatistics();
+		System.out.println("Count: " + stats.getCount());
+		System.out.println("Lowest number in List : " + stats.getMin());
+		System.out.println("Sum of all numbers : " + stats.getSum());
+		System.out.println("Average of all numbers : " + stats.getAverage());
+
+
 
 
 9. why do we use IntStream
@@ -381,8 +381,6 @@ List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, forEa)
             example showcasing various methods available in Java 8 for working with IntStream
                     int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-        // 1. forEach
-        IntStream.of(numbers).forEach(System.out::println);
 
         // 2. sum
         int sum = IntStream.of(numbers).sum();
@@ -395,9 +393,6 @@ List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, forEa)
         OptionalInt min = IntStream.of(numbers).min();
         System.out.println("Min: " + min.orElse(0));
 
-        // 5. max
-        OptionalInt max = IntStream.of(numbers).max();
-
         // 6. count
         long count = IntStream.of(numbers).count();
         System.out.println("Count: " + count);
@@ -406,18 +401,6 @@ List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, forEa)
         IntSummaryStatistics stats = IntStream.of(numbers).summaryStatistics();
         System.out.println("Stats: " + stats);
 
-        // 8. filter and collect
-        int[] evenNumbers = IntStream.of(numbers)
-                                     .filter(n -> n % 2 == 0)
-                                     .toArray();
-        IntStream.of(evenNumbers).forEach(System.out::print);
-
-        // 9. map and sum
-        int squaredSum = IntStream.of(numbers)
-                                  .map(n -> n * n)
-                                  .sum();
-        System.out.println("Sum of Squares: " + squaredSum);
-        
 10.   How do you create an IntStream in Java?
             using factory methods like
                 IntStream.range(int startInclusive, int endExclusive) or 
