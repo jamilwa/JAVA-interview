@@ -254,21 +254,35 @@ long count = strings.parallelStream().filter(string -> string.isEmpty()).count()
 It is very easy to switch between sequential and parallel streams.
 
 
-Collectors
+Collectors (CouPar JoiSum)
 Collectors are used to combine the result of processing on the elements of a stream. Collectors can be used to return a list or a string.
 
-List<String>strings = Arrays.asList("abc", "", "bc", "efg", "abcd","", "jkl");
-List<String> filtered = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
+Common Collectors: Some of the most commonly used collectors include:
 
-System.out.println("Filtered List: " + filtered);
+joining(): Concatenates the elements of the stream into a single String.
+groupingBy(): Groups the elements of the stream by a classifier function.
+partitioningBy(): Partitions the elements of the stream into two groups based on a predicate. It returns a Map<Boolean, List<T>>, where the key is true or false
+counting(): Counts the number of elements in the stream.
+summarizingInt(), summarizingDouble(), summarizingLong(): Collects statistics, such as count, sum, min, average, and max.
+toList(): Collects the elements of the stream into a List.
+toSet(): Collects the elements of the stream into a Set.
+toMap(): Collects the elements of the stream into a Map.
+
+example
+List<String> names = Arrays.asList("abc", "", "bc", "efg", "abcd","", "jkl");
+
+ Map<Integer, List<String>> groupedByLength = names.stream()
+            .collect(Collectors.groupingBy(String::length));
+
+// Partitioning names based on their length (greater than 3)
+        Map<Boolean, List<String>> partitionedByLength = names.stream()
+            .collect(Collectors.partitioningBy(name -> name.length() > 3));
+
+ // Collecting names into a Map with name as key and length as value
+        Map<String, Integer> nameLengthMap = names.stream()
+            .collect(Collectors.toMap(name -> name, String::length));
+
 String mergedString = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(", "));
-System.out.println("Merged String: " + mergedString);
-
-
-Statistics
-With Java 8, statistics collectors are introduced to calculate all statistics when stream processing is being done.
-
-List numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
 
 IntSummaryStatistics stats = numbers.stream().mapToInt((x) -> x).summaryStatistics();
 
