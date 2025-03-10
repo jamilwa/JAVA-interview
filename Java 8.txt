@@ -42,7 +42,7 @@ Following are the important points to be considered in the above example.
 
 	Types of Functional Interfaces
 	Java provides several built-in functional interfaces in the java.util.function package.
-	1. Predicate<T>
+	1. Predicate<T>: The Predicate interface is often used for filtering and matching conditions.
 		Description: Represents a boolean-valued function of one argument. It is used for testing conditions.
 		Method: boolean test(T t)
 		
@@ -132,7 +132,7 @@ public class Java8Tester {
 	3. Optional that Allows Null Values:		Optional<String> nullableOptional = Optional.ofNullable(null); // This will create an empty Optional
 
 
-	Common Methods of Optional
+	Common Methods of Optional  (GetOrElseMapIsFlatIf)
 	1. isPresent(): Checks if a value is present.
 		Optional<String> optional = Optional.of("Hello");
 		if (optional.isPresent()) {
