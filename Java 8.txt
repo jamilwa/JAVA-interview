@@ -176,9 +176,6 @@ Using collections framework in Java, a developer has to use loops and make repea
 as multi-core processors are available at ease, a Java developer has to write parallel code processing that can be pretty error-prone.
 
 A stream gets/computes elements on demand. It never stores the elements. Stream takes Collections, Arrays, or I/O resources as input source
-
-Stream supports aggregate operations like filter, map, flatmap, limit, reduce, find, match,
-
 Stream operations do the iterations internally over the source elements provided, in contrast to Collections where explicit iteration is required.
 
 Example 
@@ -324,75 +321,6 @@ List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, forEa)
 		Iterator<String> iterator = stream.iterator();
 
 
-6. Default method
-
-This capability is added for backward compatibility so that old interfaces can be used to leverage the lambda expression capability of Java 8.
-For example, ‘List’ or ‘Collection’ interfaces do not have ‘forEach’ method declaration. Thus, adding such method will simply break the collection framework implementations
-
-
-7. Date Time API
-a new Date-Time API is introduced to cover the following drawbacks of old date-time API.
-
-Not thread safe − java.util.Date is not thread safe, thus developers have to deal with concurrency issue while using date. 
-The new date-time API is immutable and does not have setter methods.
-Difficult time zone handling.
-important classes introduced in java.time package.
-
-Local − Simplified date-time API with no complexity of timezone handling.
-
-Zoned − Specialized date-time API to deal with various timezones.
-
-
-8. Base64 
-
-we can use three types of Base64 encoding.
-
-Simple − Output is mapped to a set of characters lying in A-Za-z0-9+/. The encoder does not add any line feed in output,
-and the decoder rejects any character other than A-Za-z0-9+/.
-
-URL − Output is mapped to set of characters lying in A-Za-z0-9+_. Output is URL and filename safe.
-
-MIME − Output is mapped to MIME friendly format. Output is represented in lines of no more than 76 characters each, 
-and uses a carriage return '\r' followed by a linefeed '\n' as the line separator. No line separator is present to the end of the encoded output.
-
-Program denoting map(), filter(), sorted(), collect(), forEach() and reduce()  methods of Stream API. (collect map forEach sorted red filter)
-       
-        // demonstration of map method
-        List<Integer> square  = number.stream()
-                    .map(x -> x * x)
-                    .collect(Collectors.toList());
- 
-        // create a list of String
-        List<String> names = Arrays.asList(
-            "Reflection", "Collection", "Stream");
- 
-        // demonstration of filter method
-        List<String> result
-          = names.stream()
-            .filter(s -> s.startsWith("S"))
-            .collect(Collectors.toList());
-       
-
-        // demonstration of sorted method
-        List<String> show 
-          = names.stream()
-            .sorted()
-            .collect(Collectors.toList());
-       
-        
-        // collect method returns a set
-        Set<Integer> squareSet
-          = numbers.stream()
-            .map(x -> x * x)
-            .collect(Collectors.toSet());
-       
-
-        // demonstration of forEach method
-        number.stream()
-            .map(x -> x * x)
-            .forEach(y -> System.out.println(y));
- 
-    
 9. why do we use IntStream
         the Stream API is designed to work with objects, not primitive types directly. However, the Stream API provides special primitive-type streams to handle
         primitive values such as 
@@ -463,3 +391,35 @@ Program denoting map(), filter(), sorted(), collect(), forEach() and reduce()  m
              or by converting other data structures like arrays or collections using
                 Arrays.stream(int[] array) or 
                 Collection.stream().mapToInt().
+
+
+6. Default method
+
+This capability is added for backward compatibility so that old interfaces can be used to leverage the lambda expression capability of Java 8.
+For example, ‘List’ or ‘Collection’ interfaces do not have ‘forEach’ method declaration. Thus, adding such method will simply break the collection framework implementations
+
+
+7. Date Time API
+a new Date-Time API is introduced to cover the following drawbacks of old date-time API.
+
+Not thread safe − java.util.Date is not thread safe, thus developers have to deal with concurrency issue while using date. 
+The new date-time API is immutable and does not have setter methods.
+Difficult time zone handling.
+important classes introduced in java.time package.
+
+Local − Simplified date-time API with no complexity of timezone handling.
+
+Zoned − Specialized date-time API to deal with various timezones.
+
+
+8. Base64 
+
+we can use three types of Base64 encoding.
+
+Simple − Output is mapped to a set of characters lying in A-Za-z0-9+/. The encoder does not add any line feed in output,
+and the decoder rejects any character other than A-Za-z0-9+/.
+
+URL − Output is mapped to set of characters lying in A-Za-z0-9+_. Output is URL and filename safe.
+
+MIME − Output is mapped to MIME friendly format. Output is represented in lines of no more than 76 characters each, 
+and uses a carriage return '\r' followed by a linefeed '\n' as the line separator. No line separator is present to the end of the encoded output.
