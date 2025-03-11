@@ -1,4 +1,12 @@
 Java 8 programs
+0. find average salary of female and male employees
+    // Calculate average salary by gender
+        Map<String, Double> averageSalaryByGender = employees.stream()
+            .collect(Collectors.groupingBy(
+                Employee::getGender, // Group by gender
+                Collectors.averagingDouble(Employee::getSalary) // Calculate average salary
+            ));
+
 1.  to find frequency of each character from a string
     import java.util.Map;
     import java.util.stream.Collectors;
