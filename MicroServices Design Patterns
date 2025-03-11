@@ -1,5 +1,6 @@
 
-Microservices Design patterns (CBR CQRS DB ExtC ED Gat HC LA PM R&D Saga ) 
+Microservices Design patterns (CBR CQRS DB ExtC ED Gat HC LA PM R&D Saga )  Circuit Breaker, Command Query Responsibility Segregation, Database per service, 
+Externalized config, Event Driven communication, Gateway, Health Check, Log Aggregation, Performance Monitoring, Service Registry & Discovery, Saga)
 -----------------------Integration Patterns------------------
 
 1. API Gateway Pattern (Used in GAP project)        GED : short for Gateway Enable Discovery Client
