@@ -13,3 +13,6 @@ Error: The annotation @Autowired is disabled for this location
 	taskkill /F /PID processIdNumber
 
 	execute jar file by the command  java.exe -jar "lombok.jar"
+3.  could not prepare statement [Table "PS1_0" not found; SQL statement:
+	delete ps1_0 from PLM_SYNC_TB ps1_0 where ps1_0.Master_Item_ID=? and ps1_0.IS_SDS=? [42102-224]] [delete ps1_0 from PLM_SYNC_TB ps1_0 where ps1_0.Master_Item_ID=? and ps1_0.IS_SDS=?]; SQL [delete ps1_0 from PLM_SYNC_TB ps1_0 where ps1_0.Master_Item_ID=? and ps1_0.IS_SDS=?]
+sol: 
