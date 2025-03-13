@@ -43,7 +43,7 @@ sol:    make below updates in build.gradle file
 		//        username System.getenv('SAAS_ARTIFACTORY_USERNAME') ?: "$saas_artifactory_username"
 		//        password System.getenv('SAAS_ARTIFACTORY_PASSWORD') ?: "$saas_artifactory_password"
         		  username "jmohamm"
-        		  password ""
+        		  password ""  		// this is generated from jfrog as API key
     
 			
 6. APIs and deployment 
