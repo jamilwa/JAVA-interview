@@ -494,3 +494,67 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
 10. Iterate and Improve
     Gather Feedback: Collect feedback from users and stakeholders to identify areas for improvement.
     Refine Architecture: Continuously refine the microservices architecture based on performance metrics, user feedback, and evolving business needs.
+
+11. how to design a webservice when there are lakhs of request being requested interview question
+    1. Microservices Architecture Principles
+        Decomposition: Break down the application into smaller, focused microservices that handle specific business capabilities. This allows for independent scaling
+                        and deployment.
+        Single Responsibility: Each microservice should have a single responsibility, making it easier to optimize and scale.
+
+    2. Scalability
+        Horizontal Scaling: Design microservices to be stateless so they can be easily replicated across multiple instances. Use load balancers to distribute incoming
+                            requests evenly.
+        Auto-Scaling: Implement auto-scaling mechanisms based on metrics like CPU usage, memory consumption, or request rates to dynamically adjust the number of service
+                            instances.
+
+    3. Asynchronous Communication
+        Message Queues: Use message brokers (e.g., RabbitMQ, Kafka) to decouple services and handle spikes in traffic. This allows services to process requests 
+                        asynchronously, smoothing out load.
+        In-Memory Caching: Use caching solutions (e.g., Redis, Memcached) to store frequently accessed data in memory, reducing the load on databases and improving
+                        response times.
+
+    5. Database Optimization
+        Database Sharding: Distribute data across multiple databases to reduce contention and improve read/write performance.
+        Read Replicas: Use read replicas to handle read-heavy workloads, allowing the primary database to focus on write operations.
+
+    6. Load Balancing
+        API Gateway: Use an API gateway to manage traffic, route requests to appropriate services, and handle cross-cutting concerns like authentication and logging.
+
+    8. Resilience and Fault Tolerance
+        Circuit Breaker Pattern: Implement circuit breakers to prevent cascading failures and allow services to recover gracefully.
+        Retries and Backoff Strategies: Use retries with exponential backoff for transient failures to improve reliability without overwhelming services.
+
+
+12. fault tolerance
+        Fault tolerance in microservices is the ability of a system to continue operating properly even when some components fail. resilient microservices
+        Fault tolerance can help prevent downtime, data loss, and service degradation. It can also improve the user experience and trust. 
+        Fault tolerance is important because it helps to ensure business continuity and the high availability of critical systems and applications. 
+        Fault tolerance is implemented by using spare or redundant subsystems. When a subsystem fails, another subsystem takes over its work, usually almost seamlessly. 
+
+        Here are some strategies for implementing fault tolerance in microservices: 
+             Timeout pattern: Sets a maximum time for a request to complete. If a response isn't received within that time, the request is considered failed. 
+             Circuit breaker: Monitors for a specified number of successful or failed calls to the system. If the failure threshold is reached, the circuit breaker opens,
+                              and subsequent calls fail immediately. 
+             Bulkhead: Isolates critical services from non-critical services. This prevents failure of one service from impacting others. 
+             Ensure that security measures (e.g., authentication, authorization, encryption) are built into the design without compromising performance.3.
+
+
+13. what is rest architecture design principles in microservices
+        Some design principles of REST APIs and microservices include: 
+ 
+        Separation of concerns: Microservices should be self-contained and have a single responsibility. This allows for independent development, deployment, and scaling 
+                                of each service. 
+        Loose coupling: Microservices should store their information in their own data store. This allows for flexibility in choosing the most appropriate data store for
+                        the application's needs. 
+        Decentralization: Microservices architecture is decentralized, meaning it doesn't require a single platform, technology, or programming language. 
+ 
+        Scalability: Microservices are mapped to business domains, allowing each service to be scaled independently. 
+ 
+        Design for failure: Microservices should be designed to handle failures gracefully. This can be done with mechanisms like circuit breakers, retries, and fallbacks. 
+ 
+        Interface segregation: Interfaces used for each service should be specific to the users who interact with them. 
+
+14. relational vs non relational db
+
+ 
+
