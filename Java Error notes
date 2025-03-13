@@ -27,7 +27,11 @@ sol:    make below updates in build.gradle file
 	make below updates in properties.gradle file
 		springCloudVersion = '2024.0.0'
 
-5. if using jfrog and other authentication and while setting up project locally you are unable to run the project then make following changes
+5. if using jfrog and other authentication and while setting up project locally you are unable to run the project and get the below error
+	
+	ERROR: Server returned HTTP response code: 401 for URL: https://gapinc.jfrog.io/gapinc/generic-repo/gradle-8.6-bin.zip
+	
+SOL:	then make following changes
 	To gradle services locally make following changes in the repo
 
 	1. wrapper.properties
@@ -54,7 +58,13 @@ sol:    make below updates in build.gradle file
 		 so replace the cfplatform URL to aks URL for a particular service by going to Argo Cd -> search particular service -> click on pod -> 
 		 scroll down and copy the value of chartis/app-url and replace the cfplatform url domain only.
 
-7.
+7. If project requires environment variable to be added in Run configurations of intellij to build or run the project then add it like below for jfrog
+	SAAS_ARTIFACTORY_USERNAME=jmohamm;
+	SAAS_ARTIFACTORY_PASSWORD=abcdefg;
+	systemProp.gradle.wrapperPassword=abcdefg;
+	JASYPT_ENCRYPTOR_PASSWORD=ah13ydmuw;
+	systemProp.gradle.wrapperUser=jmohamm
+	
 
 
 	
