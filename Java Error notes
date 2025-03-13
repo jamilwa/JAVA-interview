@@ -20,5 +20,12 @@ sol:  made below updates in the application-build.yml file
 		   jpa.properties.hibernate.dialect: org.hibernate.dialect.H2Dialect
 
 4. migrating the springboot version and java version
-sol: 
+sol:    make below updates in build.gradle file
+		org.springframework.boot' version '3.4.1'
+     		implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.7.0'
+     		java 17
+	make below updates in properties.gradle file
+		springCloudVersion = '2024.0.0'
+
+
 	
