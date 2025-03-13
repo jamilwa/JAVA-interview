@@ -66,5 +66,10 @@ SOL:	then make following changes
 	systemProp.gradle.wrapperUser=jmohamm
 	
 
+8. {"@timestamp":"2025-02-06T15:14:19.8579339+05:30","@version":"1","message":"Exception encountered during context initialization - cancelling refresh attempt:
+	org.springframework.beans.factory.parsing.BeanDefinitionParsingException: Configuration problem: @Bean method 'vpsExtNamedParameterJdbcTemplate' must not 
+	be declared as autowired; remove the method-level @Autowired annotation.\nOffending resource: class path resource "logger_name":"org.springframework.boot
+	.web.servlet.context.AnnotationConfigServletWebServerApplicationContext","thread_name":"main","level":"WARN","level_value":30000}
 
+sol: remove @Autowired at mentioned method
 	
