@@ -27,5 +27,34 @@ sol:    make below updates in build.gradle file
 	make below updates in properties.gradle file
 		springCloudVersion = '2024.0.0'
 
+5. if using jfrog and other authentication and while setting up project locally you are unable to run the project then make following changes
+	To gradle services locally make following changes in the repo
+
+	1. wrapper.properties
+	distributionUrl=https\://services.gradle.org/distributions/gradle-8.6-bin.zip
+
+	2. build.gradle
+		//	username = System.getenv('SAAS_ARTIFACTORY_USERNAME')
+		//	password = System.getenv('SAAS_ARTIFACTORY_PASSWORD')
+			username = "jmohamm"
+			password = ""        // this is generated from jfrog as API key
+				
+	3. properties.gradle
+		//        username System.getenv('SAAS_ARTIFACTORY_USERNAME') ?: "$saas_artifactory_username"
+		//        password System.getenv('SAAS_ARTIFACTORY_PASSWORD') ?: "$saas_artifactory_password"
+        		  username "jmohamm"
+        		  password ""
+    
+			
+6. APIs and deployment 
+	to run API use KEY : X-Gateway-Validation-Id in AUTH instead of apiKey for AKS URLs. 
+		 if it is api.azeus then use KEY : apiKey 
+		 values can be found from smee-config-repo-prod -> particular service
+	  2. if any API has cfplatform and its not working that means its migrated to aks. 
+		 so replace the cfplatform URL to aks URL for a particular service by going to Argo Cd -> search particular service -> click on pod -> 
+		 scroll down and copy the value of chartis/app-url and replace the cfplatform url domain only.
+
+7.
+
 
 	
