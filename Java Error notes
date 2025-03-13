@@ -59,9 +59,10 @@ SOL:	then make following changes
 		 scroll down and copy the value of chartis/app-url and replace the cfplatform url domain only.
 
 7. If project requires environment variable to be added in Run configurations of intellij to build or run the project then add it like below for jfrog
+	otherwise you will get error spring.datasource.password cannot be empty
 	SAAS_ARTIFACTORY_USERNAME=jmohamm;
-	SAAS_ARTIFACTORY_PASSWORD=abcdefg;
-	systemProp.gradle.wrapperPassword=abcdefg;
+	SAAS_ARTIFACTORY_PASSWORD=get this value from jfrog API key;
+	systemProp.gradle.wrapperPassword=get this value from jfrog API key;
 	JASYPT_ENCRYPTOR_PASSWORD=ah13ydmuw;
 	systemProp.gradle.wrapperUser=jmohamm
 	
@@ -73,3 +74,7 @@ SOL:	then make following changes
 
 sol: remove @Autowired at mentioned method
 	
+9. swagger throwing error "Failed to load API definition. Errors Hide Fetch error response status is 500 /v3/api-docs
+
+sol: update swagger version to below
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.7.0'
