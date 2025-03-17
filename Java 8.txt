@@ -43,7 +43,7 @@ Following are the important points to be considered.
 	Types of Functional Interfaces
 	Java provides several built-in functional interfaces in the java.util.function package.
 	1. Predicate<T>: The Predicate interface is often used for filtering and matching conditions.
-		Description: Represents a boolean-valued function of one argument. It is used for testing conditions.
+		Description: Represents a function that takes one argument and returns a boolean.
 		Method: boolean test(T t)
 		
 		Example:
