@@ -36,7 +36,8 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
         we can run multiple instances of the same image by changing host port. like
               docker container run -d -p 5002:5000 in28min/hello-world-python:0.0.1.RELEASE.      // running on host port 5002
 
-       if we run the command    docker container ls        // we can see 2 instances of the same image running.
+       if we run the command    docker container ls        // we can see 2 instances of the same image running. we can verify by running localhost:5001      and localhost:5002  in browser and we can see same image is running 
+
 
 2. What is Docker Image? :  Image is just a set of bytes. These bytes are hosted inside the Docker registry inside Docker Hub.
 3. What is a Container: :   A container is a running version of that specific image. You can create 1000s of container from a single image. 
