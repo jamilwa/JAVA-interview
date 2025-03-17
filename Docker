@@ -28,9 +28,10 @@ sol: you have all the deployment process described in a document. Let's say the 
 
 Lets understand this command          docker container run -d -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE.
       The docker image is downloaded from Docker Registry. The default Registry is Docker Hub(https://hub.docker.com) like git Hub. in28min/hello-world-python is the repository name and 0.0.1.RELEASE is tag name or image version.
-      -p 5000:5000 is mapping a host port and a container port. A container port is something which is internal to a specific container. Each application runs inside the container in a specific port. you can expose it on this specific machine
-      on a different port over here. we are exposing this application on port 5000. The internal(host) port 5000 is mapped to external port 5000 on the machine. Now I want to run it on a different port on the machine like on port 5001.
-      
+      -p 5000:5000 is mapping a host port and a container port. Each application runs inside the container in a specific port. you can expose it on this specific machine on a different port over here. we are exposing this application
+      on port 5000. The Container port 5000 is mapped to external port 5000 on the machine. Now I want to run it on a different port on the machine like on port 5001.
+      How can I change that?
+        The container port cannot change. Only the host port can change. You can take the same application and run it on a different host port that you can do by changing 5000 to 5001
 
 2. What is Docker Image? :  Image is just a set of bytes. These bytes are hosted inside the Docker registry inside Docker Hub.
 3. What is a Container: :   A container is a running version of that specific image. You can create 1000s of container from a single image. 
