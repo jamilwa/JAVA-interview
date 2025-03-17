@@ -40,7 +40,28 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
       . -d is used for detach mode. That is the terminal where we execute this command is available for other use. if we dont mention -d then we can't use the terminal to run other commands. 
 
 2. What is Docker Image? :  It is a package representing specific version of your app. it is just a set of bytes. These bytes are hosted inside the Docker registry called Docker Hub.
-3. What is a Container: :   A container is a running version of that specific image. You can create 1000s of container from a single image. 
+3. What is a Container? :   A container is a running version of that specific image. You can create 1000s of container from a single image. 
+4. What is Dokcerfile? : it is a file with instructions to create Docker image. 
+    example of sample dockerFile
+
+       FROM openjdk:18.0-slim
+       COPY target/*.jar app.jar
+       EXPOSE 5000
+       ENTRYPOINT ["java","-jar","/app.jar"]
+
+
+   Every Docker image starts from a base image, and the base image which we are making use of in 1st line of dockerfile is open JDK. We want to run a Java application, and to be able to do that we need a JDK. We are making use of a 
+          repository called OpenJDK and we are using a tag 18.0-slim. 
+   Now what do we want to run? As part of the image, we would want to run a spring boot application. When we build a Spring boot project, the application jar will be created in the target folder. So in the local machine from the 
+         target folder, we want to copy the jar file into the Docker image with a specific name. That's why we are making use of the copy command in 2nd line. So we are copying the jar which is present in the target folder as app dot jar 
+         into the docker image. 
+   Next, we are informing Docker about the port that the container listens on at runtime. The application we are creating listens on port 5000, so we are exposing port 5000. 
+   The last command which is present in here is Entrypoint. We want to configure a command that will be run at container launch. When a container is created from this Docker image, we want to launch the application, That's why we are
+   executing the command ["java","-jar","/app.jar"].
+
+
+
+
 
 docker image ls                                                                           //   this will list the all the images present in my local machine. 
 docker container run -d -p 5001:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
