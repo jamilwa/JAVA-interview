@@ -128,7 +128,7 @@ public class Java8Tester {
 	expressive way to handle optional values.
 
 	Creating an Optional: -You can create an Optional instance in several ways:
-	1. Empty Optional:  			Optional<String> emptyOptional = Optional.empty();			// it creates an empty Optional instance, which means it does not contain a value
+	1. Empty Optional:  			Optional<String> emptyOptional = Optional.empty();			// it creates an empty Optional instance, it does not contain a value
 	2. Optional with a Non-null Value:	Optional<String> nonNullOptional = Optional.of("Hello, World!");	// it creates an Optional with a non-null value. If the value is null, it throws a NullPointerException
 	3. Optional that Allows Null Values:	Optional<String> nullableOptional = Optional.ofNullable(null); 		// it creates an Optional that can hold a value that may be null. If the value is null, it creates an empty Optional
 
