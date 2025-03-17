@@ -1,4 +1,4 @@
-1. How does traditional deployment work
+ 1. How does traditional deployment work
 sol: you have all the deployment process described in a document. Let's say the operations team needs to deploy the app to a new environment to run the application. 
      The first thing that you need to do is to set up hardware.
      Next you need to set up the operating system on it Linux or Windows or Mac.
@@ -27,7 +27,7 @@ sol: you have all the deployment process described in a document. Let's say the 
      3. Isolation: Containers are isolated from one another. 
 
 Lets understand this command          docker container run -d -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE.
-     The docker image is downloaded from Docker Registry. The default Registry is Docker Hub(https://hub.docker.com) like git Hub. in28min/hello-world-python is the repository name and 0.0.1.RELEASE is tag name.
+     The docker image is downloaded from Docker Registry. The default Registry is Docker Hub(https://hub.docker.com) like git Hub. in28min/hello-world-python is the repository name and 0.0.1.RELEASE is tag name or image version.
 
 2. What is Docker Image? :  Image is just a set of bytes. These bytes are hosted inside the Docker registry inside Docker Hub.
 3. What is a Container: :   A container is a running version of that specific image. You can create 1000s of container from a single image. 
