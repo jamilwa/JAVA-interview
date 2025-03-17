@@ -59,7 +59,7 @@ Following are the important points to be considered.
 			System.out.println(stringLength.apply("Hello")); // 5
 
 	3. Consumer<T>
-		Description: Represents an operation that takes a single input argument and returns no result. It is used for operations that consume data.
+		Description: Represents an function that takes a one argument and returns no result. It is used for operations that consume data.
 		Method: void accept(T t)
 		
 		Example:
