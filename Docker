@@ -8,10 +8,10 @@ sol: you have all the deployment process described in a document. Let's say the 
      and only after that is when you would get to installing your application.
   This is a very, very manual approach. This takes a lot of time, and there is a very, very high chance that you make mistakes. 
   The goal of Docker is to make the deployemnt easy. 
-  Open Command Prompt and run                     docker --version.(assuming docker is already installed)
-  next run this command                           docker container run -d -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE
-  which means to run a container on a port 5000. but the questions is I don't have Python installed in here and you're trying to run a Python application.
-  It says unable to find image locally, so it will start downloading the image. it gives you some ID. 
+  Open Command Prompt and run           docker --version.(assuming docker is already installed)
+  next run this command                 docker container run -d -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE    // run the container in port 5000. name of the container image is in28min and the image version is 0.0.1.RELEASE
+  which means to run a container on a port 5000. but the questions is I don't have Python installed in here and you're trying to run a Python application.   It says unable to find image locally, so it will start downloading the image.
+  it gives you some ID. 
  
   Now what has happened in the background? Let's go to the browser and type in localhost:5000. What are you seeing in here? you can see hello world Python v1.
   So we are now running a Python application on our machine. And the amazing thing is on this specific machine, Python is not installed at all. 
@@ -20,10 +20,9 @@ sol: you have all the deployment process described in a document. Let's say the 
      docker container ls                                                                        //  this will list the running containers
      docker container stop <id of the running container>                                        //  this will stop the container
 
- The docker image has everything you need to run the application like OS, Application runtime(JDK, Pythong, NodeJS etc), application code and dependencies. 
+ The docker image has everything you need to run the application like OS, Application runtime(JDK, Pythong, NodeJS etc), application code and dependencies. This image can be ran everywhere like your local machine, company's data center, cloud.
 
-docker container run -d -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE               // run the container in port 5000. name of the container image is in28min and the image version is 0.0.1.RELEASE
-docker container ls                                                                        //  this will list the running containers
+
 docker image ls                                                                           //   this will list the images 
 docker container stop cc
 docker container run -d -p 5001:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
