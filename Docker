@@ -1,4 +1,21 @@
-docker container run -d -p 5000:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
+1. How does traditional deployment work
+sol: you have all the deployment process described in a document. Let's say the operations team needs to deploy the app to a new environment to run the application. 
+     The first thing that you need to do is to set up hardware.
+     Next you need to set up the operating system on it Linux or Windows or Mac.
+     After that, you need to install the right software.
+     If it's a Java application, you need to install Java, If it's a Python application, install Python etc.
+     After that, you need to set up the application Dependencies.
+     and only after that is when you would get to installing your application.
+  This is a very, very manual approach. This takes a lot of time, and there is a very, very high chance that you make mistakes. 
+  The goal of Docker is to make the deployemnt easy. 
+  We would want to run a container on a port 5000. You ask your developer, hey, I don't have Python installed in here and you're trying to run a Python application.
+  It says unable to find image locally. go ahead and download the image. Its pulling the image and it downloads it, it gives you some ID and you are at the command prompt again. 
+ 
+  Now what has happened in the background? Let's go to the browser and type in localhost 8080:5000. What are you seeing in here? you can see hello world Python v1.
+  So we are now running a Python application on our machine. And the amazing thing is on this specific machine, Python is not installed at all. 
+
+
+docker container run -d -p 5000:5000 in28min/hello-world-nodejs:0.0.1.RELEASE             // run the container in port 5000. name of the container image is in28min and the image version is 0.0.1.RELEASE
 docker container run -d -p 5000:5000 in28min/hello-world-java:0.0.1.RELEASE
 docker container run -d -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE
 docker container ls 
@@ -9,7 +26,7 @@ docker container run -d -p 5002:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
 docker container run -p 5003:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
 docker container run -p 5003:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
  
-docker --version
+docker --version                                                                             //  check if Docker is installed
 docker container ls
 docker build -t in28min/hello-world-docker:v1 .
 docker image list
