@@ -124,7 +124,8 @@ public class Java8Tester {
 
 3. Nashorn, JavaScript Engine − A Java-based engine to execute JavaScript code.
 
-4. Optional - Optional class is a container object that may or may not contain a value. It was introduced as part of the java.util package to help developers avoid 		NullPointerExceptions and to provide a more expressive way to handle optional values.
+4. Optional - Optional class is a container object that may or may not contain a value. It was introduced as part of the import java.util.Optional; package to help developers avoid NullPointerExceptions and to provide a more
+	expressive way to handle optional values.
 
 	Creating an Optional: -You can create an Optional instance in several ways:
 	1. Empty Optional:  				Optional<String> emptyOptional = Optional.empty();
