@@ -163,11 +163,6 @@ public class Java8Tester {
 		Optional<Integer> lengthOptional = optionalValue.flatMap(value -> Optional.of(value.length())); // Returns Optional[5]
 
 
-
-
-Syntax     public final class Optional<T> extends Object
-
-
 5. STREAM  API
 Stream represents a sequence of objects from a source, which supports aggregate operations.
 
