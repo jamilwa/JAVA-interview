@@ -21,7 +21,13 @@ sol: you have all the deployment process described in a document. Let's say the 
      docker container stop <id of the running container>                                        //  this will stop the container
 
  The docker image has everything you need to run the application like OS, Application runtime(JDK, Pythong, NodeJS etc), application code and dependencies. This image can be ran everywhere like your local machine, company's data center, cloud.
+ Docker is popular because of following reasons
+     1. Standardized application packaging: It has same packaging for all types of applications (Java, Python or JS)
+     2. Multi platform support: Local machine, Data Center, Cloud.
+     3. Isolation: Containers are isolated from one another. 
 
+Lets understand this command          docker container run -d -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE.
+     The docker image is downloaded from Docker Registry. The default Registry is Docker Hub(https://hub.docker.com). in28min/hello-world-python is the repository name and 0.0.1.RELEASE is tag name.
 
 docker image ls                                                                           //   this will list the images 
 docker container stop cc
