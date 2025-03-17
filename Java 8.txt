@@ -34,7 +34,7 @@ Optional curly braces − No need to use curly braces in expression body if the 
 
 Optional return keyword − The compiler automatically returns the value if the body has a single expression to return the value.
 
-Following are the important points to be considered in the above example.
+Following are the important points to be considered.
 
 1. What is Functional Programming
 	a programming style that uses pure functions to solve problems. It emphasizes writing concise, readable code that's easier to 	maintain and scale
