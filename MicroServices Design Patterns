@@ -168,8 +168,7 @@ Problem : A service generally calls other services to retrieve data, and there i
          How do we avoid cascading service failures and handle failures gracefully?
 Solution : when one service becomes unresponsive and the number of consecutive failures crosses a threshold, the circuit breaker trips To prevent cascading failures .
            and for the duration of a timeout period, all attempts to invoke the remote service will fail immediately. After the timeout expires, the circuit breaker 
-           allows a limited number of test requests to pass through. If those requests succeed, the circuit breaker resumes normal operation. Otherwise, if there 
-           is a failure, the timeout period begins again.
+           allows a limited number of test requests to pass through. If those requests succeed, the circuit breaker resumes normal operation. Otherwise, the timeout period begins again.
     example : Resilience4j, Netflix Hystrix.         
 
 
