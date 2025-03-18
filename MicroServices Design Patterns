@@ -164,7 +164,8 @@ application.yml
 
 Problem : A service generally calls other services to retrieve data, and there is a chance that the downstream service may be down. There are two problems with this:
          first, the request will keep going to the down service, exhausting network resources and slowing performance.
-         Second, the user experience will be poor and unpredictable. How do we avoid cascading service failures and handle failures gracefully?
+         Second, the user experience will be poor and unpredictable. 
+         How do we avoid cascading service failures and handle failures gracefully?
 Solution : When the number of consecutive failures crosses a threshold, the circuit breaker trips To prevent cascading failures when one service becomes unresponsive.
            and for the duration of a timeout period, all attempts to invoke the remote service will fail immediately. After the timeout expires, the circuit breaker 
            allows a limited number of test requests to pass through. If those requests succeed, the circuit breaker resumes normal operation. Otherwise, if there 
