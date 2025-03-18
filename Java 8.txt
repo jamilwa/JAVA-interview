@@ -407,10 +407,10 @@ List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, Summrayfo
                 Collection.stream().mapToInt().
 
 
-6. Default method
-
-This capability is added for backward compatibility so that old interfaces can be used to leverage the lambda expression capability of Java 8.
-For example, ‘List’ or ‘Collection’ interfaces do not have ‘forEach’ method declaration. Thus, adding such method will simply break the collection framework implementations
+6. Default method 
+	a default method is a method that can be defined in an interface with a body. It allow developers to add new methods to interfaces without breaking the existing implementations of those interfaces. 
+	It is added for backward compatibility so that old interfaces can be used to leverage the lambda expression.
+	For example, ‘List’ or ‘Collection’ interfaces do not have ‘forEach’ method declaration. Thus, adding such method will simply break the collection framework implementations
 
 
 7. Date Time API
