@@ -177,3 +177,17 @@ faster than HashTable.	                                                slower th
 	Performance: Similar to HashMap, but with different equality semantics.
 	Use Case: When you need to compare keys based on reference equality.
 
+13. if we have Collection.SynchronizedMap() then why to use concurrentHashmap
+	Collections.synchronizedMap(): Provides serial access, meaning only one thread can access the map at a time for read or write operations. This can lead to increased waiting times
+				       		and reduced performance when multiple threads are involved.
+				       Supports null keys and values, depending on the underlying map implementation.
+				       The iterator is fail-fast, meaning it throws a ConcurrentModificationException if the map is modified while iterating
+					Suitable for applications where data consistency is more critical than performance.
+	ConcurrentHashMap: Allows multiple threads to read and write concurrently. It uses a segmented locking mechanism, which means that only a portion of the map is locked during write
+				      		operations, allowing for higher throughput.
+				       Does not allow null keys or values, which helps avoid ambiguity in concurrent environments.
+				       The iterator is fail-safe, allowing modifications during iteration without throwing exceptions.
+					Ideal for high-performance applications where multiple threads frequently read and write data.
+
+
+
