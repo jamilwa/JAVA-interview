@@ -7,14 +7,11 @@
 2. Compare Wait()  and Sleep()
     both wait() and sleep() methods are used for pausing the execution of a thread, but they have different behaviors:
 
-    wait() : is defined in the Object class and is used for inter thread communication. When a thread calls the wait() method on an object, it releases the lock
-    on the object and enters the waiting state until another thread notifies it calling the notify() or notifyAll() method on the same object. The wait() method 
-    must be called from within a synchronized block or method to avoid IllegalMonitorStateException.
+    wait() : When a thread calls the wait() method on an object, it releases the lock on the object and enters the waiting state until another thread notifies it calling the notify() or notifyAll() method on the same object.
+             The wait() method must be called from within a synchronized block or method to avoid IllegalMonitorStateException.  it is defined in the Object class and is used for inter thread communication.
 
-    sleep() : The sleep() method is a static method defined in the Thread class and is used to pause the execution of a thread for a specified amount of time.
-    When a thread calls the sleep() method, it does not release the lock on any object, and other threads cannot acquire the lock during the sleep period.
-    The sleep() method is typically used for introducing delays in the execution of a thread.
-
+    sleep() : When a thread calls the sleep() method, it does not release the lock on any object, and other threads cannot acquire the lock during the sleep period. The sleep() method is typically used for introducing delays
+              in the execution of a thread. The sleep() method is a static method defined in the Thread class and is used to pause the execution of a thread for a specified amount of time.
 
     notify(): used to wake up a single thread that is waiting on the object. If multiple threads are waiting on the object, only one of them will be chosen
         to wake up. The choice of which thread to wake up is not specified and is dependent on the JVM implementation.
