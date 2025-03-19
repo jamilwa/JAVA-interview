@@ -36,10 +36,10 @@
                                 among multiple threads.
 
 4. difference between Callable and Runnable
-    The Runnable interface does not return a result. Its run() method has a void return type. If you need to return a result from a Runnable, you need to use 
-    shared variables(variables that can be accessed by multiple threads, like instance variales or static variables). The run() method cannot throw checked
-    exceptions. If you need to handle exceptions, you must catch them within the run() method. You can submit a Runnable task to an ExecutorService using the
-    execute() method. This method does not return a result.
+    The Runnable interface does not return a result. Its run() method has a void return type. If you need to return a result from a Runnable, you need to use shared variables(variables that can be
+            accessed by multiple threads, like instance variales or static variables).
+    The run() method cannot throw checked exceptions. If you need to handle exceptions, you must catch them within the run() method.
+    You can submit a Runnable task to an ExecutorService using the execute() method.
 
     example
     public class MyRunnable implements Runnable {
@@ -52,10 +52,9 @@
         }
 
 
-    The Callable interface can return a result. Its call() method returns a value of a specified type. This makes Callable more suitable for tasks that need to produce
-    a result. The call() method can throw checked exceptions. This allows you to propagate exceptions that occur during the execution of the task.
-    You can submit a Callable task to an ExecutorService using the submit() method. This method returns a Future object, which can be used to retrieve the result of 
-    the computation.
+    The Callable interface can return a result. Its call() method returns a value of a specified type. 
+    The call() method can throw checked exceptions. This allows you to propagate exceptions that occur during the execution of the task.
+    You can submit a Callable task to an ExecutorService using the submit() method. This method returns a Future object, which can be used to retrieve the result of the computation.
 
     example
     public class MyCallable implements Callable<Integer> {
