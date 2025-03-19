@@ -556,5 +556,27 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
 
 14. relational vs non relational db
 
- 
+15. Difference between Call by Value and Call by Reference
+        the terms call by value and call by reference refer to how arguments are passed to functions or methods. 
+    Call by Value : a copy of the actual value of the argument is passed to the function. This means that changes made to the parameter inside the function do not affect the original argument.
+                        A new memory location is created for the parameter in the function, which holds the copy of the value. 
+                        primitive data types (like int, float, char, etc.) are passed by value
+                        
+    example:
+    public static void main(String[] args) {
+        int number = 10;
+        System.out.println("Before: " + number); // Output: 10
+        modifyValue(number);
+        System.out.println("After: " + number);  // Output: 10
+    }
+
+    public static void modifyValue(int num) {
+        num = 20; // This change does not affect the original variable
+    }
+
+
+    Call by Reference : a reference (or address) to the actual data is passed to the function. This means that changes made to the parameter inside the function will affect the original argument
+                        No new memory location is created for the parameter; instead, the function operates on the original data's memory location.
+                        object references are also passed by value, It's important to remember that while you can modify the state of an object passed to a method, you cannot change the reference itself to point to a new object.
+                        
 
