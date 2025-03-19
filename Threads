@@ -26,11 +26,10 @@
                    Example: Saving an object to a file, sending an object over a network, or storing an object in a database are common use cases of serialization.
 
     Synchronization: Purpose: Synchronization is the process of controlling access to shared resources in a multi threaded environment to prevent data corruption and 
-                                ensure thread safety.
+                                ensure thread safety and  prevent race conditions.
                      Mechanism: synchronization is achieved using the synchronized keyword, locks, and other synchronization mechanisms provided by the 
                                 java.util.concurrent package.
-                     Example: Synchronizing access to critical sections of code, shared variables, or resources to prevent race conditions and maintain data consistency
-                                among multiple threads.
+                     
 
 4. difference between Callable and Runnable
     The Runnable interface does not return a result. Its run() method has a void return type. If you need to return a result from a Runnable, you need to use shared variables(variables that can be
