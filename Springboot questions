@@ -76,12 +76,6 @@ D. What is the role of the `@SpringBootApplication` annotation?**
      3. `@ComponentScan`: This annotation tells Spring to scan the specified package(s) for components, configurations, and services. It enables automatic detection of Spring-managed components.
               By default, @ComponentScan scans the package of the class that declares it. You can specify additional packages to scan using the basePackages attribute.
 
-E. Explain the concept of auto-configuration in Spring Boot. How does it work? 
-    Auto-configuration uses `@EnableAutoConfiguration` and conditions defined in `META-INF/spring.factories` files to automatically configure Spring beans.  
-    Spring Boot Auto Configuration would automatically provide configuration based on the dependencies. 
-   - Example: If `spring-boot-starter-web` is included, Spring Boot configures a DispatcherServlet, tomcat, Jackson for JSON, and more.  
-
-
 F. How does Spring Boot manage dependencies? 
    - It uses a parent POM (`spring-boot-starter-parent`) that defines dependency versions to ensure compatibility.  
    - You can override versions by specifying them in your `pom.xml` or `build.gradle`.  
