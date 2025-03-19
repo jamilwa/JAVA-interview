@@ -115,3 +115,30 @@ faster than HashTable.	                                                slower th
         Private : The member is accessible only within its own class.    
         Default (Package-Private): The member is accessible only within its own package.    DOP
         Protected: The member is accessible within its own package and by subclasses of other packages.  ProtOPSOP
+
+11. How to make collection threadsafe
+	1. Using Synchronized Collections : Java provides synchronized wrappers for collections through the Collections.synchronizedXXX methods. 
+	
+	examplee:   
+	List<Integer> list = Collections.synchronizedList(new ArrayList<>());
+
+        // Adding elements to the synchronized list
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        // Iterating over the synchronized list
+        synchronized (list) { // Must synchronize on the list when iterating
+            for (Integer number : list) {
+                System.out.println(number);
+
+	2. Using Concurrent Collections : Java provides a set of concurrent collections in the java.util.concurrent package. 
+	example:
+		ConcurrentHashMap: A thread-safe variant of HashMap that allows concurrent read and write operations.
+		CopyOnWriteArrayList: A thread-safe variant of ArrayList where all mutative operations (like add, set, etc.) are implemented by making a fresh copy of the underlying array.
+		BlockingQueue: An interface that represents a thread-safe queue that supports operations that wait for the queue to become non-empty when retrieving an element and wait for
+				space to become available in the queue when storing an element.
+	3. Using ThreadLocal : If you want to maintain a separate instance of a collection for each thread, you can use ThreadLocal. This is useful when you want to avoid contention between threads.
+
+
+
