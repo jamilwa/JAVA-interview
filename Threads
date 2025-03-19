@@ -106,8 +106,7 @@
 
 9. What is the difference between  synchronized  method and  synchronized  block?
      A  synchronized  method locks the entire object, meaning only one thread can execute any synchronized method of that object at a time.
-     A  synchronized  block allows you to lock a specific section of code, which can improve performance by allowing other threads to execute
-        non synchronized methods of the same object.
+     A  synchronized  block allows you to lock a specific section of code, and allows other threads to execute non synchronized methods of the same object.
 
 10. What is a deadlock?
      A deadlock is a situation in multithreading where two or more threads are blocked forever, each waiting for the other to release a resource.
