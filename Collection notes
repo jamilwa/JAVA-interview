@@ -117,7 +117,8 @@ faster than HashTable.	                                                slower th
         Protected: The member is accessible within its own package and by subclasses of other packages.  ProtOPSOP
 
 11. How to make collection threadsafe
-	1. Using Synchronized Collections : Java provides synchronized wrappers for collections through the Collections.synchronizedXXX methods. 
+	1. Using Synchronized Collections : Java provides synchronized wrappers for collections through the Collections.synchronizedXXX methods like 
+		Collections.synchronizedList(), Collections.synchronizedSet(), Collections.synchronizedSet(), Collections.synchronizedMap.
 	
 	examplee:   
 	List<Integer> list = Collections.synchronizedList(new ArrayList<>());
@@ -136,6 +137,7 @@ faster than HashTable.	                                                slower th
 	example:
 		ConcurrentHashMap: A thread-safe variant of HashMap that allows concurrent read and write operations.
 		CopyOnWriteArrayList: A thread-safe variant of ArrayList where all mutative operations (like add, set, etc.) are implemented by making a fresh copy of the underlying array.
+		ConcurrentSkipListSet: This is a thread-safe variant of NavigableSet that uses a skip list for its underlying data structure. It allows concurrent access and maintains a sorted order.
 		BlockingQueue: An interface that represents a thread-safe queue that supports operations that wait for the queue to become non-empty when retrieving an element and wait for
 				space to become available in the queue when storing an element.
 	3. Using ThreadLocal : If you want to maintain a separate instance of a collection for each thread, you can use ThreadLocal. This is useful when you want to avoid contention between threads.
@@ -191,3 +193,30 @@ faster than HashTable.	                                                slower th
 
 
 
+14. Different Set classes
+1. HashSet
+	Description: A hash table-based implementation of the Set interface. It does not guarantee the order of the elements and allows null values.
+	Performance: Offers average time complexity of O(1) for basic operations like add(), remove(), and contains().
+	Use Case: When you need a fast, unordered collection of unique elements.
+2. LinkedHashSet
+	Description: A hash table and linked list implementation of the Set interface. It maintains a doubly-linked list of the entries, which allows to maintain insertion order).
+	Performance: Similar to HashSet, with O(1) time complexity for basic operations.
+	Use Case: When you need to maintain (insertion order).
+3. TreeSet
+	Description: A red-black tree-based implementation of the Set interface. It stores the elements in a sorted order (natural ordering or by a specified comparator).
+	Performance: Offers O(log n) time complexity for basic operations like add(), remove(), and contains().
+	Use Case: When you need a sorted set.
+4. EnumSet
+	Description: A specialized Set implementation for use with enum types. It is highly efficient and can be used to represent a set of enum constants.
+	Performance: Offers O(1) time complexity for basic operations.
+	Use Case: When you need a set specifically for enum types.
+	EnumSet<Day> enumSet = EnumSet.of(Day.MONDAY, Day.WEDNESDAY);
+
+5. CopyOnWriteArraySet
+	Description: A thread-safe variant of Set that uses a copy-on-write mechanism. All mutative operations (like add, remove, etc.) are implemented by making a fresh copy of the underlying array.
+	Performance: Suitable for scenarios where reads are more frequent than writes.
+	Use Case: When you need a thread-safe set with a high read-to-write ratio.
+6. ConcurrentSkipListSet
+	Description: A thread-safe variant of NavigableSet that uses a skip list for its underlying data structure. It allows concurrent access and maintains a sorted order.
+	Performance: Offers O(log n) time complexity for basic operations.
+	Use Case: When you need a thread-safe, sorted set.
