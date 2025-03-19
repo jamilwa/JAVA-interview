@@ -93,7 +93,7 @@
     The  start()  method is used to begin the execution of a thread. It invokes the  run() method which executes the code in a new thread. 
     The  run()  method contains the code that defines the thread's task. If you call  run()  directly, it will execute the code in the current thread.
 
-8. What is the lifecycle of a thread?       NeWRu BloW TiwTer.
+8. What is the lifecycle of a thread?       NeRu Bloc WaiTer.
    New:      The thread is created but not yet started. A thread enters this state when an instance of the Thread class is created using the new keyword.
    Runnable: The thread is ready to run and waiting for CPU time. A thread enters this state when the start() method is called on a thread instance
    Blocked:  The thread is waiting for a monitor lock to enter a synchronized block or method. A thread enters this state when it attempts to access a synchronized
