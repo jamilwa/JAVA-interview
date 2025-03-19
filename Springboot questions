@@ -64,9 +64,17 @@ C. What is Spring Boot, and how is it different from the Spring Framework?**
 
 D. What is the role of the `@SpringBootApplication` annotation?**  
    - It's a combination of:  
-     1. `@Configuration`: Marks the class as a source of bean definitions.  
-     2. `@EnableAutoConfiguration`: Enables Spring Boot's auto-configuration.  
-     3. `@ComponentScan`: Enables component scanning for Spring components.  
+     1. `@Configuration`: class can be used by the Spring IoC container as a source of bean definitions. Classes annotated with @Configuration can define one or more @Bean methods.
+     2. `@EnableAutoConfiguration`: automatically configures Spring beans based on the dependencies/libraries present on the classpath.
+              For example, When you include the Spring Web dependency, Spring Boot automatically configures the necessary components for building a web application, including:
+                               DispatcherServlet
+                               Default error handling
+                               View resolvers
+                               Static resource handling
+                           When you include a database dependency (like H2, MySQL, or PostgreSQL) in your Spring Boot application, Spring Boot automatically configures a DataSource bean.
+                           When you include the Spring Security dependency, Spring Boot automatically configures basic security settings
+     3. `@ComponentScan`: This annotation tells Spring to scan the specified package(s) for components, configurations, and services. It enables automatic detection of Spring-managed components.
+              By default, @ComponentScan scans the package of the class that declares it. You can specify additional packages to scan using the basePackages attribute.
 
 E. Explain the concept of auto-configuration in Spring Boot. How does it work? 
     Auto-configuration uses `@EnableAutoConfiguration` and conditions defined in `META-INF/spring.factories` files to automatically configure Spring beans.  
