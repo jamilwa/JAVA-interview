@@ -141,4 +141,39 @@ faster than HashTable.	                                                slower th
 	3. Using ThreadLocal : If you want to maintain a separate instance of a collection for each thread, you can use ThreadLocal. This is useful when you want to avoid contention between threads.
 
 
+12. Different types of map classes
+1. HashMap
+	Description: A hash table-based implementation of the Map interface. It allows null values and one null key. It does not guarantee the order of the elements.
+	Performance: Offers average time complexity of O(1) for get() and put() operations.
+	Use Case: When you need a fast, unordered collection of key-value pairs.
+
+2. LinkedHashMap
+	Description: A hash table and linked list implementation of the Map interface. It maintains a doubly-linked list of the entries, which allows to maintain insertion order.
+	Performance: Similar to HashMap, with O(1) time complexity for get() and put().
+	Use Case: When you need insertion order.
+
+3. TreeMap
+	Description: A red-black tree-based implementation of the Map interface. It stores the keys in a sorted order (natural ordering or by a specified comparator).
+	Performance: Offers O(log n) time complexity for get(), put(), and remove() operations.
+	Use Case: When you need a sorted map.
+
+4. Hashtable
+	Description: A legacy class that implements the Map interface. It is synchronized and does not allow null keys or values.
+	Performance: Similar to HashMap, but with overhead due to synchronization.
+	Use Case: When you need a thread-safe map, but it is generally recommended to use ConcurrentHashMap instead.
+
+5. ConcurrentHashMap
+	Description: A thread-safe variant of HashMap that allows concurrent access by multiple threads. It does not allow null keys or values.
+	Performance: Offers better performance than Hashtable in concurrent scenarios due to its segmented locking mechanism.
+	Use Case: When you need a thread-safe map with high concurrency.
+
+6. WeakHashMap
+	Description: A hash table-based implementation of the Map interface that uses weak references for keys. If a key is no longer in ordinary use, it can be garbage collected.
+	Performance: Similar to HashMap, but with the added behavior of allowing keys to be collected when no strong references exist.
+	Use Case: When you want to allow keys to be garbage collected when they are no longer in use.
+
+7. IdentityHashMap
+	Description: A hash table-based implementation of the Map interface that uses reference equality (==) instead of object equality (equals()) when comparing keys.
+	Performance: Similar to HashMap, but with different equality semantics.
+	Use Case: When you need to compare keys based on reference equality.
 
