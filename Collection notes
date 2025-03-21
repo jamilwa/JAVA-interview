@@ -71,7 +71,7 @@ List methods   (LAACCSS GR) -- List Add AddAll Contains Clear Size Set Get Remov
     example
     ArrayList<String> ar = new ArrayList<>()                           // the default constructor capacity is 10. 
 
-   if we know the initial capacity of the arrayList then its better to mention it in the ArrayList declaration, like below so that it doesnt become due to resizing.
+   if we know the initial capacity of the arrayList then its better to mention it in the ArrayList declaration, like below so that it doesnt become slow due to resizing.
         ArrayList<Integer> list3 = new ArrayList<>(50)      // it will add elements to same array instead of creating new array untill its size reaches to 50.
 
      
