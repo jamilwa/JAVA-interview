@@ -118,7 +118,7 @@ faster than HashTable.	                                                slower th
 
 11. How to make collection threadsafe
 	1. Using Synchronized Collections : Java provides synchronized wrappers for collections through the Collections.synchronizedXXX methods like 
-		Collections.synchronizedList(), Collections.synchronizedSet(), Collections.synchronizedSet(), Collections.synchronizedMap.
+		Collections.synchronizedList(), Collections.synchronizedSet(), Collections.synchronizedMap.
 	
 	examplee:   
 	List<Integer> list = Collections.synchronizedList(new ArrayList<>());
