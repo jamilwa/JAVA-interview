@@ -65,9 +65,6 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
 
 docker image ls                                                                           //   this will list the all the images present in my local machine. 
 docker container run -d -p 5001:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
-docker container run -d -p 5002:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
-docker container run -p 5003:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
-docker container run -p 5003:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
  
 docker --version                                                                             //  check if Docker is installed
 docker container ls
