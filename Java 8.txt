@@ -37,8 +37,8 @@ Optional return keyword − The compiler automatically returns the value if the 
 Following are the important points to be considered.
 
 1. What is Functional Programming
-	a programming style that uses pure functions to solve problems. It emphasizes writing concise, readable code that's easier to maintain and Test. it eliminates the need of anonymous class and gives a functional programming capability to
-	Java. Lambda expressions are used to define implementation of a functional interface.
+	a programming style that uses pure functions to solve problems. It emphasizes writing concise, readable code that's easier to maintain and Test. it eliminates the need of anonymous class and gives a functional programming 
+	capability to Java. Lambda expressions are used to define implementation of a functional interface.
 
 	Types of Functional Interfaces
 	Java provides several built-in functional interfaces in the java.util.function package.
@@ -288,7 +288,8 @@ String mergedString = strings.stream().filter(string -> !string.isEmpty()).colle
 Stream INTERMEDIATE methods are   MaFiSoDi FlaSk PeeLi  (map, filter, sorted, distinct, Flatmap, Skip, Peek, Limited)
 Intermediate operations are lazy, meaning they are not executed until a terminal operation is invoked.
 
-The peek method in the Java Stream API is a useful tool for debugging and inspecting the elements flowing through a stream. It allows you to perform actions on each element without modifying the stream, making it easier to understand and trace the transformations applied to the data.
+The peek method in the Java Stream API is a useful tool for debugging and inspecting the elements flowing through a stream. It allows you to perform actions on each element without modifying the stream, making it easier to 
+understand and trace the transformations applied to the data.
 
 	example
 	List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
