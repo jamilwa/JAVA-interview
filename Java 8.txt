@@ -42,31 +42,31 @@ Following are the important points to be considered.
 
 	Types of Functional Interfaces
 	Java provides several built-in functional interfaces in the java.util.function package.
-	1. Predicate<T>: The Predicate interface is often used for filtering and matching conditions.
+	1. Predicate : The Predicate interface is often used for filtering and matching conditions.
 		Description: Represents a function that takes one argument and returns a boolean.
 		Method: boolean test(T t)
 		
-		Example:
+		Example:  filter()
 			Predicate<String> isEmpty = str -> str.isEmpty();
 			System.out.println(isEmpty.test("")); // true
 
-	2. Function<T, R>
+	2. Function
 		Description: Represents a function that takes one argument and produces a result.
 		Method: R apply(T t)
 		
-		Example:
+		Example: map, flatmpa,sorted, disticnt
 			Function<String, Integer> stringLength = str -> str.length();
 			System.out.println(stringLength.apply("Hello")); // 5
 
-	3. Consumer<T>
+	3. Consumer
 		Description: Represents an function that takes a one argument and returns no result. It is used for operations that consume data.
 		Method: void accept(T t)
 		
-		Example:
+		Example:   forEach, Peek
 			Consumer<String> print = str -> System.out.println(str);
 			print.accept("Hello, World!"); // Prints: Hello, World!
 
-	4. Supplier<T>
+	4. Supplier
 		Description: Represents a supplier of results. It does not take any arguments and returns a result.
 		Method: T get()
 
@@ -74,7 +74,7 @@ Following are the important points to be considered.
 			Supplier<String> supplier = () -> "Hello, Supplier!";
 			System.out.println(supplier.get()); // Hello, Supplier!
 
-	5. UnaryOperator<T>
+	5. UnaryOperator
 		Description: Represents a function that takes a single argument of type T and returns a result of the same type.
 		Method: T apply(T t)
 
@@ -82,7 +82,7 @@ Following are the important points to be considered.
 			UnaryOperator<Integer> square = x -> x * x;
 			System.out.println(square.apply(5)); // 25
 
-	6. BinaryOperator<T>
+	6. BinaryOperator
 		Description: Represents a function that takes two arguments of the same type and returns a result of the same type.
 		Method: T apply(T t1, T t2)
 
