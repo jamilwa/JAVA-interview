@@ -220,3 +220,15 @@ faster than HashTable.	                                                slower th
 	Description: A thread-safe variant of NavigableSet that uses a skip list for its underlying data structure. It allows concurrent access and maintains a sorted order.
 	Performance: Offers O(log n) time complexity for basic operations.
 	Use Case: When you need a thread-safe, sorted set.
+
+
+
+15.  			ArrayList														LinkedList
+
+1) ArrayList internally uses a dynamic array to store the elements.							LinkedList internally uses a doubly linked list to store the elements.
+2) slow because If any element is removed from the array, all the other elements are shifted in memory.			fast because it uses a doubly linked list, so no bit shifting is required in memory.
+3) act as a list only because it implements List only.									act as a list and queue both because it implements List and Deque interfaces.
+4) better for storing and accessing data.										better for manipulating data.
+5) The memory location for the elements of an ArrayList is contiguous.							The location for the elements of a linked list is not contagious.
+6) when an ArrayList is initialized, a default capacity of 10 is assigned to the ArrayList. 				no default capacity in a LinkedList. an empty list is created when a LinkedList is initialized.
+
