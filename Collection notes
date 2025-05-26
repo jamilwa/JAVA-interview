@@ -113,8 +113,8 @@ faster than HashTable.	                                                slower th
     Hashing is commonly used for indexing data in HashMap, ensuring data integrity, and optimizing search operations.
 
 10.   Access modifiers
-        Default (Package-Private): The member is accessible only within its own package.    DOP
-        Protected: The member is accessible within its own package and by subclasses of other packages.  ProSOP
+        Default (Package-Private): accessible only within its own package.    DOP
+        Protected: accessible in subclasses of other packages.  ProSOP
 
 11. How to make collection threadsafe
 	1. Using Synchronized Collections : Java provides synchronized wrappers for collections through the Collections.synchronizedXXX methods like 
