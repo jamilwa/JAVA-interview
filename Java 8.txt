@@ -254,7 +254,7 @@ long count = strings.parallelStream().filter(string -> string.isEmpty()).count()
 It is very easy to switch between sequential and parallel streams.
 
 
-Collectors (CouPar JoiSum)
+Collectors (Collectors Group Joining parti, toList counting summarizingInt) 
 Collectors are used to combine the result of processing on the elements of a stream. Collectors can be used to return a list or a string.
 
 Common Collectors: Some of the most commonly used collectors include:
