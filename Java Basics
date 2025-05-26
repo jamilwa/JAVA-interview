@@ -1,12 +1,12 @@
 
  1. What is Static Keyword in Java
-      Memory Management:  Static variables are allocated memory only once when the class is loaded, which helps in conserving memory when multiple instances of a class
-                          are created.
+     static keyword is used for Memory Management
 
      The static keyword can be applied to:
      Variables: Static variables are initialized only once at the start of the execution of the program. If not explicitly initialized, they are assigned default 
                 values (e.g., 0 for integers, null for objects). They are also known as class variables. 
-                A single copy of a static variable is shared among all instances of the class.
+                A single copy of a static variable is shared among all instances of the class. which helps in conserving memory when multiple instances of a class
+                are created.
      Methods: Static methods and variables can be accessed directly using the class name and doesn't need any object. 
      Blocks: Static blocks are executed when the class is loaded, before the main method is executed. They are also Known as static initialization blocks.
      Nested Classes: Static nested classes can be defined within a class.
