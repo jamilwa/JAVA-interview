@@ -171,24 +171,24 @@ Java 8 programs
         }
 
 
-1. for(char c=97; c<= 122; c++)                                                  // will print small abcd
+1. for(char c=97; c<= 122; c++)                                               // will print small abcd
 
-2. for(char c=65; c<= 90; c++)                                                   // will print capital abcd
+2. for(char c=65; c<= 90; c++)                                                // will print capital abcd
 
 3. int num = 12345;
-   int n = String.valueOf(num).length();                                         // it converts number to String so that we can get number of digits of a number.
+   int n = String.valueOf(num).length();                                      // it converts number to String so that we can get number of digits of a number.
 
-4. "I am jamil".replaceAll("\\s+", "");                                          // replaces all whitespace characters like spaces, tabs, new line characters.
+4. "I am jamil".replaceAll("\\s+", "");                                       // replaces all whitespace characters like spaces, tabs, new line characters.
 
-5.  Arrays.sort(arr[])                                                             // used to sort array
+5.  Arrays.sort(arr[])                                                        // used to sort array
 
-6.  Arrays.sort(numbers[], Comparator.reverseOrder())                             // Sorting the array in descending order. note: it works on object like Integer not on int.
+6.  Arrays.sort(numbers[], Comparator.reverseOrder())                         // Sorting the array in descending order. note: it works on object like Integer not on int.
 
-6.  Collections.sort(ArrayList)                                                  // Sorting the list
+6.  Collections.sort(ArrayList)                                               // Sorting the list
 
-7.  Collections.sort(ArrayList, Comparator.reverseOrder());                     // Sorting the list in descending order 
+7.  Collections.sort(ArrayList, Comparator.reverseOrder());                   // Sorting the list in descending order 
 
-8.  Collections.sort(personList, Comparator.comparing(Person::getName));         // Sorting the list of Person objects based on name
+8.  Collections.sort(personList, Comparator.comparing(Person::getName));      // Sorting the list of Person objects based on name
 
 9.  Collections.sort(personList, Comparator.comparing(Person::getName).thenComparing(Person::getAge));    // Sorting the list of Person objects based on name and then age
 
