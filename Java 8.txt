@@ -125,13 +125,12 @@ public class Java8Tester {
 
 3. Nashorn, JavaScript Engine − A Java-based engine to execute JavaScript code.
 
-4. Optional - Optional class is a container object that may or may not contain a value. It was introduced as part of the import java.util.Optional; package to help developers avoid NullPointerExceptions and to provide a more
-	expressive way to handle optional values.
+4. Optional - Optional class is a container object that may or may not contain a value. It was introduced as part of the import java.util.Optional; package to help 			developers avoid NullPointerExceptions and to provide a more expressive way to handle optional values.
 
 	Creating an Optional: -You can create an Optional instance in several ways:
-	1. Empty Optional:  			Optional<String> emptyOptional = Optional.empty();			// it creates an empty Optional instance, it does not contain a value
-	2. Optional with a Non-null Value:	Optional<String> nonNullOptional = Optional.of("Hello, World!");	// it creates an Optional with a non-null value. If the value is null, it throws a NullPointerException
-	3. Optional that Allows Null Values:	Optional<String> nullableOptional = Optional.ofNullable(null); 		// it creates an Optional that can hold a value that may be null. If the value is null, it creates an empty Optional
+	1. Empty Optional:  Optional<String> emptyOptional = Optional.empty();			// it creates an empty Optional instance, it does not contain a value
+	2. Optional with a Non-null Value: Optional<String> nonNullOptional = Optional.of("Hello, World!");	// it creates an Optional with a non-null value. If the 															value is null, it throws a NullPointerException
+	3. Optional that Allows Null Values:	Optional<String> nullableOptional = Optional.ofNullable(null); 		// it creates an Optional that can hold a value that 															// may be null. If the value is null, it creates an 															// empty Optional
 
 
 	Common Methods of Optional  (Get IfOrElse MapIsFlat)
