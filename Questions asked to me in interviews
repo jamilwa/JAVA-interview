@@ -50,7 +50,7 @@
 Path Variable
     
         @RequestMapping("/users/{id}")
-        public String getUser ById(@PathVariable("id") Long id) {
+        public String getUserById(@PathVariable("id") Long id) {
             return "User  ID: " + id;
 
         url:-    example.com/users/123
@@ -58,8 +58,8 @@ Path Variable
 Reqeust Param
 
         @RequestMapping("/users")
-        public String getUser ByAge(@RequestParam("age") Integer age) {
-            return "User  Age: " + age;
+        public String getUserById(@RequestParam("id") Long id) {
+            return "User  id: " + id;
 
         url:-    example.com/users?id=123
 
