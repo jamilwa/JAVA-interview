@@ -109,11 +109,10 @@ faster than HashTable.	                                                slower th
 	at a specified index.D: remove() - Deletes an element
 
 09. what is hashing? 
-    hashing refers to the process of converting an object or data structure into a numerical value, known as a hash code, using a hashing algorithm. 
+    the process of converting an object or data structure into a hash code(numerical value), using a hashing algorithm. 
     Hashing is commonly used for indexing data in HashMap, ensuring data integrity, and optimizing search operations.
 
 10.   Access modifiers
-        Private : The member is accessible only within its own class.    
         Default (Package-Private): The member is accessible only within its own package.    DOP
         Protected: The member is accessible within its own package and by subclasses of other packages.  ProSOP
 
