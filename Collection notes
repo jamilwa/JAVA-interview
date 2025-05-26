@@ -48,8 +48,9 @@ Arrays class methods are    (ABCDES) ---- Array BinarySearch CopyOf DeepToString
                Arrays.binarySearch(numbers, 3);                  // output:  2 which is the index position of the value 3
 
 List methods   (LAACCSS GR) -- List Add AddAll Contains Clear Size Set Get Remove
-        a. List<String> list1 = Arrays.asList("jamil", "ansari")            // we use classes to implement an interface, LHS should always be an interface and RHS a class
-	b. Collection<String> list2 = Arrays.asList("jamil", "ansari")      // we can either use the interface or its parent interface to implement it. Collection is parent of all interfaces
+        a. List<String> list1 = Arrays.asList("jamil", "ansari")           // we use classes to implement an interface, LHS should always be an interface and RHS a class
+	b. Collection<String> list2 = Arrays.asList("jamil", "ansari")     // we can either use the interface or its parent interface to implement it. Collection is 
+										parent of all interfaces
 	c. ArrayList<Integer> list3 = new ArrayList<>()                     // this is empty list with size zero
 	
         ArrayList<String> list = new ArrayList<>();
