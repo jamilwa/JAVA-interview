@@ -38,8 +38,8 @@ Following are the important points to be considered.
 
 1. What is Functional Programming
 	a programming style that uses pure functions to solve problems. It emphasizes writing concise, readable code that's easier to maintain and Test. it eliminates
-	the need of anonymous class and gives a functional programming 
-	capability to Java. Lambda expressions are used to define implementation of a functional interface.
+	the need of anonymous class and gives a functional programming capability to Java. 
+	Lambda expressions are used to define implementation of a functional interface.
 
 	Types of Functional Interfaces
 	Java provides several built-in functional interfaces in the java.util.function package.
