@@ -85,3 +85,14 @@ sol: replace jakarta dependency with javax
 11. java.io.UncheckedIOExcetpion: cannot delete
 sol: 	check yml file for localPath value. the value may be incorrect.
 
+12. Could not autowire, No beans of 'theclass.java' type is found.
+sol: check theclass.java file for missing @Component/@Service annotations
+
+13. Postman throwing error code: message:throwable content-type 'multipart/form-data;boundary=---------------------charset=UTF-8 is not supported
+sol: in body use raw JSON type instead of form-data or any other body type.
+
+14. method doSomething() in interface cannot be applied to given types
+sol: check if number of parameters and their types are matching in interface and implementation class
+
+15. IntelliJ throws "Could not find or load main class com.example.something caused by Java.lang.ClassNotFoundException:
+sol: This happens when a project build was interrupted. therefore previous files are deleted and new files are yet to be generated. hence build your project again.
