@@ -82,3 +82,6 @@ sol: update swagger version to below
 10. package jakarta.xml.bind.annotation does not exist
 sol: replace jakarta dependency with javax
 
+11. java.io.UncheckedIOExcetpion: cannot delete
+sol: 	check yml file for localPath value. the value may be incorrect.
+
