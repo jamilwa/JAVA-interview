@@ -78,3 +78,7 @@ sol: remove @Autowired at mentioned method
 
 sol: update swagger version to below
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.7.0'
+
+10. package jakarta.xml.bind.annotation does not exist
+sol: replace jakarta dependency with javax
+
