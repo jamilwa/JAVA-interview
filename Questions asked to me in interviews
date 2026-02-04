@@ -389,6 +389,15 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
 37. how does load balancing occur ?
 38. if 5 microservices are there how many db will you use and how many ec2 instances will be needed
 39. when request comes who will pick up first land balancer or api gateway 
+    the Load Balancer almost always picks up the request first. Think of it as a two-layer entry system: the Load Balancer handles the "physical" traffic,
+    and the API Gateway handles the "logical" routing and security for your microservices.
+
+    The Typical Flow
+        1. User Request: A user hits api.example.com.
+        2. Load Balancer (Layer 4 or 7): This is the "Front Door." It receives the raw traffic. Its job is to distribute high volumes of incoming requests across multiple
+            instances of your Gateway to ensure high availability.
+        3. API Gateway: Once the Load Balancer hands off the request, the Gateway looks inside the request. It checks for a JWT token, validates the API key, and 
+            decides which specific microservice (e.g., your "Interact City" configuration service) should receive it.
 40. what is api version and how can it be backtracked 
 41. 
 43.  why do we use interface instead of abstract classes
@@ -406,7 +415,7 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
  Checked exceptions not propagated using throw only keyword                                     Checked exceptions are propagated using Throws keyword.
 
 45. what are ACID properties
-        To maintain database consistency both before and after a transaction, specific properties, known as ACID properties must be followed.
+        To maintain database consistency before and after a transaction, ACID properties must be followed.
         Atomicity: either the entire transaction takes place at once or doesn’t happen at all. There is no midway i.e. transactions do not occur partially.
                    If any part of the transaction fails, the entire transaction is rolled back to its original state, ensuring data consistency and integrity.
                    Atomicity is also known as the ‘All or nothing rule
