@@ -370,6 +370,20 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
 33. what is the new feauture added to hashmap in java 8
         HashMap replaces linked list with a binary tree when the number of elements in a bucket reaches certain threshold
 34. how do you see logs and how do  you create it for microservices
+    New Relic is an observability and monitoring platform. It allows you to track the health, performance, and reliability of your entire software stack in real-time.
+    1.APM(Application Performance Monitoring): It monitors your Spring Boot services. It tracks response times, throughput, and error rates. It can tell you exactly
+            which SQL query or method call is slowing down your API.
+    2.Infrastructure Monitoring: It monitors your AWS EC2 instances, EMR clusters, or Docker containers (CPU, Memory, Disk usage).
+    3.Distributed Tracing: In a microservices environment like the ones you built at Deloitte or Rakuten, New Relic tracks a request as it travels from Service A to 
+            Service B to Service C, helping you find where the chain is breaking.
+    4.Log Management: It aggregates logs from multiple sources so you can search through them in one place, similar to Splunk or the ELK stack.
+
+    New Relic helps you move from "reactive" to "proactive" approach like bleow
+    1.Alerting: You can set thresholds. For example: "Alert me if the failure rate of the Mirakl ETL connector exceeds 5% over a 5-minute window."
+    2.Service Maps: It automatically generates a visual map of how your microservices talk to each other and to external databases/APIs.
+    3.Scalability Analysis: During your Java 17 migration, you could use New Relic to compare the performance of the old Spring Boot 2.x services vs. the new 3.x
+            services to prove the upgrade's value to stakeholders.
+
 35. difference between stored procedure and functions
 36. difference between map and flatmap
 37. how does load balancing occur ?
