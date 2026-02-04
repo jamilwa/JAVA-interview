@@ -415,7 +415,7 @@ To summarize, association represents a "uses-a" relationship, aggregation repres
  Checked exceptions not propagated using throw only keyword                                     Checked exceptions are propagated using Throws keyword.
 
 45. what are ACID properties
-        To maintain database consistency before and after a transaction, ACID properties must be followed.
+        To maintain database consistency before and after a transaction, Ato Co Iso Dura properties must be followed.
         Atomicity: either the entire transaction takes place at once or doesn’t happen at all. There is no midway i.e. transactions do not occur partially.
                    If any part of the transaction fails, the entire transaction is rolled back to its original state, ensuring data consistency and integrity.
                    Atomicity is also known as the ‘All or nothing rule
