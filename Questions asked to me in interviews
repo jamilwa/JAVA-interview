@@ -118,14 +118,50 @@ SQL functions can be used in SELECT, INSERT, UPDATE, and DELETE statements to pe
 
 
 
-10. what is @qualifier 
-      In the Java Spring Framework, @Qualifier is an annotation used to resolve the ambiguity between
-      multiple beans of the same type. It helps specify which bean should be injected when there are multiple candidates.
-    Example:
-        @Autowired
-        @Qualifier("specificBean")
-        private MyService myService;
+10. what is @Primary & @qualifier 
+@Primary and @Qualifier are the two tools used to resolve this "autowiring ambiguity." @Primary tells Spring, "If there are multiple beans of this type, use this one
+by default unless specified otherwise." It is a class-level or bean-definition level configuration. 
+example:
+    @Component
+    @Primary
+    public class OracleDatabaseService implements DatabaseService { 
+        // This will be the default database used everywhere
+    }
 
+    @Component
+    public class MySqlDatabaseService implements DatabaseService { }
+
+@Qualifier gives you granular control. It tells Spring, "Regardless of the default, I want this specific bean for this specific injection point." 
+It is used at the injection point (Constructor, Field, or Setter).  @Qualifier is an annotation used to resolve the ambiguity between
+multiple beans of the same type.
+example:
+    @Component
+    @Qualifier("smsService")
+    public class SmsNotification implements NotificationService { }
+
+    @Component
+    @Qualifier("emailService")
+    public class EmailNotification implements NotificationService { }
+
+// Injection Point
+@Service
+public class AssetService {
+    private final NotificationService notificationService;
+
+    public AssetService(@Qualifier("smsService") NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }
+}
+
+
+The Comparison: Which one is "Better"?
+Feature        @Primary                                        @Qualifier
+Logic          Use this by default.                            Use this specific name.
+Control        Implicit/Global                                 Explicit/Local
+Priority       Low (overridden by Qualifier)                   High (overrides Primary)                  
+
+
+      
 11. how to add custom methods to string class
         In Java, you cannot directly add methods to existing classes such as String because it is a final class. However, you can achieve similar functionality by
         creating a utility class with static methods that operate on String objects. This approach is common in Java for extending the functionality of built-in classes.
