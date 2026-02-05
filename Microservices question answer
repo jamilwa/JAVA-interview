@@ -20,15 +20,16 @@ Spring Boot microservices
    service instances dynamically. 
 
 4. How do you handle security in microservices? 
-   Authentication/Authorization: Implement OAuth2 with tools like Spring Security and Keycloak. API Gateway Security: Use JWT tokens and validate them at the gateway level.
+   Authentication/Authorization: Implement OAuth2 with tools like Spring Security and Keycloak. 
+   API Gateway Security: Use JWT tokens and validate them at the gateway level.
    Service-to-Service Communication: Secure inter-service calls using mTLS (Mutual TLS) or token-based mechanisms. 
    Best Practices: 
       Secure sensitive data using environment variables, encrypt configurations using Spring Cloud Config, and adopt proper logging mechanisms. 
 
 5. What is the role of API Gateway in microservices? 
-   API Gateway acts as a single entry point for all clients.
-   Responsibilities: Request routing to appropriate services. Aggregating responses from multiple services. Handling authentication, rate limiting, logging, and
-   caching. Tools: Spring Cloud Gateway, Zuul, NGINX.
+   API Gateway acts as a single entry point for all client requests.
+   Responsibilities: Request routing to appropriate services. Aggregating responses from multiple services. Handling authentication, rate limiting, logging, and caching. 
+   Tools: Spring Cloud Gateway, Zuul, NGINX.
 
 6. What are Circuit Breakers, and how are they implemented? 
    A Circuit Breaker prevents an application from making repeated requests to a failing service, thereby improving system resilience. Implementation in Spring Boot: 
@@ -57,8 +58,8 @@ Spring Boot microservices
    </dependency> 
 
 8. How do you ensure data consistency across distributed services?
-   Eventual Consistency: Use event-driven communication with tools like Kafka or RabbitMQ. SAGA Pattern: Break a distributed transaction into a series of local transactions
-   coordinated by a central orchestrator or choreography. 
+   Eventual Consistency: Use event-driven communication with tools like Kafka or RabbitMQ.
+   SAGA Pattern: Break a distributed transaction into a series of local transactions coordinated by a central orchestrator or choreography. 
    Best Practices: Use idempotent operations. Leverage compensating transactions for rollback.
 
 9. How do you configure centralized logging in microservices?
