@@ -9,9 +9,10 @@ Spring Boot microservices
       Reliability is improved in application .
 
 2. How do you implement inter-service communication in microservices? 
-   Synchronous: REST (HTTP), gRPC. Asynchronous: Messaging systems like Kafka, RabbitMQ, or JMS. For synchronous communication, ensure timeout mechanisms 
-                and circuit breakers (e.g., Resilience4j) are implemented. 
-   Asynchronous: communication, leverage message brokers with reliable delivery mechanisms and eventual consistency patterns.
+   Synchronous: REST (HTTP), gRPC. 
+    For synchronous communication, ensure timeout mechanisms and circuit breakers (e.g., Resilience4j) are implemented. 
+   Asynchronous: Messaging systems like Kafka, RabbitMQ, or JMS.   
+   for Asynchronous communication, leverage message brokers with reliable delivery mechanisms and eventual consistency patterns.
 
 3. Explain service discovery in microservices. 
    Service discovery enables microservices to find each other dynamically at runtime. Tools: Eureka (Netflix OSS), Consul, Zookeeper, or Kubernetes DNS. 
