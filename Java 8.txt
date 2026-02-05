@@ -292,8 +292,8 @@ String mergedString = strings.stream().filter(string -> !string.isEmpty()).colle
 Stream INTERMEDIATE methods are   MaFiSoDi FlaSk PeeLi  (map, filter, sorted, distinct, Flatmap, Skip, Peek, Limited)
 Intermediate operations are lazy, meaning they are not executed until a terminal operation is invoked.
 
-The peek method in the Java Stream API is a useful tool for debugging and inspecting the elements flowing through a stream. It allows you to perform actions on each element without modifying the stream, making it easier to 
-understand and trace the transformations applied to the data.
+The peek method in the Java Stream API is a useful tool for debugging and inspecting the elements flowing through a stream. It allows you to perform actions
+on each element without modifying the stream, making it easier to understand and trace the transformations applied to the data.
 
 	example
 	List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
@@ -442,3 +442,4 @@ URL − Output is mapped to set of characters lying in A-Za-z0-9+_. Output is UR
 
 MIME − Output is mapped to MIME friendly format. Output is represented in lines of no more than 76 characters each, 
 and uses a carriage return '\r' followed by a linefeed '\n' as the line separator. No line separator is present to the end of the encoded output.
+
