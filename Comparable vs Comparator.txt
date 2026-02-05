@@ -4,7 +4,6 @@ Comparable provides compareTo() method to sort elements in Java.	               
 Comparable interface is present in java.lang package.	                                Comparator interface is present in java. util package.
 This method can sort the data according to the natural sorting order.           	This method sorts the data according to the customized sorting order.
 It affects the original class. i.e., the actual class is altered.                 	It doesn’t affect the original class, i.e., the actual class is not altered.
-found in java.lang package                            					found in java.util package
 
 
 1. Whenever we have to sort objects in customized way or compare objects then we have to use two things. Comparable interface and Comparator( both are functional 		interface(has only one abstract method)
@@ -165,3 +164,4 @@ public class Main {
 
 	// Comparable has comparTo(T o)	.  this is used when we have class in same project, so that we can use this operator
 	// Comparator has compare(T o1, T o2)	this is used when we dont have class in the project, we r getting it externally from jar
+
