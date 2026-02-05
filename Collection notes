@@ -11,15 +11,15 @@ It can increase its size by 50%.	          It can increase its size by doubling 
 It is not a legacy class.	                  It is a legacy class.
 
 3.              Array                                                                          Arraylist 
-    Array is static in size.	                                                ArrayList is dynamic in size.
-    It is mandatory to provide the size of an array while using new keyword     We can create an instance of ArrayList without specifying its size. 
-     ex:   int[] myArray = new int[6];                                               initial capacity is 10.
+    Array is static in size.	                                                	ArrayList is dynamic in size.
+    It is mandatory to provide the size of an array while using new keyword     	We can create an instance of ArrayList without specifying its size. 
+     ex:   int[] myArray = new int[6];                                              	 initial capacity is 10.
            myArray[0] = 3;
-    It performs fast because of fixed size.	                                The resize operation slows down the performance.
-    length variable to determine the size of an array.	                        size() method to determine the size of ArrayList.
-    stores both objects and primitives type.	                                doesn't store primitive type. It automatically converts primitive type to object.
-    can add elements in an array by using the assignment operator.	        the add() method to add elements in the ArrayList.
-    throws ArrayIndexOutofBoundException					throws IndexOutofBoundException
+    It performs fast because of fixed size.	                                		The resize operation slows down the performance.
+    length variable to determine the size of an array.	                        	size() method to determine the size of ArrayList.
+    stores both objects and primitives type.	                                	doesn't store primitive type. It automatically converts primitive type to object.
+    can add elements in an array by using the assignment operator.	        		the add() method to add elements in the ArrayList.
+    throws ArrayIndexOutofBoundException											throws IndexOutofBoundException
 
 Arrays class methods are    (ABCDES) ---- Array BinarySearch CopyOf DeepToString Equals Sort
                import java.util.Arrays;
