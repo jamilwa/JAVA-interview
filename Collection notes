@@ -242,3 +242,24 @@ faster than HashTable.	                                                slower th
 6) when an ArrayList is initialized, a default capacity of 10 						    no default capacity in a LinkedList. an empty list is created when a LinkedList
 	is assigned to the ArrayList.														 is initialized.
 
+
+
+16. difference between Collection and Collections
+	Collection	is the root interface of the Java Collections Framework. It defines the basic operations for a group of objects. Sub-interfaces: List, Set, and Queue
+				all extend Collection.
+				Key Methods are: .add(), .remove(), .size(), .iterator(), and .clear()
+	Collections is a utility class consisting exclusively of static methods that operate on or return collections. It cannot be instantiated (it has a private constructor)
+				You use this when you need to perform an algorithm (sorting, searching, or thread-safety) on an existing collection.
+				example methods: 
+					sort(List list): Sorts elements using natural ordering.
+					reverse(List list): Reverses the order of elements.
+					synchronizedCollection(Collection c): Returns a thread-safe version of your collection (useful for multi-threaded microservices).
+					unmodifiableList(List list): Returns a read-only list (perfect for protecting configuration data).
+					binarySearch(List list, T key): Efficiently finds an item in a sorted list
+
+Feature			Collection							Collections
+Type			Interface							Class (Utility)
+Package			java.util.Collection				java.util.Collections
+Purpose			Defines the structure of data.		Provides tools/methods to manipulate data.
+Inheritance		Extended by List, Set, Queue.		Inherits only from Object.
+Methods			Instance methods (e.g., add()).		Static methods (e.g., sort()).
