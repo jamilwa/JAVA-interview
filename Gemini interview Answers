@@ -67,18 +67,16 @@ This tells Spring Boot to find any available port. You can then find which port 
 
 
 3. What is starter dependency
-a Starter Dependencies are "curated bundle" of libraries. 
-Instead of you having to hunt down every single library needed for a specific task (like connecting to a database or building a web API) and making sure
+a Starter Dependencies are "curated bundle" of libraries that contains a list of other dependencies.
+Instead of you having to hunt down every single library needed for a specific task (like building a web API and making sure
 their versions are compatible, you just add one "Starter," and Spring Boot pulls in everything else for you.
 
 How it works 
-A Starter is a simple Maven or Gradle dependency that contains a list of other dependencies. It uses transitive dependencies to pull in the actual jars
 For example, if you add spring-boot-starter-web, you don't just get one file. You automatically get:
-•	Spring MVC (The framework)
-
 •	Jackson (For JSON processing)
 •	Tomcat (The embedded web server)
 •	Logging (Logback and SLF4J)
+•	Spring MVC (The framework)
 
 4. Why spring-boot-starter-parent
 In Maven-based Spring Boot projects, the "Parent" is a special project that your project "inherits" from. It doesn’t actually add any code to your app; 
@@ -1039,3 +1037,47 @@ object. Thread B creates an entirely new object. There is zero chance of a "dirt
 You might wonder: "Isn't creating new objects every time slow?"
 In modern JVMs, creating short-lived objects is incredibly cheap. The Garbage Collector (especially G1 or ZGC) is optimized for "young generation" objects. 
     The safety and clarity gained from immutability almost always outweigh the negligible memory overhead of creating a few extra DTOs.
+
+
+28. different logging slf4j etc in springboot and their differences
+1. SLF4J (The Facade)SLF4J (Simple Logging Facade for Java) is not a logging framework; it is an abstraction layer.
+    Why it’s used: It allows you to write logger.info("...") in your code while remaining agnostic about whether you're using Logback, Log4j2, or JUL.
+    Key Feature: Placeholder Support. Instead of string concatenation ("Value is " + val), you use {}. This is faster because if the log level (e.g., DEBUG) is disabled,
+        the string construction never happens.You use Lombok's @Slf4j annotation to automatically inject the log variable into your classes, reducing boilerplate.
+
+2. The Implementations Spring Boot provides support for three main implementations out of the box:
+    Logback (The Default)
+        Status: The default engine for spring-boot-starter-logging.
+        Pros: Faster and smaller footprint than the original Log4j. It supports "Automatic Reloading" of configuration files and is natively designed to work with SLF4J.
+        Config File: logback-spring.xml.Log4j2 
+3.  The Performance Leader)
+        Status: A popular alternative, often used in high-throughput enterprise systems.
+        Pros: Offers Asynchronous Loggers, which use a "LMAX Disruptor" library to handle logging in a separate thread. This can be significantly faster than Logback 
+            in multi-threaded environments.
+        Config File: log4j2-spring.xml.JUL (Java Util Logging)Status: The built-in Java logging.Pros: No external dependencies.Cons: Very limited features compared to
+            Logback/Log4j2. Rarely used in Spring Boot microservices.
+
+Comparison Table
+Feature                SLF4J                  Logback               Log4j2    
+Role                   Facade(Interface)      Implementation        Implementation
+SpringBoot Default     Yes                    Yes                   No (Must exclude Logback)
+Asynchronous Logging   N/A                    Supported             Superior Performance
+Configuration          None(Code only)        XML/Groovy            XML/JSON/YAML
+Modern Features        Placeholders {}        Auto-reload config    Lambda support, Garbage-free
+
+If your IoT project required extreme performance, you might have switched from Logback to Log4j2.
+In Spring Boot, you do this by excluding the default logging starter in your pom.xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter</artifactId>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-log4j2</artifactId>
+</dependency>
