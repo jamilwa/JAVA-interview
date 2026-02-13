@@ -82,19 +82,16 @@ For example, if you add spring-boot-starter-web, you don't just get one file. Yo
 In Maven-based Spring Boot projects, the "Parent" is a special project that your project "inherits" from. It doesn’t actually add any code to your app; 
     instead, it sets the rules, versions, and configurations for everything you do. 
 1. The "Version Manager" (Dependency Management)
-The most important job of the Parent is managing library versions.
-•	Without Parent: You’d have to manually specify the version for every single library (e.g., Hibernate 6.1, Jackson 2.15, SnakeYAML 2.0). If you pick versions
-    that don't like each other, your 
+    •	Without Parent: You’d have to manually specify the version for every single library (e.g., Hibernate 6.1, Jackson 2.15, SnakeYAML 2.0). If you pick versions
+            that are incompatible, your app crashes.
+    •	With Parent: You only specify the version of the Spring Boot Parent once. From that point on, you can add starters without version tags.
 
-app crashes.
-•	With Parent: You only specify the version of the Spring Boot Parent once. From that point on, you can add starters without version tags.
-2. Default Configuration (Sensible Defaults)
-The Parent provides pre-configured settings for your build environment: 
-•	Java Version: It sets the default Java version (like Java 17 or 21).
-•	Resource Filtering: It configures Maven to recognize placeholders like @project.version@ inside your application.properties.
-•	UTF-8 Encoding: It ensures your source code is compiled using UTF-8 by default so you don't run into weird character issues.
+2. Default Configuration
+    •	Java Version: It sets the default Java version (like Java 17 or 21).
+    •	Resource Filtering: It configures Maven to recognize placeholders like @project.version@ inside your application.properties.
+    •	UTF-8 Encoding: It ensures your source code is compiled using UTF-8 by default so you don't run into weird character issues.
+
 What if I can't use the Parent?
-
 Sometimes, a large company already has its own "Corporate Parent" POM that your project must inherit from. Since Maven only allows one parent, you can't use the 
     spring-boot-starter-parent. 
 In that case, you use a "workaround" called Import Scope. You add the spring-boot-dependencies inside your <dependencyManagement> section. It gives you the version
@@ -102,22 +99,17 @@ In that case, you use a "workaround" called Import Scope. You add the spring-boo
 
 
 5. What is CommandLineRunner 
-CommandLineRunner is a simple functional interface used to run a specific piece of code immediately after the application context has fully loaded, but before the
-    application finishes starting up. 
-It is the go-to tool for "startup tasks." 
-How it Works
+CommandLineRunner is a functional interface used to run a specific piece of code immediately after the application context has fully loaded, but before the
+    application starting up. It is the go-to tool for "startup tasks." 
 
-When you implement CommandLineRunner, you override a single method: run(String... args). Spring Boot automatically detects any bean that implements this interface
-    and executes it. 
+How it Works: When you implement CommandLineRunner, you override run(String... args) method. Spring Boot automatically detects any bean that implements
+this interface and executes it. 
 Common Use Cases
 •	Database Seeding: Checking if a database is empty and inserting "Admin" users or reference data.
 •	Logging: Printing a specific message to confirm that external services (like a cache or message queue) are reachable.
 •	Cleanup: Clearing out temporary folders or old cache files on restart.
 •	Reading Arguments: Processing command-line arguments passed when the .jar was executed.
-import org.springframework.boot.CommandLineRunner;
-import 
 
-org.springframework.stereotype.Component;
 
 @Component
 public class MyStartupTask implements CommandLineRunner {
