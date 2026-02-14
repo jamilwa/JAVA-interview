@@ -385,4 +385,32 @@ public @interface Service {
       StripeProcessor), @Autowired works with @Qualifier to choose the right one without you having to write logic to decide.
 
 
-27. How does @ComponentScan works
+27. How does @ComponentScan work
+    @ComponentScan is the engine that drives the automatic discovery of your beans. It tells Spring, "Look in these specific folders, find any classes with a stereotype 
+    annotation, and create an object for them in the container.
+
+  1. How It Works Internally (Step-by-Step):  The process is managed primarily by the ClassPathBeanDefinitionScanner and ComponentScanAnnotationParser:
+      Scanning: When your application starts, Spring reads the basePackages defined in the annotation. If none are specified, it defaults to the package of the class 
+                where the annotation is placed.
+      Resource Discovery: Spring uses a ResourcePatternResolver to find all .class files within those packages and their sub-packages on the classpath.
+      Metadata Reading: Instead of loading every class into memory (which would be slow and memory-intensive), Spring uses the ASM library to read the class metadata
+                        directly from the bytecode.
+      Candidate Filtering: It checks for "Candidate Components"—classes marked with @Component or its specializations (@Service, @Repository, @Controller, @Configuration).
+      Bean Registration: For every candidate found, Spring creates a BeanDefinition (a recipe for the bean) and registers it in the BeanFactory.
+
+  2. Default Behavior in Spring Boot: Spring starts scanning from the package containing your main class and moves downwards into all sub-packages.
+
+    example
+      @SpringBootApplication
+      @ComponentScan(basePackages = {"com.ust.iot", "com.common.utils"})
+      public class IoTApplication { ... }
+
+3. Key Attributes of @ComponentScan
+    Attribute                        Description  
+    basePackages                     A String array specifying the packages to scan.
+    basePackageClasses               A type-safe alternative. Spring scans the package of the classes provided.
+    includeFilters                   Tell Spring to include classes even if they don't have a @Component annotation (e.g., scan by regex or custom type).
+    excludeFilters                   Tell Spring to ignore certain classes, even if they have @Component. Useful for excluding test configurations or legacy code.
+    lazyInit                         If true, the beans found by the scanner won't be created until they are first needed.
+
+
