@@ -366,3 +366,23 @@ public @interface Service {
 }
 
 
+26. how does @Autowired simplify dependency injection
+    @Autowired as the bridge between your class and the Spring ApplicationContext. Without it, you would have to manually "wire" your objects together using the new keyword
+    or complex XML configurations, which leads to tightly coupled code that is difficult to test. 
+    
+    How it works "Under the Hood"
+      AutowiredAnnotationBeanPostProcessor. This is the internal Spring class responsible for processing the @Autowired annotation. It uses Java Reflection to find the
+      annotation and inject the bean after the class is instantiated but before it's ready for use.
+
+  1. Eliminates Boilerplate (The "New" Problem): In standard Java, if OrderService depends on OrderRepository, you have to instantiate the repository manually.
+  2. Automatic Dependency Discovery: Internally, Spring uses a process called Component Scanning. When the application starts, it looks for classes marked with @Component,
+      @Service, or @Repository. When it sees @Autowired, it searches its "Bean Inventory" (the ApplicationContext) for a matching object type and injects it automatically
+  3. Support for Multiple Injection Types: @Autowired is flexible. You can use it in three places.
+      Field Injection	Annotation is placed directly on the field.	Simplest, but makes unit testing harder without Spring.
+      Setter Injection	Annotation is placed on the setter method. Good for optional dependencies that can be changed later.
+      Constructor Injection	Annotation is on the constructor.	Recommended. Ensures the object is always created with its dependencies (Immutability).
+  4. Handling Multiple Implementations (The Ambiguity Resolver): If you have one interface (e.g., PaymentProcessor) but two implementations (PaypalProcessor and
+      StripeProcessor), @Autowired works with @Qualifier to choose the right one without you having to write logic to decide.
+
+
+27. How does @ComponentScan works
