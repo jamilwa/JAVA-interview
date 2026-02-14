@@ -1,11 +1,27 @@
-A. Different bean scopes
- 1. Singleton : The default scope in Spring Boot, where the Spring container creates and manages a single instance of a bean per Spring IoC container. 
-                This is memory efficient because the bean is reused across the application. 
- 2. Prototype : The framework manages the type of bean, but creates a new instance of that class each time it's requested.
- 3. Request : creates a bean instance for a single HTTP request.
- 4. Session : creates a bean instance for an HTTP Session.
- 5. Application : creates the bean instance for a ServletContext.
- 6. websocket : creates it for a particular WebSocket session.
+A. what is bean in springboot
+  A Bean is an object managed by the Spring IoC container. This is essential for our Microservices architecture because it allows us to achieve Loose Coupling. 
+  For example, a Service doesn't need to know how to create a repository class; it simply asks Spring to inject it as a Bean. This makes our code easier to test and maintain
+
+How to Define a Bean
+  There are three primary ways to define a bean in Spring Boot:
+   1. Stereotype Annotations: Mark a class with @Component, @Service, @Repository, or @Controller. Spring will scan these and create beans automatically.
+   2. Java Configuration: Use @Bean on a method inside a @Configuration class. This is useful for third-party libraries (like your KafkaTemplate) where you can't
+      modify the source code to add @Component.
+  3. XML Configuration: (Legacy) Defining beans in an applicationContext.xml file.
+
+The Bean Lifecycle
+   1. Instantiation: Spring calls the constructor to create the object.
+   2. Populate Properties: Spring performs Dependency Injection (e.g., injecting the UserRepository into your UserService).
+   3. Aware Interfaces: If the bean implements interfaces like BeanNameAware, Spring gives it its metadata.
+   4. Initialization: Spring calls methods annotated with @PostConstruct or any custom init() method.
+   5. Ready for Use: The bean is now available for your application logic.
+   6. Destruction: When the container shuts down, Spring calls methods annotated with @PreDestroy to clean up resources (like closing database connections).
+
+Bean Scopes
+  The "Scope" defines how many instances of a bean are created:
+   1. Singleton (Default): Only one instance per Spring container. Most services and repositories are Singletons.
+   2. Prototype: A new instance is created every time it is requested from the container.
+   3. Web Scopes: Request (one per HTTP request), Session (one per HTTP session), and Application
 
 B. The three main types of dependency injection in Spring Boot are:
 Dependency Injection (DI) it allows us to achieve the principle of Inversion Of Control (IoC) i.e. shifting the creation, management and the lifecycle of objects from
