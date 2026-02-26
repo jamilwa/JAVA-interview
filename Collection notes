@@ -231,13 +231,13 @@ faster than HashTable.	                                                slower th
 
 
 
-15.  			          ArrayList				  LinkedList
+15.  			          ArrayList				              LinkedList
 
-structure                uses a dynamic array	  uses a doubly linked list.
-Access                   Fast (O1)				  Slow (On)
-Insert/Delete in middle  Slow (On)                Faster  
-Memory                   Low                      High
-Iteration                Fast                     Slower
+structure                uses a dynamic array	              uses a doubly linked list.
+Access                   Fast (O1)				              Slow (On)
+Insert/Delete in middle  Slow (On)                            Faster  
+Memory                   Low                                  High
+Iteration                Fast because contiguous memory       scattered nodes in memory          Slower
 
 
 
