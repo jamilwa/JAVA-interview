@@ -460,11 +460,14 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 		3. Thread Pooling: Modern apps rarely create threads manually by extending thread class. Instead, they use ExecutorService. These services are designed to work 
 			with Runnable tasks, not Thread subclasses.
 
-
 	Virtual Threads (Project Loom).
 		Before Java 21, every Java thread was a "Platform Thread" (a 1:1 wrapper around an expensive OS thread). If you created 10,000 threads, your system would crash.
 		With Virtual Threads, you can create millions of threads because they are managed by the JVM, not the OS.
 		Best for I/O-bound tasks: (Database calls, API requests, Kafka consuming)
+
+		For simple tasks, Runnable is better than extending Thread because it preserves the inheritance hierarchy. However, for a production microservice, 
+		I prefer using ExecutorService with Virtual Threads (in Java 21). This allows us to handle massive I/O concurrency without the overhead of context-switching
+		between expensive OS platform threads.
 		
 
 30. What is the difference between  start()  and  run()  methods?
@@ -494,9 +497,61 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
      Deadlock can be prevented by Avoiding nested locks, Using a timeout when trying to acquire locks, Ensuring that all threads acquire locks in a consistent order,
           Using higher level concurrency utilities from the  java.util.concurrent  package.
 
-12. What is the  volatile  keyword in Java?
+35. What is the  volatile  keyword in Java?
      A volatile variable's value will be modified by different threads. the value of the variable is always read from the main memory, not from the thread's local cache,
      thus providing visibility of changes made by one thread to others.
 
-13. Explain SYNCHRONIZE keyword
-    SYNCHRONIZE ensures that only one thread can execute the synchronized block or method at any given time, preventing race conditions and ensuring thread safety.
+36. how to handle Thread Interruptions
+	The Core Principle: Interruption is a Request: you cannot force a thread to stop. Calling thread.interrupt() simply sets a boolean flag (the "interrupt status") on 
+		the target thread. It is the responsibility of the code running inside that thread to check the flag and shut down gracefully.
+	How to Handle it Properly
+		Pattern A: Propagate the Exception: If you are writing a utility method and a blocking call (like Thread.sleep() or BlockingQueue.take()) throws an
+			InterruptedException, the best practice is to not catch it at all. Let the caller decide how to handle the shutdown.
+		Pattern B: Restore the Interrupt Status: In Spring Boot, you often cannot throw checked exceptions because you are overriding a method (like run()). 
+			If you catch InterruptedException, you must not "swallow" it. You must restore the flag so higher-level frameworks (like Spring’s TaskExecutor) 
+			know the thread was interrupted.
+
+	Real-World Kafka Scenario: In a banking environment, a "hung" Kafka consumer can cause massive data lags. You use interruption to trigger a graceful shutdown of 
+		the KafkaConsumer.poll().
+	
+	Interview Tip: Why "Restore" the Flag?
+		An interviewer might ask: "Why do I need to call Thread.currentThread().interrupt() inside the catch block?"
+		Answer: When a blocking method like Thread.sleep() throws an InterruptedException, it automatically clears the interrupt flag to false before throwing. 
+				If I catch it and do nothing, the rest of the application won't know an interrupt was requested. By calling interrupt() again, I set the flag back to true, 
+				allowing higher-level logic or thread pool managers to handle the cancellation properly."
+	
+37. What is ExecutorService
+		Instead of creating threads manually, use the ExecutorService. It acts as a manager that maintains a "pool" of threads. You just give it the tasks, and it handles
+		the execution, reusing idle threads to save memory and CPU. It is part of the java.util.concurrent package that manages and executes asynchronous tasks on 
+		background thread.
+		It improves performance by reusing threads instead of creating new ones each time.
+
+		example
+		// Create a thread pool with 2 threads
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+        executor.submit(() -> {
+            System.out.println("Task 1 is running on " + Thread.currentThread().getName());
+        });
+
+        executor.submit(() -> {
+            System.out.println("Task 2 is running on " + Thread.currentThread().getName());
+        });
+
+        // Shut down the executor service
+        executor.shutdown();
+	}
+
+
+		// two types of shutdown are there
+		 executor.shutdown();            // orderly shutdown. waits for tasks to finish
+		 executor.shutdownNow();         // force immediate shutdown. attempts to stop running tasks
+
+	1. "Fixed Thread Pool" : This is the most common implementation. It limits the number of concurrent threads, preventing your application from crashing 
+		under high load (e.g., a burst of Kafka messages).
+
+	When using ExecutorService, you must consider:
+		Thread Pool Sizing: If a task is CPU-bound, set the pool size to the number of available cores. If it's I/O-bound (DB calls, Kafka), you can set it much higher.
+		Naming Threads: In production, use a ThreadFactory to name your threads (e.g., "kafka-consumer-pool-1"). This makes debugging thread dumps 10x faster.
+		Graceful Shutdown: Applications that don't call .shutdown() can leave "zombie" threads running, preventing the JVM from exiting or causing memory leaks.
+
+38. 
