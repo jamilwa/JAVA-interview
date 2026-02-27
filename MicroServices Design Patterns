@@ -163,13 +163,12 @@ Solution : The Spring Cloud config server provides the option to externalize the
                   environmentVariables.SPRING_PROFILES_ACTIVE = "stage"
                                
 
-3. Service Registry and Discovery Pattern (Used in GAP project)  
-Problem : When microservices come into the picture, we need to address a few issues in terms of calling services:
-         With container technology, IP addresses are dynamically allocated to the service instances. Every time the address changes, a consumer service can break 
+3. Service Registry and Discovery Pattern(@EES) (Used in GAP project)  
+Problem : With container technology, IP addresses are dynamically allocated to the service instances. Every time the address changes, a consumer service can break 
          and require manual changes. Each service URL has to be remembered by the consumer and become tightly coupled. So how does the consumer or router know all 
          the available service instances and locations?
-Solution : A service registry needs to be created, which will log the metadata of each producer service. A service instance should register to the registry when 
-         starting and should de-register when shutting down. Therefore, the consumer or router should query the registry and find out the location of the service. 
+Solution : A service registry needs to be created, which will log the metadata of each service. each service instance should register to the registry when 
+         starting and should de-register when shutting down. Therefore, the services should query the registry and find out the location of the other service. 
          The registry also needs to conduct a health check of the producer service to ensure that only working instances of the services are available and able to 
          be consumed through it. 
          There are two types of service discovery:
@@ -230,9 +229,10 @@ Problem : A service generally calls other services to retrieve data, and there i
          Second, the user experience will be poor and unpredictable. 
          How do we avoid cascading service failures and handle failures gracefully?
 Solution : when one service becomes unresponsive and the number of consecutive failures crosses a threshold, the circuit breaker trips To prevent cascading failures .
-           and for the duration of a timeout period, all attempts to invoke the remote service will fail immediately. After the timeout expires, the circuit breaker 
-           allows a limited number of test requests to pass through. If those requests succeed, the circuit breaker resumes normal operation. Otherwise, the timeout period begins again.
-    example : Resilience4j, Netflix Hystrix.         
+           and for the duration of a timeout period, all attempts to invoke the remote service will fail immediately. After the timeout expires, give time to heal.
+          the circuit breaker allows a limited number of test requests to pass through. If those requests succeed, the circuit breaker resumes normal operation.
+          Otherwise, the timeout period begins again.
+    example : Resilience4j.        
 
 
 pom.xml
