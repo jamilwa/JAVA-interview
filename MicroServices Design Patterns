@@ -284,8 +284,7 @@ Solution: One database per microservice must be designed. It must be private to 
 Solution: CQRS suggests splitting the application into two parts — the command side and the query side.
                   The command side: These are requests to change the state of the application. They do not return data but may return a status or acknowledgment. 
                   The query side: These are requests to retrieve data. Queries can return data in various formats, such as DTOs. 
-                  This pattern is often used in conjunction with Event Sourcing and is particularly useful in complex applications where scalability, performance,
-                           and maintainability are concerns
+                  
          Key Concepts of CCQRS
                   Scalability: By separating commands and queries, you can scale them independently. For example, if your application has a high read-to-write ratio, you
                                     can optimize the query side for performance without affecting the command side.
@@ -301,8 +300,8 @@ Solution: CQRS suggests splitting the application into two parts — the command
 Problem : When each service has its own database and a business transaction spans multiple services, how do we ensure data consistency across services? 
          For example, for an e-commerce application where customers have a credit limit, the application must ensure that a new order will not exceed the customer’s
          credit limit. Since Orders and Customers are in different databases, the application cannot simply use a local ACID transaction.
-Solution : A Saga represents a high-level business process that consists of several sub-requests, which each update data within a single service. 
-         Each request has a compensating request that is executed when the request fails. It can be implemented in two ways:
+Solution : A Saga represents a high-level business transaction that consists of several sub-transactions, each sub-transactions update data within a single service. 
+         Each transaction has a compensating transaction that is executed when the request fails. It can be implemented in two ways:
          1. Choreography – When there is no central coordination, each service produces and listens to another service’s events and decides if an action should be
                            taken or not.
          2. Orchestration – An orchestrator (object) takes responsibility for a saga’s decision-making and sequencing business logic.
@@ -440,15 +439,15 @@ Solution : Each service needs to have an endpoint that can be used to check the 
     actions on a web application in which they are authenticated
 
     How CSRF Works
-         User Authentication: A user logs into a web application (e.g., a banking site) and receives an authentication cookie.
-         Malicious Site: The user visits a malicious website while still logged into the web application.
-         Unwanted Request: The malicious site sends a request to the web application (e.g., transferring money) using the user's credentials (the browser
+         User Authentication: A user logs into a application (e.g., a banking site) and receives an authentication cookie.
+         Malicious Site: The user visits a malicious website while still logged into the application.
+         Unwanted Request: The malicious site sends a request to the application (e.g., transferring money) using the user's credentials (the browser
                            automatically includes the authentication cookie).
          Execution: The web application processes the request as if it were a legitimate action initiated by the user, potentially leading to unauthorized actions.
 
    CSRF Protection in Spring Security
-         Spring Security provides built-in support to protect against CSRF attacks. When CSRF protection is enabled, Spring Security requires a CSRF token to be
-         included in state-changing requests (like POST, PUT, DELETE). Here’s how it works:
+         Spring Security provides built-in support to protect against CSRF attacks. Spring Security requires a CSRF token to be included in state-changing 
+         requests (like POST, PUT, DELETE). Here’s how it works:
          
          CSRF Token Generation: When a user accesses a web application, Spring Security generates a unique CSRF token and associates it with the user's session.
          Token Inclusion: The CSRF token must be included in any state-changing request. This can be done by adding it as a hidden field in forms or as a request 
