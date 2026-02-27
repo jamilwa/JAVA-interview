@@ -63,7 +63,65 @@ Insert/Delete in middle  Slow (On)                            Faster
 Memory                   Low                                  High
 Iteration                Fast because contiguous memory       Slower becuase scattered nodes in memory 
 
-7. 
+7. Comparator
+class Employee {
+    String name;
+    int age;
 
+    // add Constructor, setter, getter and tostring
+}
+
+class AgeComparator implements Comparator<Employee> {
+    @Override
+    public int compare(Employee e1, Employee e2) {
+        return Integer.compare(e1.age, e2.age); // Compare by age
+    }
+}
+
+class NameComparator implements Comparator<Employee> {
+    @Override
+    public int compare(Employee e1, Employee e2) {
+        // Compare by name in lexicographical order
+        return e1.name.compareTo(e2.name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List<Employee> employees = Arrays.asList(new Employee("Alice", 30), new Employee("Charlie", 35), new Employee("Bob", 25), new Employee("Bob", 20) );
+
+        Collections.sort(employees, new NameComparator());     				// is used if there are no setters and getters, but only constructor is there.
+		System.out.println(employees); 						// output [Alice (30), Bob (25), Bob (20), Charlie (35)]
+
+        Collections.sort(employees, Comparator.comparing(Employee::getName)); 
+		System.out.println(employees); 						// output [Alice (30), Bob (25), Bob (20), Charlie (35)]
+
+        Collections.sort(employees, Comparator.comparing(Employee::getName).thenComparing(Employee::getAge));        
+		System.out.println(employees); 						// output [Alice (30), Bob (20), Bob (25), Charlie (35)]
+
+        Collections.sort(employees, Comparator.comparing(Employee::getName, Comparator.reverseOrder())
+      .thenComparing(Employee::getAge, Comparator.reverseOrder())); 
+		System.out.println(employees); 						// output [Charlie (35), Bob (25), Bob (20), Alice (30)]
+
+
+	if Comparator is not to be used in Collections.sort() by name & then by age, then we can make use of below code to do sorting
+	
+	class EmployeeComparator implements Comparator<Employee> {
+	 
+	    @Override
+	    public int compare(Employee e1, Employee e2)
+	    {
+		// 1st level comparison
+	        int NameCompare = e1.getName().compareTo(e2.getName());
+	        int AgeCompare = Integer.compare(e1.Age, e2.Age);
+	 
+	        // 2nd level comparison
+	        return (NameCompare == 0) ? AgeCompare : NameCompare;
+		}
+
+		and in main class use below
+		Collections.sort(employees, new EmployeeComparator());
+
+8. 
 
 
