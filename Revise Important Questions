@@ -554,4 +554,82 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 		Naming Threads: In production, use a ThreadFactory to name your threads (e.g., "kafka-consumer-pool-1"). This makes debugging thread dumps 10x faster.
 		Graceful Shutdown: Applications that don't call .shutdown() can leave "zombie" threads running, preventing the JVM from exiting or causing memory leaks.
 
-38. 
+38. How to customize Exception handling in springboot
+Step-by-Step Example
+1) Create a Custom Exception: This exception represents a business problem (e.g., resource not found), This extends RuntimeException so you don’t have to catch 
+	it everywhere — Spring will handle it globally.:
+
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+	}
+
+
+2) Throw the Exception in a Controller
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable Long id) {
+        // If user not found, throw your custom exception
+        throw new ResourceNotFoundException("User with ID " + id + " not found");
+    }
+	}
+
+
+When this exception is thrown, Spring will route it to your global handler.
+
+3) Global Exception Handler with @RestControllerAdvice
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex) {
+                ErrorResponse error = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(),
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    // Handle other generic exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Internal server error: " + ex.getMessage(),
+                LocalDateTime.now()
+        );
+
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+	}
+
+4) Custom Error Response Structure (optional)
+
+For consistent API responses, define a model like this:
+
+public class ErrorResponse {
+
+    private int status;
+    private String message;
+    private LocalDateTime timestamp;
+
+    public ErrorResponse(int status, String message, LocalDateTime timestamp) {
+        this.status = status;
+        this.message = message;
+        this.timestamp = timestamp;
+    }
+
+    // getters + setters
+}
+
+Key points: @RestControllerAdvice automatically serializes returned objects to JSON.
+
+
+39. 
