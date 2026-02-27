@@ -1,1 +1,69 @@
-A
+1.                  Array                                                                          Arraylist 
+    Array is static in size.	                                                	ArrayList is dynamic in size.
+    It is mandatory to provide the size of an array while using new keyword     	We can create an instance of ArrayList without specifying its size. 
+     ex:   int[] myArray = new int[6];                                              	 initial capacity is 10.
+           myArray[0] = 3;
+    It performs fast because of fixed size.	                                		The resize operation slows down the performance.
+    length variable to determine the size of an array.	                        	size() method to determine the size of ArrayList.
+    stores both objects and primitives type.	                                	doesn't store primitive type. It automatically converts primitive type to object.
+    can add elements in an array by using the assignment operator.	        		the add() method to add elements in the ArrayList.
+    throws ArrayIndexOutofBoundException											                  throws IndexOutofBoundException
+
+
+2. Arrays class methods are    (ABCDES) ---- Array BinarySearch CopyOf DeepToString Equals Sort
+int[] numbers = {1, 2, 3, 7, 4, 5};
+ void       Arrays.sort(numbers);                          // Output: [1, 2, 3, 4, 5, 7]
+               Arrays.sort(numbers[], Comparator.reverseOrder())           // Sorting the array in descending order. note: it works on object like Integer not on int.
+               Arrays.sort(numbers, 3,5);                                 // sorts only numbers falling between fromIndex 3 and toIndex 5
+
+int[] copy = Arrays.copyOf(numbers, 3);
+               Arrays.toString(copy));                         // Output: [1, 2, 3]
+
+ Arrays.binarySearch(numbers, 3);                  // output:  2 which is the index position of the value 3
+
+3. Access modifiers
+        Default (Package-Private): accessible only within its own package.    DOP
+        Protected: accessible in subclasses of other packages.  ProSOP
+
+4. How to make collection threadsafe
+	1. Using Synchronized Collections : Java provides synchronized wrappers for collections through the Collections.synchronizedXXX methods like 
+		Collections.synchronizedList(), Collections.synchronizedSet(), Collections.synchronizedMap.
+    examplee:   
+    	List<Integer> list = Collections.synchronizedList(new ArrayList<>());
+
+  2. Using Concurrent Collections : Java provides a set of concurrent collections in the java.util.concurrent package. 
+	example:
+		ConcurrentHashMap: A thread-safe variant of HashMap that allows concurrent read and write operations.
+		CopyOnWriteArrayList: A thread-safe variant of ArrayList where all mutative operations (like add, set, etc.) are implemented by making a fresh copy
+					of the underlying array.
+		ConcurrentSkipListSet: This is a thread-safe variant of NavigableSet that uses a skip list for its underlying data structure. It allows concurrent 
+					access and maintains a sorted order.
+		BlockingQueue: An interface that represents a thread-safe queue that supports operations that wait for the queue to become non-empty when retrieving 
+					an element and wait for space to become available in the queue when storing an element.
+	3. Using ThreadLocal : If you want to maintain a separate instance of a collection for each thread, you can use ThreadLocal. This is useful when you want to
+				avoid contention between threads.
+
+5. if we have Collection.SynchronizedMap() then why to use concurrentHashmap
+	Collections.synchronizedMap(): Provides serial access, meaning only one thread can access the map at a time for read or write operations. This can lead to
+				       increased waiting times and reduced performance when multiple threads are involved.
+				       Supports null keys and values, depending on the underlying map implementation.
+				       The iterator is fail-fast, meaning it throws a ConcurrentModificationException if the map is modified while iterating
+				       Suitable for applications where data consistency is more critical than performance.
+	ConcurrentHashMap: Allows multiple threads to read and write concurrently. It uses a segmented locking mechanism, which means that only a portion of the map
+				is locked during write operations, allowing for higher throughput.
+				Does not allow null keys or values, which helps avoid ambiguity in concurrent environments.
+				The iterator is fail-safe, allowing modifications during iteration without throwing exceptions.
+				Ideal for high-performance applications where multiple threads frequently read and write data.
+
+6.   			                      ArrayList				              LinkedList
+
+structure                uses a dynamic array	                uses a doubly linked list.
+Access                   Fast (O1)				                    Slow (On)
+Insert/Delete in middle  Slow (On)                            Faster  
+Memory                   Low                                  High
+Iteration                Fast because contiguous memory       Slower becuase scattered nodes in memory 
+
+7. 
+
+
+
