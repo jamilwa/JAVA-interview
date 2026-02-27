@@ -229,9 +229,17 @@ Constructors using new operator (TreeSet::new)
 13. why do we use IntStream
         the Stream API is designed to work with objects, not primitive types directly. However, the Stream API provides special primitive-type streams to handle
         primitive values such as 
-                1. IntStream: A stream of primitive ints. the methods of InstStream are
-					sum, average, min, count, summaryStatistics
-				example: int sum = IntStream.of(numbers).sum();
+        IntStream: A stream of primitive ints. 
+
+	How do you create an IntStream in Java?
+		IntStream.of(numbers[])
+             or by converting other data structures like arrays or collections using
+        Arrays.stream(int[] array) or 
+        Collection.stream().mapToInt().
+
+	the methods of InstStream are	sum, average, min, count, summaryStatistics
+		example: int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+				 int sum = IntStream.of(numbers).sum();
 
 example:   int[] intArray = {1, 2, 3, 4, 5};
            IntStream a = Arrays.stream(intArray);        // Using IntStream
@@ -244,6 +252,128 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
     example:    IntStream intStream = Arrays.stream(intArray);
                 List<Integer> resultList = intStream.boxed().collect(Collectors.toList());				 // Convert IntStream to Stream<Integer>
 
-14. 
+14. Default method 
+	a default method is a method that can be defined in an interface with a body. It allow developers to add new methods to interfaces without breaking the 
+	existing implementations of those interfaces. 
+	for example: if i have a old interface with 2 methods, all the class which is implementing this interface should override these 2 methods. few months later if i 
+		add another method to this interface, then the existing classes who have implemented this interface should override this new method also, if we dont do then the 
+		implementing classes will break and throw errors. Therefore it is added for backward compatibility so that old interfaces can be used to leverage the lambda expression.
+	For example, ‘List’ or ‘Collection’ interfaces do not have ‘forEach’ method declaration. Thus, adding such method will simply break the collection framework implementations
+	example: Collection interface has below default method
+		default Stream<E> stream() {
+        return StreamSupport.stream(spliterator(), false);
+    }
+
+15. What is Static Keyword in Java
+     static keyword is used for Memory Management
+
+     The static keyword can be applied to:
+     Variables: Static variables are initialized only once at the start of the program. If not explicitly initialized, they are assigned default 
+                values (e.g., 0 for integers, null for objects). They are also known as class variables. 
+                A single copy of a static variable is shared among all instances of the class. which helps in conserving memory when multiple instances of a class
+                are created.
+     Methods: Static methods and variables can be accessed directly using the class name and doesn't need any object. 
+     Blocks: Static blocks are executed even before the main method is executed. They are also Known as static initialization blocks.
+     Nested Classes: Static nested classes can be defined within a class.
+
+     THIS and SUPER cannot be used in static contexts because they refer to instance-specific data. THIS refers to the current object, and SUPER refers to the superclass
+     of the current object.
+
+     Static methods cannot be overridden. If a subclass defines a static method with the same name and parameters as a static method in the superclass, 
+     it is known as method hiding, not overriding. The method that gets called is determined by the reference type, not the object type. 
+
+16. What is the abstraction?    HIDSOF
+    Abstraction is a process of hiding the implementation details and showing only functionality to the user.  Abstraction enables you to focus on what the object does
+   instead of how it does it. It can be achieved through abstract classes and interfaces in Java.
+
+17. What is the difference between abstraction and encapsulation?
+    Abstraction hides the implementation details whereas encapsulation wraps code and data into a single unit.
+    The main purpose of encapsulation is to protect the internal state of an object and ensure that it can only be modified in controlled ways. 
+    This enhances data integrity and security.
+    Encapsulation is achieved using:
+    Access Modifiers: Keywords like private, protected, and public that control the visibility of class members (variables and methods).
+    Getters and Setters: Public methods that allow controlled access to private variables.
+
+18.  What is the interface?
+ The interface is a blueprint for a class that has only constants (static final variables) and abstract methods. It is used to achieve full abstraction and 
+ multiple inheritance. There can be only abstract methods in the Java interface, not method body. Java Interface also represents the IS-A relationship. It cannot be
+ instantiated just like the abstract class. However, we need to implement it to define its methods. Traditionally, interfaces could only contain abstract methods.
+ However, since Java 8, interfaces can also include:
+ Default Methods:  Methods with a body that can provide default behavior. Implementing classes can choose to override these methods.
+ Static Methods:  Methods that belong to the interface itself and can be called without an instance of the interface.
+ Private Methods:  Methods that can be used within the interface to share code between default methods.
+
+19. What is a marker interface?
+    A marker interface is an interface that does not contain any methods or fields. Its primary purpose is to provide metadata about a class to the 
+    Java runtime or to other parts of the program. The syntax for it is like below
+       public interface Serializable{ } 
+
+   Common Examples of Marker Interfaces
+     Serializable: Serializable interface indicates that its objects can be serialized (converted into a byte stream) and deserialized (reconstructed from a byte stream).
+     Cloneable: Cloneable interface indicates that it allows its objects to be cloned (i.e., creating a copy of the object).
+     Remote: In Java RMI (Remote Method Invocation), the Remote interface indicates that a class can be used to define remote objects.
+
+20. Difference between StringBuffer and StringBuilder
+       StringBuffer is thread-safe and suitable for multi-threaded environments but is slower due to synchronization.
+       StringBuilder is not thread-safe but is faster and more efficient for single-threaded applications.
+
+21. What is Garbage Collection?
+     Garbage Collection (GC) in Java is an automatic memory management process that helps in reclaiming memory by removing objects that are no longer in use or reachable
+     in a program. This process is to ensure efficient memory usage in applications. 
+     GC is automatic, meaning that developers do not need to manually free memory. The Java Virtual Machine (JVM) handles this process, allowing developers to focus
+     on application logic rather than memory management.
+     Garbage Collection (GC) runs periodically and can be triggered by various factors, such as memory pressure or explicit requests from the application.
+     Memory Management:  In Java, memory is divided into several areas, primarily the Heap and the Stack. The Heap is where objects are allocated, while the Stack is
+                         used for method calls and local variables. When an object is created, memory is allocated for it in the Heap. Once there are no references to
+                         that object, it becomes eligible for garbage collection. 
+
+     Types of Garbage Collection
+         1.  Serial Garbage Collector: A simple, single-threaded garbage collector that is suitable for small applications with a single thread. It pauses all 
+             application threads during garbage collection.
+         2. Parallel Garbage Collector: A multi-threaded garbage collector that uses multiple threads to perform garbage collection in parallel. It is suitable
+            for applications that require high throughput.
+
+     Garbage Collection Process - The garbage collection process generally involves the following steps:
+         Marking: The garbage collector identifies which objects are reachable and marks all reachable objects.
+         Sweeping: After marking, the garbage collector sweeps through the heap and collects all unmarked (unreachable) objects, reclaiming their memory.
+         Compacting (optional): In some garbage collection algorithms, the memory is compacted to reduce fragmentation. This involves moving reachable objects
+                                together to create contiguous free space.
+
+     Important Methods Related to Garbage Collection
+          1. System.gc(): The System.gc() method is a request to the JVM to perform garbage collection. However, it depends upon the JVM whether to perform it or not.
+          2. finalize():  This is a protected method of the Object class that can be overridden by a class to perform cleanup operations before an object is 
+                          garbage collected. The finalize() method is called by the garbage collector when it determines that there are no more references to the object.
+
+              example:
+              @Override
+               protected void finalize() throws Throwable {
+                       try {
+                              // Cleanup code, e.g., closing resources
+                              System.out.println("Object is being garbage collected");
+                       } finally {
+                            super.finalize(); 
+
+22. What is the transient keyword?
+ 		If you define any data member as transient, it will not be serialized. By determining transient keyword, the value of variable need not persist when it is restored.
+
+23. How to make a read-only class in Java?
+    A class can be made read-only by making all of the fields private. The read-only class will have only getter methods which return the private property of the class
+    to the main method
+
+24.  How can we create an immutable class in Java?
+     We can create an immutable class by defining a final class having all of its members as final
+
+25. hashmap internal working
+		Hashmap
+		a. map doesnt maintain order, hashmap initial capacity is 16, using this value node array of size 16 is created. we can have 1 null key whose index will be zero in bucket
+		b. hashcode is generated for keys using their ascii codes
+		c. index is generated from hashcode using modulo 10 etc.
+		d. this index is used to determine location of the value to be stored in bucket/node type array
+		e. Node is a nested class within hashmap class. A node array is created with size 16 because default initial capacity of node array is 16
+		f. The node structure is like     [ hashcode, key, value, null ]
+		. when collision occurs due to getting same index from hashcode, then a linkedlist is created on same index & elements are stored
+		. maximum 8 collisions are allowed to create linked list in a single index, if collisions > 8, then a Balanced tree(Red black tree) is created
+		 
+
 
 
