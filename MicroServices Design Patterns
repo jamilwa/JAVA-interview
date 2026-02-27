@@ -76,7 +76,7 @@ spring:
 
 NOTE: Rate limiting -  is a mechanism that controls the number of requests an API can handle within a given time period.(no. of Request Api TimE), calculated in 
          requests per second (RPS)
-         How it works: If a client exceeds the rate limit, the server may respond with an error message, say no to the request, or delay its response. 
+         How it works: If a client exceeds the rate limit, the server may respond with an error message like HTTP 429 (Too Many Requests). 
          Benefit:  ensure that resources are available to all users.
                    ensur that APIs perform well to provide a good user experience
                    protects the system against malicious activity.
@@ -85,9 +85,54 @@ NOTE: Rate limiting -  is a mechanism that controls the number of requests an AP
 
 How to implement rate limiting in Spring Boot:
 Spring Cloud Gateway:
-Use the built-in "Rate Limiting Filter" in Spring Cloud Gateway, which integrates with Redis to manage rate limits. 
+Spring Cloud Gateway includes a built-in RequestRateLimiter filter that you can apply per route — typically backed by Redis and implemented using a Token-Bucket algorithm.
+Example: Redis-Backed Rate Limiting
+1) Add Dependencies
+         <dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-gateway</artifactId>
+</dependency>
 
- -------------Cross-Cutting Concern Patterns----------------
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+</dependency>
+
+2) Define a Key Resolver: You must supply a KeyResolver that determines how you bucket traffic (e.g., per user IP, API key, user ID):
+
+@Configuration
+public class RateLimiterConfig {
+
+    @Bean
+    public KeyResolver ipKeyResolver() {
+        return exchange -> 
+            Mono.just(exchange.getRequest().getRemoteAddress().getAddress().getHostAddress());
+    }
+}
+
+3) Use the Rate Limiter in Gateway Routes
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: product-api
+          uri: lb://product-service
+          predicates:
+            - Path=/products/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipKeyResolver}"
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+                redis-rate-limiter.requestedTokens: 1
+
+replenishRate: tokens added per second (e.g., 10 req/sec)
+🔹 burstCapacity: tokens allowed to accumulate for short bursts (~20)
+🔹 requestedTokens: tokens used per request (default 1)
+💡 If there are no tokens available, the gateway returns HTTP 429.
+
+-------------Cross-Cutting Concern Patterns----------------
 2. Externalized Configuration (Used in GAP project)
 Problem : A service typically calls other services and databases as well. For each environment like dev, QA, UAT, and/or prod, the endpoint URL or other configuration
          properties might be different. A change in any of those properties might require a re-build as well as re-deploy of the service. How do we avoid code 
