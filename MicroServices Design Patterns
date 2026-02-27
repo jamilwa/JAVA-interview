@@ -8,6 +8,7 @@ Externalized config, Gateway, Saga, Health Check, Event Driven communication, Lo
          Clients need to communicate with multiple services (e.g., User, Order, Product). Exposing all services directly means:
              Clients must know the location details of every microservice.
             Repeated Effort: Concerns like authentication, rate-limiting, and logging are repeated in every service.
+(ABCE)
 Authentication and Authorization: Implement filters in the gateway to handle user authentication and authorization checks before forwarding requests to backend services. 
 Load Balancing: Configure the gateway to load balance requests across multiple instances of a backend service. 
 Caching: Cache frequently accessed data at the gateway level to improve performance. 
@@ -73,9 +74,9 @@ spring:
 
 
 
-NOTE: Rate limiting -  is a mechanism that controls the number of requests an API can handle within a given time period.
-         How it works: Rate limits are calculated in requests per second (RPS). 
-                       If a client exceeds the rate limit, the server may respond with an error message, say no to the request, or delay its response. 
+NOTE: Rate limiting -  is a mechanism that controls the number of requests an API can handle within a given time period.(no. of Request Api TimE), calculated in 
+         requests per second (RPS)
+         How it works: If a client exceeds the rate limit, the server may respond with an error message, say no to the request, or delay its response. 
          Benefit:  ensure that resources are available to all users.
                    ensur that APIs perform well to provide a good user experience
                    protects the system against malicious activity.
