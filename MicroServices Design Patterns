@@ -3,7 +3,7 @@ Microservices Design patterns (CCD EGS HELP R&D )  Circuit Breaker, Command Quer
 Externalized config, Gateway, Saga, Health Check, Event Driven communication, Log Aggregation, Performance Monitoring, Service Registry & Discovery )
 -----------------------Integration Patterns------------------
 
-1. API Gateway Pattern (Used in GAP project)        GED : short for Gateway Enable Discovery Client
+1. API Gateway Pattern (Used in GAP project)        GEDE : short for Gateway Enable Discovery Client Eureka.
          The API Gateway acts as a single entry point that aggregates and routes requests to the relevant microservices while handling common concerns.
          Clients need to communicate with multiple services (e.g., User, Order, Product). Exposing all services directly means:
              Clients must know the location details of every microservice.
@@ -14,10 +14,25 @@ Caching: Cache frequently accessed data at the gateway level to improve performa
 Error Handling: Implement error handling mechanisms in the gateway to gracefully handle errors from backend services and provide appropriate responses to the client. 
 
 Example: Spring Cloud Gateway.
+pom.xml
+       <!-- Gateway -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-gateway</artifactId>
+</dependency>
 
-   pom.xml
-       <artifactId>spring-cloud-starter-gateway</artifactId>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+<!-- For Eureka discovery client -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+
+<!-- Load balancer so lb:// can work -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+</dependency>
+
 
 main.java      
    @SpringBootApplication
@@ -30,26 +45,31 @@ main.java
 
 
 application.yml
-server:
-  port: 8080
-
 spring:
-  cloud:
-    gateway:
-      routes:
-        - id: user-service
-          uri: lb://USER-SERVICE
-          predicates:
-            - Path=/users/**
-        - id: order-service
-          uri: lb://ORDER-SERVICE
-          predicates:
-            - Path=/orders/**
+  application:
+    name: api-gateway
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true          # automatically discover all registered services
+          lower-case-service-id: true
+
+      # Optionally add manual routes too
+      routes:
+        - id: custom-order-route
+          uri: lb://order-service  # uses service ID from Eureka
+          predicates:
+            - Path=/orders/**       # matches /orders/**
+          filters:
+            - StripPrefix=1         # removes /orders prefix before forwarding
 
 
 
