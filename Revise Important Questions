@@ -427,9 +427,10 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
     
 
 29. How do you create a thread in Java?
-	1. By extending the  Thread  class:
+	1. Extending the Thread Class:  You create a subclass that extends Thread and overrides the run() method.
            example
            class MyThread extends Thread {
+				@override
                public void run() {
                    // code to be executed
                 }
@@ -438,7 +439,7 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
                 MyThread thread = new MyThread();
                 thread.start();
    
-        2. By implementing the  Runnable  interface:
+        2. By implementing the Runnable interface: define a task by implementing the Runnable interface and pass that task to a Thread object.
            example
            class MyRunnable implements Runnable {
            public void run() {
@@ -447,6 +448,24 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 
            Thread thread = new Thread(new MyRunnable());
            thread.start();
+
+		3. Using Lambda Expressions (Modern Short-hand)
+			Since Runnable is a functional interface, you can skip the class definition entirely.
+
+	 which is better?
+		implementing Runnable is superior to extending Thread for three reasons:
+		1. Multiple Inheritance: Java allows a class to extend only one other class. If you extend Thread, your class cannot inherit from any other base class.
+		2. Separation of Concerns: Runnable represents the task to be performed(what to do), while Thread is the worker that executes it(how to run it).
+			Decoupling them makes your code cleaner and more modular.
+		3. Thread Pooling: Modern apps rarely create threads manually by extending thread class. Instead, they use ExecutorService. These services are designed to work 
+			with Runnable tasks, not Thread subclasses.
+
+
+	Virtual Threads (Project Loom).
+		Before Java 21, every Java thread was a "Platform Thread" (a 1:1 wrapper around an expensive OS thread). If you created 10,000 threads, your system would crash.
+		With Virtual Threads, you can create millions of threads because they are managed by the JVM, not the OS.
+		Best for I/O-bound tasks: (Database calls, API requests, Kafka consuming)
+		
 
 30. What is the difference between  start()  and  run()  methods?
     The  start()  method is used to begin the execution of a thread. It invokes the  run() method which executes the code in a new thread. 
