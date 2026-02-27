@@ -122,6 +122,128 @@ public class Main {
 		and in main class use below
 		Collections.sort(employees, new EmployeeComparator());
 
-8. 
+8. What is Functional Programming
+	a programming style that uses pure functions to solve problems. It emphasizes writing concise, readable code that's easier to maintain and Test. it eliminates
+	the need of anonymous class and gives a functional programming capability to Java. 
+	Lambda expressions are used to define implementation of a functional interface.
+
+		Types of Functional Interfaces
+	Java provides several built-in functional interfaces in the java.util.function package.
+	1. Predicate : The Predicate interface is often used for filtering and matching conditions.
+		Description: Represents a function that takes one argument and returns a boolean.
+		Method: boolean test(T t)
+		
+		Example:  filter()
+			Predicate<String> isEmpty = str -> str.isEmpty();
+			System.out.println(isEmpty.test("")); // true
+
+	2. Function
+		Description: Represents a function that takes one argument and produces a result.
+		Method: R apply(T t)
+		
+		Example: map, flatmpa,sorted, disticnt
+			Function<String, Integer> stringLength = str -> str.length();
+			System.out.println(stringLength.apply("Hello")); // 5
+
+	3. Consumer
+		Description: Represents an function that takes a one argument and returns no result. It is used for operations that consume data.
+		Method: void accept(T t)
+		
+		Example:   forEach, Peek
+			Consumer<String> print = str -> System.out.println(str);
+			print.accept("Hello, World!"); // Prints: Hello, World!
+
+	4. Supplier
+		Description: Represents a supplier of results. It does not take any arguments and returns a result.
+		Method: T get()
+
+		Example:
+			Supplier<String> supplier = () -> "Hello, Supplier!";
+			System.out.println(supplier.get()); // Hello, Supplier!
+
+	5. UnaryOperator
+		Description: Represents a function that takes a single argument of type T and returns a result of the same type.
+		Method: T apply(T t)
+
+		Example:
+			UnaryOperator<Integer> square = x -> x * x;
+			System.out.println(square.apply(5)); // 25
+
+	6. BinaryOperator
+		Description: Represents a function that takes two arguments of the same type and returns a result of the same type.
+		Method: T apply(T t1, T t2)
+
+		Example:
+			BinaryOperator<Integer> add = (a, b) -> a + b;
+			System.out.println(add.apply(5, 10)); // 15
+
+9.  A method reference can be used to point the following types of methods −
+Static methods
+Instance methods
+Constructors using new operator (TreeSet::new)
+
+10. Optional - Optional class is a container object that may or may not contain a value. It was introduced as part of the import java.util.Optional; package to help
+		developers avoid NullPointerExceptions and to provide a more expressive way to handle optional values.
+
+	Creating an Optional: -You can create an Optional instance in several ways:
+	1. Empty Optional:  Optional<String> emptyOptional = Optional.empty();			// it creates an empty Optional instance, it does not contain a value
+	2. Optional with a Non-null Value: Optional<String> nonNullOptional = Optional.of("Hello, World!");	// it creates an Optional with a non-null value. If the
+															value is null, it throws a NullPointerException
+	3. Optional that Allows Null Values:	Optional<String> nullableOptional = Optional.ofNullable(null); 		// it creates an Optional that can hold a value 
+															that may be null. If the value is null, it creates 
+															an empty Optional
+
+
+	Common Methods of Optional  (Get IfOrElse MapIsFlat)
+	1. isPresent(): Checks if a value is present.
+		Optional<String> optional = Optional.of("Hello");
+		if (optional.isPresent()) {
+    			System.out.println(optional.get()); // Prints: Hello
+		}
+	
+	2. ifPresent(Consumer<? super T> action): Executes the given action if a value is present.
+		optional.ifPresent(value -> System.out.println(value)); // Prints: Hello
+
+	3. get(): Returns the value if present; otherwise, it throws NoSuchElementException.
+		String value = optional.get(); // Returns "Hello"
+
+	4. orElse(T other): Returns the value if present; otherwise, returns the provided default value.
+		String value = emptyOptional.orElse("Default Value"); // Returns "Default Value"
+
+	5. orElseGet(Supplier<? extends T> other): Returns the value if present; otherwise, invokes the provided supplier and returns the result.
+		String value = emptyOptional.orElseGet(() -> "Generated Value"); // Returns "Generated Value"
+
+	6. orElseThrow(Supplier<? extends X> exceptionSupplier): Returns the value if present; otherwise, throws an exception created by the provided supplier.
+		String value = emptyOptional.orElseThrow(() -> new IllegalArgumentException("Value is absent"));
+
+	7. map(Function<? super T, ? extends U> mapper): If a value is present, applies the provided mapping function to it and returns an Optional describing the result.
+		Optional<Integer> lengthOptional = optional.map(String::length); // Returns Optional[5]
+
+	8. flatMap(Function<? super T, Optional<U>> mapper): Similar to map, but the mapping function must return an Optional
+		Optional<String> optionalValue = Optional.of("Hello");
+		Optional<Integer> lengthOptional = optionalValue.flatMap(value -> Optional.of(value.length())); // Returns Optional[5]
+
+
+11. Collectors (Collectors Group Joining parti, toList counting summarizingInt) 
+12. List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, SummrayforEa)
+13. why do we use IntStream
+        the Stream API is designed to work with objects, not primitive types directly. However, the Stream API provides special primitive-type streams to handle
+        primitive values such as 
+                1. IntStream: A stream of primitive ints. the methods of InstStream are
+					sum, average, min, count, summaryStatistics
+				example: int sum = IntStream.of(numbers).sum();
+
+example:   int[] intArray = {1, 2, 3, 4, 5};
+           IntStream a = Arrays.stream(intArray);        // Using IntStream
+           int sum = a.sum();           				// Example operations on IntStream
+You can convert a regular Stream to a primitive-type stream using methods like mapToInt, mapToLong, or mapToDouble.
+   example:  List<Integer> numbersList = Arrays.asList(1, 2, 3, 4, 5);
+            IntStream b = numbersList.stream().mapToInt(Integer::intValue);
+
+Conversely, you can convert a primitive-type stream to a regular Stream using methods like boxed().
+    example:    IntStream intStream = Arrays.stream(intArray);
+                List<Integer> resultList = intStream.boxed().collect(Collectors.toList());				 // Convert IntStream to Stream<Integer>
+
+14. 
 
 
