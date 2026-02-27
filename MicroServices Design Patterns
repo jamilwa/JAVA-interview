@@ -262,9 +262,9 @@ public class OrderService {
 
 application.yml
 resilience4j.circuitbreaker.instances.default.registerHealthIndicator=true
-resilience4j.circuitbreaker.instances.default.slidingWindowSize=10                                   // The number of calls to consider for the failure rate
-resilience4j.circuitbreaker.instances.default.failureRateThreshold=50                               // The percentage of failures that will trigger the circuit breaker to open.
-resilience4j.circuitbreaker.instances.default.waitDurationInOpenState=10000                        //  The time the circuit breaker stays open before transitioning to half-open.
+resilience4j.circuitbreaker.instances.default.slidingWindowSize=10                      // The number of calls to consider for the failure rate
+resilience4j.circuitbreaker.instances.default.failureRateThreshold=50                   // The percentage of failures that will trigger the circuit breaker to open.
+resilience4j.circuitbreaker.instances.default.waitDurationInOpenState=10000             //  The time the circuit breaker stays open before transitioning to half-open.
  
 
 
@@ -280,18 +280,21 @@ Solution: One database per microservice must be designed. It must be private to 
          Some business transactions need to query data that is owned by multiple services.
 
 6. Command Query Responsibility Segregation (CQRS)
-         Once we implement database-per-service, there is a requirement to query, which requires joint data from multiple services — it's not possible.
+         Once we implement database-per-service, there is a requirement to query, joint data from multiple services — it's not possible.
 Solution: CQRS suggests splitting the application into two parts — the command side and the query side.
                   The command side: These are requests to change the state of the application. They do not return data but may return a status or acknowledgment. 
-                  The query side: These are requests to retrieve data. They do not change the state of the application. Queries can return data in various formats, such as DTOs. 
-                  This pattern is often used in conjunction with Event Sourcing and is particularly useful in complex applications where scalability, performance, and maintainability are concerns
+                  The query side: These are requests to retrieve data. Queries can return data in various formats, such as DTOs. 
+                  This pattern is often used in conjunction with Event Sourcing and is particularly useful in complex applications where scalability, performance,
+                           and maintainability are concerns
          Key Concepts of CCQRS
-                  Scalability: By separating commands and queries, you can scale them independently. For example, if your application has a high read-to-write ratio, you can optimize the query side for performance without
-                               affecting the command side.
-                  Flexibility: Different data models can be used for commands and queries. This allows you to optimize the data structure for each operation type. For instance, you might use a normalized database for 
-                               commands and a denormalized view for queries.
-                  Improved Performance: Since commands and queries can be optimized separately, you can improve the performance of each operation type. For example, you can use caching strategies for queries to speed up data retrieval.
-                  Event Sourcing: CCQRS is often used with Event Sourcing, where state changes are stored as a sequence of events. This allows you to reconstruct the current state of an application by replaying events.
+                  Scalability: By separating commands and queries, you can scale them independently. For example, if your application has a high read-to-write ratio, you
+                                    can optimize the query side for performance without affecting the command side.
+                  Flexibility: Different data models can be used for commands and queries. This allows you to optimize the data structure for each operation type. 
+                                    For instance, you might use a normalized database for commands and a denormalized view for queries.
+                  Improved Performance: Since commands and queries can be optimized separately, you can improve the performance of each operation type. For example,
+                                    you can use caching strategies for queries to speed up data retrieval.
+                  Event Sourcing: CCQRS is often used with Event Sourcing, where state changes are stored as a sequence of events. This allows you to reconstruct the
+                                    current state of an application by replaying events.
 
 
 7. Saga Pattern
