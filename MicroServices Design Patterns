@@ -85,7 +85,7 @@ NOTE: Rate limiting -  is a mechanism that controls the number of requests an AP
 
 How to implement rate limiting in Spring Boot:
 Spring Cloud Gateway:
-Spring Cloud Gateway includes a built-in RequestRateLimiter filter that you can apply per route — typically backed by Redis and implemented using a Token-Bucket algorithm.
+Spring Cloud Gateway includes a built-in RequestRateLimiter filter backed by Redis and implemented using a Token-Bucket algorithm.
 Example: Redis-Backed Rate Limiting
 1) Add Dependencies
          <dependency>
@@ -98,7 +98,7 @@ Example: Redis-Backed Rate Limiting
     <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
 </dependency>
 
-2) Define a Key Resolver: You must supply a KeyResolver that determines how you bucket traffic (e.g., per user IP, API key, user ID):
+2) Define a Key Resolver: that determines how you bucket traffic (e.g., per user IP, API key, user ID):
 
 @Configuration
 public class RateLimiterConfig {
