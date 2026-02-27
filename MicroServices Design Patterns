@@ -137,8 +137,7 @@ replenishRate: tokens added per second (e.g., 10 req/sec)
 Problem : A service typically calls other services and databases as well. For each environment like dev, QA, UAT, and/or prod, the endpoint URL or other configuration
          properties might be different. A change in any of those properties might require a re-build as well as re-deploy of the service. How do we avoid code 
          modification for configuration changes?
-Solution : Externalized configuration, including endpoint URLs and credentials, will mitigate the problem. The application should load them either at startup or
-         on the fly. The Spring Cloud config server provides the option to externalize the properties to GitHub and load them as environment properties. 
+Solution : The Spring Cloud config server provides the option to externalize the properties to GitHub and load them as environment properties. 
          These can be accessed by the application on startup or can be refreshed without a server restart.
          
          Spring Boot supports various external sources for these configurations, such as:
@@ -151,13 +150,11 @@ Solution : Externalized configuration, including endpoint URLs and credentials, 
          bootstrap.properties
                   spring.cloud.config.name = application name
                   spring.cloud.config.uri = ${SPRING_CLOUD_CONFIG_URI)}
+                  spring.config.activate.on-profile = default, local
                   spring.cloud.config.failFast = true
 
-                  spring.cloud.config.failfast = false
-                  spring.config.activate.on-profile = default, local
 
-
-         chartis-dev.properties   or chartis-stage.properties or chartis-prod.properties      // for diff environments
+                  chartis-dev.properties   or chartis-stage.properties or chartis-prod.properties      // for diff environments
                   version = 
                   appName = application name
                   team = teamname 
