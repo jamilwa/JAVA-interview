@@ -374,6 +374,110 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 		. when collision occurs due to getting same index from hashcode, then a linkedlist is created on same index & elements are stored
 		. maximum 8 collisions are allowed to create linked list in a single index, if collisions > 8, then a Balanced tree(Red black tree) is created
 		 
+26. what is context switching? 
+    Context switching is a process that occurs in when the operating system (OS) switches the processor from executing one thread or process to another. This switch 
+    involves saving the state of the currently running thread or process so that it can be resumed later, and loading the state of the new thread or process to be 
+    executed next. context switching allows for multitasking, concurrency, and efficient CPU utilization by enabling the OS to switch between different threads or 
+    processes running on a system.
+
+27. Compare Wait()  and Sleep()
+    both wait() and sleep() methods are used for pausing the execution of a thread, but they have different behaviors:
+
+    wait() : When a thread calls the wait() method on an object, it releases the lock on the object and enters the waiting state until another thread notifies it 
+             calling the notify() or notifyAll() method on the same object. The wait() method must be called from within a synchronized block/method to avoid 
+             IllegalMonitorStateException.  it is defined in the Object class and is used for inter thread communication.
+
+    sleep() : When a thread calls the sleep() method, it does not release the lock on any object, and other threads cannot acquire the lock during the sleep period.
+                The sleep() method is typically used for introducing delays in the execution of a thread. The sleep() method is a static method defined in the 
+                Thread class and is used to pause the execution of a thread for a specified amount of time.
+
+    notify(): used to wake up a single thread that is waiting on the object. If multiple threads are waiting on the object, only one of them will be chosen
+                to wake up. The choice of which thread to wake up is not specified and is dependent on the JVM implementation.
+
+    notifyAll(): This method is used to wake up all the threads that are waiting on the object. When notifyAll() is called, all threads waiting on the object are
+                    awakened. However, only one thread can acquire the monitor at a time.
+
+28.  difference between Callable and Runnable
+    The Runnable interface does not return a result. Its run() method has a void return type. 
+    The run() method cannot throw checked exceptions. If you need to handle exceptions, you must catch them within the run() method.
+    You can submit a Runnable task to an ExecutorService using the execute() method.
+
+    example
+    public class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        try {
+            // Task code that may throw an exception
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
+	The Callable interface can return a result. Its call() method returns a value of a specified type. 
+    The call() method can throw checked exceptions. 
+    You can submit a Callable task to an ExecutorService using the submit() method. This method returns a Future object, 
+	which can be used to retrieve the result of the computation.
 
+    example
+    public class MyCallable implements Callable<Integer> {
+    @Override
+    public Integer call() throws Exception {
+        // Task code here
+        return 42; // Example return value
+    
+
+29. How do you create a thread in Java?
+	1. By extending the  Thread  class:
+           example
+           class MyThread extends Thread {
+               public void run() {
+                   // code to be executed
+                }
+
+   
+                MyThread thread = new MyThread();
+                thread.start();
+   
+        2. By implementing the  Runnable  interface:
+           example
+           class MyRunnable implements Runnable {
+           public void run() {
+               // code to be executed
+               }
+
+           Thread thread = new Thread(new MyRunnable());
+           thread.start();
+
+30. What is the difference between  start()  and  run()  methods?
+    The  start()  method is used to begin the execution of a thread. It invokes the  run() method which executes the code in a new thread. 
+    The  run()  method contains the code that defines the thread's task. If you call  run()  directly, it will execute the code in the current thread.
+
+31. What is the lifecycle of a thread?       NeRu Bloc WaiTer.
+   New:      The thread is created but not yet started. A thread enters this state when an instance of the Thread class is created using the new keyword.
+   Runnable: The thread is ready to run and waiting for CPU time. A thread enters this state when the start() method is called on a thread instance
+   Blocked:  The thread is waiting for a monitor lock to enter a synchronized block or method. A thread enters this state when it attempts to access a synchronized
+             resource that is currently locked by another thread.
+   Waiting:  The thread is waiting indefinitely for another thread to perform a particular action(e.g., notify, notifyAll, or join). 
+             In this state, the thread does not consume CPU resources.
+   Timed Waiting:  it is waiting for another thread to perform an action for a specified waiting time. After the time expires, the thread will wake up automatically.
+                    A thread enters this state when it calls methods like Thread.sleep(milliseconds), Object.wait(milliseconds), or Thread.join(milliseconds).
+   Terminated:  The thread has completed its execution. A thread enters this state when its run() method completes or when it is terminated by an exception.
+
+32. What is the difference between  synchronized  method and  synchronized  block?
+     A  synchronized  method locks the entire object, meaning only one thread can execute any synchronized method of that object at a time.
+     A  synchronized  block allows you to lock a specific section of code, and allows other threads to execute non synchronized methods of the same object.
+
+33. What is a deadlock?
+     A deadlock is a situation in multithreading where two or more threads are blocked forever, each waiting for the other to release a resource.
+     This can occur when two threads hold locks on different resources and each thread is waiting for the other to release its lock.
+
+34. How can you prevent deadlock?
+     Deadlock can be prevented by Avoiding nested locks, Using a timeout when trying to acquire locks, Ensuring that all threads acquire locks in a consistent order,
+          Using higher level concurrency utilities from the  java.util.concurrent  package.
+
+12. What is the  volatile  keyword in Java?
+     A volatile variable's value will be modified by different threads. the value of the variable is always read from the main memory, not from the thread's local cache,
+     thus providing visibility of changes made by one thread to others.
+
+13. Explain SYNCHRONIZE keyword
+    SYNCHRONIZE ensures that only one thread can execute the synchronized block or method at any given time, preventing race conditions and ensuring thread safety.
