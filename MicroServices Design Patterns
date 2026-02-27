@@ -390,3 +390,18 @@ Solution : Each service needs to have an endpoint that can be used to check the 
          Token Validation: When the server receives a state-changing request, it checks the CSRF token against the one stored in the user's session. If the tokens
                            match, the request is processed; if not, the request is rejected.
 
+
+
+Pattern                                                   	Example Tools / Technologies
+Circuit Breaker	                           Resilience4j, Hystrix, Istio
+CQRS	                                    Axon Framework, Eventuate, Lagom
+Database per Service	                  PostgreSQL, MongoDB, Redis
+Externalized Config	                  Spring Cloud Config, Consul, Vault
+Gateway	                                    Spring Cloud Gateway, Kong, KrakenD
+Saga	                                    Camunda, Axon Sagas, Kafka events
+Health Check	                           Spring Boot Actuator, Kubernetes Probes
+Event-Driven Comm	                           Kafka, RabbitMQ, AWS SNS/SQS
+Log Aggregation	                           ELK Stack, Fluentd, Splunk
+Perf Monitoring	                           Prometheus, Grafana, New RElic
+Registry/Discovery	                  Eureka, Consul, Kubernetes DNS
+
