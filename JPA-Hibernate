@@ -142,4 +142,42 @@ Always clarify whether the question is about JPA specification, Hibernate implem
 
 Be ready to explain how lazy loading and fetch types impact performance and how caching works.
 
-If you want, I can also provide a set of advanced Hibernate/JPA interview questions with detailed example code answers! (Useful for 3–5+ years roles.)
+18. Question: What is the N+1 problem and how can you fix it?
+Answer:
+The N+1 SELECT problem happens when Hibernate executes one query for the parent entities and then, for each parent, one additional query for child entities — leading to N+1 total queries, causing severe performance issues.
+
+Example & Fix — Using JOIN FETCH:
+
+String hql = "SELECT d FROM Department d " +
+             "JOIN FETCH d.employees WHERE d.id = :id";
+Department dept = session.createQuery(hql, Department.class)
+                         .setParameter("id", deptId)
+                         .uniqueResult();
+
+
+📌 Using JOIN FETCH loads departments and employees in a single query, preventing extra queries.
+
+19. Question: What is optimistic locking and how do you implement it?
+Answer:
+Optimistic locking detects concurrent updates without locking rows. It uses a version column annotated with @Version. When two transactions try to update the same entity version, the second update fails, preventing lost updates.
+
+Entity Example:
+
+@Entity
+public class Product {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Version
+    private Integer version;
+
+    private String name;
+    // getters/setters
+}
+
+
+Usage:
+When you fetch and update a Product, the version field ensures updates are only accepted if no one else modified it in the meantime.
+
+20. 
