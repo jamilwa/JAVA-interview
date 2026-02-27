@@ -1,0 +1,145 @@
+1. What is Hibernate?
+
+Answer:
+Hibernate is a Java-based ORM (Object-Relational Mapping) framework that maps Java objects to relational database tables. It eliminates most JDBC boilerplate code and automates CRUD operations.
+
+2. What is JPA?
+
+Answer:
+JPA (Java Persistence API) is a standard specification for object-relational mapping in Java. It defines interfaces and annotations for persisting data, but it alone doesn’t implement these behaviors; Hibernate is one of the most common JPA providers.
+
+3. What’s the difference between JPA and Hibernate?
+
+Answer:
+
+JPA: A specification/API defining how ORM should work.
+
+Hibernate: A concrete implementation of JPA that adds additional features like caching, better query handling, advanced mapping strategies, etc.
+
+4. What are advantages of using Hibernate?
+
+Answer:
+
+Eliminates JDBC boilerplate
+
+Provides HQL (object-oriented query language)
+
+Caching support
+
+Database independence
+
+Automatic transaction & session management
+
+5. What is ORM?
+
+Answer:
+ORM stands for Object-Relational Mapping — it converts Java objects to database tables and vice versa, so developers work with objects rather than SQL, reducing manual syntax and errors.
+
+6. Difference between Hibernate and JDBC?
+
+Answer:
+
+JDBC requires manual SQL and result-set mapping.
+
+Hibernate abstracts this via ORM and manages entity states, caching, and transactions automatically.
+
+7. What is HQL?
+
+Answer:
+Hibernate Query Language (HQL) is an object-oriented query language similar to SQL but works with object entities and their properties instead of tables and columns.
+
+8. What are EntityManager and Session?
+
+Answer:
+
+EntityManager (JPA): Standard interface to interact with persistence context.
+
+Session (Hibernate): Similar to EntityManager, but specific to Hibernate and has additional methods like save(), saveOrUpdate() etc.
+
+9. Difference between persist() and save()?
+
+Answer:
+
+persist() (JPA): Makes entity managed but doesn’t return primary key.
+
+save() (Hibernate): Persists entity and returns generated ID.
+
+10. What is the difference between get() and load() in Hibernate?
+
+Answer:
+
+get(): Eagerly fetches the object; returns null if not found.
+
+load(): Lazily fetches; returns a proxy object and throws an exception if entity doesn’t exist when accessed.
+
+11. What are the states of a JPA entity?
+
+Answer:
+
+Transient: Not associated with persistence context
+
+Persistent: Tracked by the context
+
+Detached: Was persistent but no longer tracked (e.g., after session close)
+
+12. How is inheritance mapped in Hibernate?
+
+Answer:
+Hibernate supports:
+
+SINGLE_TABLE – maps entire hierarchy into one table
+
+TABLE_PER_CLASS – each class gets its own table
+
+JOINED – parent and child in separate tables linked by keys
+
+13. How do you define relationships in JPA/Hibernate?
+
+Answer:
+
+@OneToOne – single entity to single entity
+
+@OneToMany, @ManyToOne – one parent to multiple children
+
+@ManyToMany – many ↔ many
+These are mapped with annotations and often combined with @JoinColumn or @JoinTable.
+
+14. What is caching in Hibernate?
+
+Answer:
+
+First-level cache: Provided by default within a session.
+
+Second-level cache: Shared cache across sessions that improves performance.
+
+15. What are common JPA annotations?
+
+Answer:
+
+@Entity, @Table, @Id, @GeneratedValue
+
+@Column, @OneToMany, @ManyToOne, etc.
+These help define entity mapping and relationships.
+
+16. How do you run native SQL in JPA?
+
+Answer:
+Use EntityManager.createNativeQuery() or @NamedNativeQuery to execute raw SQL directly.
+
+17. What is a Criteria Query?
+
+Answer:
+A type-safe, programmatic way to build queries in JPA (alternative to JPQL strings). It supports dynamic query composition.
+
+18. How is transaction managed in JPA?
+
+Answer:
+With EntityTransaction (begin, commit, rollback) via EntityManager, or using @Transactional in Spring for declarative transactions.
+
+📌 Tips for Interviews
+
+Always clarify whether the question is about JPA specification, Hibernate implementation, or Spring Data JPA — they are related but different.
+
+Be ready to explain how lazy loading and fetch types impact performance and how caching works.
+
+If you want, I can also provide a set of advanced Hibernate/JPA interview questions with detailed example code answers! (Useful for 3–5+ years roles.)
