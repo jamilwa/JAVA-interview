@@ -663,4 +663,11 @@ Singleton class example with double lock
 }
 
 
-40. 
+40. The Bean Lifecycle
+   1. Instantiation: Spring calls the constructor to create the object. The object exists, but dependencies aren’t injected yet.
+   2. Dependency Injection: Spring performs Dependency Injection (e.g., injecting the UserRepository into your UserService).
+   3. Aware Interfaces: If the bean implements interfaces like BeanNameAware, Spring gives it its metadata.
+   4. Initialization: Spring calls methods annotated with @PostConstruct or any custom init() method.
+   5. Ready for Use: The bean is now available for your application logic.
+   6. Destruction: When the container shuts down, Spring calls methods annotated with @PreDestroy to clean up resources (like closing database connections).
+
