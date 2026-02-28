@@ -1,6 +1,7 @@
 A. what is bean in springboot
-  A Bean is an object managed by the Spring IoC container. This is essential for our Microservices architecture because it allows us to achieve Loose Coupling. 
-  For example, a Service doesn't need to know how to create a repository class; it simply asks Spring to inject it as a Bean. This makes our code easier to test and maintain
+A bean is an object managed by the Spring IoC (Inversion of Control) container. The container controls when the bean is created, how its dependencies are injected, and 
+when it’s destroyed. For example
+a Service doesn't need to know how to create a repository class; it simply asks Spring to inject it as a Bean. This makes our code easier to test and maintain
 
 How to Define a Bean
   There are three primary ways to define a bean in Spring Boot:
@@ -10,8 +11,8 @@ How to Define a Bean
   3. XML Configuration: (Legacy) Defining beans in an applicationContext.xml file.
 
 The Bean Lifecycle
-   1. Instantiation: Spring calls the constructor to create the object.
-   2. Populate Properties: Spring performs Dependency Injection (e.g., injecting the UserRepository into your UserService).
+   1. Instantiation: Spring calls the constructor to create the object. The object exists, but dependencies aren’t injected yet.
+   2. Dependency Injection: Spring performs Dependency Injection (e.g., injecting the UserRepository into your UserService).
    3. Aware Interfaces: If the bean implements interfaces like BeanNameAware, Spring gives it its metadata.
    4. Initialization: Spring calls methods annotated with @PostConstruct or any custom init() method.
    5. Ready for Use: The bean is now available for your application logic.
@@ -69,7 +70,7 @@ public class RESTController {
 3. Field injection: The injector directly injects dependencies into class fields. This is a concise but potentially less flexible approach
 
 
-C. What is Spring Boot, and how is it different from the Spring Framework?**  
+C. What is Spring Boot, and how is it different from the Spring Framework?**  (Actuator Starter Tomcat AutoConfig Profiles)
    - Spring Boot simplifies Spring development by embedded server like Tomcat, Jetty, and Undertow.
    - Simplified dependency management with `starter` dependencies. 
    - Actuator gives Production-ready features like metrics, health checks and application monitoring.  Common endpoints:  /actuator/health   and   /actuator/metrics  
