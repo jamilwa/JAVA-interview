@@ -671,3 +671,117 @@ Singleton class example with double lock
    5. Ready for Use: The bean is now available for your application logic.
    6. Destruction: When the container shuts down, Spring calls methods annotated with @PreDestroy to clean up resources (like closing database connections).
 
+The Complete Spring Bean Lifecycle
+​1. Bean Definition Loading
+​Before a bean is even created, Spring reads your configuration (XML, Java Config, or Annotations). It creates a BeanDefinition, which is a recipe for how the bean should be built.
+
+
+​2. Instantiation
+
+
+​Spring instantiates the bean using the bean's constructor.
+
+
+
+
+​Note: If you use constructor injection, the dependencies are actually resolved here rather than in the next step.
+
+
+
+
+​3. Populate Properties (Dependency Injection)
+
+
+​Spring injects the dependencies using setter injection or field injection (@Autowired). This is where the bean transitions from a hollow shell to a functional object.
+
+
+​4. Aware Interfaces
+
+
+​Spring checks if the bean implements any Aware interfaces. This allows the bean to "talk back" to the Spring container.
+
+
+
+
+​BeanNameAware: Gives the bean its ID/Name.
+
+
+​BeanFactoryAware: Gives the bean access to the factory that created it.
+
+
+​ApplicationContextAware: Gives the bean access to the entire Spring context.
+
+
+
+
+​5. BeanPostProcessor: Before Initialization
+
+
+​This is a powerful extension point. Spring passes the bean through the postProcessBeforeInitialization method of any registered BeanPostProcessor.
+
+
+
+
+​Role: This is often where Spring handles annotations like @PostConstruct.
+
+
+
+
+​6. Initialization
+
+
+​Now the bean is configured, and Spring performs the actual initialization:
+
+
+
+
+​@PostConstruct: The modern standard for init logic.
+
+
+​AfterPropertiesSet: Part of the InitializingBean interface (older style).
+
+
+​Custom init-method: Defined in @Bean(initMethod = "...").
+
+
+
+
+​7. BeanPostProcessor: After Initialization
+
+
+​The bean passes through postProcessAfterInitialization.
+
+
+
+
+​Critical Fact: This is where Spring AOP Proxies are created. If your bean uses @Transactional, Spring replaces your original bean with a "proxy" bean here to handle the database transactions.
+
+
+
+
+​8. Ready for Use
+
+
+​The bean is fully baked and live in the ApplicationContext. It stays here until the application is stopped or the scope (like "request" or "session") expires.
+
+
+​9. Destruction
+
+
+​When the container shuts down (e.g., context.close()), the bean is cleaned up:
+
+
+
+
+​@PreDestroy: The standard for cleanup logic.
+
+
+​destroy(): Part of the DisposableBean interface.
+
+
+​Custom destroy-method: Defined in @Bean(destroyMethod = "...").
+
+
+
+
+
