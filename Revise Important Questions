@@ -532,10 +532,10 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 			Pool Type							Best Use Case							Behavior
 			newFixedThreadPool				Kafka Consumers / DB writing		Constant number of threads. Safe for resource management.
 			newCachedThreadPool				Short-lived asynchronous tasks		Creates new threads as needed; terminates idle threads after 60s.
-			newSingleThreadExecutor			Sequential task processing			Guaranteed execution order (one after another).
+			newSingleThreadExecutor			Sequential task processing			Guaranteed execution order one after another.
 			newScheduledThreadPool			Cleanup jobs / Heartbeats			Can run tasks after a delay or periodically.
 
-		3. What happens when the pool is full and the queue is also full? The ExecutorService uses a RejectedExecutionHandler with 4 standard policies
+		3. What happens when the pool is full and the queue is also full? The ExecutorService uses a RejectedExecutionHandler with 4 standard policies(ABCD)
 			AbortPolicy (Default): Throws an exception (RejectedExecutionException).
 			CallerRunsPolicy: The thread that submitted the task (e.g., the Main thread) executes it itself. This slows down the producer, providing natural back-pressure.
 			DiscardPolicy: Silently drops the task.
