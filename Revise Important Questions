@@ -195,13 +195,13 @@ Constructors using new operator (TreeSet::new)
 
 
 	Common Methods of Optional  (Get IfOrElse MapIsFlat)
-	1. isPresent(): Checks if a value is present.
+	1. isPresent(): Checks if a value is present. returns a boolean. it requires get(). it Can lead to NoSuchElementException. Not functional. Avoid using this method.
 		Optional<String> optional = Optional.of("Hello");
 		if (optional.isPresent()) {
     			System.out.println(optional.get()); // Prints: Hello
 		}
 	
-	2. ifPresent(Consumer<? super T> action): Executes the given action if a value is present.
+	2. ifPresent(Consumer<? super T> action): Executes a lambda only if a value is present. return void. doesnt require get(). it is functional. recommended to use.  
 		optional.ifPresent(value -> System.out.println(value)); // Prints: Hello
 
 	3. get(): Returns the value if present; otherwise, it throws NoSuchElementException.
