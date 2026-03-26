@@ -300,11 +300,25 @@ Solution: CQRS suggests splitting the application into two parts — the command
 Problem : When each service has its own database and a business transaction spans multiple services, how do we ensure data consistency across services? 
          For example, for an e-commerce application where customers have a credit limit, the application must ensure that a new order will not exceed the customer’s
          credit limit. Since Orders and Customers are in different databases, the application cannot simply use a local ACID transaction.
-Solution : A Saga represents a high-level business transaction that consists of several sub-transactions, each sub-transactions update data within a single service. 
-         Each transaction has a compensating transaction that is executed when the request fails. It can be implemented in two ways:
-         1. Choreography – When there is no central coordination, each service produces and listens to another service’s events and decides if an action should be
-                           taken or not.
-         2. Orchestration – An orchestrator (object) takes responsibility for a saga’s decision-making and sequencing business logic.
+Solution : A Saga is a sequence of local transactions where: Each service commits independently. If a step fails, compensating actions undo prior steps. 
+           Instead of rollback, we compensate. Compensation is not rollback, It’s a new business operation.
+           Why Saga Works Well for Microservices: No global locks, High availability, Failure‑tolerant, Scales horizontally, Cloud‑native.
+         
+         Example Scenario – Order Placement
+         Business Flow : Create Order -> Process Payment -> Reserve Inventory -> Confirm Order.
+         Happy Path:     Order Created → Payment OK → Inventory Reserved → Order Confirmed.
+         Failure:        Order Created → Payment OK → Inventory Failed
+         Compensation:   Refund Payment → Cancel Order.
+
+
+It can be implemented in two ways:
+1. Choreography – When there is no central coordination, each service produces and listens to another service’s events and decides if an action should be taken or not.
+                  pros: Loose coupling, Highly scalable, Event‑driven, Cloud‑native.
+                  cons: Harder to debug, Complex flow visualization, Requires strong event design.
+
+2. Orchestration – A Saga Orchestrator controls the workflow, Calls each service directly, Decides compensation on failure.
+                  pros: Centralized logic, Easy to reason, Easier error handling.
+                  cons: Orchestrator can grow complex, Slightly tighter coupling.
 
 
 8.  Event-Driven Pattern (Used in GAP project)
