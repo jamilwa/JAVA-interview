@@ -237,7 +237,11 @@ Constructors using new operator (TreeSet::new)
 		Note: Use map() when the function returns a normal value
 			✅ Use flatMap() when the function returns an Optional
 
-
+10. Optional.map() vs Stream.map()
+	Optional.map() transforms at most one value. If the value exists, transform it. Otherwise do nothing.
+		Optional.map() is used to: Transform a single value (if present) & Avoid null checks & Keep logic null‑safe
+	Stream.map() transforms zero to many values
+		Stream.map() is used to: Transform each element of a collection/stream & Process multiple values & Enable functional data pipelines.
 11. Collectors (Collectors Group Joining parti, toList counting summarizingInt) 
 12. List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, SummrayforEa)
 13. why do we use IntStream
