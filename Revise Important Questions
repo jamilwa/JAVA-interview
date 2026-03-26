@@ -635,33 +635,63 @@ Key points: @RestControllerAdvice automatically serializes returned objects to J
 39. What is singleTon desing pattern
 	The Singleton pattern is a creational design pattern that ensures a class has only one instance in the entire application and provides a global point of access to
 	that instance. It’s commonly used for things like logging, configuration settings, cache managers, or thread pools
-example:
-Singleton class example with double lock
+example: Thread-Safe Double-Checked Locking - To make singleton class thread safe, we use three key components:
+	volatile keyword: Ensures that the change to instance is immediately visible to all threads and prevents "instruction reordering" by the compiler.
+	Synchronized block: Only allows one thread to create the object at a time.
+	Double-check: We check null twice—once outside the lock (for performance) and once inside (for safety).
 
-	public class DCLSingleton {
+public class SafeSingleton {
+    private static volatile SafeSingleton instance;					// 1. volatile is mandatory for thread safety here
 
-    // Volatile ensures visibility across threads
-    private static volatile DCLSingleton instance;
+    private SafeSingleton() {
+        System.out.println("Singleton Instance Created by: " + Thread.currentThread().getName());
+    }
 
-    // Private constructor prevents instantiation from outside
-    private DCLSingleton() {}
-
-    public static DCLSingleton getInstance() {
-        if (instance == null) {                     // 1st check (no lock)
-            synchronized (DCLSingleton.class) {     // Lock only if null
-                if (instance == null) {             // 2nd check (with lock)
-                    instance = new DCLSingleton();
+    public static SafeSingleton getInstance() {
+        if (instance == null) {							        // First check (No locking, fast)
+            synchronized (SafeSingleton.class) {
+                if (instance == null) {							// Second check (Inside lock, safe)
+                    instance = new SafeSingleton();
                 }
             }
         }
         return instance;
     }
+}
 
-    public void doSomething() {
-        System.out.println("Singleton is working!");
+
+
+Execution with 2 Threads
+Here is the step-by-step execution logic showing how the threads interact:
+
+public class SingletonTest {
+    public static void main(String[] args) {
+        // Creating Thread 1
+        Thread thread1 = new Thread(() -> {
+            SafeSingleton s1 = SafeSingleton.getInstance();
+            System.out.println("Thread 1 got: " + s1.hashCode());
+        }, "Thread-1");
+
+        // Creating Thread 2
+        Thread thread2 = new Thread(() -> {
+            SafeSingleton s2 = SafeSingleton.getInstance();
+            System.out.println("Thread 2 got: " + s2.hashCode());
+        }, "Thread-2");
+
+        thread1.start();
+        thread2.start();
     }
 }
 
+The Step-by-Step Flow:
+T1 and T2 start: Both call getInstance().
+First Check: Both see instance == null.
+Synchronization: T1 reaches the synchronized block first and enters. T2 is blocked and waits.
+Second Check (T1): T1 confirms instance is still null and creates the object.
+Release: T1 exits the block. The volatile keyword ensures the new value of instance is flushed to main memory.
+Entry (T2): T2 now enters the synchronized block.
+Second Check (T2): T2 checks instance == null. Because T1 just updated it, the check returns false.
+Exit: T2 exits without creating a new object and returns the one created by T1.
 
 40. The Bean Lifecycle
    1. Bean Definition: ​Spring reads your configuration (XML, Java Config, or Annotations). It creates a BeanDefinition.
