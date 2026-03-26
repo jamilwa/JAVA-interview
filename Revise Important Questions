@@ -242,7 +242,7 @@ Constructors using new operator (TreeSet::new)
 		Optional.map() is used to: Transform a single value (if present) & Avoid null checks & Keep logic null‑safe
 	Stream.map() transforms zero to many values
 		Stream.map() is used to: Transform each element of a collection/stream & Process multiple values & Enable functional data pipelines.
-11. Collectors (Collectors Group Joining parti, toList counting summarizingInt) 
+11. Collectors (Collectors Group Joining parti, counting toList summarizingInt) 
 12. List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, SummrayforEa)
 13. why do we use IntStream
         the Stream API is designed to work with objects, not primitive types directly. However, the Stream API provides special primitive-type streams to handle
