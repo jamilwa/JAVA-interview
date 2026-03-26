@@ -536,6 +536,34 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 			Single (newSingleThreadExecutor)			Sequential task processing			Guaranteed execution order (one after another).
 			Scheduled (newScheduledThreadPool)			Cleanup jobs / Heartbeats			Can run tasks after a delay or periodically.
 
+		3. What happens when the pool is full and the queue is also full? The ExecutorService uses a RejectedExecutionHandler with 4 standard policies
+			AbortPolicy (Default): Throws an exception (RejectedExecutionException).
+			CallerRunsPolicy: The thread that submitted the task (e.g., the Main thread) executes it itself. This slows down the producer, providing natural back-pressure.
+			DiscardPolicy: Silently drops the task.
+			DiscardOldestPolicy: Drops the oldest unhandled task to make room for the new one.
+
+		4. Simply calling shutdown() isn't always enough in a production environment. You should use the "Two-Phase Shutdown" pattern to ensure data integrity:
+					executor.shutdown(); 														// Phase 1: Stop accepting new tasks
+						try {
+    						if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {				// Wait a while for existing tasks to terminate
+        						executor.shutdownNow(); 										// Phase 2: Cancel currently executing tasks
+        						if (!executor.awaitTermination(60, TimeUnit.SECONDS)){			// Wait a while for tasks to respond to being cancelled
+            						System.err.println("Pool did not terminate");
+   								 }
+							}
+						} catch (InterruptedException ie) {
+    						executor.shutdownNow(); // (Re-)Cancel if current thread also interrupted
+    						Thread.currentThread().interrupt();
+					}
+
+		5. Naming Threads with a Custom ThreadFactory 
+				ThreadFactory namedThreadFactory = runnable -> {
+   					 Thread t = new Thread(runnable);
+    				 t.setName("kafka-processor-" + t.getId());
+    				 return t;
+				};
+				ExecutorService executor = Executors.newFixedThreadPool(10, namedThreadFactory);
+
 
 		example
 		// Create a thread pool with 2 threads
