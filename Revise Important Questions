@@ -591,79 +591,147 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 		Graceful Shutdown: Applications that don't call .shutdown() can leave "zombie" threads running, preventing the JVM from exiting or causing memory leaks.
 
 38. How to customize Exception handling in springboot
-Step-by-Step Example
-1) Create a Custom Exception: This exception represents a business problem (e.g., resource not found), This extends RuntimeException so you don’t have to catch 
-	it everywhere — Spring will handle it globally.:
+Step-by-Step Example of Production‑Grade Exception Handling in Spring Boot
+Modern Spring Boot applications should have:
+Centralized exception handling
+Consistent error response format
+Clear HTTP status mapping
+Correlation IDs for tracing
+Validation & framework exception coverage
+No internal details leaked to clients
 
-public class ResourceNotFoundException extends RuntimeException {
+1. Create a Custom Business Exception. 
+	public class ResourceNotFoundException extends RuntimeException {
+    private final String errorCode;			// Error codes help frontend + logs. Easier internationalization later
+
     public ResourceNotFoundException(String message) {
         super(message);
+        this.errorCode = "RESOURCE_NOT_FOUND";
+    }
+
+    public String getErrorCode() {
+        return errorCode;
     }
 	}
 
 
-2) Throw the Exception in a Controller
-@RestController
-@RequestMapping("/users")
-public class UserController {
+2. Throw exceptions from Service layer, not controllers
+	@Service
+	public class UserService {
 
-    @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
-        // If user not found, throw your custom exception
-        throw new ResourceNotFoundException("User with ID " + id + " not found");
+    public UserDto getUserById(Long id) {
+        return findUser(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User with ID " + id + " not found"));
     }
 	}
 
 
-When this exception is thrown, Spring will route it to your global handler.
+3. Standardized Error Response
+	public class ApiError {
 
-3) Global Exception Handler with @RestControllerAdvice
+    private int status;
+    private String error;      // HTTP reason phrase
+    private String message;    // Human-readable
+    private String errorCode;  // Stable client reference
+    private String path;
+    private Instant timestamp;
 
-@RestControllerAdvice
+    public ApiError(
+            int status,
+            String error,
+            String message,
+            String errorCode,
+            String path
+    ) {
+        this.status = status;
+        this.error = error;
+        this.message = message;
+        this.errorCode = errorCode;
+        this.path = path;
+        this.timestamp = Instant.now();
+    }
+
+    // getters
+}
+
+
+4. Global Exception Handler (@RestControllerAdvice)
+	@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex) {
-                ErrorResponse error = new ErrorResponse(
+    public ResponseEntity<ApiError> handleResourceNotFound(
+            ResourceNotFoundException ex,
+            HttpServletRequest request
+    ) {
+        ApiError error = new ApiError(
                 HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
                 ex.getMessage(),
-                LocalDateTime.now()
+                ex.getErrorCode(),
+                request.getRequestURI()
         );
 
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
-    // Handle other generic exceptions
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGenericException(Exception ex) {
-        ErrorResponse error = new ErrorResponse(
+    public ResponseEntity<ApiError> handleGenericException(
+            Exception ex,
+            HttpServletRequest request
+    ) {
+        ApiError error = new ApiError(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "Internal server error: " + ex.getMessage(),
-                LocalDateTime.now()
+                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+                "An unexpected error occurred",
+                "INTERNAL_SERVER_ERROR",
+                request.getRequestURI()
         );
 
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        return ResponseEntity.internalServerError().body(error);
     }
+}
+
+
+5. Handle Validation Errors
+	public class UserRequest {
+
+    @NotBlank
+    private String name;
+
+    @Email
+    private String email;
+
+    // getters/setters
 	}
 
-4) Custom Error Response Structure (optional)
 
-For consistent API responses, define a model like this:
+@ExceptionHandler(MethodArgumentNotValidException.class)
+public ResponseEntity<ApiError> handleValidationException(
+        MethodArgumentNotValidException ex,
+        HttpServletRequest request
+) {
+    String message = ex.getBindingResult()
+            .getFieldErrors()
+            .stream()
+            .map(err -> err.getField() + ": " + err.getDefaultMessage())
+            .collect(Collectors.joining(", "));
 
-public class ErrorResponse {
+    ApiError error = new ApiError(
+            HttpStatus.BAD_REQUEST.value(),
+            HttpStatus.BAD_REQUEST.getReasonPhrase(),
+            message,
+            "VALIDATION_FAILED",
+            request.getRequestURI()
+    );
 
-    private int status;
-    private String message;
-    private LocalDateTime timestamp;
-
-    public ErrorResponse(int status, String message, LocalDateTime timestamp) {
-        this.status = status;
-        this.message = message;
-        this.timestamp = timestamp;
-    }
-
-    // getters + setters
+    return ResponseEntity.badRequest().body(error);
 }
+
+
+6. Logging (Critical in Production), Log once, inside handler. Never log in controller & handler both
+	private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
 Key points: @RestControllerAdvice automatically serializes returned objects to JSON.
 
