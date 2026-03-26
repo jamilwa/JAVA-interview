@@ -529,11 +529,11 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 			If all threads are busy, the task is placed in a Queue (usually a LinkedBlockingQueue). If the queue is also full, the Executor decides whether
 			to create more threads or reject the task.
 		2. The 4 Main Types of Thread Pools 
-			Pool Type											Best Use Case							Behavior
-			Fixed (newFixedThreadPool)					Kafka Consumers / DB writing		Constant number of threads. Safe for resource management.
-			Cached (newCachedThreadPool)				Short-lived asynchronous tasks		Creates new threads as needed; terminates idle threads after 60s.
-			Single (newSingleThreadExecutor)			Sequential task processing			Guaranteed execution order (one after another).
-			Scheduled (newScheduledThreadPool)			Cleanup jobs / Heartbeats			Can run tasks after a delay or periodically.
+			Pool Type							Best Use Case							Behavior
+			newFixedThreadPool				Kafka Consumers / DB writing		Constant number of threads. Safe for resource management.
+			newCachedThreadPool				Short-lived asynchronous tasks		Creates new threads as needed; terminates idle threads after 60s.
+			newSingleThreadExecutor			Sequential task processing			Guaranteed execution order (one after another).
+			newScheduledThreadPool			Cleanup jobs / Heartbeats			Can run tasks after a delay or periodically.
 
 		3. What happens when the pool is full and the queue is also full? The ExecutorService uses a RejectedExecutionHandler with 4 standard policies
 			AbortPolicy (Default): Throws an exception (RejectedExecutionException).
