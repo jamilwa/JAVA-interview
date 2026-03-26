@@ -1,3 +1,91 @@
+0. Deep Copy vs Shallow Copy
+   Shallow Copy: References inside the object are copied as references, not duplicated. Both object referecences will point to the same object. 
+       example:     Object o1 = new Object();
+                    Object o2 = o1;        // here o1 and o2 are referring to same object in memory. if o1 = "value 1"  and o2 = "value 2", then even o1 value will be value 2.
+        Original Object ──┐
+                          ├──> Nested Object
+        Shallow Copy  ────┘
+
+
+ class Address {
+    String city;
+}
+
+class User implements Cloneable {
+    String name;
+    Address address;
+
+    protected User clone() throws CloneNotSupportedException {
+        return (User) super.clone(); // Shallow copy
+    }
+}
+
+usage: 
+User u1 = new User();
+u1.address = new Address();
+u1.address.city = "Bangalore";
+
+User u2 = u1.clone();
+u2.address.city = "Delhi";
+
+Result:     //  Both changed because address reference is shared
+u1.address.city → Delhi
+u2.address.city → Delhi
+
+Key Characteristics
+Aspect          Shallow Copy                               Deep Copy
+Memory             Low                                       High
+Speed              Fast                                      slow
+Risk               High unintended side effects              Low
+Typical Usage      Immutable / read‑only data                Mutable objects, multi‑threading
+
+Common Shallow Copy Methods: Object.clone() (default)
+
+
+Deep Copy:  Safe, No shared state, Completely separate memory.  two separate objects are created. change in object 2 doesnt affect the original objects value
+ example:
+class User {
+    String name;
+    Address address;
+
+    public User(User other) {
+        this.name = other.name;
+        this.address = new Address();
+        this.address.city = other.address.city;
+    }
+}
+
+usage:
+User u2 = new User(u1);
+u2.address.city = "Delhi";
+
+Result:   // city changes in u2 doesnt affect u1 value.
+u1.address.city → Bangalore
+u2.address.city → Delhi
+ 
+ Use Shallow Copy When:
+✔ Objects are immutable
+✔ Nested objects are not modified
+✔ Performance is critical
+✔ DTOs are read‑only
+✅ Example:
+
+Configuration objects
+Cache value objects
+API response mapping
+
+
+✅ Use Deep Copy When:
+✔ Objects are mutable
+✔ Multi‑threaded access
+✔ State must not leak
+✔ Defensive copying
+✅ Example:
+
+Business domain objects
+Request cloning
+Event replay systems
+Distributed systems
 
  1. What is Static Keyword in Java
      static keyword is used for Memory Management
