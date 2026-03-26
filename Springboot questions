@@ -267,51 +267,7 @@ P. How do you integrate Spring Boot with Kafka or RabbitMQ?**
     an exception( ConcurrentModificationException ) if the collection is modified while iterating over it.
 
 
-24.  @RestControllerAdvice is a Spring Framework annotation used for global exception handling. It defines a class that is called when an exception occurs,
-     which handles exceptions across an entire application. 
-     It contains multiple methods with the @ExceptionHandler annotation which returns a ResponseEntity object.
-
-     Benefits : Centralized exception handling makes code more maintainable and readable. It provides a consistent response to users.
-
-example: 
-
-UserNotFoundException.java
-
-public class UserNotFoundException extends RuntimeException {
-    public UserNotFoundException(String message) {
-        super(message);
-    }
-}
-
-
-GlobalExceptionHandler.java
-
-@RestControllerAdvice
-public class GlobalExceptionHandler {
-
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleUserNotFoundException(UserNotFoundException ex) {
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", HttpStatus.NOT_FOUND.value());
-        response.put("error", "Not Found");
-        response.put("message", ex.getMessage());                  MEST(Message, Error, Status, Timestamp)
-
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
-        Map<String, Object> response = new HashMap<>();
-        response.put("timestamp", LocalDateTime.now());
-        response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        response.put("error", "Internal Server Error");
-        response.put("message", ex.getMessage());
-
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-}
-
+24.  
 
 
 25. Different stereotype annotations
