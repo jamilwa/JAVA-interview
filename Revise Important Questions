@@ -526,6 +526,17 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 		background thread.
 		It improves performance by reusing threads instead of creating new ones each time.
 
+		1. How it Works Internally: An ExecutorService is a combination of a Thread Pool and a BlockingQueue. When you submit() a task, it doesn't always go straight to
+			a thread. If all threads are busy, the task is placed in a Queue (usually a LinkedBlockingQueue). If the queue is also full, the Executor decides whether
+			to create more threads or reject the task.
+		2. The 4 Main Types of Thread Pools 
+			Pool Type											Best Use Case							Behavior
+			Fixed (newFixedThreadPool)					Kafka Consumers / DB writing		Constant number of threads. Safe for resource management.
+			Cached (newCachedThreadPool)				Short-lived asynchronous tasks		Creates new threads as needed; terminates idle threads after 60s.
+			Single (newSingleThreadExecutor)			Sequential task processing			Guaranteed execution order (one after another).
+			Scheduled (newScheduledThreadPool)			Cleanup jobs / Heartbeats			Can run tasks after a delay or periodically.
+
+
 		example
 		// Create a thread pool with 2 threads
         ExecutorService executor = Executors.newFixedThreadPool(2);
