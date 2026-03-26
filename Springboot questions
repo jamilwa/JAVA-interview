@@ -25,9 +25,9 @@ Bean Scopes
    3. Web Scopes: Request (one per HTTP request), Session (one per HTTP session), and Application
 
 B. The three main types of dependency injection in Spring Boot are:
-Dependency Injection (DI) it allows us to achieve the principle of Inversion Of Control (IoC) i.e. shifting the creation, management and the lifecycle of objects from
-        the programmer to the framework. This approach helps relieve the programmer from the responsibility of managing and creating objects and allows them to 
-        focus mainly on the business logic.
+    Dependency Injection (DI) it allows us to achieve the principle of Inversion Of Control (IoC) i.e. shifting the creation, management and the lifecycle of objects from
+    the programmer to the framework. This approach helps relieve the programmer from the responsibility of managing and creating objects and allows them to 
+    focus mainly on the business logic.
 
 1. Constructor injection : The injector supplies the dependency through the client class constructor. This is the most recommended technique in the Spring Framework. 
 
