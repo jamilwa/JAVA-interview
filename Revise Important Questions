@@ -862,3 +862,46 @@ public class ProductController {
     private final ProductService productService;
 }
 
+
+42. How do you handle transactions in Spring Boot?
+     @Transactional annotation defines the scope and behavior of database transactions. It manages transactions declaratively using AOP proxies, allowing developers to 
+     focus on business logic while ensuring data integrity. The @Transactional annotation works best on public methods. 
+     Transactions work only when @Transactional method is called from another class. 
+
+      Features of @Transactional
+      1. Transaction Management: When a method annotated with @Transactional is called, Spring will start a new transaction or join existing transaction depending on 
+                                 Propagaton Level. If the method completes successfully, the transaction will be committed. If an exception occurs, the transaction will
+                                 be rolled back for RuntimeException and Errors, ensuring that the database remains in a consistent state.
+      2. Propagation: It supports different propagation behaviors, which determine how transactions are handled when a method is called within another transactional
+                      context. The default propagation level is Propagation.REQUIRED, which means that if a transaction already exists, the method will join that
+                      transaction; otherwise, a new transaction will be created.
+      3. Isolation Levels: You can specify the isolation level of the transaction, which controls how transaction integrity is visible to other transactions. 
+                           Common isolation levels include READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ, and SERIALIZABLE. 
+                           Isolation Level Defaults are Database‑Specific. Example: PostgreSQL → READ_COMMITTED, MySQL → REPEATABLE_READ. 
+                           You don’t need to specify isolation unless there’s a business need.
+                            Spring default isolation = Isolation.DEFAULT
+      4. Rollback Rules: By default, Spring will roll back the transaction for unchecked exceptions (subclasses of RuntimeException) and errors. 
+                         You can customize this behavior using the rollbackFor and noRollbackFor attributes.
+      5. Timeout: You can specify a timeout for the transaction, after which it will be rolled back if it has not completed.
+      6. Read-Only Transactions: You can mark a transaction as read-only, which can help optimize performance for operations that do not modify the database.
+
+      Example : use the @Transactional annotation in a Spring service class
+
+            @Service
+            public class UserService {
+
+              @Autowired
+              private UserRepository userRepository;
+
+              @Transactional
+              public User createUser (User user) {
+                   // This method will be executed within a transaction
+                   return userRepository.save(user);
+              }
+
+              @Transactional(readOnly = true)
+              public User getUser (Long id) {
+                  // This method is marked as read-only
+                  return userRepository.findById(id).orElse(null);
+              }
+           }
