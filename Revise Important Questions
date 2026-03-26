@@ -55,13 +55,16 @@ int[] copy = Arrays.copyOf(numbers, 3);
 				The iterator is fail-safe, allowing modifications during iteration without throwing exceptions.
 				Ideal for high-performance applications where multiple threads frequently read and write data.
 
-6.   			                      ArrayList				              LinkedList
+6.(AIIMS)   			            	ArrayList				              LinkedList
+Access                   	Fast (O1)				                    Slow (On)
+Insert/Delete in middle  	Slow (On)                            		Faster  
+Iteration                	Fast because contiguous memory       		Slower becuase scattered nodes in memory 
+Memory                   	Low                                  		High
+structure                	uses a dynamic array	                	uses a doubly linked list.
 
-structure                uses a dynamic array	                uses a doubly linked list.
-Access                   Fast (O1)				                    Slow (On)
-Insert/Delete in middle  Slow (On)                            Faster  
-Memory                   Low                                  High
-Iteration                Fast because contiguous memory       Slower becuase scattered nodes in memory 
+
+
+
 
 7. Comparator
 class Employee {
