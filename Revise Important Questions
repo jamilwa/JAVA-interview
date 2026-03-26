@@ -905,3 +905,48 @@ public class ProductController {
                   return userRepository.findById(id).orElse(null);
               }
            }
+
+
+43. How does @teansactional work internally
+
+In Spring, @Transactional works through a design pattern called AOP (Aspect-Oriented Programming). It essentially uses 
+
+a Proxy—a "middleman" that wraps your class and manages the database connection for you. 
+Here is the step-by-step internal flow of what happens when you call a transactional method.
+1. The Proxy Creation
+When Spring starts up, it scans your beans for the @Transactional annotation. If it finds one, it doesn't just inject your raw class into other beans; it 
+    creates a Proxy object (usually using CGLIB or JDK Dynamic Proxies). 
+2. The Step-by-Step Internal Flow
+When a caller executes your method, the call goes to the Proxy first, not your actual code: 
+•	Intercept: The Proxy intercepts the call.
+•	Transaction Manager: The Proxy asks the PlatformTransactionManager (like 
+
+DataSourceTransactionManager) to start a new transaction.
+•	Connection Binding: The Transaction Manager gets a connection from the Data Source and binds it to the current thread (using ThreadLocal).
+•	Target Execution: Only now does the Proxy call your actual method. Every database query inside your method looks for a connection on the current thread
+    and finds the one we just opened.
+•	The Result: 
+•	Success: If your method finishes without an error, the Proxy tells the Transaction Manager to Commit.
+•	Failure: If a RuntimeException occurs, the Proxy tells the Transaction Manager to Rollback.
+•	Cleanup: The connection is released/closed and unbound from the thread.
+
+3. Important Internal "Gotchas"
+A. Self-Invocation (The "Inside Call" Problem)
+This is the most common bug with @Transactional. If you call a transactional method from another method inside the same class, the transaction will fail to start. 
+•	Why? Because the call is happening directly on this, skipping the Proxy "middleman." To Spring, it looks like a normal method call.
+B. Visibility
+Internal Spring AOP proxies only work on public methods. If you put @Transactional on a private or protected method, Spring will ignore it without throwing an error. 
+C. Rollback Rules
+By default, Spring only rolls back for Unchecked Exceptions (RuntimeException and Error). It will not roll back for Checked 
+
+Exceptions (like IOException or SQLException) unless you explicitly tell it to:
+@Transactional(rollbackFor = Exception.class)
+Summary of Components
+Proxy
+Intercepts the call and handles the "Before" and "After" logic.
+TransactionManager
+Decides whether to Open, Commit, or Rollback.
+TransactionDefinition
+Holds settings like Propagation, Isolation, and Timeout.
+TransactionStatus
+Represents the state of the current transaction.
