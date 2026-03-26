@@ -196,26 +196,24 @@ Constructors using new operator (TreeSet::new)
 
 	Common Methods of Optional  (OrElseGet IfPresent)
 	1. isPresent(): Checks if a value is present. returns a boolean. it requires get(). it Can lead to NoSuchElementException. Not functional. Avoid using this method.
-		Optional<String> optional = Optional.of("Hello");
-		if (optional.isPresent()) {
-    			System.out.println(optional.get()); // Prints: Hello
+		Optional<String> name = Optional.of("Jamil");
+		if (name.isPresent()) {
+    			System.out.println(name.get()); // Prints: Hello
 		}
 	
 	2. ifPresent(Consumer<? super T> action): Executes a lambda only if a value is present. return void. doesnt require get(). it is functional. recommended to use.  
-		optional.ifPresent(value -> System.out.println(value)); // Prints: Hello
+		name.ifPresent(value -> System.out.println(value)); // Prints: Hello
 
 	3. get(): Returns the value if present; otherwise, it throws NoSuchElementException.
-		String value = optional.get(); // Returns "Hello"
+		String value = name.get(); // Returns "Hello"
 
 	4. orElse(T other): Eager Evaluation. Returns the value if present; otherwise, returns the provided default value.  
-		Optional<String> optional = Optional.of("value");
-		String result = optional.orElse(getDefault()); 
+		String result = name.orElse(getDefault()); 
 
 		cons: getDefault() is called even though the value exists. This can cause Performance issues, Unintended side effects, Unnecessary DB or API calls.
 
 	5. orElseGet(Supplier<? extends T> other): Lazy Evaluation, Returns the value if present; otherwise, invokes the provided supplier and returns the result.
-		Optional<String> optional = Optional.of("value");
-		String result = optional.orElseGet(() -> getDefault());
+		String result = name.orElseGet(() -> getDefault());
 
 		pros: getDefault() executes only if Optional is Empty. 
 
@@ -229,12 +227,15 @@ Constructors using new operator (TreeSet::new)
 		Avoid using Parameterless orElseThrow() in APIs.  example:  optional.orElseThrow();
 
 
-	7. map(Function<? super T, ? extends U> mapper): If a value is present, applies the provided mapping function to it and returns an Optional describing the result.
-		Optional<Integer> lengthOptional = optional.map(String::length); // Returns Optional[5]
+	7. map(Function<? super T, ? extends U> mapper): Transforms the value inside an Optional & Wraps the result back into an Optional & Returns Optional.empty() if the 
+		original Optional is empty. 
+		Optional<Integer> lengthOptional = name.map(String::length); 			// Returns Optional[5]
 
 	8. flatMap(Function<? super T, Optional<U>> mapper): Similar to map, but the mapping function must return an Optional
-		Optional<String> optionalValue = Optional.of("Hello");
-		Optional<Integer> lengthOptional = optionalValue.flatMap(value -> Optional.of(value.length())); // Returns Optional[5]
+		Optional<Integer> lengthOptional = name.flatMap(value -> Optional.of(value.length())); // Returns Optional[5]
+
+		Note: Use map() when the function returns a normal value
+			✅ Use flatMap() when the function returns an Optional
 
 
 11. Collectors (Collectors Group Joining parti, toList counting summarizingInt) 
