@@ -825,56 +825,7 @@ Note on Persistence: If you use Spring Data JPA, entities are technically mutabl
 
 truly immutable, map your mutable @Entity objects to immutable Records (DTOs) before returning them to the controller.
 
-24. Explain why constructor injection is preferred
-
-In Spring Boot, Constructor Injection is the gold standard for dependency injection, especially when building robust, production-grade applications. 
-    While @Autowired on a field is shorter to write, constructor injection offers structural advantages that field injection simply can't match.
-1. Requirement of Final Fields (Immutability)
-As we discussed with the immutable API, constructor injection allows you to declare 
-
-your dependencies as final.
-•	Field Injection: You cannot use final because the field must be modified by Spring via reflection after the object is instantiated.
-•	Constructor Injection: The dependency is assigned at the moment of creation. This ensures the dependency cannot be changed (mutated) or become null during 
-    the lifecycle of the bean.
-
-private final ProductService productService; // 'final' is only possible with constructor injection
-
-2. Ease of Unit Testing
-This is perhaps the biggest practical advantage. When you use constructor injection, your class has no "hidden" dependencies.
-
-•	No Spring Needed: You can instantiate the class in a plain JUnit test using the new keyword and pass in a Mockito mock.
-•	With Field Injection: You are forced to use @SpringBootTest (which is slow) or use reflection utilities to "force" the dependency into the private field.
-3. Prevention of NullPointerExceptions
-Constructor injection guarantees that a bean is never created in an uninitialized state. If a required dependency is missing, the application will fail to compile
-    or fail immediately at startup rather than throwing a NullPointerException at runtime when a specific method is called.
-4. Circular Dependency Detection
-
-Spring can detect circular dependencies (Class A needs Class B, and Class B needs Class A) much more effectively with constructor injection. It will throw a
-    BeanCurrentlyInCreationException at startup, forcing you to fix a flawed architectural design early.
-Comparison at a Glance
-Immutability
-Supported (final fields)
-Not supported
-Testability
-Easy (POJO-friendly)
-Hard (Requires Spring context)
-Transparency
-Explicit (Visible in signature)
-Hidden (Magic reflection)
-Safety
-Fail-fast at startup
-Potential NPE at runtime
-
-Pro-Tip: Use Lombok to save space
-If you find constructors too verbose, you can use the @RequiredArgsConstructor annotation from Lombok. It will automatically generate the constructor for all
-    final fields, keeping your code clean while maintaining all the benefits of constructor injection.
-
-@RestController
-@RequiredArgsConstructor // Automatically creates the constructor for you
-public class ProductController {
-    private final ProductService productService;
-}
-
+24. 
 25. How does springboot handles Circular 
 
 Dependency
