@@ -194,7 +194,7 @@ Constructors using new operator (TreeSet::new)
 															an empty Optional
 
 
-	Common Methods of Optional  (Get IfOrElse MapIsFlat)
+	Common Methods of Optional  (OrElseGet IfPresent)
 	1. isPresent(): Checks if a value is present. returns a boolean. it requires get(). it Can lead to NoSuchElementException. Not functional. Avoid using this method.
 		Optional<String> optional = Optional.of("Hello");
 		if (optional.isPresent()) {
@@ -207,14 +207,27 @@ Constructors using new operator (TreeSet::new)
 	3. get(): Returns the value if present; otherwise, it throws NoSuchElementException.
 		String value = optional.get(); // Returns "Hello"
 
-	4. orElse(T other): Returns the value if present; otherwise, returns the provided default value.
-		String value = emptyOptional.orElse("Default Value"); // Returns "Default Value"
+	4. orElse(T other): Eager Evaluation. Returns the value if present; otherwise, returns the provided default value.  
+		Optional<String> optional = Optional.of("value");
+		String result = optional.orElse(getDefault()); 
 
-	5. orElseGet(Supplier<? extends T> other): Returns the value if present; otherwise, invokes the provided supplier and returns the result.
-		String value = emptyOptional.orElseGet(() -> "Generated Value"); // Returns "Generated Value"
+		cons: getDefault() is called even though the value exists. This can cause Performance issues, Unintended side effects, Unnecessary DB or API calls.
+
+	5. orElseGet(Supplier<? extends T> other): Lazy Evaluation, Returns the value if present; otherwise, invokes the provided supplier and returns the result.
+		Optional<String> optional = Optional.of("value");
+		String result = optional.orElseGet(() -> getDefault());
+
+		pros: getDefault() executes only if Optional is Empty. 
 
 	6. orElseThrow(Supplier<? extends X> exceptionSupplier): Returns the value if present; otherwise, throws an exception created by the provided supplier.
-		String value = emptyOptional.orElseThrow(() -> new IllegalArgumentException("Value is absent"));
+		Throws NoSuchElementException. Mostly useful for internal APIs.
+		Optional<User> optUser = findUser();
+		User user = optUser.orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+		Pros: Use orElseThrow() in service layer, ✅ Throw domain‑specific exceptions, ✅ Combine with global exception handling, ✅ Avoid parameterless orElseThrow() for APIs
+			  ✅ Keep exception messages clear & actionable
+		Avoid using Parameterless orElseThrow() in APIs.  example:  optional.orElseThrow();
+
 
 	7. map(Function<? super T, ? extends U> mapper): If a value is present, applies the provided mapping function to it and returns an Optional describing the result.
 		Optional<Integer> lengthOptional = optional.map(String::length); // Returns Optional[5]
