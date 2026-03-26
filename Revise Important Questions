@@ -589,7 +589,6 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 
 	When using ExecutorService, you must consider:
 		Thread Pool Sizing: If a task is CPU-bound, set the pool size to the number of available cores. If it's I/O-bound (DB calls, Kafka), you can set it much higher.
-		Naming Threads: In production, use a ThreadFactory to name your threads (e.g., "kafka-consumer-pool-1"). This makes debugging thread dumps 10x faster.
 		Graceful Shutdown: Applications that don't call .shutdown() can leave "zombie" threads running, preventing the JVM from exiting or causing memory leaks.
 
 38. How to customize Exception handling in springboot
