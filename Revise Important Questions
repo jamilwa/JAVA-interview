@@ -437,9 +437,8 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
                     awakened. However, only one thread can acquire the monitor at a time.
 
 28.  difference between Callable and Runnable
-    The Runnable interface does not return a result. Its run() method has a void return type. 
+    a. The Runnable interface does not return a result. Its run() method has a void return type.  Runnable can be executed or submitted.
     The run() method cannot throw checked exceptions. If you need to handle exceptions, you must catch them within the run() method.
-    You can submit a Runnable task to an ExecutorService using the execute() method.
 
     example
     public class MyRunnable implements Runnable {
@@ -448,22 +447,44 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
         try {
             // Task code that may throw an exception
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace();		// must handle checked exceptions
         }
 
 
-	The Callable interface can return a result. Its call() method returns a value of a specified type. 
-    The call() method can throw checked exceptions. 
-    You can submit a Callable task to an ExecutorService using the submit() method. This method returns a Future object, 
-	which can be used to retrieve the result of the computation.
+    You can submit a Runnable task to an ExecutorService using the execute() method. There are two ways:
+		1. ✅ Using execute() (NO result). Exceptions go to thread’s UncaughtExceptionHandler
+			ExecutorService executor = Executors.newFixedThreadPool(1);
+			executor.execute(new MyRunnable());
+
+		2. ✅ Using submit() (Returns Future<?>). Future.get() returns null. Any exception is wrapped in ExecutionException
+			Future<?> future = executor.submit(new MyRunnable());
+
+	b. The Callable interface can return a result. Its call() method returns a value of a specified type. The call() method can throw checked exceptions. 
+		 Callable must be submitted and returns a Future. Callable cannot be used with execute()
 
     example
     public class MyCallable implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         // Task code here
-        return 42; // Example return value
+        return 42; 
+
+    You can submit a Callable task to an ExecutorService using the submit() method. This method returns a Future object, 
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+		Future<Integer> future = executor.submit(new MyCallable());
+		Integer result = future.get(); // blocks until result is available
     
+		✅ Future.get(): Returns result. Throws ExecutionException if call() throws exception
+
+		Key Differences (Corrected & Complete)
+		Feature						Runnable		Callable
+		Return value				❌ No (void)	✅ Yes
+		Checked exceptions			❌ No			✅ Yes
+		Method						run()			call()
+		Submit using execute()		✅ Yes			❌ No
+		Submit using submit()		✅ Yes			✅ Yes
+		Returns Future				⚠️ Optional		✅ Yes
+		Lambda friendly				✅ Yes			✅ Yes
 
 29. How do you create a thread in Java?
 	1. Extending the Thread Class:  You create a subclass that extends Thread and overrides the run() method.
