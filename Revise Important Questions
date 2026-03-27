@@ -398,15 +398,15 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 			example: myMap.put("a", 1);
 			put(key, value) -> hash(key) -> initialize table if needed -> calculate index -> table empty? YES → insert node, NO → check equals? same key → replace, different key → chain / treeify. resize if needed.
 			Now: Default capacity = 16, table of size 16 is created, Entry is placed in calculated index/bucket. we can have 1 null key whose index will be 0 in table.
-		b. hashcode is generated for keys using "key.hashCode()" method. If key is null, hash is 0.
-		c. index is generated  using this formula  "index = (n - 1) & hash".  Where n = array length (capacity, e.g., 16) and hash = key.hashCode().
-		d. this index is used to determine location of the value to be stored in table.
-		e. A Node represents one key–value pair. Node is a nested class within hashmap class.
-		f. The node structure is like     [ hashcode, key, value, next ]
-		. when collision occurs due to getting same index from hashcode, then a linkedlist is created on same index & elements are stored
-		. maximum 8 collisions are allowed to create linked list in a single index, if collisions > 8, A bucket is converted to a Red‑Black Tree ONLY IF:
+		3. hashcode is generated for keys using "key.hashCode()" method. If key is null, hash is 0.
+		4. index is generated  using this formula  "index = (n - 1) & hash".  Where n = array length (capacity, e.g., 16) and hash = key.hashCode().
+		5. this index is used to determine location of the value to be stored in table.
+		6. A Node represents one key–value pair. Node is a nested class within hashmap class.
+		7. The node structure is like     [ hashcode, key, value, next ]
+		8. when collision occurs due to getting same index from hashcode, then a linkedlist is created on same index & elements are stored
+		9. maximum 8 collisions are allowed to create linked list in a single index, if collisions > 8, A bucket is converted to a Red‑Black Tree ONLY IF:
 				Bucket size >= 8  or HashMap capacity >= 64.  If capacity < 64 → resize instead of treeify.
-		. Default load factor = 0.75, when resizing happen "threshold = capacity × loadFactor"
+		10. Default load factor = 0.75, when resizing happen "threshold = capacity × loadFactor"
 26. what is context switching? 
     When the OS switches the processor from executing one thread/process to another is called context switching. This switch involves saving the state of the currently
 	running thread/process so that it can be resumed later, and loading the state of the new thread/process to be executed next. context switching allows for multitasking,
