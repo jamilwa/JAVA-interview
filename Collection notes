@@ -10,18 +10,8 @@ ArrayList is not thread-safe.	                  Vector is a thread-safe.
 It can increase its size by 50%.	          It can increase its size by doubling the size of the array.
 It is not a legacy class.	                  It is a legacy class.
 
-3.              Array                                                                          Arraylist 
-    Array is static in size.	                                                	ArrayList is dynamic in size.
-    It is mandatory to provide the size of an array while using new keyword     	We can create an instance of ArrayList without specifying its size. 
-     ex:   int[] myArray = new int[6];                                              	 initial capacity is 10.
-           myArray[0] = 3;
-    It performs fast because of fixed size.	                                		The resize operation slows down the performance.
-    length variable to determine the size of an array.	                        	size() method to determine the size of ArrayList.
-    stores both objects and primitives type.	                                	doesn't store primitive type. It automatically converts primitive type to object.
-    can add elements in an array by using the assignment operator.	        		the add() method to add elements in the ArrayList.
-    throws ArrayIndexOutofBoundException											throws IndexOutofBoundException
 
-Arrays class methods are    (ABCDES) ---- Array BinarySearch CopyOf DeepToString Equals Sort
+3. Arrays class methods are    (ABCDES) ---- Array BinarySearch CopyOf DeepToString Equals Sort
                import java.util.Arrays;
 
                int[] numbers = {1, 2, 3, 7, 4, 5};
@@ -47,7 +37,7 @@ Arrays class methods are    (ABCDES) ---- Array BinarySearch CopyOf DeepToString
 
                Arrays.binarySearch(numbers, 3);                  // output:  2 which is the index position of the value 3
 
-List methods   (LAACCSS GR) -- List Add AddAll Contains Clear Size Set Get Remove
+4. List methods   (LAACCSS GR) -- List Add AddAll Contains Clear Size Set Get Remove
         a. List<String> list1 = Arrays.asList("jamil", "ansari")           // we use classes to implement an interface, LHS should always be an interface and RHS a class
 	b. Collection<String> list2 = Arrays.asList("jamil", "ansari")     // we can either use the interface or its parent interface to implement it. Collection is 
 										parent of all interfaces
@@ -99,6 +89,19 @@ HashMap allows one null key                             	            HashTable d
 Iterator is used to traverse HashMap.	                                Either Iterator or Enumerator is used for traversing a HashTable.
 It is fail-fast.                                                        It is fail-safe.
 faster than HashTable.	                                                slower than HashMap.
+
+6. Hashmap methods
+	1. putIfAbsent(K key, V value):  Adds value only if key is absent
+			example: 			myMap.putIfAbsent("age", 30);
+	
+	2. compute():  Atomic calculation on key, Locks only bucket, not entire map. 
+			example: 			myConcurrentMap.compute(key, (k, v) -> v == null ? 1 : v + 1);
+
+	3. computeIfAbsent():  Computes value once, Prevents duplicate initialization. Perfect for: Caches, Lazy loading, High concurrency
+			example:			myConcurrentMap.computeIfAbsent(id, this::loadFromDB);
+
+	4. computeIfPresent(): Only updates existing key atomically.
+
 
 7. An easy-to-remember acronym for common Set methods in Java could be "AIS". Here's what each letter represents:
    A: add() - Adds an element to the set.
@@ -229,15 +232,6 @@ faster than HashTable.	                                                slower th
 	Performance: Offers O(log n) time complexity for basic operations.
 	Use Case: When you need a thread-safe, sorted set.
 
-
-
-15.  			          ArrayList				              LinkedList
-
-structure                uses a dynamic array	              uses a doubly linked list.
-Access                   Fast (O1)				              Slow (On)
-Insert/Delete in middle  Slow (On)                            Faster  
-Memory                   Low                                  High
-Iteration                Fast because contiguous memory       scattered nodes in memory          Slower
 
 
 
