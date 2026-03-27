@@ -392,13 +392,14 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 25. hashmap internal working
 		Hashmap
 		a. map doesnt maintain order, hashmap initial capacity is 16, using this value node array of size 16 is created. we can have 1 null key whose index will be zero in bucket
-		b. hashcode is generated for keys using their ascii codes
-		c. index is generated from hashcode using modulo 10 etc.
+		b. hashcode is generated for keys using "key.hashCode()" method. 
+		c. index is generated  using this formula  "index = (n - 1) & hash".  Where n = array length (capacity, e.g., 16) and hash = key.hashCode().
 		d. this index is used to determine location of the value to be stored in bucket/node type array
-		e. Node is a nested class within hashmap class. A node array is created with size 16 because default initial capacity of node array is 16
-		f. The node structure is like     [ hashcode, key, value, null ]
+		e. Node is a nested class within hashmap class. Array is NOT created immediately, It is created On first put(), OR after resizing. Lazy initialization.
+		f. The node structure is like     [ hashcode, key, value, next ]
 		. when collision occurs due to getting same index from hashcode, then a linkedlist is created on same index & elements are stored
-		. maximum 8 collisions are allowed to create linked list in a single index, if collisions > 8, then a Balanced tree(Red black tree) is created
+		. maximum 8 collisions are allowed to create linked list in a single index, if collisions > 8, A bucket is converted to a Red‑Black Tree ONLY IF:
+				Bucket size >= 8  or HashMap capacity >= 64.  If capacity < 64 → resize instead of treeify.
 		 
 26. what is context switching? 
     When the OS switches the processor from executing one thread/process to another is called context switching. This switch involves saving the state of the currently
