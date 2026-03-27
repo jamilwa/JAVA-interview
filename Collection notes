@@ -91,17 +91,59 @@ It is fail-fast.                                                        It is fa
 faster than HashTable.	                                                slower than HashMap.
 
 6. Hashmap methods
-	1. putIfAbsent(K key, V value):  Adds value only if key is absent
-			example: 			myMap.putIfAbsent("age", 30);
+	1. putIfAbsent(K key, V value): Adds the value only if the key does NOT already exist, If the key is already present → does nothing
+			example: 			Map<String, Integer> map = new ConcurrentHashMap<>();
+								map.putIfAbsent("age", 30);
+								map.putIfAbsent("age", 40);
+				What happens?
+					First call → "age" not present → ✅ value 30 added
+					Second call → "age" already present → ❌ ignored
+
+			Prevents overwriting an existing value. Avoids race conditions in multi‑threading. 	
+			✅ Common use: Initializing values, Simple counters, Safe default inserts.
 	
-	2. compute():  Atomic calculation on key, Locks only bucket, not entire map. 
-			example: 			myConcurrentMap.compute(key, (k, v) -> v == null ? 1 : v + 1);
+	2. compute():  Recalculates the value for a key, Gets both key and existing value. it Can: Insert, Update, Remove (by returning null).
+					Locks only bucket, not entire map. 
+			example: 			ConcurrentMap<String, Integer> map = new ConcurrentHashMap<>();
+								map.compute("count", (k, v) -> v == null ? 1 : v + 1);
+								map.compute("count", (k, v) -> v == null ? 1 : v + 1);
 
-	3. computeIfAbsent():  Computes value once, Prevents duplicate initialization. Perfect for: Caches, Lazy loading, High concurrency
-			example:			myConcurrentMap.computeIfAbsent(id, this::loadFromDB);
+			Step‑by‑step
+				First call → "count" not present → v == null → set to 1
+				Second call → "count" exists → v + 1 → set to 2
 
-	4. computeIfPresent(): Only updates existing key atomically.
+			Why is this useful?  Safe increment / update. No need for get() then put(). Avoids race conditions
+			✅ Use case: Counters, Accumulating values.
 
+	3. computeIfAbsent():  Calculates value ONLY if key is missing, Computes value once, Prevents duplicate initialization. 
+			example:			ConcurrentMap<Integer, String> cache = new ConcurrentHashMap<>();
+								cache.computeIfAbsent(1, id -> "User-" + id);
+								cache.computeIfAbsent(1, id -> "NewUser-" + id);
+			What happens?
+						First call → key 1 missing → value computed → "User-1"
+						Second call → key already exists → lambda NOT executed
+
+			✅ Why is this powerful?     Prevents duplicate work, Avoids multiple DB calls, Lambda executes only once
+			✅ Perfect for: Caches, Lazy loading, Expensive computations, High‑concurrency systems.
+
+	4. computeIfPresent(): Updates value ONLY if key already exists, If key is missing → does nothing. 
+				example:  		ConcurrentMap<String, Integer> map = new ConcurrentHashMap<>();
+								map.put("score", 50);
+								map.computeIfPresent("score", (k, v) -> v + 10);
+								map.computeIfPresent("rank", (k, v) -> 1);
+				What happens?
+							"score" exists → updated to 60
+							"rank" does not exist → ignored
+
+				✅ Why is this useful? Prevents accidental creation of new keys, Safe updates in concurrent environments
+				✅ Use case: Conditional updates, Incrementing only existing values
+
+✅ Side‑by‑Side Summary
+Method				When It Runs			Key Missing			Key Present	
+putIfAbsent			Insert only				✅ Insert			❌ Ignore	
+compute				Always					✅ Insert			✅ Update
+computeIfAbsent		Only if missing			✅ Insert			❌ Ignore
+computeIfPresent	Only if present			❌ Ignore			✅ Update
 
 7. An easy-to-remember acronym for common Set methods in Java could be "AIS". Here's what each letter represents:
    A: add() - Adds an element to the set.
