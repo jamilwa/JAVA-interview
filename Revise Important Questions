@@ -408,9 +408,16 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 				Bucket size >= 8  or HashMap capacity >= 64.  If capacity < 64 → resize instead of treeify.
 		10. Default load factor = 0.75, when resizing happen "threshold = capacity × loadFactor"
 26. what is context switching? 
-    When the OS switches the processor from executing one thread/process to another is called context switching. This switch involves saving the state of the currently
-	running thread/process so that it can be resumed later, and loading the state of the new thread/process to be executed next. context switching allows for multitasking,
-	concurrency, and efficient CPU utilization by enabling the OS to switch between different threads/processes running on a system.
+    	Context switching occurs when the OS switches the CPU from executing one process/thread to another. During this switch, the OS saves the execution context (CPU registers,
+		program counter, stack pointer, flags.) of the current process/thread and restores the saved context of the next one to resume execution. This saving and restoring
+		takes time → context switching is not free. This mechanism enables: Multitasking, Concurrency, Efficient CPU utilization.
+		
+		Real‑World Example, Consider a web server:
+			Thread A is processing a request
+			Thread A waits for DB response (I/O)
+			OS switches CPU to Thread B
+			When DB response arrives, OS switches back to Thread A
+	    ✅ This switch is context switching.
 
 27. Compare Wait()  and Sleep()
     both wait() and sleep() methods are used for pausing the execution of a thread, but they have different behaviors:
