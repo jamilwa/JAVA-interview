@@ -390,12 +390,18 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
      We can create an immutable class by defining a final class having all of its members as final
 
 25. hashmap internal working
-		Hashmap
-		a. map doesnt maintain order, hashmap initial capacity is 16, using this value node array of size 16 is created. we can have 1 null key whose index will be zero in bucket
-		b. hashcode is generated for keys using "key.hashCode()" method. 
+		when we write  map<String, Integer> mymap = new HashMap<>();   the following occurs. 
+		1. JVM allocates memory on the heap, A HashMap object is created, No table is created yet, Internal fields are initialized: size = 0, loadFactor = 0.75, table = null
+			HashMap uses lazy initialization.
+		2. Table is NOT created immediately. It is created only when the first put() happens. A bucket is a single index in the table array. table[0] → bucket 0
+			table[1] → bucket 1 
+			example: myMap.put("a", 1);
+			put(key, value) -> hash(key) -> initialize table if needed -> calculate index -> table empty? YES → insert node, NO → check equals? same key → replace, different key → chain / treeify. resize if needed.
+			Now: Default capacity = 16, table of size 16 is created, Entry is placed in calculated index/bucket. we can have 1 null key whose index will be 0 in table.
+		b. hashcode is generated for keys using "key.hashCode()" method. If key is null, hash is 0.
 		c. index is generated  using this formula  "index = (n - 1) & hash".  Where n = array length (capacity, e.g., 16) and hash = key.hashCode().
-		d. this index is used to determine location of the value to be stored in bucket/node type array
-		e. Node is a nested class within hashmap class. Array is NOT created immediately, It is created On first put(), OR after resizing. Lazy initialization.
+		d. this index is used to determine location of the value to be stored in table.
+		e. A Node represents one key–value pair. Node is a nested class within hashmap class.
 		f. The node structure is like     [ hashcode, key, value, next ]
 		. when collision occurs due to getting same index from hashcode, then a linkedlist is created on same index & elements are stored
 		. maximum 8 collisions are allowed to create linked list in a single index, if collisions > 8, A bucket is converted to a Red‑Black Tree ONLY IF:
