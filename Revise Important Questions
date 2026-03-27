@@ -557,7 +557,32 @@ Conversely, you can convert a primitive-type stream to a regular Stream using me
 
 30. What is the difference between  start()  and  run()  methods?
     The  start()  method is used to begin the execution of a thread. It invokes the  run() method which executes the code in a new thread. 
+		Key Points
+			✅ Creates a new thread
+			✅ Executes asynchronously
+			✅ JVM manages thread lifecycle
+			❌ Cannot be called more than once
+						t.start(); // ✅ OK
+						t.start(); // ❌ IllegalThreadStateException
+
+		✅ Calling start()
+				main thread----> new thread ----> run()
+				✅ Two threads exist, main and new thread
+				✅ Runs concurrently
+
     The  run()  method contains the code that defines the thread's task. If you call  run()  directly, it will execute the code in the current thread.
+		✅ Calling run()
+				main thread----> run()
+				✅ Only one thread
+				✅ No concurrency
+
+	Feature						start()				run()
+	Creates new thread			✅ Yes				❌ No
+	Calls run() internally		✅ Yes				❌ No
+	Async execution				✅ Yes				❌ No
+	Runs in current thread		❌					✅
+	Called by JVM				✅					❌
+	Can be called multiple times❌No				✅ Yes (like any method)
 
 31. What is the lifecycle of a thread?       NeRu Bloc WaiTer.
    New:      The thread is created but not yet started. A thread enters this state when an instance of the Thread class is created using the new keyword.
