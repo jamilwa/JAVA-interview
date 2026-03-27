@@ -728,21 +728,15 @@ Order Fields
 22. 
 
 23.  Write an immutable API in springboot 
-
-Building an immutable API in Spring Boot is a fantastic way to ensure thread safety, reduce side effects, and make your code significantly easier to debug. 
-    In the Java ecosystem, this is primarily achieved using Records (introduced in Java 14/16) and a functional approach to data flow.
-Here is a clean implementation of an immutable REST API.
-1. The Immutable Model (The Record)
-Using a Java record automatically makes the fields private final and generates the constructor, getters, equals, and hashCode methods. Once created, this object
-    cannot be changed.
-Note on Persistence: If you use Spring Data JPA, entities are technically mutable by design (Hibernate requires a no-args constructor and setters). To keep the API 
-
-truly immutable, map your mutable @Entity objects to immutable Records (DTOs) before returning them to the controller.
+        Building an immutable API in Spring Boot is a fantastic way to ensure thread safety, reduce side effects, and make your code significantly easier to debug. 
+        this is primarily achieved using Records (introduced in Java 14/16) and a functional approach to data flow.
+            1. The Immutable Model (The Record): Using a Java record automatically makes the fields private final and generates the constructor, getters, equals, 
+                and hashCode methods. Once created, this object cannot be changed.
+            Note on Persistence: If you use Spring Data JPA, entities are technically mutable by design (Hibernate requires a no-args constructor and setters).
+            To keep the API truly immutable, map your mutable @Entity objects to immutable Records (DTOs) before returning them to the controller.
 
 24. 
-25. How does springboot handles Circular 
-
-Dependency
+25. How does springboot handles Circular Dependency
 
 a perfect architectural world, circular dependencies (where Bean A requires Bean B, and Bean B requires Bean A) shouldn't exist. However, legacy code or 
     complex logic sometimes makes them inevitable.
@@ -760,32 +754,28 @@ If you must allow it (not recommended), you have to explicitly enable it in your
 
 spring.main.allow-circular-references=true
 
-3. How to Resolve Circular 
+3. How to Resolve Circular Dependencies
+    the three primary ways to fix it, ordered from "Quick Fix" to "Best Practice."
+        A. The @Lazy Hint (The "Wait a Minute" Approach)
+            By placing @Lazy on one of the dependencies, Spring won't fully initialize that bean until it’s actually needed for a method call. Instead, it injects a proxy.
 
-Dependencies
-If you encounter this error, here are the three primary ways to fix it, ordered from "Quick Fix" to "Best Practice."
-A. The @Lazy Hint (The "Wait a Minute" Approach)
-By placing @Lazy on one of the dependencies, Spring won't fully initialize that bean until it’s actually needed for a method call. Instead, it injects a proxy.
+            @Service
+            public class ServiceA {
+                private final ServiceB serviceB;
 
-@Service
-public class ServiceA {
-    private final ServiceB serviceB;
-
-    public ServiceA(@Lazy ServiceB serviceB) { // Injects a proxy initially
-        this.serviceB = serviceB;
-    }
-}
+                public ServiceA(@Lazy ServiceB serviceB) {         // Injects a proxy initially
+                    this.serviceB = serviceB;
+                } }
+                
 
 
-B. Setter/Field Injection (The "Post-Construction" Approach)
-While we discussed why constructor injection is better, Setter Injection technically "solves" the circle. Spring creates the objects using their no-args 
-    constructors first, and then "wires" the dependencies into them afterward. This breaks the deadlock during the instantiation phase.
-C. Architectural Refactoring (The "Right" Way)
-Usually, a circular dependency is a sign that your classes are doing too much.
-•	Extract a Third Class: Take the common logic that both ServiceA and ServiceB need and move it to ServiceC.
-•	Use Events: Instead of ServiceA calling ServiceB directly, have ServiceA publish 
+        B. Setter/Field Injection (The "Post-Construction" Approach)
+            While we discussed why constructor injection is better, Setter Injection technically "solves" the circle. Spring creates the objects using their no-args 
+            constructors first, and then "wires" the dependencies into them afterward. This breaks the deadlock during the instantiation phase.
 
-an application event that ServiceB listens for.
+        C. Architectural Refactoring (The "Right" Way)
+            •	Extract a Third Class: Take the common logic that both ServiceA and ServiceB need and move it to ServiceC.
+            •	Use Events: Instead of ServiceA calling ServiceB directly, have ServiceA publish an application event that ServiceB listens for.
 
 
 26. How is @data from lombok is different from record class
@@ -799,20 +789,11 @@ This is the most significant architectural difference.
 after the object is created.
 •	Java record: All fields are implicitly private final. There are no setters. Once you instantiate a record, its state is locked forever.
 2. Structural differences
-Standard class
-Specialized "Record" type
-Inheritance
-Can extend other classes
-Cannot extend classes (final)
-Fields
-Can add instance fields anytime
-Fields must be defined in the header
-Boilerplate
-Handled by annotation processor
-Handled by the Java Compiler
-Getters
-getName()
-name()
+    Standard                 class                            Record type
+    Inheritance       Can extend other classes            Cannot extend classes (final)
+    Fields            Can add instance fields anytime     Fields must be defined in the header
+    Boilerplate       Handled by annotation processor     Handled by the Java Compiler
+    Getters           getName()                           name()
 
 4. When to use which?
 Use @Data when:
