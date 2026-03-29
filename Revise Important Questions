@@ -31,20 +31,29 @@
 4. How to make collection threadsafe
 	1. Using Synchronized Collections : Java provides synchronized wrappers for collections through the Collections.synchronizedXXX methods like 
 		Collections.synchronizedList(), Collections.synchronizedSet(), Collections.synchronizedMap.
+		- Provides serial access (one thread at a time).
+		- Iterators are fail-fast (ConcurrentModificationException if modified during iteration).
+		- Performance can degrade under heavy contention.
+
     examplee:   
     	List<Integer> list = Collections.synchronizedList(new ArrayList<>());
 
-  2. Using Concurrent Collections : Java provides a set of concurrent collections in the java.util.concurrent package. 
-	example:
-		ConcurrentHashMap: A thread-safe variant of HashMap that allows concurrent read and write operations.
-		CopyOnWriteArrayList: A thread-safe variant of ArrayList where all mutative operations (like add, set, etc.) are implemented by making a fresh copy
+  2. Using Concurrent Collections : - Designed for high concurrency and scalability. found in the java.util.concurrent package. 
+	example: 
+		ConcurrentHashMap: Thread-safe map with segmented locking, that allows concurrent read and write operations.
+		CopyOnWriteArrayList: A thread-safe ArrayList where all mutative operations (like add, set, etc.) are implemented by making a fresh copy
 					of the underlying array.
-		ConcurrentSkipListSet: This is a thread-safe variant of NavigableSet that uses a skip list for its underlying data structure. It allows concurrent 
-					access and maintains a sorted order.
+		ConcurrentSkipListSet: A thread-safe NavigableSet that uses a skip list for its underlying data structure. It allows concurrent access & maintains a sorted order.
 		BlockingQueue: An interface that represents a thread-safe queue that supports operations that wait for the queue to become non-empty when retrieving 
-					an element and wait for space to become available in the queue when storing an element.
-	3. Using ThreadLocal : If you want to maintain a separate instance of a collection for each thread, you can use ThreadLocal. This is useful when you want to
-				avoid contention between threads.
+					an element and wait for space to become available in the queue when storing an element. Supports producer-consumer patterns with blocking operations
+
+	3. Immutable Collections
+		- If collections don’t need modification, use immutable collections (e.g., List.of(), Set.of() in Java 9+).
+		- Immutable objects are inherently thread-safe.
+
+	4. Using ThreadLocal : - Each thread gets its own isolated copy of the collection. Useful when you want to avoid synchronization altogether.
+		example: ThreadLocal<List<String>> threadLocalList = ThreadLocal.withInitial(ArrayList::new);
+
 
 5. if we have Collection.SynchronizedMap() then why to use concurrentHashmap
 	Collections.synchronizedMap(): Provides serial access, meaning only one thread can access the map at a time for read or write operations. This can lead to
