@@ -61,6 +61,8 @@
 				       Supports null keys and values, depending on the underlying map implementation.
 				       The iterator is fail-fast, meaning it throws a ConcurrentModificationException if the map is modified while iterating
 				       Suitable for applications where data consistency is more critical than performance.
+					   - Collections.synchronizedMap() does not guarantee safe iteration unless you manually synchronize during iteration:
+
 	ConcurrentHashMap: Allows multiple threads to read and write concurrently. It uses a segmented locking mechanism, which means that only a portion of the map
 				is locked during write operations, allowing for higher throughput.
 				Does not allow null keys or values, which helps avoid ambiguity in concurrent environments.
