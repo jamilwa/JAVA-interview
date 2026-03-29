@@ -62,12 +62,18 @@
 				       The iterator is fail-fast, meaning it throws a ConcurrentModificationException if the map is modified while iterating
 				       Suitable for applications where data consistency is more critical than performance.
 					   - Collections.synchronizedMap() does not guarantee safe iteration unless you manually synchronize during iteration:
+									synchronized(map) {
+   										 for (Object key : map.keySet()) {
+        									// safe iteration
+   												 }
+											}
 
 	ConcurrentHashMap: Allows multiple threads to read and write concurrently. It uses a segmented locking mechanism, which means that only a portion of the map
 				is locked during write operations, allowing for higher throughput.
 				Does not allow null keys or values, which helps avoid ambiguity in concurrent environments.
 				The iterator is fail-safe, allowing modifications during iteration without throwing exceptions.
 				Ideal for high-performance applications where multiple threads frequently read and write data.
+
 
 6.(AIIMS)   			            	ArrayList				              LinkedList
 Access                   	Fast (O1)				                    Slow (On)
@@ -77,10 +83,8 @@ Memory                   	Low                                  		High
 structure                	uses a dynamic array	                	uses a doubly linked list.
 
 
-
-
-
 7. Comparator
+
 class Employee {
     String name;
     int age;
@@ -88,56 +92,22 @@ class Employee {
     // add Constructor, setter, getter and tostring
 }
 
-class AgeComparator implements Comparator<Employee> {
-    @Override
-    public int compare(Employee e1, Employee e2) {
-        return Integer.compare(e1.age, e2.age); // Compare by age
-    }
-}
 
-class NameComparator implements Comparator<Employee> {
-    @Override
-    public int compare(Employee e1, Employee e2) {
-        // Compare by name in lexicographical order
-        return e1.name.compareTo(e2.name);
-    }
-}
-
-public class Main {
+public class DemoComparator {
     public static void main(String[] args) {
         List<Employee> employees = Arrays.asList(new Employee("Alice", 30), new Employee("Charlie", 35), new Employee("Bob", 25), new Employee("Bob", 20) );
 
-        Collections.sort(employees, new NameComparator());     				// is used if there are no setters and getters, but only constructor is there.
-		System.out.println(employees); 						// output [Alice (30), Bob (25), Bob (20), Charlie (35)]
-
-        Collections.sort(employees, Comparator.comparing(Employee::getName)); 
-		System.out.println(employees); 						// output [Alice (30), Bob (25), Bob (20), Charlie (35)]
-
-        Collections.sort(employees, Comparator.comparing(Employee::getName).thenComparing(Employee::getAge));        
-		System.out.println(employees); 						// output [Alice (30), Bob (20), Bob (25), Charlie (35)]
-
-        Collections.sort(employees, Comparator.comparing(Employee::getName, Comparator.reverseOrder())
-      .thenComparing(Employee::getAge, Comparator.reverseOrder())); 
-		System.out.println(employees); 						// output [Charlie (35), Bob (25), Bob (20), Alice (30)]
-
-
-	if Comparator is not to be used in Collections.sort() by name & then by age, then we can make use of below code to do sorting
-	
-	class EmployeeComparator implements Comparator<Employee> {
-	 
-	    @Override
-	    public int compare(Employee e1, Employee e2)
-	    {
-		// 1st level comparison
-	        int NameCompare = e1.getName().compareTo(e2.getName());
-	        int AgeCompare = Integer.compare(e1.Age, e2.Age);
-	 
-	        // 2nd level comparison
-	        return (NameCompare == 0) ? AgeCompare : NameCompare;
-		}
-
-		and in main class use below
-		Collections.sort(employees, new EmployeeComparator());
+   		employees.sort(Comparator.comparing(Employees::getName));				 								// [Alice (30), Bob (25), Bob (20), Charlie (35)]
+        employees.sort(Comparator.comparing(Employees::getName).thenComparing(Employees::getAge));				// [Alice (30), Bob (20), Bob (25), Charlie (35)]
+        employees.sort(Comparator.comparing(Employees::getName, Comparator.reverseOrder()).thenComparing(Employees::getAge, Comparator.reverseOrder()));
+        
+		// Custom comparator (Name then Age)					// [Alice (30), Bob (20), Bob (25), Charlie (35)]
+        employees.sort((e1, e2) -> {
+            int nameCompare = e1.getName().compareTo(e2.getName());
+            return (nameCompare == 0) ? Integer.compare(e1.getAge(), e2.getAge()) : nameCompare;
+        });
+        
+    }
 
 8. What is Functional Programming
 	a programming style that uses pure functions to solve problems. It emphasizes writing concise, readable code that's easier to maintain and Test. it eliminates
