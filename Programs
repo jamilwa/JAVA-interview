@@ -270,3 +270,103 @@ Java 8 programs
         boolean isWhitespace = Character.isWhitespace(ch);          //  Returns true if the specified character is a whitespace character.
 
 13. for(Map.Entry<String, Integer> entry : map.entrySet())                                          // iterating map.
+
+
+19. Magic number 
+
+public class MagicNumber {
+    public static boolean isMagic(int n) {
+        // A set to remember sums we have already seen – detects cycles
+        Set<Integer> seen = new HashSet<>();
+
+        int current = n;
+        while (current != 1 && !seen.contains(current)) {
+            seen.add(current);
+            current = digitSquareSum(current);
+        }
+        return current == 1;
+    }
+
+    /** Helper: sum of the squares of the decimal digits of x. */
+    private static int digitSquareSum(int x) {
+        int sum = 0;
+        while (x > 0) {
+            int d = x % 10;          // extract last digit
+            sum += d * d;            // add its square
+            x /= 10;                 // drop the digit
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        int[] tests = {1, 7, 10, 19, 2, 4, 20, 100, 0};
+
+        for (int t : tests) {
+            System.out.printf("%d -> %b%n", t, isMagic(t));
+        }
+    }
+}
+
+
+20. Parentheses balanced
+public class ParenthesesChecker {
+
+
+    public static boolean isBalanced(String s) {
+
+        Deque<Character> stack = new ArrayDeque<>();
+
+
+        for (char c : s.toCharArray()) {
+
+            if (c == '(' || c == '[' || c == '{') {
+
+                stack.push(c);
+
+            } else if (c == ')' || c == ']' || c == '}') {
+
+                if (stack.isEmpty()) return false;
+
+                char open = stack.pop();
+
+                if ((open == '(' && c != ')') ||
+
+                    (open == '[' && c != ']') ||
+
+                    (open == '{' && c != '}')) {
+
+                    return false;
+
+                }
+
+            } else {
+
+                return false;
+
+            }
+
+        }
+
+        return stack.isEmpty();   
+
+// true only if no unmatched openings remain
+
+    }
+
+
+    public static void main(String[] args) {
+
+        String[] tests = {"()[]{}", "([{}])", "(]", "([)]", "((()))", ""};
+
+        for (String t : tests) {
+
+            System.out.println(t + " -> " + isBalanced(t));
+
+        }
+
+    }
+
+}
+
+
+21. 
