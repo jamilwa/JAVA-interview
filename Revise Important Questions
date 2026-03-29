@@ -10,16 +10,19 @@
     throws ArrayIndexOutofBoundException											                  throws IndexOutofBoundException
 
 
-2. Arrays class methods are    (ABCDES) ---- Array BinarySearch CopyOf DeepToString Equals Sort
-int[] numbers = {1, 2, 3, 7, 4, 5};
- void       Arrays.sort(numbers);                          // Output: [1, 2, 3, 4, 5, 7]
-               Arrays.sort(numbers[], Comparator.reverseOrder())           // Sorting the array in descending order. note: it works on object like Integer not on int.
-               Arrays.sort(numbers, 3,5);                                 // sorts only numbers falling between fromIndex 3 and toIndex 5
+2. Arrays class methods are    (ABCDES) ---- AsList BinarySearch CopyOf DeepToString Equals Sort
+	int[] numbers = {1, 2, 3, 7, 4, 5};
+ 	Arrays.sort(numbers);                          				 // Output: [1, 2, 3, 4, 5, 7]
+    Arrays.sort(numbers[], Comparator.reverseOrder())           // Sorting the array in descending order. Comparator ❌ does NOT work with primitives (int[]).
+															   //  therefore we have to change int[] numbers  to  Integer[] numbers = {1, 2, 3, 7, 4, 5};
+    Arrays.sort(numbers, 3,5);                                // sorts only numbers falling between fromIndex 3 and toIndex 5. Output: [1, 2, 3, 4, 7, 5]
 
-int[] copy = Arrays.copyOf(numbers, 3);
-               Arrays.toString(copy));                         // Output: [1, 2, 3]
-
- Arrays.binarySearch(numbers, 3);                  // output:  2 which is the index position of the value 3
+	int[] copy = Arrays.copyOf(numbers, 3);			        	// Output: [1, 2, 3]. If new size < original → truncated
+	int[] copy2 = Arrays.copyOf(numbers, 8);					// Output: [1, 2, 3, 7, 4, 5, 0, 0]. If new size > original → remaining filled with default values
+	int[] rangeCopy = Arrays.copyOfRange(numbers, 2, 5);		// Output: [3, 7, 4]
+ 	
+	Arrays.binarySearch(numbers, 3);                  		// output:  2 which is the index position of the value 3. ✅ Array must be sorted for binarySearch
+	Arrays.binarySearch(numbers, 6);						// Output: -6. -(insertionPoint + 1), Insertion point for 6 is index 5, so: -(5 + 1) = -6
 
 3. Access modifiers
         Default (Package-Private): accessible only within its own package.    DOP
