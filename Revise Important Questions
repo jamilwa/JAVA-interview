@@ -265,6 +265,9 @@ Constructors using new operator (TreeSet::new)
 		Note:
 		Collectors.toList() → mutable
 		Stream.toList() → immutable
+
+	What Are Downstream Collectors?
+		A downstream collector is a collector that is applied after a grouping or partitioning operation.
 		
 
 12. List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, SummrayforEa)
