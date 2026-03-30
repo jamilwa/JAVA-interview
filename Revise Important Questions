@@ -111,11 +111,16 @@ public class DemoComparator {
 
 8. What is Functional Programming
 	a programming style that uses pure functions to solve problems. It emphasizes writing concise, readable code that's easier to maintain and Test. it eliminates
-	the need of anonymous class and gives a functional programming capability to Java. 
-	Lambda expressions are used to define implementation of a functional interface.
+	the need of anonymous class and gives a functional programming capability using:
+		Lambda expressions
+		Functional interfaces
+		Streams API
+		Method references
 
-		Types of Functional Interfaces
+	A functional interface is an interface that contains exactly ONE abstract method. Can have default and static methods. Annotated with @FunctionalInterface 
+	(optional but recommended). Types of Functional Interfaces: 
 	Java provides several built-in functional interfaces in the java.util.function package.
+
 	1. Predicate : The Predicate interface is often used for filtering and matching conditions.
 		Description: Represents a function that takes one argument and returns a boolean.
 		Method: boolean test(T t)
@@ -125,10 +130,9 @@ public class DemoComparator {
 			System.out.println(isEmpty.test("")); // true
 
 	2. Function
-		Description: Represents a function that takes one argument and produces a result.
+		Description: Represents a function that takes one argument and produces a result. used in map(), flatmap(), sorted, distinct()
 		Method: R apply(T t)
 		
-		Example: map, flatmpa,sorted, disticnt
 			Function<String, Integer> stringLength = str -> str.length();
 			System.out.println(stringLength.apply("Hello")); // 5
 
@@ -149,7 +153,7 @@ public class DemoComparator {
 			System.out.println(supplier.get()); // Hello, Supplier!
 
 	5. UnaryOperator
-		Description: Represents a function that takes a single argument of type T and returns a result of the same type.
+		Description: Represents a function that takes a single argument of type T and returns a result of the same type. used in map(). 
 		Method: T apply(T t)
 
 		Example:
@@ -157,7 +161,7 @@ public class DemoComparator {
 			System.out.println(square.apply(5)); // 25
 
 	6. BinaryOperator
-		Description: Represents a function that takes two arguments of the same type and returns a result of the same type.
+		Description: Represents a function that takes two arguments of the same type and returns a result of the same type. used in reduce() Aggregation operations.
 		Method: T apply(T t1, T t2)
 
 		Example:
