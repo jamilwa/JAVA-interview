@@ -64,15 +64,176 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
 
 
 docker image ls                                                                           //   this will list the all the images present in my local machine. 
-docker container run -d -p 5001:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
- 
+docker image list
 docker --version                                                                             //  check if Docker is installed
 docker container ls
 docker build -t in28min/hello-world-docker:v1 .
-docker image list
 docker run -d -p 5000:5000 in28min/hello-world-docker:v1
-docker build -t in28min/hello-world-docker:v2 .
 docker container run -d -p 5000:5000 in28min/hello-world-docker:v2
-docker build -t in28min/hello-world-docker:v3 .
-docker container run -d -p 5000:5000 in28min/hello-world-docker:v3
-docker build -t in28min/hello-world-docker:v4 .
+
+5. docker network create equifox-net
+   creates a custom Docker network named equifox-net. Assigns it a private subnet (e.g. 172.18.0.0/16). Sets up internal DNS. Allows containers to communicate with each 
+   other by container name. It provides easier service discovery, and is preferred over the default bridge network for production‑like setups. Isolated from other 
+   Docker networks unless connected explicitly. 
+   Why create a custom Docker network?
+     Custom networks are better than the default bridge network because they provide:
+     ✅ Automatic DNS-based container name resolution
+     ✅ Better isolation
+     ✅ Cleaner microservice architecture
+     ✅ Easier container-to-container communication
+
+   to verify the network run:                         docker network ls.
+   to Inspect details run:                            docker network inspect equifox-net
+   to Start a container on the network:               docker run -d --name app1 --network equifox-net nginx
+                                                      docker run -d --name app2 --network equifox-net busybox sleep 1000
+   app2 can ping app1 using container name:           docker exec -it app2 ping app1
+   Container name = hostname. No need to know IP addresses. This does NOT work reliably on the default bridge network
+   Connecting existing containers:                    docker network connect equifox-net container_name
+   to disconnect containers:                          docker network disconnect equifox-net container_name
+
+   Common real‑world use case:
+     Example: Microservices 
+              frontend  → backend  → database
+              
+              docker network create equifox-net
+              docker run --network equifox-net --name backend backend-image
+              docker run --network equifox-net --name frontend frontend-image
+
+              Frontend can call backend as: http://backend:8080
+
+   Optional: Creating with custom subnet. Useful when integrating with external systems. Avoiding IP conflicts
+         docker network create --subnet 192.168.100.0/24 equifox-net
+
+6. Docker Compose Networking: Docker Compose automatically creates and manages networks for multi‑container applications, so containers can discover and
+   communicate with each other by service name.
+   1️⃣ Default Networking in Docker Compose:         docker compose up
+      Docker Compose automatically does the following:
+      ✅ Creates a default bridge network
+      ✅ Attaches all services to that network
+      ✅ Enables DNS-based service name resolution
+
+      Example: Default Network
+      docker-compose.yml
+        version: "3.9"
+        services:
+          web:
+           image: nginx
+          api:
+           image: node
+
+     Docker Compose creates a network named: <project_name>_default
+     web can reach api using: http://api
+     api can reach web using: http://web
+     Service name = hostname
+     ❌ IP addresses should never be hardcoded
+     ✅ Use service names instead
+
+  2️⃣ Custom Networks in Docker Compose
+     Custom Bridge Network Example
+     version: "3.9"
+
+services:
+  frontend:
+    image: nginx
+    networks:
+      - app-net
+
+  backend:
+    image: node
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
+
+
+✅ Both services communicate via app-net
+✅ Fully isolated from other Compose projects
+
+3️⃣ Multiple Networks (Advanced but Common)
+    Used when: Some services must be public
+               Others must stay private
+    ✅ Frontend + Backend + Database Example
+version: "3.9"
+
+services:
+  frontend:
+    image: nginx
+    networks:
+      - public-net
+
+  backend:
+    image: node
+    networks:
+      - public-net
+      - private-net
+
+  db:
+    image: mysql
+    networks:
+      - private-net
+
+networks:
+  public-net:
+  private-net:
+
+
+🔐 Result
+
+frontend ↔ backend ✅
+backend ↔ db ✅
+frontend ❌ db (isolated)
+
+4️⃣ External Networks (Using Existing Docker Networks)
+   Use when: Network already exists
+             Multiple Compose projects must communicate
+
+   Example
+    1. First, create the network:     docker network create equifox-net
+    2. Then reference it in Compose:
+version: "3.9"
+
+services:
+  app:
+    image: nginx
+    networks:
+      - equifox-net
+
+networks:
+  equifox-net:
+    external: true
+
+✅ Docker Compose will not recreate it
+✅ Ideal for shared infrastructure (API, Auth, Gateway)
+
+5️⃣ Exposing Ports vs Networking (Important Clarification)
+   🔁 Internal communication (container ↔ container)
+       Service name → internal port
+       backend:
+          ports:
+            - "8080:8080"
+
+      ports is NOT needed for internal networking.
+
+   🌍 External access (host ↔ container)
+      ✅ Only needed to access services from your machine
+       ports:
+         - "8080:8080"
+
+
+6️⃣ Docker Compose Network vs Docker Network
+Feature                        Docker Network                   Docker Compose
+Creation                       Manual                           Automatic
+DNS                            Yes                              Yes
+Service Names                  Container names                  Service names
+Ease                           Low✅                            High
+Scaling Support                Manual                           Built-in
+
+
+7️⃣ Scaling Services (Networking Handles It)
+  docker compose up --scale backend=3
+
+  Docker: Creates backend_1, backend_2, backend_3
+          DNS load‑balances automatically. ✅ Requests distributed across replicas
+
