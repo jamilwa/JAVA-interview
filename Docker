@@ -83,7 +83,7 @@ docker container run -d -p 5000:5000 in28min/hello-world-docker:v2
      ✅ Easier container-to-container communication
 
    to verify the network run:                         docker network ls.
-   to Inspect details run:                            docker network inspect equifox-net
+   to Inspect details run/Verify the connection:      docker network inspect equifox-net
    to Start a container on the network:               docker run -d --name app1 --network equifox-net nginx
                                                       docker run -d --name app2 --network equifox-net busybox sleep 1000
    app2 can ping app1 using container name:           docker exec -it app2 ping app1
@@ -91,6 +91,7 @@ docker container run -d -p 5000:5000 in28min/hello-world-docker:v2
    Connecting existing containers:                    docker network connect equifox-net container_name
    to disconnect containers:                          docker network disconnect equifox-net container_name
 
+   
    Common real‑world use case:
      Example: Microservices 
               frontend  → backend  → database
@@ -224,7 +225,7 @@ networks:
 
 6️⃣ Docker Compose Network vs Docker Network
 Feature                        Docker Network                   Docker Compose
-Creation                       Manual                           Automatic
+Creation                       Manual                           Automaticcon
 DNS                            Yes                              Yes
 Service Names                  Container names                  Service names
 Ease                           Low✅                            High
@@ -236,4 +237,79 @@ Scaling Support                Manual                           Built-in
 
   Docker: Creates backend_1, backend_2, backend_3
           DNS load‑balances automatically. ✅ Requests distributed across replicas
+
+7. docker network connect equifox-net pg16.  what does this command do
+   connects an already running container named pg16 to the Docker network equifox-net allowing it to communicate with other containers on that network using Docker’s 
+   internal DNS without restarting the container. Docker allows a container to belong to multiple networks.
+   So after this command: pg16 may still be on its original network AND also on equifox-net. This is called multi‑network attachment.
+     ✅ Container pg16 becomes part of the equifox-net network
+     ✅ pg16 gets:
+       A new IP address on equifox-net
+       A network interface on that network
+       DNS visibility to other containers on equifox-net
+     ✅ pg16 can:
+        Communicate with other containers on equifox-net
+        Be accessed by container name (pg16)
+
+8. Difference between docker run --network equifox-net pg16  and  docker network connect equifox-net pg16
+   docker run --network equifox-net  creates a container and attaches to equifox-net network , while docker network connect equifox-net pg16 attaches an already running
+   container to equifox-net network without restarting it. The latter is especially useful for multi‑network setups and live fixes.
+   When to use docker network connect
+    ✅ Add a database to an app network
+    ✅ Attach a debug container
+    ✅ Connect legacy containers
+    ✅ Temporary production fixes
+    ✅ Multi‑tier networking designs
+
+9. explain   docker compose -f docker-compose.optionB.fixed.yml up --build
+   is used to build and start a multi‑container application defined in a specific Docker Compose file. 
+   1️⃣ docker compose
+     Invokes Docker Compose (v2), which is built into Docker CLI
+     Used to manage multi‑container applications
+    🔹 Note: This is the modern replacement for docker-compose
+
+   2️⃣ -f docker-compose.optionB.fixed.yml
+      Specifies a custom Compose file
+      Overrides the default file name (docker-compose.yml)
+      ✅ This allows you to:
+          Maintain multiple configurations (OptionA, OptionB, prod, dev, fixed, etc.)
+          Choose which setup to run at execution time
+          example:
+                 docker compose -f docker-compose.dev.yml up
+                 docker compose -f docker-compose.prod.yml up
+
+   3️⃣ up
+      Creates networks, volumes, and containers
+      Starts all defined services
+      Attaches logs to the terminal (unless -d is used)
+    Equivalent steps:
+        Create network(s)
+        Create container(s)
+        Start container(s)
+        Stream logs to stdout
+
+   4️⃣ --build
+       Forces Docker to rebuild images before starting containers. Only images defined via Dockerfile are rebuilt. Services using image: (like postgres:16) are not rebuilt
+       Even if images already exist
+       ✅ This is useful when:
+          Dockerfile was modified
+          Application code changed
+          Dependencies changed
+          You want to ensure the latest build is used
+
+Stop and remove everything:         docker compose -f docker-compose.optionB.fixed.yml down
+Rebuild without cache:              docker compose -f docker-compose.optionB.fixed.yml build --no-cache        then run 
+                                    docker compose -f docker-compose.optionB.fixed.yml up
+Run a single service:               docker compose -f docker-compose.optionB.fixed.yml up app
+
+10. Difference between
+    docker compose up -> builds and starts all services and creates everything needed.
+    docker compose run -> executes a one‑off command in a new temporary container.
+    docker compose start -> starts only existing stopped containers without rebuilding or recreating them.
+    
+11. difference between
+    docker compose stop -> halts running containers without removing them.
+    docker compose down -> stops and removes containers and networks.
+
+
 
