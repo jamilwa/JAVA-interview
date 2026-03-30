@@ -311,5 +311,5 @@ Run a single service:               docker compose -f docker-compose.optionB.fix
     docker compose stop -> halts running containers without removing them.
     docker compose down -> stops and removes containers and networks.
 
-
+12. 
 
