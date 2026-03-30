@@ -267,8 +267,50 @@ Constructors using new operator (TreeSet::new)
 		Stream.toList() → immutable
 
 	What Are Downstream Collectors?
-		A downstream collector is a collector that is applied after a grouping or partitioning operation.
-		
+		A downstream collector is a collector that is applied after a grouping or partitioning operation. In simple terms: First, split the stream (group/partition it).
+		Then, apply another collector to each group — that second collector is the downstream collector.
+		Where Are Downstream Collectors Used? Mainly with:
+			Collectors.groupingBy()
+			Collectors.partitioningBy()
+		Why Do We Need Downstream Collectors?
+		Without downstream collectors: groupingBy() → always returns Map<K, List<T>>
+		With downstream collectors: You can change what each group produces:
+		count, average, sum, min / max, set, custom transformation
+
+		✅ Basic Example (Without Downstream)
+			Map<String, List<Employee>> byGender = employees.stream().collect(Collectors.groupingBy(Employee::getGender));
+			Output: Male   → List<Employee>
+					Female → List<Employee>	
+
+		groupingBy(KEY, VALUE_COLLECTOR), ✅ That VALUE_COLLECTOR is the downstream collector
+			KEY → how to group
+			VALUE_COLLECTOR → what to collect per group
+
+		✅ Common Downstream Collectors (With Examples)
+			1️⃣ counting() as Downstream
+				Map<String, Long> countByGender = employees.stream().collect(Collectors.groupingBy( Employee::getGender, Collectors.counting()));
+				Outpu:   Male   → 10
+						 Female → 8
+				✅ Group first → Count each group
+
+			2️⃣ averagingInt()
+				Map<String, Double> avgAgeByGender = employees.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingInt(Employee::getAge)));
+
+			3️⃣ summarizingInt()
+				Map<String, IntSummaryStatistics> statsByDept = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.summarizingInt(Employee::getSalary)));
+
+			4️⃣ mapping() (Very Popular Downstream)
+				Map<String, List<String>> namesByDept = employees.stream().collect(Collectors.groupingBy( Employee::getDepartment, Collectors.mapping(
+                     Employee::getName, Collectors.toList())));
+					 output: IT → ["Alice", "Bob"]
+					 HR → ["John"]
+			5️⃣	minBy() / maxBy()
+				Map<String, Optional<Employee>> highestSalaryByDept = employees.stream().collect(Collectors.groupingBy( Employee::getDepartment,
+                 Collectors.maxBy( Comparator.comparing(Employee::getSalary) )));
+
+			6️⃣	collectingAndThen() as Downstream
+				Map<String, List<Employee>> immutableGroups = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.collectingAndThen(
+                     Collectors.toList(), Collections::unmodifiableList )));
 
 12. List of Terminal Operations in Streams (ColCouToA, ReSuMa, NoneAllAny, SummrayforEa)
 13. why do we use IntStream
