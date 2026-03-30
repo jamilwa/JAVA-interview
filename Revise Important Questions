@@ -234,6 +234,34 @@ Constructors using new operator (TreeSet::new)
 	Stream.map() transforms zero to many values
 		Stream.map() is used to: Transform each element of a collection/stream & Process multiple values & Enable functional data pipelines.
 11. Collectors (Collectors Group Joining parti, counting toList summarizingInt averagingInt minBy ) 
+		1. joining(): Joins stream elements into a String.
+				List<String> names = List.of("Java", "Stream", "API");
+				String result = names.stream().collect(Collectors.joining(" "));				// output: Java Stream API
+
+				variants:  Collectors.joining(delimiter)
+						   Collectors.joining(delimiter, prefix, suffix)
+		2. partitioningBy(): Splits data into two groups (true / false).   Always returns Map<Boolean, …>
+				Map<Boolean, List<Integer>> result = numbers.stream().collect( Collectors.partitioningBy(n -> n % 2 == 0));
+
+		3. counting(): 
+				long count = names.stream().collect(Collectors.counting());
+				System.out.println(count);
+
+				or 
+				names.stream().count();
+
+		4. summarizingInt()
+				IntSummaryStatistics stats = employees.stream().collect(Collectors.summarizingInt(Employee::getSalary));
+				System.out.println(stats.getAverage());
+				System.out.println(stats.getMax());
+				System.out.println(stats.getCount());
+				System.out.println(stats.getSum());
+
+		5.  minBy():
+				Optional<Employee> youngest = employees.stream().collect(Collectors.minBy(Comparator.comparing(Employee::getAge)));
+
+		6. collectingAndThen()
+				Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList)
 		Note:
 		Collectors.toList() → mutable
 		Stream.toList() → immutable
