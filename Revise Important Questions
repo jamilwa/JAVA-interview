@@ -1242,4 +1242,100 @@ Security Tip: Actuator endpoints reveal sensitive details about your server. In 
     so only admins can access them.
 
 
-46. 
+46. What are solid principles. Give example
+	These are guidelines for developers to create software that is MUST. (maintainable, understandable, scaleable, and Testable). 
+    Single Responsibility Principle : a class should focus on a single task or functionality. making them easier to understand, test, and maintain.
+			example:
+					// Handles only product catalog logic
+						class ProductCatalogService {
+    								List<Product> getProductsByCategory(String category) { /* ... */ }
+						}
+
+					// Handles only payment logic
+						class PaymentService {
+    							void processPayment(Order order) { /* ... */ }
+						}
+    Open/Closed Principle : classes, modules, functions, etc. should be open for extension but closed for modification. This means that you should be able to add new
+                            functionality to a class without changing its existing code. This is achieved through abstraction, such as using interfaces or abstract classes.
+							Flipkart can add new discount types (festivals, loyalty, flash sales) without touching old code.
+			example:
+						// Base discount strategy
+						interface DiscountStrategy {
+    							double applyDiscount(double price);
+						}
+
+						// New strategies can be added without changing existing code
+						class FestivalDiscount implements DiscountStrategy {
+    							public double applyDiscount(double price) { return price * 0.7; }
+						}
+
+						class BigBillionDayDiscount implements DiscountStrategy {
+    						public double applyDiscount(double price) { return price * 0.85; }
+						}
+    Liskov Substitution Principle : a subclass should be able to substitute its parent class without changing the behavior of the program. a subclass can be used 
+                                    interchangeably with its superclass. It promotes the use of inheritance and polymorphism. 
+									Both EkartDelivery and ThirdPartyCourier can replace DeliveryPartner without breaking functionality.
+			example:
+					class DeliveryPartner {
+    					void deliver(Order order) { /* ... */ }
+					}
+
+					class EkartDelivery extends DeliveryPartner {
+    					@Override
+    					void deliver(Order order) { System.out.println("Delivered by Ekart"); }
+					}
+
+					class ThirdPartyCourier extends DeliveryPartner {
+    					@Override
+    					void deliver(Order order) { System.out.println("Delivered by Courier"); }
+					}
+    Interface Segregation Principle : Create smaller, customizable interfaces to the needs of the classes. This prevents classes from being burdened with
+                                            methods they don't need, promoting cleaner and more maintainable code. 
+										Guest users can search but not order, while customers can do both.
+			example:
+					// Split interfaces
+					interface Searchable {
+    					List<Product> search(String keyword);
+					}
+
+					interface Orderable {
+    					void placeOrder(Product product);
+					}
+
+					class Customer implements Searchable, Orderable {
+    					public List<Product> search(String keyword) { /* ... */ }
+    					public void placeOrder(Product product) { /* ... */ }
+					}
+
+					class GuestUser implements Searchable {
+    					public List<Product> search(String keyword) { /* ... */ }
+					}
+    Dependency Inversion Principle :  high-level modules should not depend on low-level modules; both should depend on abstractions. Abstractions should not depend on
+                                      details, details should depend on abstractions. This principle helps to decouple modules and promote flexibility, extensibility,
+                                      and easier testing.  Flipkart can swap payment providers (Razorpay, Paytm, UPI) without changing CheckoutService.
+			example:
+					// Abstraction
+					interface PaymentGateway {
+    					void pay(double amount);
+					}
+
+					// Implementations
+					class RazorpayGateway implements PaymentGateway {
+    					public void pay(double amount) { System.out.println("Paid via Razorpay"); }
+					}
+
+					class PhonePeGateway implements PaymentGateway {
+    					public void pay(double amount) { System.out.println("Paid via Paytm"); }
+					}
+
+					// High-level module depends on abstraction
+					class CheckoutService {
+    					private final PaymentGateway gateway;
+
+    					CheckoutService(PaymentGateway gateway) { this.gateway = gateway; }
+
+    					void checkout(Order order) {
+        				gateway.pay(order.getTotalAmount());
+    					}
+					}
+
