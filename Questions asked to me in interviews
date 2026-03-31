@@ -1,5 +1,4 @@
-1. What are SOLID Principles 
-    The SOLID principles are a set of design principles for writing maintainable and scalable code. These are guidelines for developers to create software 
+1.  These are guidelines for developers to create software 
     that is MUST. (maintainable, understandable, scaleable, and Testable). 
 
     Single Responsibility Principle : a class should focus on a single task or functionality. making them easier to understand, test, and maintain.
