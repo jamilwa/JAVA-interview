@@ -375,8 +375,12 @@ Constructors using new operator (TreeSet::new)
     Getters and Setters: Public methods that allow controlled access to private variables.
 
 18.  What is the interface?
- The interface is a blueprint for a class that has only constants (static final variables) and abstract methods. It is used to achieve full abstraction and 
- multiple inheritance. There can be only abstract methods in the Java interface, not method body. Java Interface also represents the IS-A relationship. It cannot be
+ Interface is a blueprint for a class that is used to achieve abstraction and multiple inheritance. It defines what a class should do, not how it should do it.
+	1️⃣ Variables in an Interface
+		All variables in an interface are implicitly: public, static, final.
+		✅ Even if you don’t write them explicitly, the compiler adds them.
+	
+ There can be only abstract methods in the Java interface, not method body. Java Interface also represents the IS-A relationship. It cannot be
  instantiated just like the abstract class. However, we need to implement it to define its methods. Traditionally, interfaces could only contain abstract methods.
  However, since Java 8, interfaces can also include:
  Default Methods:  Methods with a body that can provide default behavior. Implementing classes can choose to override these methods.
