@@ -170,13 +170,10 @@ Constructors using new operator (TreeSet::new)
 		developers avoid NullPointerExceptions and to provide a more expressive way to handle optional values.
 
 	Creating an Optional: -You can create an Optional instance in several ways:
-	1. Empty Optional:  Optional<String> emptyOptional = Optional.empty();			// it creates an empty Optional instance, it does not contain a value
-	2. Optional with a Non-null Value: Optional<String> nonNullOptional = Optional.of("Hello, World!");	// it creates an Optional with a non-null value. If the
-															value is null, it throws a NullPointerException
-	3. Optional that Allows Null Values:	Optional<String> nullableOptional = Optional.ofNullable(null); 		// it creates an Optional that can hold a value 
-															that may be null. If the value is null, it creates 
-															an empty Optional
-
+		1. Optional<String> opt = Optional.empty();					// creates an empty Optional instance, it does not contain a value
+		2. Optional<String> opt = Optional.of("Hello, World!");		// creates an Optional with a value. If the value is null, it throws a NullPointerException.
+		3. Optional<String> opt = Optional.ofNullable(null); 		// creates an Optional that can hold a value that may be null. If the value is null, it creates 
+																	   an empty Optional.
 
 	Common Methods of Optional  (OrElseGet IfPresent)
 	1. isPresent(): Checks if a value is present. returns a boolean. it requires get(). it Can lead to NoSuchElementException. Not functional. Avoid using this method.
