@@ -406,21 +406,18 @@ Constructors using new operator (TreeSet::new)
      in a program. GC is automatic, meaning that developers do not need to manually free memory. JVM handles this process, allowing developers to focus
      on application logic rather than memory management.
      Types of Garbage Collection
-         1.  Serial Garbage Collector: A simple, single-threaded garbage collector that is suitable for small applications with a single thread. It pauses all 
-             application threads during garbage collection.
-         2. Parallel Garbage Collector: A multi-threaded garbage collector that uses multiple threads to perform garbage collection in parallel. It is suitable
-            for applications that require high throughput.
+         1. Serial Garbage Collector: A single-threaded garbage collector that is suitable for small applications. It pauses all application threads during GC.
+         2. Parallel Garbage Collector: A multi-threaded garbage collector that is used to perform GC in parallel. It is suitable for applications that require high throughput.
 
      Garbage Collection Process - The garbage collection process generally involves the following steps:
          Marking: The garbage collector identifies which objects are reachable and marks all reachable objects.
          Sweeping: After marking, the garbage collector sweeps through the heap and collects all unmarked (unreachable) objects, reclaiming their memory.
-         Compacting (optional): In some garbage collection algorithms, the memory is compacted to reduce fragmentation. This involves moving reachable objects
-                                together to create contiguous free space.
+         Compacting (optional): the memory is compacted to reduce fragmentation. This involves moving reachable objects together to create contiguous free space.
 
      Important Methods Related to Garbage Collection
           1. System.gc(): The System.gc() method is a request to the JVM to perform garbage collection. However, it depends upon the JVM whether to perform it or not.
           2. finalize():  This is a protected method of the Object class that can be overridden by a class to perform cleanup operations before an object is 
-                          garbage collected. The finalize() method is called by the garbage collector when it determines that there are no more references to the object.
+                          garbage collected. The finalize() method is called by the garbage collector when it finds that there are no more references to the object.
 
               example:
               @Override
