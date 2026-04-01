@@ -230,10 +230,8 @@ Constructors using new operator (TreeSet::new)
 				Map<Boolean, List<Integer>> result = numbers.stream().collect( Collectors.partitioningBy(n -> n % 2 == 0));
 
 		3. counting(): 
-				long count = names.stream().collect(Collectors.counting());
-				System.out.println(count);
-
-				or 
+				names.stream().collect(Collectors.counting());
+					or 
 				names.stream().count();
 
 		4. summarizingInt()
