@@ -303,25 +303,28 @@ Constructors using new operator (TreeSet::new)
         IntStream: A stream of primitive ints. 
 
 	How do you create an IntStream in Java?
-		IntStream.of(numbers[])
-             or by converting other data structures like arrays or collections using
-        Arrays.stream(int[] array) or 
-        Collection.stream().mapToInt().
+		1. IntStream.of(numbers[])
+			example: 
+					int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+				 	int sum = IntStream.of(numbers).sum();
 
-	the methods of InstStream are	sum, average, min, count, summaryStatistics
-		example: int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-				 int sum = IntStream.of(numbers).sum();
+        2. Arrays.stream(int[] array) 
+		   example: 
+					int[] intArray = {1, 2, 3, 4, 5};
+           			IntStream a = Arrays.stream(intArray);        // Using IntStream
+           			int sum = a.sum();           				
 
-example:   int[] intArray = {1, 2, 3, 4, 5};
-           IntStream a = Arrays.stream(intArray);        // Using IntStream
-           int sum = a.sum();           				// Example operations on IntStream
-You can convert a regular Stream to a primitive-type stream using methods like mapToInt, mapToLong, or mapToDouble.
-   example:  List<Integer> numbersList = Arrays.asList(1, 2, 3, 4, 5);
-            IntStream b = numbersList.stream().mapToInt(Integer::intValue);
+        3. Collection.stream().mapToInt(). You can convert a regular Stream to a primitive-type stream using methods like mapToInt, mapToLong, or mapToDouble.
+			example:  
+					List<Integer> numbersList = Arrays.asList(1, 2, 3, 4, 5);
+            		IntStream b = numbersList.stream().mapToInt(Integer::intValue);
 
-Conversely, you can convert a primitive-type stream to a regular Stream using methods like boxed().
-    example:    IntStream intStream = Arrays.stream(intArray);
-                List<Integer> resultList = intStream.boxed().collect(Collectors.toList());				 // Convert IntStream to Stream<Integer>
+			Conversely, you can convert a primitive-type stream to a regular Stream using methods like boxed().
+    		example:    
+					IntStream ar = Arrays.stream(intArray);
+                	List<Integer> resultList = ar.boxed().collect(Collectors.toList());				 // Convert IntStream to Stream<Integer>
+
+		the methods of InstStream are sum, average, min, count, summaryStatistics.
 
 14. Default method 
 	a default method is a method that can be defined in an interface with a body. It allow developers to add new methods to interfaces without breaking the 
