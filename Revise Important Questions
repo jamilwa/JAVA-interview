@@ -106,10 +106,7 @@ public class DemoComparator {
 8. What is Functional Programming
 	a programming style that uses pure functions to solve problems. It emphasizes writing concise, readable code that's easier to maintain and Test. it eliminates
 	the need of anonymous class and gives a functional programming capability using:
-		Lambda expressions
-		Functional interfaces
-		Streams API
-		Method references
+		1. Lambda expressions	2. Functional interfaces   3. Streams API  	4. Method references
 
 	A functional interface is an interface that contains exactly ONE abstract method. Can have default and static methods. Annotated with @FunctionalInterface 
 	(optional but recommended). Types of Functional Interfaces: 
