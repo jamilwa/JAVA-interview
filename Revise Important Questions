@@ -24,7 +24,7 @@
 	Arrays.binarySearch(numbers, 3);                  		// output:  2 which is the index position of the value 3. ✅ Array must be sorted for binarySearch
 	Arrays.binarySearch(numbers, 11);						// Output: -7. -(insertionPoint + 1), Insertion point for 11 is index 6, so: -(6 + 1) = -7
 
-3. Access modifiers (DoproSop)
+3. Access modifiers (DopSop)
         Default (Package-Private): accessible only within its own package.    DOP
         Protected: accessible in subclasses of other packages.  ProSOP
 
