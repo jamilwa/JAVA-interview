@@ -46,12 +46,10 @@
 		BlockingQueue: An interface that represents a thread-safe queue which supports operations that wait for the queue to become non-empty when retrieving 
 					an element and wait for space to become available in the queue when storing an element. Supports producer-consumer patterns with blocking operations
 
-	3. Immutable Collections
-		- If collections don’t need modification, use immutable collections (e.g., List.of(), Set.of() in Java 9+).
-		- Immutable objects are inherently thread-safe.
-
+	3. Immutable Collections: Immutable objects are thread-safe. so if collections don’t need modification, use immutable collections like List.of(), Set.of().
+		
 	4. Using ThreadLocal : - Each thread gets its own isolated copy of the collection. Useful when you want to avoid synchronization altogether.
-		example: ThreadLocal<List<String>> threadLocalList = ThreadLocal.withInitial(ArrayList::new);
+		example: ThreadLocal<List<String>> myList = ThreadLocal.withInitial(ArrayList::new);
 
 
 5. if we have Collection.SynchronizedMap() then why to use concurrentHashmap
