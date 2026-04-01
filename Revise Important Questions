@@ -41,10 +41,9 @@
   2. Using Concurrent Collections : - Designed for high concurrency and scalability. found in the java.util.concurrent package. 
 	example: 
 		ConcurrentHashMap: Thread-safe map with segmented locking, that allows concurrent read and write operations.
-		CopyOnWriteArrayList: A thread-safe ArrayList where all mutative operations (like add, set, etc.) are implemented by making a fresh copy
-					of the underlying array.
+		CopyOnWriteArrayList: A thread-safe ArrayList where operations like add, set, etc. are implemented by making a fresh copy of the underlying array.
 		ConcurrentSkipListSet: A thread-safe NavigableSet that uses a skip list for its underlying data structure. It allows concurrent access & maintains a sorted order.
-		BlockingQueue: An interface that represents a thread-safe queue that supports operations that wait for the queue to become non-empty when retrieving 
+		BlockingQueue: An interface that represents a thread-safe queue which supports operations that wait for the queue to become non-empty when retrieving 
 					an element and wait for space to become available in the queue when storing an element. Supports producer-consumer patterns with blocking operations
 
 	3. Immutable Collections
