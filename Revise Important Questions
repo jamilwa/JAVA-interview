@@ -376,16 +376,16 @@ Constructors using new operator (TreeSet::new)
 
 18.  What is the interface?
  Interface is a blueprint for a class that is used to achieve abstraction and multiple inheritance. It defines what a class should do, not how it should do it.
-	1️⃣ Variables in an Interface
+ Interfaces cannot be instantiated. They must be implemented by a class.
+   Variables in an Interface
 		All variables in an interface are implicitly: public, static, final.
 		✅ Even if you don’t write them explicitly, the compiler adds them.
-	
- There can be only abstract methods in the Java interface, not method body. Java Interface also represents the IS-A relationship. It cannot be
- instantiated just like the abstract class. However, we need to implement it to define its methods. Traditionally, interfaces could only contain abstract methods.
- However, since Java 8, interfaces can also include:
- Default Methods:  Methods with a body that can provide default behavior. Implementing classes can choose to override these methods.
- Static Methods:  Methods that belong to the interface itself and can be called without an instance of the interface.
- Private Methods:  Methods that can be used within the interface to share code between default methods.
+	 
+   Methods in an Interface:
+	1. Abstract Methods: Implicitly public and abstract.
+	2. Default Methods: Methods with a body. Provide default behavior. Can be overridden by implementing classes
+ 	3. Static Methods:  belong to the interface itself. Cannot be overridden. it can be called using interface name.
+ 	4. Private Methods: Used only inside the interface. Cannot be accessed or overridden by implementing classes. share code between default methods.
 
 19. What is a marker interface?
     A marker interface is an interface that does not contain any methods or fields. Its primary purpose is to provide metadata about a class to the 
