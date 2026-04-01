@@ -262,7 +262,7 @@ Constructors using new operator (TreeSet::new)
 		count, average, sum, min / max, set, custom transformation
 
 		✅ Basic Example (Without Downstream)
-			Map<String, List<Employee>> byGender = employees.stream().collect(Collectors.groupingBy(Employee::getGender));
+			Map<String, List<Employee>> countByGender = employees.stream().collect(Collectors.groupingBy(Employee::getGender));
 			Output: Male   → List<Employee>
 					Female → List<Employee>	
 
