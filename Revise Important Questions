@@ -333,10 +333,16 @@ Constructors using new operator (TreeSet::new)
 		add another method to this interface, then the existing classes who have implemented this interface should override this new method also, if we dont do then the 
 		implementing classes will break and throw errors. Therefore it is added for backward compatibility so that old interfaces can be used to leverage the lambda expression.
 	For example, ‘List’ or ‘Collection’ interfaces do not have ‘forEach’ method declaration. Thus, adding such method will simply break the collection framework implementations
-	example: Collection interface has below default method
-		default Stream<E> stream() {
-        return StreamSupport.stream(spliterator(), false);
-    }
+	example:
+			Interface				Default Methods
+			Iterable				forEach, spliterator
+			Collection				removeIf, stream, parallelStream
+			List					sort, replaceAll
+			Map						computeIfAbsent, putIfAbsent, merge
+			Comparator				reversed, thenComparing
+			Optional				map, flatMap, filter
+			Iterator				forEachRemaining
+
 
 15. What is Static Keyword in Java
      static keyword is used for Memory Management
