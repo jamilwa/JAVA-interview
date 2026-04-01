@@ -216,10 +216,9 @@ Constructors using new operator (TreeSet::new)
 			  Use flatMap() when the function returns an Optional
 
 10. Optional.map() vs Stream.map()
-	Optional.map() transforms at most one value. If the value exists, transform it. Otherwise do nothing.
-		Optional.map() is used to: Transform a single value (if present) & Avoid null checks & Keep logic null‑safe
-	Stream.map() transforms zero to many values
-		Stream.map() is used to: Transform each element of a collection/stream & Process multiple values & Enable functional data pipelines.
+	Optional.map(): If the value exists, transform it. Otherwise do nothing. It is used to Avoid null checks & Keep logic null‑safe.
+	Stream.map(): Transform each element of a collection/stream & Enable functional data pipelines.
+
 11. Collectors (Collectors Group Joining parti, counting toList summarizingInt averagingInt minBy ) 
 		1. joining(): Joins stream elements into a String.
 				List<String> names = List.of("Java", "Stream", "API");
