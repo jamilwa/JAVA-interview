@@ -14,7 +14,7 @@
 	int[] numbers = {1, 2, 3, 7, 4, 5};
  	Arrays.sort(numbers);                          				 // Output: [1, 2, 3, 4, 5, 7]
     Arrays.sort(numbers[], Comparator.reverseOrder())           // Sorting the array in descending order. Comparator ❌ does NOT work with primitives (int[]).
-															   //  therefore we have to change int[] numbers  to  Integer[] numbers = {1, 2, 3, 7, 4, 5};
+															   	 therefore we have to change int[] numbers  to  Integer[] numbers = {1, 2, 3, 7, 4, 5};
     Arrays.sort(numbers, 3,5);                                // sorts only numbers falling between fromIndex 3 and toIndex 5. Output: [1, 2, 3, 4, 7, 5]
 
 	int[] copy = Arrays.copyOf(numbers, 3);			        	// Output: [1, 2, 3]. If new size < original → truncated
