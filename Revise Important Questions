@@ -403,8 +403,7 @@ Constructors using new operator (TreeSet::new)
 
 21. What is Garbage Collection?
      Garbage Collection (GC) in Java is an automatic memory management process that helps in reclaiming memory by removing objects that are no longer in use or reachable
-     in a program. This process is to ensure efficient memory usage in applications. 
-     GC is automatic, meaning that developers do not need to manually free memory. The Java Virtual Machine (JVM) handles this process, allowing developers to focus
+     in a program. GC is automatic, meaning that developers do not need to manually free memory. JVM handles this process, allowing developers to focus
      on application logic rather than memory management.
      Garbage Collection (GC) runs periodically and can be triggered by various factors, such as memory pressure or explicit requests from the application.
      Memory Management:  In Java, memory is divided into several areas, primarily the Heap and the Stack. The Heap is where objects are allocated, while the Stack is
