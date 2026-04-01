@@ -175,7 +175,7 @@ Constructors using new operator (TreeSet::new)
 		3. Optional<String> opt = Optional.ofNullable(null); 		// creates an Optional that can hold a value that may be null. If the value is null, it creates 
 																	   an empty Optional.
 
-	Common Methods of Optional  (OrElseGet IfPresent)
+	Common Methods of Optional  (OrElseGet flat IfPresent )
 	1. isPresent(): Checks if a value is present. returns a boolean. it requires get(). it Can lead to NoSuchElementException. Not functional. Avoid using this method.
 		Optional<String> name = Optional.of("Jamil");
 		if (name.isPresent()) {
