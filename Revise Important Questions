@@ -116,7 +116,7 @@ public class DemoComparator {
 		Description: Represents a function that takes one argument and returns a boolean.
 		Method: boolean test(T t)
 		
-		Example:  filter()
+		Example:  filter(), removeIf(), isEmpty(), allMatch(), anyMatch(), noneMatch().
 			Predicate<String> isEmpty = str -> str.isEmpty();
 			System.out.println(isEmpty.test("")); // true
 
@@ -131,18 +131,20 @@ public class DemoComparator {
 		Description: Represents an function that takes a one argument and returns no result. It is used for operations that consume data.
 		Method: void accept(T t)
 		
-		Example:   forEach, Peek
+		Example:   forEach(), Peek()
 			Consumer<String> print = str -> System.out.println(str);
 			print.accept("Hello, World!"); // Prints: Hello, World!
 
 	4. Supplier
-		Description: Represents a supplier of results. It does not take any arguments and returns a result.
+		Description: Represents a supplier of results. It does not take any arguments and returns a result. Is mainly used for lazy value generation, object creation,
+		and deferred execution
 		Method: T get()
 
-		Example:
-			Supplier<String> supplier = () -> "Hello, Supplier!";
-			System.out.println(supplier.get()); // Hello, Supplier!
-
+		Example: lazy obejct creation
+			1. Supplier<List<String>> listSupplier = ArrayList::new;
+				List<String> list = listSupplier.get();						// Object created only when get() is called
+			2.  optional.orElseGet(() -> expensiveMethod());
+			3.  String value = map.getOrDefault("key", defaultValue.get());
 	5. UnaryOperator
 		Description: Represents a function that takes a single argument of type T and returns a result of the same type. used in map(). 
 		Method: T apply(T t)
@@ -155,7 +157,7 @@ public class DemoComparator {
 		Description: Represents a function that takes two arguments of the same type and returns a result of the same type. used in reduce() Aggregation operations.
 		Method: T apply(T t1, T t2)
 
-		Example:
+		Example:	reduce().
 			BinaryOperator<Integer> add = (a, b) -> a + b;
 			System.out.println(add.apply(5, 10)); // 15
 
