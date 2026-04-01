@@ -110,7 +110,7 @@ public class DemoComparator {
 
 	A functional interface is an interface that contains exactly ONE abstract method. Can have default and static methods. Annotated with @FunctionalInterface 
 	(optional but recommended). Types of Functional Interfaces: 
-	Java provides several built-in functional interfaces in the java.util.function package.
+	Java provides several built-in functional interfaces in the java.util.function package.  PreFunConSuUnBin.
 
 	1. Predicate : The Predicate interface is often used for filtering and matching conditions.
 		Description: Represents a function that takes one argument and returns a boolean.
