@@ -1,4 +1,164 @@
-1.  
+1.  How to fetch data from 2 DB's used in single application
+    1️⃣ Multi‑Database Using Spring Data JPA (Recommended)
+        🧱 Architecture Overview
+            Spring Boot App
+            │
+            ├── DB1 (MySQL)
+            │   ├── DataSource1
+            │   ├── EntityManager1
+            │   ├── TransactionManager1
+            │
+            ├── DB2 (PostgreSQL)
+            │   ├── DataSource2
+            │   ├── EntityManager2
+            │   ├── TransactionManager2
+
+    Each database has:
+        ✅ Its own entity package
+        ✅ Its own repository package
+
+    ✅ Step 1: Configure application.yml
+        spring:
+          datasource:
+              db1:
+                url: jdbc:mysql://localhost:3306/employees_db
+                username: root
+                password: root
+                driver-class-name: com.mysql.cj.jdbc.Driver
+             db2:
+              url: jdbc:postgresql://localhost:5432/payroll_db
+              username: postgres
+              password: postgres
+              driver-class-name: org.postgresql.Driver
+
+        jpa:
+          hibernate:
+             ddl-auto: update
+             show-sql: true
+
+    
+✅ Step 2: DB1 Configuration (Primary DB)
+@Configuration
+@EnableJpaRepositories( 
+        basePackages = "com.app.db1.repository",
+        entityManagerFactoryRef = "db1EntityManagerFactory",
+        transactionManagerRef = "db1TransactionManager"
+)
+public class Db1Config {
+
+    @Primary
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.db1")
+    public DataSource db1DataSource() {
+        return DataSourceBuilder.create().build();
+    }
+
+    @Primary
+    @Bean
+    public LocalContainerEntityManagerFactoryBean db1EntityManagerFactory(
+            EntityManagerFactoryBuilder builder) {
+
+        return builder
+                .dataSource(db1DataSource())
+                .packages("com.app.db1.entity")
+                .persistenceUnit("db1")
+                .build();
+    }
+
+    @Primary
+    @Bean
+    public PlatformTransactionManager db1TransactionManager(
+            @Qualifier("db1EntityManagerFactory")
+            EntityManagerFactory emf) {
+
+        return new JpaTransactionManager(emf);
+    }
+}
+
+
+✅ Step 3: DB2 Configuration (Secondary DB)
+@Configuration
+@EnableJpaRepositories(
+        basePackages = "com.app.db2.repository",
+        entityManagerFactoryRef = "db2EntityManagerFactory",
+        transactionManagerRef = "db2TransactionManager"
+)
+public class Db2Config {
+
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.db2")
+    public DataSource db2DataSource() {
+        return DataSourceBuilder.create().build();
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean db2EntityManagerFactory(
+            EntityManagerFactoryBuilder builder) {
+
+        return builder
+                .dataSource(db2DataSource())
+                .packages("com.app.db2.entity")
+                .persistenceUnit("db2")
+                .build();
+    }
+
+    @Bean
+    public PlatformTransactionManager db2TransactionManager(
+            @Qualifier("db2EntityManagerFactory")
+            EntityManagerFactory emf) {
+
+        return new JpaTransactionManager(emf);
+    }
+}
+
+✅ Step 4: Separate Entities & Repositories
+✅ DB1 Entity
+@Entity
+@Table(name = "employee")
+public class Employee {
+    @Id
+    private Long id;
+    private String name;
+}
+
+✅ DB1 Repository
+@Repository
+public interface EmployeeRepository
+        extends JpaRepository<Employee, Long> {}
+
+✅ DB2 Entity
+@Entity
+@Table(name = "salary")
+public class Salary {
+    @Id
+    private Long id;
+    private Double amount;
+}
+
+✅ DB2 Repository
+@Repository
+public interface SalaryRepository
+        extends JpaRepository<Salary, Long> {}
+
+✅ Step 5: Use Both DBs in One Service
+@Service
+public class EmployeeService {
+
+    private final EmployeeRepository employeeRepository;
+    private final SalaryRepository salaryRepository;
+
+    public EmployeeService(EmployeeRepository employeeRepository,
+                           SalaryRepository salaryRepository) {
+        this.employeeRepository = employeeRepository;
+        this.salaryRepository = salaryRepository;
+    }
+
+    public void fetchFromBothDatabases() {
+        employeeRepository.findAll();
+        salaryRepository.findAll();
+    }
+}
+
 2. Explain why equals and hashcode method should be overridden.
     By default, the equals() method compares the content equality of two strings, which might not be suitable for your specific use case. Overriding equals() allows you
     to define your own logic for comparing object equality based on your application's requirements.
