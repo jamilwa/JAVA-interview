@@ -260,4 +260,30 @@ session.getTransaction().commit();
 
 Hibernate generates appropriate SQL because it tracked the modified field.
 
-24. 
+24. How to write custom queries?
+    1. we write Custom Queries Using @Query (JPQL). JPQL is database‑independent. ✅ Uses entity fields, not column names. example
+
+      public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+        @Query("SELECT e FROM Employee e WHERE e.department = :dept")
+        List<Employee> findEmployeesByDept(@Param("dept") String department);
+        }
+
+    2. @Query with Native SQL. ✅ Uses real table/column names. ❌ Database‑dependent
+        Use native queries when:
+          a. Stored procedures
+          b. Complex joins
+          c. Vendor‑specific SQL (e.g., Postgres JSON, MySQL functions)
+
+        ✅ Native Query Example
+            @Query( value = "SELECT * FROM employee WHERE salary > ?1", nativeQuery = true )
+            List<Employee> findEmployeesWithHighSalary(double salary);
+
+
+      Best Practises
+        ✅ Prefer derived queries or JPQL
+        ✅ Use native queries sparingly
+        ✅ Always use parameter binding (:param)
+        ❌ Avoid string concatenation (SQL Injection risk)
+        ✅ Keep queries in repository layer only
+
+25. 
