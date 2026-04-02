@@ -167,8 +167,78 @@ public class EmployeeService {
     it doesn't mean they are equal. Therefore, when overriding equals(), you should also override hashCode() to ensure consistency.
     because HashSet, HashMap, and Hashtable rely on the hashCode() method.
 
-3.  
-    
+3.  How to trace log in microservices ? 
+    Tracing logs in microservices means following one request end‑to‑end across multiple microservices using a common identifier, so you can debug, monitor, and analyze 
+    behavior across the system.
+    Logs:- tell you (What happened)
+    Metrics:- tell you (How often / how much)
+    Tracing:- (Where & why it happened)
+
+    ✅ High‑Level Architecture for Log Tracing
+        Client Request
+             ↓
+        API Gateway (Trace ID created)
+             ↓
+        Service A  → Service B → Service C
+             ↓            ↓            ↓
+        Logs with SAME Trace ID
+             ↓
+        Central Log System (ELK / Grafana / Datadog)
+
+   ✅ 4 Pillars of Log Tracing in Microservices
+        1️⃣ Correlation ID / Trace ID: A unique identifier generated at the entry point of a request and propagated across all services. example: X‑Trace‑Id: 8af3c92b‑e991‑4ffc
+        2️⃣ Distributed Tracing Tools (ACTUAL TRACE VISUALIZATION): we use the tool OpenTelemetry for it. 
+            ✅ What Distributed Tracing Gives You
+                Service call graph
+                Latency per service
+                Error location
+                Slowest span (bottleneck)
+
+            ✅ Visual Trace Example
+                Request 8af3d
+                |
+                |-- API Gateway (20 ms)
+                |   |
+                |   |-- Order Service (50 ms)
+                |       |
+                |       |-- Payment Service (300 ms ❌)            //     You instantly know where the problem is.
+                |           |
+                |           |-- Bank API (timeout)
+
+
+        3️⃣ Log Aggregation (CENTRALIZATION)
+            ✅ Why needed
+                Microservices run on:
+                    Different hosts
+                    Different containers
+                    Different pods (Kubernetes)
+                 so Logs MUST be centralized.
+            Tools for this are  1. ELK (Elasticsearch, Logstash, Kibana)
+                            2. Loki + Grafana
+                            3. Datadog / Splunk
+
+        4️⃣ Structured Logging (CRITICAL)
+            🚫 Problem with Plain Logs. ❌ Hard to parse.  ❌ Hard to search. 
+              example:
+                User logged in
+                Payment failed
+
+            ✅ Structured Logs (JSON). Machine‑readable, Searchable, Compatible with log tools.
+                {
+                  "timestamp": "2026‑04‑02T10:12:14Z",
+                  "service": "order‑service",
+                  "traceId": "8af3d",
+                  "level": "ERROR",
+                  "message": "Payment failed"
+                }
+
+    Real Production Scenario (Example)
+        ✅ Tracing steps
+            Search logs by traceId
+            Locate slow service via trace
+            Identify external API timeout
+            Add retries / circuit breaker
+
 4. Difference between collection and stream
         Stream: It doesn’t store data, it operates on the source data structure i.e collection.	
                 it use functional interfaces like lambda.
