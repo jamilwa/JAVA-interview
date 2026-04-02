@@ -77,21 +77,23 @@ Java 8 programs
       
 
 5. Parentheses balanced
-   public class ParenthesesChecker {
+
       public static boolean isBalanced(String s) {
         Deque<Character> stack = new ArrayDeque<>();
-        for (char c : s.toCharArray()) {
+        for (char c : s.toCharArray()) {                  
             if (c == '(' || c == '[' || c == '{') {
                 stack.push(c);
-            } else if (c == ')' || c == ']' || c == '}') {
-                if (stack.isEmpty()) return false;
+            } 
+            else if (c == ')' || c == ']' || c == '}') {
+                 if (stack.isEmpty()){
+                    return false;
+                }
                 char open = stack.pop();
-                if ((open == '(' && c != ')') ||
-                    (open == '[' && c != ']') ||
-                    (open == '{' && c != '}')) {
+                if ((open == '(' && c != ')') || (open == '[' && c != ']') || (open == '{' && c != '}')) {
                     return false;
                 }
-            } else {
+            } 
+            else {
                 return false;
             }
         }
@@ -99,31 +101,31 @@ Java 8 programs
     }
 
 17.  find all permutations of a string 
-                 public static void permute(char[] arr, int index) {
-                        if (index == arr.length) {
-                            System.out.println(new String(arr));
-                            return;
-                         }
+        public static void permute(char[] arr, int index) {
+            if (index == arr.length) {
+                System.out.println(new String(arr));
+                return;
+            }
 
-                        for (int i = index; i < arr.length; i++) {
-                            swap(arr, index, i);          // choose
-                            permute(arr, index + 1);      // explore
-                            swap(arr, index, i);          // backtrack
-                            }
-                        }
+            for (int i = index; i < arr.length; i++) {
+                 swap(arr, index, i);          // choose
+                 permute(arr, index + 1);      // explore
+                 swap(arr, index, i);          // backtrack
+               }
+        }
 
-                 private static void swap(char[] arr, int i, int j) {
-                    char temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
+        private static void swap(char[] arr, int i, int j) {
+            char temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+         }
 
 18.  to find vowels and consonants from a string
             public static int[] countVowelsAndConsonants(String input) {
               int vowelsCount = 0, consonantsCount = 0;
       
               for (char c : input.toLowerCase().toCharArray()) {
-                  if (c >= 'a' && c <= 'z') { // Ensure character is a letter
+                  if (c >= 'a' && c <= 'z') {              // Ensure character is a letter
                       if ("aeiou".indexOf(c) != -1) {
                           vowelsCount++;
                       } else {
