@@ -8,18 +8,28 @@ Java 8 programs
             ));
 
 1.  to find frequency of each character from a string
-    import java.util.Map;
-    import java.util.stream.Collectors;
-    
-        String inputString = "hello world";
-
-        Map<Character, Integer> charCountMap = inputString.chars()        // this converts the string into an IntStream of character
+         String inputString = "hello world";
+         Map<Character, Integer> charCountMap = inputString.chars()        // this converts the string into an IntStream of character
             .mapToObj(c -> (char) c)                                     // Convert int to Character
-            .collect(Collectors.groupingBy(
-                         c -> c,
-                         Collectors.counting()
-                     ));
-        System.out.println(charCountMap);
+            .collect(Collectors.groupingBy( c -> c, Collectors.counting()));
+         System.out.println(charCountMap);
+
+                    or 
+
+        public static void duplicateChar(String input){
+                String newStr = input.replaceAll("\\s+", "").toLowerCase();
+                Map<Character, Integer> charCount = new HashMap<>();
+                
+                for (char ch : newStr.toCharArray()) {
+                    charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
+                }
+
+            // Step 2: Find the repeated characters
+                for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
+                    if (entry.getValue() > 1) {
+                        System.out.println(entry.getKey());
+                    }
+                }  
 
 2. Find Odd Even
      Map<Boolean, List<Integer>> oddEvenNumbersMap = 
@@ -38,7 +48,7 @@ Java 8 programs
             19 → 1 + 9 = 10
             10 → 1 + 0 = 1  
 
-public static boolean isMagic(int num) {
+    public static boolean isMagic(int num) {
         while (num > 9) {
             int sum = 0;
             while (num > 0) {
@@ -48,20 +58,11 @@ public static boolean isMagic(int num) {
             num = sum;
         }
         return num == 1;
-    }
+        }
 
 
-
-14. find palindrome in array using Java 8
-    import java.util.Arrays;
-     
-          public static String[] findPalindromes(String[] array) {
-              return Arrays.stream(array)
-                      .filter(PalindromeFinder::isPalindrome)
-                      .toArray(String[]::new);
-          }
-      
-          public static boolean isPalindrome(String word) {
+4. find palindrome
+           public static boolean isPalindrome(String word) {
               int left = 0;
               int right = word.length() - 1;
       
@@ -75,61 +76,56 @@ public static boolean isMagic(int num) {
           }
       
 
-15. find the non repeating character in a string 
-            public static void duplicateChar(String input){
-                String newStr = input.replaceAll("\\s+", "").toLowerCase();
-                Map<Character, Integer> charCount = new HashMap<>();
-                
-                for (char ch : newStr.toCharArray()) {
-                    charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
+5. Parentheses balanced
+
+      public static boolean isBalanced(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        for (char c : s.toCharArray()) {                  
+            if (c == '(' || c == '[' || c == '{') {
+                stack.push(c);
+            } 
+            else if (c == ')' || c == ']' || c == '}') {
+                 if (stack.isEmpty()){
+                    return false;
                 }
-
-            // Step 2: Find the repeated characters
-                for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
-                    if (entry.getValue() > 1) {
-                        System.out.println(entry.getKey());
-                    }
-                }
-
-
-         // just modify the second for loop like below to find unique characters in a string
-            for (Map.Entry<Character, Integer> entry : charCount.entrySet()) {
-                    if (entry.getValue() == 1) {
-                        System.out.println(entry.getKey());
-                    }
-                }
-
-      // same above logic can be used to find non repeating words and duplicate words in a sentence with few modifications
-
-
-16. 
+                char open = stack.pop();
+                if ((open == '(' && c != ')') || (open == '[' && c != ']') || (open == '{' && c != '}')) {
+                    return false;
+                }
+            } 
+            else {
+                return false;
+            }
+        }
+        return stack.isEmpty();   // true only if no unmatched openings remain
+    }
 
 17.  find all permutations of a string 
-                 public static void permute(char[] arr, int index) {
-                        if (index == arr.length) {
-                            System.out.println(new String(arr));
-                            return;
-                         }
+        public static void permute(char[] arr, int index) {
+            if (index == arr.length) {
+                System.out.println(new String(arr));
+                return;
+            }
 
-                        for (int i = index; i < arr.length; i++) {
-                            swap(arr, index, i);          // choose
-                            permute(arr, index + 1);      // explore
-                            swap(arr, index, i);          // backtrack
-                            }
-                        }
+            for (int i = index; i < arr.length; i++) {
+                 swap(arr, index, i);          // choose
+                 permute(arr, index + 1);      // explore
+                 swap(arr, index, i);          // backtrack
+               }
+        }
 
-                 private static void swap(char[] arr, int i, int j) {
-                    char temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
+        private static void swap(char[] arr, int i, int j) {
+            char temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+         }
 
 18.  to find vowels and consonants from a string
             public static int[] countVowelsAndConsonants(String input) {
               int vowelsCount = 0, consonantsCount = 0;
       
               for (char c : input.toLowerCase().toCharArray()) {
-                  if (c >= 'a' && c <= 'z') { // Ensure character is a letter
+                  if (c >= 'a' && c <= 'z') {              // Ensure character is a letter
                       if ("aeiou".indexOf(c) != -1) {
                           vowelsCount++;
                       } else {
@@ -149,19 +145,18 @@ public static boolean isMagic(int num) {
         int n = b.length;
         for (int i = 0; i < n; i++) {
             boolean found = false;
-            // Check if the element exists in the first array
             for (int j = 0; j < m; j++) {
                 if (b[i] == a[j]) {
-                    found = true;
+                    found = true;            // Check if the element exists in the first array
                     break;
                 }
             }
-            // If any element is not found, return false
-            if (!found) return false;
+            if (!found){                    // If any element is not found, return false
+                return false;         
+            }
         }
-        // If all elements are found, return true
-        return true;
-    }
+    return true;                            // If all elements are found, return true
+}
 
 
 21.  method to split a string at capital letters and then capitalize each word first letter and add underscore.
@@ -294,65 +289,7 @@ public static boolean isMagic(int num) {
 19.       
 
 
-20. Parentheses balanced
-public class ParenthesesChecker {
-
-
-    public static boolean isBalanced(String s) {
-
-        Deque<Character> stack = new ArrayDeque<>();
-
-
-        for (char c : s.toCharArray()) {
-
-            if (c == '(' || c == '[' || c == '{') {
-
-                stack.push(c);
-
-            } else if (c == ')' || c == ']' || c == '}') {
-
-                if (stack.isEmpty()) return false;
-
-                char open = stack.pop();
-
-                if ((open == '(' && c != ')') ||
-
-                    (open == '[' && c != ']') ||
-
-                    (open == '{' && c != '}')) {
-
-                    return false;
-
-                }
-
-            } else {
-
-                return false;
-
-            }
-
-        }
-
-        return stack.isEmpty();   
-
-// true only if no unmatched openings remain
-
-    }
-
-
-    public static void main(String[] args) {
-
-        String[] tests = {"()[]{}", "([{}])", "(]", "([)]", "((()))", ""};
-
-        for (String t : tests) {
-
-            System.out.println(t + " -> " + isBalanced(t));
-
-        }
-
-    }
-
-}
+20. 
 
 
 21. 
