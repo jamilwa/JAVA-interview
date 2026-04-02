@@ -679,9 +679,9 @@ Constructors using new operator (TreeSet::new)
 				allowing higher-level logic or thread pool managers to handle the cancellation properly."
 	
 37. What is ExecutorService
-		Instead of creating threads manually, use the ExecutorService. It manages a "pool" of threads and executes asynchronous tasks on background threads.
-		You just give it the tasks, and it handles the execution, reusing idle threads to save memory and CPU. It is part of the java.util.concurrent package. 
-		It improves performance by reusing threads instead of creating new ones each time.
+		ExecutorService manages a "pool" of threads and executes asynchronous tasks on background threads. You just give it the tasks, and it handles the execution, 
+		reusing idle threads to save memory and CPU. It improves performance by reusing threads instead of creating new ones. It is part of the java.util.concurrent package. 
+		Instead of creating threads manually, use the ExecutorService.
 
 		1. How it Works Internally: An ExecutorService is a combination of a Thread Pool and a BlockingQueue. When you submit() a task, it goes to thread pool, 
 			If all threads are busy, the task is placed in a Queue (usually a LinkedBlockingQueue). If the queue is also full, the Executor decides whether
