@@ -106,6 +106,21 @@ Java 8 programs
         .map(word -> new StringBuilder(word).reverse().toString())
         .collect(Collectors.joining(" "));
 
+    -----reverse without using built in reverse methods-----
+        
+        String[] words = input.split(" ");
+        StringBuilder result = new StringBuilder();
+
+        for (String word : words) {
+            for (int i = word.length() - 1; i >= 0; i--) {
+                result.append(word.charAt(i));
+            }
+            result.append(" ");
+        }
+
+        return result.toString().trim();
+
+
 
 7.  find all permutations of a string 
         public static void permute(char[] arr, int index) {
