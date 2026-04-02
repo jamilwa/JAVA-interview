@@ -742,15 +742,6 @@ Constructors using new operator (TreeSet::new)
 		Graceful Shutdown: Applications that don't call .shutdown() can leave "zombie" threads running, preventing the JVM from exiting or causing memory leaks.
 
 38. How to customize Exception handling in springboot
-Step-by-Step Example of Production‑Grade Exception Handling in Spring Boot
-Modern Spring Boot applications should have:
-Centralized exception handling
-Consistent error response format
-Clear HTTP status mapping
-Correlation IDs for tracing
-Validation & framework exception coverage
-No internal details leaked to clients
-
 1. Create a Custom Business Exception. 
 	public class ResourceNotFoundException extends RuntimeException {
     private final String errorCode;			// Error codes help frontend + logs. Easier internationalization later
