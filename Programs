@@ -33,9 +33,22 @@ Java 8 programs
                 listOfIntegers.stream()
                 .collect(Collectors.groupingBy(i -> (i % 2 == 0) ? "Even" : "Odd"));
 
-3. 
+3. Magic number. if you add sum of digits which results in 1, then it is magic number. 
+    example: 19 is magic number.
+            19 → 1 + 9 = 10
+            10 → 1 + 0 = 1  
 
-
+public static boolean isMagic(int num) {
+        while (num > 9) {
+            int sum = 0;
+            while (num > 0) {
+                sum += num % 10;
+                num /= 10;
+            }
+            num = sum;
+        }
+        return num == 1;
+    }
 
 
 
@@ -278,40 +291,7 @@ Java 8 programs
 13. for(Map.Entry<String, Integer> entry : map.entrySet())                                          // iterating map.
 
 
-19. Magic number 
-
-public class MagicNumber {
-    public static boolean isMagic(int n) {
-        // A set to remember sums we have already seen – detects cycles
-        Set<Integer> seen = new HashSet<>();
-
-        int current = n;
-        while (current != 1 && !seen.contains(current)) {
-            seen.add(current);
-            current = digitSquareSum(current);
-        }
-        return current == 1;
-    }
-
-    /** Helper: sum of the squares of the decimal digits of x. */
-    private static int digitSquareSum(int x) {
-        int sum = 0;
-        while (x > 0) {
-            int d = x % 10;          // extract last digit
-            sum += d * d;            // add its square
-            x /= 10;                 // drop the digit
-        }
-        return sum;
-    }
-
-    public static void main(String[] args) {
-        int[] tests = {1, 7, 10, 19, 2, 4, 20, 100, 0};
-
-        for (int t : tests) {
-            System.out.printf("%d -> %b%n", t, isMagic(t));
-        }
-    }
-}
+19.       
 
 
 20. Parentheses balanced
