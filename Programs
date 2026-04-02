@@ -145,19 +145,18 @@ Java 8 programs
         int n = b.length;
         for (int i = 0; i < n; i++) {
             boolean found = false;
-            // Check if the element exists in the first array
             for (int j = 0; j < m; j++) {
                 if (b[i] == a[j]) {
-                    found = true;
+                    found = true;            // Check if the element exists in the first array
                     break;
                 }
             }
-            // If any element is not found, return false
-            if (!found) return false;
+            if (!found){                    // If any element is not found, return false
+                return false;         
+            }
         }
-        // If all elements are found, return true
-        return true;
-    }
+    return true;                            // If all elements are found, return true
+}
 
 
 21.  method to split a string at capital letters and then capitalize each word first letter and add underscore.
