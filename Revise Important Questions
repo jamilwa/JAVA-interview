@@ -709,34 +709,26 @@ Constructors using new operator (TreeSet::new)
    								 }
 							}
 						} catch (InterruptedException ie) {
-    						executor.shutdownNow(); // (Re-)Cancel if current thread also interrupted
+    						executor.shutdownNow(); 				// (Re-)Cancel if current thread also interrupted
     						Thread.currentThread().interrupt();
 					}
 
 		5. Naming Threads with a Custom ThreadFactory 
-				ThreadFactory namedThreadFactory = runnable -> {
+				ThreadFactory tf = runnable -> { 
    					 Thread t = new Thread(runnable);
     				 t.setName("kafka-processor-" + t.getId());
     				 return t;
 				};
-				ExecutorService executor = Executors.newFixedThreadPool(10, namedThreadFactory);
+				ExecutorService ex = Executors.newFixedThreadPool(10, tf);
 
 
 		example
 		// Create a thread pool with 2 threads
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-        executor.submit(() -> {
-            System.out.println("Task 1 is running on " + Thread.currentThread().getName());
-        });
-
-        executor.submit(() -> {
-            System.out.println("Task 2 is running on " + Thread.currentThread().getName());
-        });
-
-        // Shut down the executor service
-        executor.shutdown();
+        ExecutorService ex = Executors.newFixedThreadPool(2);
+        ex.submit(() -> { System.out.println("Task 1 is running on " + Thread.currentThread().getName()); });
+        ex.submit(() -> { System.out.println("Task 2 is running on " + Thread.currentThread().getName()); });
+        executor.shutdown();			// Shut down the executor service
 	}
-
 
 		// two types of shutdown are there
 		 executor.shutdown();            // orderly shutdown. waits for tasks to finish
