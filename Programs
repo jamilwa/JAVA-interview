@@ -51,8 +51,7 @@ public static boolean isMagic(int num) {
     }
 
 
-
-14. find palindrome in array using Java 8
+4. find palindrome in array using Java 8
     import java.util.Arrays;
      
           public static String[] findPalindromes(String[] array) {
@@ -75,7 +74,7 @@ public static boolean isMagic(int num) {
           }
       
 
-15. find the non repeating character in a string 
+5. find the non repeating character in a string 
             public static void duplicateChar(String input){
                 String newStr = input.replaceAll("\\s+", "").toLowerCase();
                 Map<Character, Integer> charCount = new HashMap<>();
@@ -102,7 +101,27 @@ public static boolean isMagic(int num) {
       // same above logic can be used to find non repeating words and duplicate words in a sentence with few modifications
 
 
-16. 
+6. Parentheses balanced
+public class ParenthesesChecker {
+    public static boolean isBalanced(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        for (char c : s.toCharArray()) {
+            if (c == '(' || c == '[' || c == '{') {
+                stack.push(c);
+            } else if (c == ')' || c == ']' || c == '}') {
+                if (stack.isEmpty()) return false;
+                char open = stack.pop();
+                if ((open == '(' && c != ')') ||
+                    (open == '[' && c != ']') ||
+                    (open == '{' && c != '}')) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return stack.isEmpty();   // true only if no unmatched openings remain
+    }
 
 17.  find all permutations of a string 
                  public static void permute(char[] arr, int index) {
@@ -294,65 +313,7 @@ public static boolean isMagic(int num) {
 19.       
 
 
-20. Parentheses balanced
-public class ParenthesesChecker {
-
-
-    public static boolean isBalanced(String s) {
-
-        Deque<Character> stack = new ArrayDeque<>();
-
-
-        for (char c : s.toCharArray()) {
-
-            if (c == '(' || c == '[' || c == '{') {
-
-                stack.push(c);
-
-            } else if (c == ')' || c == ']' || c == '}') {
-
-                if (stack.isEmpty()) return false;
-
-                char open = stack.pop();
-
-                if ((open == '(' && c != ')') ||
-
-                    (open == '[' && c != ']') ||
-
-                    (open == '{' && c != '}')) {
-
-                    return false;
-
-                }
-
-            } else {
-
-                return false;
-
-            }
-
-        }
-
-        return stack.isEmpty();   
-
-// true only if no unmatched openings remain
-
-    }
-
-
-    public static void main(String[] args) {
-
-        String[] tests = {"()[]{}", "([{}])", "(]", "([)]", "((()))", ""};
-
-        for (String t : tests) {
-
-            System.out.println(t + " -> " + isBalanced(t));
-
-        }
-
-    }
-
-}
+20. 
 
 
 21. 
