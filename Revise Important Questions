@@ -912,22 +912,16 @@ Here is the step-by-step execution logic showing how the threads interact:
 
 public class SingletonTest {
     public static void main(String[] args) {
-        // Creating Thread 1
-        Thread thread1 = new Thread(() -> {
-            SafeSingleton s1 = SafeSingleton.getInstance();
-            System.out.println("Thread 1 got: " + s1.hashCode());
-        }, "Thread-1");
 
-        // Creating Thread 2
-        Thread thread2 = new Thread(() -> {
-            SafeSingleton s2 = SafeSingleton.getInstance();
-            System.out.println("Thread 2 got: " + s2.hashCode());
-        }, "Thread-2");
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        executorService.submit(() -> { SafeSingleton t1 = SafeSingleton.getInstance();
+            						   System.out.println(Thread.currentThread().getName()+ " got: " + t1.hashCode()); 
+									});
+        executorService.submit(() -> { SafeSingleton t2 = SafeSingleton.getInstance();
+            						   System.out.println(Thread.currentThread().getName()+ " got: " + t2.hashCode());
+        							});
+        executorService.shutdown();
 
-        thread1.start();
-        thread2.start();
-    }
-}
 
 The Step-by-Step Flow:
 T1 and T2 start: Both call getInstance().
@@ -939,10 +933,7 @@ Entry (T2): T2 now enters the synchronized block.
 Second Check (T2): T2 checks instance == null. Because T1 just updated it, the check returns false.
 Exit: T2 exits without creating a new object and returns the one created by T1.
 
-40. The Bean Lifecycle
-   1. Bean Definition: ​Spring reads your configuration (XML, Java Config, or Annotations). It creates a BeanDefinition.
-   2. Instantiation: Spring calls the constructor to create the object. The object exists, but dependencies aren’t injected yet.
-   3. Dependency Injection: Spring performs Dependency Injection (e.g., injecting the UserRepository into your UserService).
+40. The Bean Lifecycle  (DefInstaInjectInterPostProcessorInitPostProcessorReadyForUseDestruction)
    4. Aware Interfaces: If the bean implements interfaces like BeanNameAware, Spring gives it its metadata.
    5. Initialization: Spring calls methods annotated with @PostConstruct or any custom init() method.
    6. Ready for Use: The bean is now available for your application logic.
@@ -952,19 +943,18 @@ The Complete Spring Bean Lifecycle
 ​1. Bean Definition Loading: ​Spring reads your configuration (XML, Java Config, or Annotations). It creates a BeanDefinition.
 ​2. Instantiation: ​Spring instantiates the bean using the bean's constructor. 
 ​3. Dependency Injection: ​Spring injects the dependencies using setter injection or field injection (@Autowired). 
-​4. Aware Interfaces: ​Spring checks if the bean implements any Aware interfaces. This allows the bean to "talk back" to the Spring container.
-	​BeanNameAware: Gives the bean its ID/Name.
+​4. Aware Interfaces: ​if the bean implements any Aware interfaces. This allows the bean to "talk back" to the Spring container.
+	​BeanNameAware: Gives the bean its Name.
 	​BeanFactoryAware: Gives the bean access to the factory that created it.
 	​ApplicationContextAware: Gives the bean access to the entire Spring context.
 ​5. BeanPostProcessor: Before Initialization - ​Spring passes the bean through the postProcessBeforeInitialization method of any registered BeanPostProcessor.
-	​Role: spring handles annotations like @PostConstruct.
 ​6. Initialization: ​Now the bean is configured, and Spring performs the actual initialization:
-	​@PostConstruct: The modern standard for init logic.
+	​@PostConstruct: contains init logic.
 	​Custom init-method: Defined in @Bean(initMethod = "...").
 ​7. BeanPostProcessor: After Initialization - ​The bean passes through postProcessAfterInitialization.
 	​Critical Fact: Spring AOP Proxies are created. If your bean uses @Transactional, Spring replaces your original bean with a "proxy" bean here to handle the
 	database transactions.
-​8. Ready for Use: ​The bean is fully baked and live in the ApplicationContext. It stays here until the application is stopped or the scope (like request/session) expires.
+​8. Ready for Use: ​The bean is ready and live in the ApplicationContext. It stays here until the application is stopped or the scope (like request/session) expires.
 ​9. Destruction: ​When the container shuts down (e.g., context.close()), the bean is cleaned up:
 	​@PreDestroy: The standard for cleanup logic.
 	​destroy(): Part of the DisposableBean interface.
