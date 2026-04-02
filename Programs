@@ -92,16 +92,24 @@ Java 8 programs
 16. 
 
 17.  find all permutations of a string 
-                  public static void generatePermutations(String str, String ans) {
-                       if (str.isEmpty()) {
-                           System.out.println(ans);
-                           return;
-                       }
-               
-                       for (int i = 0; i < str.length(); i++) {
-                           String remaining = str.substring(0, i) + str.substring(i + 1);
-                           generatePermutations(remaining, ans + str.charAt(i));
-                       }
+                 public static void permute(char[] arr, int index) {
+                        if (index == arr.length) {
+                            System.out.println(new String(arr));
+                            return;
+                         }
+
+                        for (int i = index; i < arr.length; i++) {
+                            swap(arr, index, i);          // choose
+                            permute(arr, index + 1);      // explore
+                            swap(arr, index, i);          // backtrack
+                            }
+                        }
+
+                 private static void swap(char[] arr, int i, int j) {
+                    char temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
 
 18.  to find vowels and consonants from a string
             public static int[] countVowelsAndConsonants(String input) {
