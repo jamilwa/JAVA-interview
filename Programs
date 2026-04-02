@@ -100,7 +100,14 @@ Java 8 programs
         return stack.isEmpty();   // true only if no unmatched openings remain
     }
 
-17.  find all permutations of a string 
+6.  reverse each word while preserving the order
+    String input = "Jamil is java developer";
+    String result = Arrays.stream(input.split(" "))
+        .map(word -> new StringBuilder(word).reverse().toString())
+        .collect(Collectors.joining(" "));
+
+
+7.  find all permutations of a string 
         public static void permute(char[] arr, int index) {
             if (index == arr.length) {
                 System.out.println(new String(arr));
@@ -120,7 +127,7 @@ Java 8 programs
             arr[j] = temp;
          }
 
-18.  to find vowels and consonants from a string
+8.  to find vowels and consonants from a string
             public static int[] countVowelsAndConsonants(String input) {
               int vowelsCount = 0, consonantsCount = 0;
       
@@ -133,12 +140,12 @@ Java 8 programs
                       }
 
 
-19.   to find if a string has unique chars or not using jqva 8
+9.   to find if a string has unique chars or not using jqva 8
       static boolean hasaUniqueChars(String str) {
           return Arrays.stream(str.toLowerCase().split("")).distinct().count() == str.length();
       }
 
-20. find if an array is sub set of another array
+10. find if an array is sub set of another array
      
     static boolean isSubset(int[] a, int[] b) {
         int m = a.length;
@@ -159,7 +166,7 @@ Java 8 programs
 }
 
 
-21.  method to split a string at capital letters and then capitalize each word first letter and add underscore.
+11.  method to split a string at capital letters and then capitalize each word first letter and add underscore.
          example:  input =   "inThisWorld"
                    output =  "in_This_World"
 
@@ -176,7 +183,7 @@ Java 8 programs
         }
 
 
-22. reverse a string, without using builtin methods
+12. reverse a string, without using builtin methods
         String input = "ansari";
         char[] inputArr = input.toCharArray();
         String reversed = "";
