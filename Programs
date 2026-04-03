@@ -121,7 +121,6 @@ Java 8 programs
         return result.toString().trim();
 
 
-
 7.  find all permutations of a string 
         public static void permute(char[] arr, int index) {
             if (index == arr.length) {
@@ -206,6 +205,118 @@ Java 8 programs
             reversed=reversed+(inputArr[i]);
         }
 
+13. Find out longest name from a list of names using java 8
+    Optional<String> longestName = names.stream()
+             .max(Comparator.comparingInt(String::length));
+
+14. move zeroes to end
+    static void moveZerosToEnd(int a[]) {
+        // int a[] = {1,3,6,0,2,0,0,4,3,}                           // to move zeroes to front  do below changes in comment
+        int c = 0;                                                  //   a.length - 1
+        for (int i = 0; i < a.length; i++) {                         //  int i=a.length - 1;i>=0;i--
+            if (a[i] != 0) {
+                a[c++] = a[i];                                      // a[c--]
+            }
+        }
+        //Assigning zero to remaining elements
+        while (c < a.length) {                                     // c <= a.length - 1
+            a[c++] = 0;                                            // c--
+        }
+        System.out.println(Arrays.toString(a));
+    }
+
+
+15. reverseArray
+    static void reverseArray(int a[]) {
+        System.out.println("Array Before Reverse : " + Arrays.toString(a));
+        // int a[] = {1,3,6,0,2,0,0,4,3,}
+        int i = 0, j = a.length - 1;
+        while (i < j) {
+            int tmp = a[i];
+            a[i] = a[j];
+            a[j] = tmp;
+            i++;
+            j--;
+        }
+
+        System.out.println("Array After Reverse : " + Arrays.toString(a));
+    }
+
+
+16. smallest and 2nd smallest number
+    // program to find smallest and 2nd smallest integer
+    public static Optional<int[]> smallestTwoStreams(int[] a) {
+        int[] distinctSorted = Arrays.stream(a).distinct().sorted().toArray();
+//        if (distinctSorted.length < 2)                                                    // edge case checking
+//            return Optional.empty();
+        return Optional.of(new int[]{distinctSorted[0], distinctSorted[1]});
+    }
+
+
+17. Java program which prints all contiguous sub arrays with given sum
+    private static void hashingMethod(int[] arr, int target) {
+
+        int prefixSum = 0;
+
+        // prefixSum → list of indices where this sum occurred
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        map.computeIfAbsent(0, x -> new ArrayList<>()).add(-1);
+
+        for (int i = 0; i < arr.length; i++) {
+            prefixSum += arr[i];
+            int needed = prefixSum - target;
+
+            if (map.containsKey(needed)) {
+                for (int start : map.get(needed)) {
+                    print(arr, start + 1, i);
+                }
+            }
+
+            map.computeIfAbsent(prefixSum, x -> new ArrayList<>()).add(i);
+        }
+    }
+
+    private static void print(int[] arr, int start, int end) {
+        System.out.print("[ ");
+        for (int i = start; i <= end; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println("]");
+    }
+
+
+18. Java program which finds triplets in the given array whose sum is equal to given number
+    private static void getArrayTriplets(int[] inputArray, int sum) {
+        System.out.println("Input Array : " + Arrays.toString(inputArray));
+        System.out.println("Given Number : " + sum);
+        System.out.println("Array triplets whose sum is " + sum + " are :");
+
+        //int a[] = {7, 5, 9, 3, 0, 8, 6}   target = 12
+        for (int i = 0; i < inputArray.length - 2; i++) {
+            int left = i + 1;
+            int right = inputArray.length - 1;
+            while (left < right) {
+                if (inputArray[i] + inputArray[left] + inputArray[right] == sum) {
+                    System.out.println("[" + inputArray[i] + ", " + inputArray[left] + ", " + inputArray[right] + "]");
+                    left++;
+                    right--;
+                } else if (inputArray[i] + inputArray[left] + inputArray[right] < sum) {
+                    left++;
+                } else {
+                    right--;
+                }
+
+
+
+19.  find highest paid employee from each department.
+        Map<String, Employee> highestPaidEmplinEachDept = employeeList.stream().collect(Collectors.groupingBy(Employee::getDepartment,
+                Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary)), Optional::get)
+        ));
+
+20.  Get the details of youngest male employee in the product development department?
+        var youngestMaleInProductDept = employeeList.stream().filter(e -> e.getDepartment().equalsIgnoreCase("Product Development"))
+                .filter(employee -> employee.getGender().equalsIgnoreCase("male")).min(Comparator.comparing(Employee::getAge));
+        System.out.println(youngestMaleInProductDept);
 
 1. for(char c=97; c<= 122; c++)                                               // will print small abcd
 
