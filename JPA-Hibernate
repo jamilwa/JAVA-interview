@@ -1,18 +1,11 @@
 1. What is Hibernate?
-
-Answer:
-Hibernate is a Java-based ORM (Object-Relational Mapping) framework that maps Java objects to relational database tables. It eliminates most JDBC boilerplate code and automates CRUD operations.
+   It is a ORM (Object-Relational Mapping) framework that maps Java objects to relational database tables. It eliminates JDBC boilerplate code & automates CRUD operations.
 
 2. What is JPA?
-
-Answer:
-JPA (Java Persistence API) is a standard specification for object-relational mapping in Java. It defines interfaces and annotations for persisting data, but it alone doesn’t implement these behaviors; Hibernate is one of the most common JPA providers.
+   JPA (Java Persistence API) is implementation for ORM in Java. It defines interfaces and annotations for persisting data, It is one of the most common JPA providers.
 
 3. What’s the difference between JPA and Hibernate?
-
-Answer:
-
-JPA: A specification/API defining how ORM should work.
+  JPA: A specification/API defining how ORM should work.
 
 Hibernate: A concrete implementation of JPA that adds additional features like caching, better query handling, advanced mapping strategies, etc.
 
