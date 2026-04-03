@@ -7,7 +7,7 @@ Java 8 programs
                 Collectors.averagingDouble(Employee::getSalary) // Calculate average salary
             ));
 
-1.  to find frequency of each character from a string
+1.  to find frequency/duplicates of each character from a string
          String inputString = "hello world";
          Map<Character, Integer> charCountMap = inputString.chars()        // this converts the string into an IntStream of character
             .mapToObj(c -> (char) c)                                     // Convert int to Character
@@ -16,6 +16,22 @@ Java 8 programs
 
                     or 
 
+        System.out.println("duplicate items ");
+        Stream.of(111, 333, 555, 777, 333, 444, 555)
+                .collect(Collectors.groupingBy(i -> i, Collectors.counting()))
+                .entrySet().stream()
+                .filter(e -> e.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .forEach(System.out::println);
+
+
+                    or
+
+        var dedup = numlist.stream().filter(n -> Collections.frequency(numlist, n) > 1).collect(Collectors.toSet());
+        System.out.println("duplicate items " + dedup);
+
+
+                    or
         public static void duplicateChar(String input){
                 String newStr = input.replaceAll("\\s+", "").toLowerCase();
                 Map<Character, Integer> charCount = new HashMap<>();
@@ -317,6 +333,48 @@ Java 8 programs
         var youngestMaleInProductDept = employeeList.stream().filter(e -> e.getDepartment().equalsIgnoreCase("Product Development"))
                 .filter(employee -> employee.getGender().equalsIgnoreCase("male")).min(Comparator.comparing(Employee::getAge));
         System.out.println(youngestMaleInProductDept);
+
+21. // find second larget element in an array
+        var maxElement = Stream.of(111, 333, 555, 777, 333, 444, 555).distinct().sorted(Comparator.reverseOrder()).skip(1).findFirst();
+        System.out.println(maxElement.orElseThrow());
+
+22.  // Write a Java program to find all pairs of elements in an integer array whose sum is equal to a given number
+        int target = 6;
+        int[] inputArray = {1, 7, 6, 8, 4, 1, 7, 3};
+
+        int i = 0;
+        int j = inputArray.length - 1;
+
+        while (i < j) {
+            if (inputArray[i] + inputArray[j] == target) {
+                System.out.println(inputArray[i] + " + " + inputArray[j] + " = " + target);
+                i++;
+                j--;
+            } else if (inputArray[i] + inputArray[j] < target) {
+                i++;
+            } else if (inputArray[i] + inputArray[j] > target) {
+                j--;
+            }
+
+23.      remove specific item from an array
+
+        int[] arr = {1, 2, 3, 2, 4};
+        int itemToRemove = 2;
+
+        int[] resulti = Arrays.stream(arr)
+                .filter(x -> x != itemToRemove)
+                .toArray();
+
+24. If you want to remove only the first occurrence by value, you can track a flag:
+        int[] ar = {5, 2, 7, 2, 9};
+        int itemToRem = 2;
+
+        AtomicBoolean removed = new AtomicBoolean(false);
+        int[] resultss = Arrays.stream(arr)
+                .filter(x -> !(x == itemToRem && !removed.getAndSet(true)))
+                .toArray();
+
+
 
 1. for(char c=97; c<= 122; c++)                                               // will print small abcd
 
