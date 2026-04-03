@@ -1,158 +1,93 @@
-1. What is Hibernate?
+1. What is JPA?          (This is like the interface)
+   JPA (Java Persistence API) is specification for ORM in Java. It defines interfaces and annotations for persisting data, Hibernate is one of the most common JPA providers.
+
+2. What is Hibernate?     (This is like the class which implements the interface)
    It is a ORM (Object-Relational Mapping) framework that maps Java objects to relational database tables. It eliminates JDBC boilerplate code & automates CRUD operations.
 
-2. What is JPA?
-   JPA (Java Persistence API) is implementation for ORM in Java. It defines interfaces and annotations for persisting data, It is one of the most common JPA providers.
-
 3. What’s the difference between JPA and Hibernate?
-  JPA: A specification/API defining how ORM should work.
-
-Hibernate: A concrete implementation of JPA that adds additional features like caching, better query handling, advanced mapping strategies, etc.
+   JPA: A specification/API defining how ORM should work.
+   Hibernate: A concrete implementation of JPA that adds additional features like caching, better query handling, advanced mapping strategies, etc.
 
 4. What are advantages of using Hibernate?
+   1. Eliminates JDBC boilerplate
+   2. Provides HQL (object-oriented query language)
+   3. Caching support
+   4. Database independence
+   5. Automatic transaction & session management
 
-Answer:
-
-Eliminates JDBC boilerplate
-
-Provides HQL (object-oriented query language)
-
-Caching support
-
-Database independence
-
-Automatic transaction & session management
-
-5. What is ORM?
-
-Answer:
-ORM stands for Object-Relational Mapping — it converts Java objects to database tables and vice versa, so developers work with objects rather than SQL, reducing manual syntax and errors.
-
-6. Difference between Hibernate and JDBC?
-
-Answer:
-
-JDBC requires manual SQL and result-set mapping.
-
-Hibernate abstracts this via ORM and manages entity states, caching, and transactions automatically.
-
+5. 
+6. 
 7. What is HQL?
-
-Answer:
-Hibernate Query Language (HQL) is an object-oriented query language similar to SQL but works with object entities and their properties instead of tables and columns.
+   Hibernate Query Language (HQL) is an object-oriented query language similar to SQL but works with object entities and their properties instead of tables and columns.
 
 8. What are EntityManager and Session?
-
-Answer:
-
-EntityManager (JPA): Standard interface to interact with persistence context.
-
-Session (Hibernate): Similar to EntityManager, but specific to Hibernate and has additional methods like save(), saveOrUpdate() etc.
+   EntityManager (JPA): Standard interface to interact with DataBase.
+   Session (Hibernate): Similar to EntityManager, but specific to Hibernate and has additional methods like save(), saveOrUpdate() etc.
 
 9. Difference between persist() and save()?
-
-Answer:
-
-persist() (JPA): Makes entity managed but doesn’t return primary key.
-
-save() (Hibernate): Persists entity and returns generated ID.
+   persist() (JPA): Makes entity managed but doesn’t return primary key.
+   save() (Hibernate): Persists entity and returns generated ID.
 
 10. What is the difference between get() and load() in Hibernate?
-
-Answer:
-
-get(): Eagerly fetches the object; returns null if not found.
-
-load(): Lazily fetches; returns a proxy object and throws an exception if entity doesn’t exist when accessed.
+    get(): Eagerly fetches the object; returns null if not found.
+    load(): Lazily fetches; returns a proxy object and throws an exception if entity doesn’t exist when accessed.
 
 11. What are the states of a JPA entity?
-
-Answer:
-
-Transient: Not associated with persistence context
-
-Persistent: Tracked by the context
-
-Detached: Was persistent but no longer tracked (e.g., after session close)
+      Transient: Not associated with persistence context
+      Persistent: Tracked by the context
+      Detached: Was persistent but no longer tracked (e.g., after session close)
 
 12. How is inheritance mapped in Hibernate?
-
-Answer:
-Hibernate supports:
-
-SINGLE_TABLE – maps entire hierarchy into one table
-
-TABLE_PER_CLASS – each class gets its own table
-
-JOINED – parent and child in separate tables linked by keys
+      Hibernate supports:
+         SINGLE_TABLE – maps entire hierarchy into one table
+         TABLE_PER_CLASS – each class gets its own table
+         JOINED – parent and child in separate tables linked by keys
 
 13. How do you define relationships in JPA/Hibernate?
-
-Answer:
-
-@OneToOne – single entity to single entity
-
-@OneToMany, @ManyToOne – one parent to multiple children
-
-@ManyToMany – many ↔ many
-These are mapped with annotations and often combined with @JoinColumn or @JoinTable.
+      @OneToOne – single entity to single entity
+      @OneToMany, @ManyToOne – one parent to multiple children
+      @ManyToMany – many ↔ many
+      These are mapped with annotations and often combined with @JoinColumn or @JoinTable.
 
 14. What is caching in Hibernate?
-
-Answer:
-
-First-level cache: Provided by default within a session.
-
-Second-level cache: Shared cache across sessions that improves performance.
+      First-level cache: Provided by default within a session.
+      Second-level cache: Shared cache across sessions that improves performance.
 
 15. What are common JPA annotations?
-
-Answer:
-
-@Entity, @Table, @Id, @GeneratedValue
-
-@Column, @OneToMany, @ManyToOne, etc.
-These help define entity mapping and relationships.
+      @Entity, @Table, @Id, @GeneratedValue
+      @Column, @OneToMany, @ManyToOne, etc.
+      These help define entity mapping and relationships.
 
 16. How do you run native SQL in JPA?
-
-Answer:
-Use EntityManager.createNativeQuery() or @NamedNativeQuery to execute raw SQL directly.
+      Use EntityManager.createNativeQuery() or @NamedNativeQuery to execute raw SQL directly.
 
 17. What is a Criteria Query?
-
-Answer:
-A type-safe, programmatic way to build queries in JPA (alternative to JPQL strings). It supports dynamic query composition.
+      A type-safe, programmatic way to build queries in JPA (alternative to JPQL strings). It supports dynamic query composition.
 
 18. How is transaction managed in JPA?
-
-Answer:
-With EntityTransaction (begin, commit, rollback) via EntityManager, or using @Transactional in Spring for declarative transactions.
+      With EntityTransaction (begin, commit, rollback) via EntityManager, or using @Transactional in Spring for declarative transactions.
 
 📌 Tips for Interviews
 
 Always clarify whether the question is about JPA specification, Hibernate implementation, or Spring Data JPA — they are related but different.
-
 Be ready to explain how lazy loading and fetch types impact performance and how caching works.
 
-18. Question: What is the N+1 problem and how can you fix it?
-Answer:
-The N+1 SELECT problem happens when Hibernate executes one query for the parent entities and then, for each parent, one additional query for child entities — leading to N+1 total queries, causing severe performance issues.
+18. What is the N+1 problem and how can you fix it?
+      The N+1 SELECT problem happens when Hibernate executes one query for the parent entities and then, for each parent, one additional query for child entities 
+      leading to N+1 total queries, causing severe performance issues.
 
-Example & Fix — Using JOIN FETCH:
-
-String hql = "SELECT d FROM Department d " +
-             "JOIN FETCH d.employees WHERE d.id = :id";
-Department dept = session.createQuery(hql, Department.class)
+      Example & Fix — Using JOIN FETCH:
+         String hql = "SELECT d 
+                       FROM Department d JOIN FETCH d.employees WHERE d.id = :id";
+         Department dept = session.createQuery(hql, Department.class)
                          .setParameter("id", deptId)
                          .uniqueResult();
 
-
 📌 Using JOIN FETCH loads departments and employees in a single query, preventing extra queries.
 
-19. Question: What is optimistic locking and how do you implement it?
-Answer:
-Optimistic locking detects concurrent updates without locking rows. It uses a version column annotated with @Version. When two transactions try to update the same entity version, the second update fails, preventing lost updates.
+19. What is optimistic locking and how do you implement it?
+    Optimistic locking detects concurrent updates without locking rows. It uses a version column annotated with @Version. When two transactions try to update the same 
+    entity version, the second update fails, preventing lost updates.
 
 Entity Example:
 
@@ -174,88 +109,74 @@ Usage:
 When you fetch and update a Product, the version field ensures updates are only accepted if no one else modified it in the meantime.
 
 20. How do you handle composite primary keys in JPA?
-Answer:
-Use @Embeddable for the composite key class and @EmbeddedId in the entity.
+    Use @Embeddable for the composite key class and @EmbeddedId in the entity.
 
-Code Example:
+   Code Example:
+      @Embeddable
+      public class OrderId implements Serializable {
+          private Long customerId;
+          private Long orderId;
+      }
 
-@Embeddable
-public class OrderId implements Serializable {
-    private Long customerId;
-    private Long orderId;
-}
-
-@Entity
-public class Order {
-    @EmbeddedId
-    private OrderId id;
-
-    private String product;
-}
-
+      @Entity
+      public class Order {
+          @EmbeddedId
+          private OrderId id;
+          private String product;
+      }
 
 This maps a primary key made of multiple fields.
 
-21. Question: How would you implement a many-to-many relationship?
-Answer:
-Use @ManyToMany and a join table.
+21. How would you implement a many-to-many relationship?
+      Use @ManyToMany and a join table.
+      @Entity
+      public class Student {
+          @Id
+          @GeneratedValue
+          private Long id;
 
-@Entity
-public class Student {
-    @Id
-    @GeneratedValue
-    private Long id;
+          @ManyToMany
+          @JoinTable(name = "student_course",
+          joinColumns = @JoinColumn(name = "student_id"),
+          inverseJoinColumns = @JoinColumn(name = "course_id"))
+          private Set<Course> courses = new HashSet<>();
+      }
 
-    @ManyToMany
-    @JoinTable(name = "student_course",
-        joinColumns = @JoinColumn(name = "student_id"),
-        inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private Set<Course> courses = new HashSet<>();
-}
+      @Entity
+      public class Course {
+       @Id
+       @GeneratedValue
+       private Long id;
 
-@Entity
-public class Course {
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @ManyToMany(mappedBy = "courses")
-    private Set<Student> students = new HashSet<>();
-}
-
+       @ManyToMany(mappedBy = "courses")
+       private Set<Student> students = new HashSet<>();
+   }
 
 This creates a join table to link students and courses.
 
-22. Question: What are default fetch types for associations?
-Answer:
+22. What are default fetch types for associations?
+      @ManyToOne and @OneToOne → EAGER
+      @OneToMany and @ManyToMany → LAZY
+      Best practice is to explicitly set fetch types to avoid performance issues.
 
-@ManyToOne and @OneToOne → EAGER
+   Example:
+      @OneToMany(fetch = FetchType.LAZY)
+      private List<Order> orders;
 
-@OneToMany and @ManyToMany → LAZY
-Best practice is to explicitly set fetch types to avoid performance issues.
-
-Example:
-
-@OneToMany(fetch = FetchType.LAZY)
-private List<Order> orders;
-
-
-Use lazy loading for large collections to avoid loading unnecessary data.
+      Use lazy loading for large collections to avoid loading unnecessary data.
 
 23. Explain automatic dirty checking.
-Answer:
-Hibernate automatically detects changes to managed entities and flushes them at commit without explicit update(). Example:
+   hibernate automatically detects changes to managed entities and flushes them at commit without explicit update(). 
+      Example:
+         Employee emp = session.get(Employee.class, 1L);
+         emp.setAge(31);
+         session.getTransaction().commit();
 
-Employee emp = session.get(Employee.class, 1L);
-emp.setAge(31);
-session.getTransaction().commit();
-
-
-Hibernate generates appropriate SQL because it tracked the modified field.
+   Hibernate generates appropriate SQL because it tracked the modified field.
 
 24. How to write custom queries?
-    1. we write Custom Queries Using @Query (JPQL). JPQL is database‑independent. ✅ Uses entity fields, not column names. example
-
+    1. we write Custom Queries Using @Query (JPQL). JPQL is database‑independent. ✅ Uses entity fields, not column names. 
+      example
       public interface EmployeeRepository extends JpaRepository<Employee, Long> {
         @Query("SELECT e FROM Employee e WHERE e.department = :dept")
         List<Employee> findEmployeesByDept(@Param("dept") String department);
