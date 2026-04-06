@@ -311,5 +311,35 @@ Run a single service:               docker compose -f docker-compose.optionB.fix
     docker compose stop -> halts running containers without removing them.
     docker compose down -> stops and removes containers and networks.
 
-12. 
+12. docker exec -it pg16 psql -U postgres  
+    This command opens an interactive PostgreSQL (psql) session inside a running Docker container named pg16, logging in as the postgres user.
+    Especially useful when PostgreSQL is not exposed via ports or you want direct container access.
+    ✅ docker exec
+       Executes a command inside a running container
+       The container must already be up and running
+    ✅ -it :  -it allows you to type commands interactively, like a real shell.
+    ✅ pg16
+        Name (or ID) of the Docker container
+        Typically refers to a PostgreSQL 16 container
+    ✅ psql
+        PostgreSQL’s command‑line client
+        Used to run SQL commands, manage databases, inspect schemas, etc.
+    ✅ -U postgres
+        Specifies the database user
+        postgres is the default superuser in PostgreSQL
+
+  🔹 Common Variations
+    ✅ Connect to a specific database:    docker exec -it pg16 psql -U postgres mydb
+    ✅ Open a shell first, then run psql:  docker exec -it pg16 bash
+                                            psql -U postgres
+
+  🔹 Important Notes
+     ❌ Container must be running
+     ❌ psql must be installed inside the container (it is by default in Postgres images)
+     ✅ Authentication works because the command runs inside the container
+
+13. 
+    
+    
+   
 
