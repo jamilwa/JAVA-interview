@@ -301,7 +301,8 @@ Scaling Support                Manual                           Built-in
 
 Stop and remove everything:         docker compose -f docker-compose.optionB.fixed.yml down
 Rebuild without cache:              docker compose -f docker-compose.optionB.fixed.yml build --no-cache        then run 
-                                    docker compose -f docker-compose.optionB.fixed.yml up
+Start services (foreground)         docker compose -f docker-compose.optionB.fixed.yml up
+Start services (background)         docker compose -f docker-compose.optionB.fixed.yml up -d
 Run a single service:               docker compose -f docker-compose.optionB.fixed.yml up app
 
 10. Difference between
