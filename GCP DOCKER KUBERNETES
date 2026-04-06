@@ -43,9 +43,44 @@
     ✅ Authentication (Service Account): gcloud auth activate-service-account --key-file=service-account-key.json 
         or recommended (no keys): Attached automatically to: Compute Engine, GKE, Cloud Run, App Engine.
     ✅ Why Service Accounts Are Safer: ✔ No passwords, ✔ Scoped permissions, ✔ Can be rotated, ✔ Fully auditable, ✔ Principle of least privilege.
-      
 
-4. 
+
+4.  Explain gcloud configurations
+    gcloud configurations let you maintain multiple named sets of CLI settings (like active account, project, region, zone) on the same machine and switch between them instantly.
+      In simple terms: configurations = profiles for the gcloud CLI.
+    ✅ Why configurations are needed
+        Without configurations, you’d constantly: 
+            Switch projects manually
+            Switch accounts manually
+            Risk running commands in the wrong environment (e.g., prod)
+        With configurations, you can safely separate:
+            dev / qa / prod
+            personal / work accounts
+            different client projects
+
+    ✅ What does a configuration store?
+        Each configuration can store values like:
+            Account (user or service account)
+            Project
+            Region
+            Zone
+            Other CLI preferences
+        Each configuration is isolated from the others.
+    ✅ Default configuration (always exists)
+        When you install gcloud, it creates: default
+        to check it run:        gcloud config configurations list
+    ✅ Common configuration commands 
+        🔹 Create a new configuration:                    gcloud config configurations create dev
+        🔹 Activate (switch to) a configuration:          gcloud config configurations activate dev
+        🔹 Set values in a configuration:                 gcloud config set project my-dev-project
+                                                          gcloud config set account dev-user@company.com
+                                                          gcloud config set compute/region asia-south1
+                                                          gcloud config set compute/zone asia-south1-a
+        These settings apply only to the active configuration
+        🔹 Delete a configuration:                        gcloud config configurations delete dev
+        
+            
+5.   gcloud services list --available  
 
     
 
