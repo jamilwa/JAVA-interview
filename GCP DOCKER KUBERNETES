@@ -81,7 +81,27 @@
         
             
 5.   gcloud services list --available  
+        ✅ It shows which Google Cloud services you can enable in your project. 
+        Once you find the service you need: gcloud services enable compute.googleapis.com                //This allows you to start using that service in the project.
+        ✅ List enabled services (active):                gcloud services list
+        ✅ Describe a specific service:                   gcloud services describe compute.googleapis.com
+        🔹 Filter Available Services
+            ✅ Search for Kubernetes‑related services:    gcloud services list --available | grep container
+            ✅ Filter by name:                            gcloud services list --available --filter="NAME:cloudrun"
 
-    
+
+        🔹 Real‑World Example Scenario
+            You want to deploy a GKE cluster, but the command fails.
+            Steps to troubleshoot:
+                gcloud services list --available | grep container
+                Confirm container.googleapis.com exists. Enable it if required.
+               🔹 Permissions Required: To run or act on this command, you need:
+                    roles/serviceusage.viewer → to list services
+                    roles/serviceusage.admin → to enable services
+                    Without permissions: PERMISSION_DENIED
+        Always verify: gcloud config list project
+
+                
+            
 
 
