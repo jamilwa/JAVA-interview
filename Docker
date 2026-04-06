@@ -9,9 +9,10 @@ sol: you have all the deployment process described in a document. Let's say the 
   This is a very, very manual approach. This takes a lot of time, and there is a very, very high chance that you make mistakes. 
   The goal of Docker is to make the deployemnt easy. 
   Open Command Prompt and run           docker --version.(assuming docker is already installed)
-  next run this command                 docker container run -d -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE    // run the container in port 5000. name of the container image is in28min and the image version is 0.0.1.RELEASE
-  which means to run a container on a port 5000. but the questions is I don't have Python installed in here and you're trying to run a Python application.   It says unable to find image locally, so it will start downloading the image.
-  it gives you some ID. 
+  next run this command                 docker container run -d -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE    // run the container in port 5000. name of the
+                                        //  container image is in28min and the image version is 0.0.1.RELEASE
+  which means to run a container on a port 5000. but the questions is I don't have Python installed in here and you're trying to run a Python application.   
+  It says unable to find image locally, so it will start downloading the image. it gives you some ID. 
  
   Now what has happened in the background? Let's go to the browser and type in localhost:5000. What are you seeing in here? you can see hello world Python v1.
   So we are now running a Python application on our machine. And the amazing thing is on this specific machine, Python is not installed at all. 
@@ -20,26 +21,32 @@ sol: you have all the deployment process described in a document. Let's say the 
      docker container ls                                                                        //  this will list the running containers
      docker container stop <id of the running container>                                        //  this will stop the container
 
- The docker image has everything you need to run the application like OS, Application runtime(JDK, Pythong, NodeJS etc), application code and dependencies. This image can be ran everywhere like your local machine, company's data center, cloud.
- Docker is popular because of following reasons
+ The docker image has everything you need to run the application like OS, Application runtime(JDK, Pythong, NodeJS etc), application code and dependencies. 
+ This image can be ran everywhere like your local machine, company's data center, cloud. Docker is popular because of following reasons
      1. Standardized application packaging: It has same packaging for all types of applications (Java, Python or JS)
      2. Multi platform support: Local machine, Data Center, Cloud.
      3. Isolation: Containers are isolated from one another. 
 
 Lets understand this command          docker container run -d -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE.
-      . The docker image is downloaded from Docker Registry. The default Registry is Docker Hub(https://hub.docker.com) like git Hub. in28min/hello-world-python is the repository name and 0.0.1.RELEASE is tag name or image version.
-      . -p 5000:5000 is mapping a host port and a container port. Each application runs inside the container in a specific port. you can expose it on this specific machine on a different port over here. we are exposing this application
-      on port 5000. The Container port 5000 is mapped to external port 5000 on the machine. Now I want to run it on a different port on the machine like on port 5001.
+      . The docker image is downloaded from Docker Registry. The default Registry is Docker Hub(https://hub.docker.com) like git Hub. in28min/hello-world-python is the
+         repository name and 0.0.1.RELEASE is tag name or image version.
+      . -p 5000:5000 is mapping a host port and a container port. Each application runs inside the container in a specific port. you can expose it on this specific 
+         machine on a different port over here. we are exposing this application on port 5000. The Container port 5000 is mapped to external port 5000 on the machine.
+         Now I want to run it on a different port on the machine like on port 5001.
       How can I change that?
-        The container port cannot change(app developer can change it). Only the host port can change. You can take the same application and run it on a different host port that you can do by changing 5000 to 5001. like
-              docker container run -d -p 5001:5000 in28min/hello-world-python:0.0.1.RELEASE.       // running on host port 5001
+        The container port cannot change(app developer can change it). Only the host port can change. You can take the same application and run it on a different host
+        Port that you can do by changing 5000 to 5001. like 
+           docker container run -d -p 5001:5000 in28min/hello-world-python:0.0.1.RELEASE.       // running on host port 5001
         we can run multiple instances of the same image by changing host port. like
               docker container run -d -p 5002:5000 in28min/hello-world-python:0.0.1.RELEASE.      // running on host port 5002
 
-       if we run the command    docker container ls        // we can see 2 instances of the same image running. we can verify by running localhost:5001      and localhost:5002  in browser and we can see same image is running 
-      . -d is used for detach mode. That is the terminal where we execute this command is available for other use. if we dont mention -d then we can't use the terminal to run other commands. 
+       if we run the command    docker container ls        // we can see 2 instances of the same image running. we can verify by running localhost:5001  and 
+         localhost:5002  in browser and we can see same image is running 
+      . -d is used for detach mode. That is the terminal where we execute this command is available for other use. if we dont mention -d then we can't use the 
+         terminal to run other commands. 
 
-2. What is Docker Image? :  It is a package representing specific version of your app. it is just a set of bytes. These bytes are hosted inside the Docker registry called Docker Hub.
+2. What is Docker Image? :  It is a package representing specific version of your app. it is just a set of bytes. These bytes are hosted inside the Docker registry
+                            called Docker Hub.
 3. What is a Container? :   A container is a running version of that specific image. You can create 1000s of container from a single image. 
 4. What is Dokcerfile? : it is a file with instructions to create Docker image. 
     example of sample dockerFile
@@ -50,17 +57,14 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
        ENTRYPOINT ["java","-jar","/app.jar"]
 
 
-   Every Docker image starts from a base image, and the base image which we are making use of in 1st line of dockerfile is open JDK. We want to run a Java application, and to be able to do that we need a JDK. We are making use of a 
-          repository called OpenJDK and we are using a tag 18.0-slim. 
-   Now what do we want to run? As part of the image, we would want to run a spring boot application. When we build a Spring boot project, the application jar will be created in the target folder. So in the local machine from the 
-         target folder, we want to copy the jar file into the Docker image with a specific name. That's why we are making use of the copy command in 2nd line. So we are copying the jar which is present in the target folder as app dot jar 
-         into the docker image. 
+   Every Docker image starts from a base image, and the base image which we are making use of in 1st line of dockerfile is open JDK. We want to run a Java application, 
+   and to be able to do that we need a JDK. We are making use of a repository called OpenJDK and we are using a tag 18.0-slim. 
+   Now what do we want to run? As part of the image, we would want to run a spring boot application. When we build a Spring boot project, the application jar will be 
+   created in the target folder. So in the local machine from the target folder, we want to copy the jar file into the Docker image with a specific name. That's why we
+   are making use of the copy command in 2nd line. So we are copying the jar which is present in the target folder as app dot jar into the docker image. 
    Next, we are informing Docker about the port that the container listens on at runtime. The application we are creating listens on port 5000, so we are exposing port 5000. 
-   The last command which is present in here is Entrypoint. We want to configure a command that will be run at container launch. When a container is created from this Docker image, we want to launch the application, That's why we are
-   executing the command ["java","-jar","/app.jar"].
-
-
-
+   The last command which is present in here is Entrypoint. We want to configure a command that will be run at container launch. When a container is created from 
+   this Docker image, we want to launch the application, That's why we are executing the command ["java","-jar","/app.jar"].
 
 
 docker image ls                                                                           //   this will list the all the images present in my local machine. 
