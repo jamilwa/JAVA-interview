@@ -341,7 +341,20 @@ Run a single service:               docker compose -f docker-compose.optionB.fix
      ❌ psql must be installed inside the container (it is by default in Postgres images)
      ✅ Authentication works because the command runs inside the container
 
-13. 
+13. docker start equifox-loan-service equifox-credit-service equifox-payment-service
+    This command starts multiple existing Docker containers at the same time.
+     ✅ It starts containers that already exist
+     ❌ It does not create new containers
+     ❌ It does not rebuild images
+
+     ✅ docker start
+         Starts stopped containers
+         Containers must already be created earlier using:
+           docker run                // Create + start a new container
+           docker create             // creates a container from a Docker image but does NOT start it.
+           docker compose up        // Create + start multiple services
+
+14. 
     
     
    
