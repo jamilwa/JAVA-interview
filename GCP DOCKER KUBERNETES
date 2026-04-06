@@ -1,6 +1,6 @@
 1. gcloud auth list
-    gcloud auth list displays all Google Cloud accounts that are currently authenticated on your local machine and shows which account is active.
-    In simple terms: It tells you who is logged in to the gcloud CLI. 
+    gcloud auth list displays all Google Cloud accounts that are currently authenticated on your local machine and shows which account is active. who am I?
+    In simple terms: It tells you who is logged in to the gcloud CLI. it allows you to Check active account
     🔹 Switch Active Account, If you have multiple accounts and want to switch:
         gcloud config set account admin@company.com
 
@@ -9,7 +9,7 @@
     ✅ Activate service account (for automation):  gcloud auth activate-service-account --key-file=service-account-key.json
     ✅ Remove an account: gcloud auth revoke user@example.com
 
-  Authentication and project selection are separate in GCP. After checking accounts, also check project: gcloud config list project
+  In GCP, authentication (account) and configuration (project) are separate. After checking accounts, also check project: gcloud config list project
   Set project if needed: gcloud config set project my-project-id
 
   🔹 Real‑World Scenario: You run a deployment command and get a permission error. First thing to check: gcloud auth list
@@ -21,6 +21,32 @@
 ❌ Forgetting to switch accounts before production work
 ❌ Confusing project permissions with authentication
 
+2. gcloud config list project
+    gcloud config list project displays the Google Cloud project that is currently set as active in your local gcloud CLI configuration. in short it allows you to 
+    check active project. where am I working
+    If the project is missing or incorrect:  gcloud config set project new-project-id
+    🔹 Override Project Temporarily (Per Command): Instead of changing global config, you can do:        gcloud compute instances list --project=some-other-project
+        ✅ Useful in scripts or multi‑project environments
 
+    🔹 Real‑World Scenario: You run a deploy command and it fails or deploys to the wrong environment.
+        First checks:   gcloud auth list
+                        gcloud config list project
+
+   ✅ List all configs:      gcloud config list
+
+
+3. User Accounts vs Service Accounts (GCP)
+    🔹 High‑Level Difference: User accounts are for humans interacting with GCP, while service accounts are for applications and automated processes.
+    🔹 What is a Service Account? A service account is a non‑human identity used by: Applications, Virtual machines, CI/CD pipelines, Kubernetes workloads
+        Example: my-service@my-project.iam.gserviceaccount.com
+     Service accounts are used when: A VM accesses Cloud Storage, A Kubernetes Pod accesses Pub/Sub, A CI/CD pipeline deploys to GCP, A backend talks to another GCP service.
+    ✅ Authentication (Service Account): gcloud auth activate-service-account --key-file=service-account-key.json 
+        or recommended (no keys): Attached automatically to: Compute Engine, GKE, Cloud Run, App Engine.
+    ✅ Why Service Accounts Are Safer: ✔ No passwords, ✔ Scoped permissions, ✔ Can be rotated, ✔ Fully auditable, ✔ Principle of least privilege.
+      
+
+4. 
+
+    
 
 
