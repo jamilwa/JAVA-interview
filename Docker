@@ -106,8 +106,10 @@ docker container run -d -p 5000:5000 in28min/hello-world-docker:v2
          docker network create --subnet 192.168.100.0/24 equifox-net
 
 6. Docker Compose Networking: Docker Compose automatically creates and manages networks for multi‑container applications, so containers can discover and
-   communicate with each other by service name.
+   communicate with each other by service name.  
    1️⃣ Default Networking in Docker Compose:         docker compose up
+      You run the command "docker compose up" from a terminal/command prompt on your machine, in the directory that contains the Docker Compose file. If the file name 
+      is not docker-compose.yml, specify it explicitly:   docker compose -f fileName.yml up
       Docker Compose automatically does the following:
       ✅ Creates a default bridge network
       ✅ Attaches all services to that network
