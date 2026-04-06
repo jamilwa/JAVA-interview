@@ -101,7 +101,11 @@
                     Without permissions: PERMISSION_DENIED
         Always verify: gcloud config list project
 
-                
+6. gcloud compute zones list
+    ✅ It tells you which zones exist in GCP and whether they are available to deploy resources.
+    ✅ List zones in a specific region:         gcloud compute zones list --filter="region:(asia-south1)"
+
+
             
 
 
