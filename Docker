@@ -69,7 +69,11 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
     ✅ Best Practices (Recommended Improvements)
        1️⃣ Use JRE instead of JDK (Smaller Image):     FROM eclipse-temurin:17-jre-alpine
        2️⃣ Add JVM Options (Production‑Friendly):      ENTRYPOINT ["java","-Xms256m","-Xmx512m","-jar","app.jar"]    // Prevents memory issues. Recommended in containers
-
+       3️⃣ Use multi‑stage builds
+       4️⃣ Prefer distroless images
+       5️⃣ Avoid running as root
+       6️⃣ Externalize config (env vars, ConfigMaps, Secrets)
+       7️⃣ Add health endpoints (for orchestration)
    
     Multi‑stage builds reduce image size and improve security by separating build and runtime. A multi‑stage Dockerfile where the application is built using a Maven image 
     and then copied into a lightweight Java runtime image, resulting in a smaller, faster, and more secure container suitable for Kubernetes. example 
