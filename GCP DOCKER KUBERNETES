@@ -109,3 +109,69 @@
             
 
 
+---------------------------------------------------------KUBERNETES---------------------------------------------------------
+run below command in powershell
+1. kubectl get nodes: The command kubectl get nodes lists all the nodes (machines) in a Kubernetes cluster along with their status, roles, age, and Kubernetes version.
+    Nodes are the workers in a Kubernetes cluster: Pods run on nodes, If a node is unhealthy, applications may fail, Cluster troubleshooting usually starts here.
+    This command helps you: Verify cluster connectivity, Check node health, See how many nodes you have, Confirm worker vs control‑plane nodes.
+    ✅ Show more details: kubectl get nodes -o wide
+    ✅ Describe a specific node (deep debugging):  kubectl describe node <node-name>
+    ✅ Filter by labels: kubectl get nodes --show-labels
+
+    🔹 Real‑World Scenarios: run the command in below scenarios
+        ✅ After cluster creation
+        ✅ Application not scheduling
+        ✅ After adding nodes
+
+        nodes = machines
+        pods  = workloads. smallest deployable unit
+
+2. kubectl get pods -A
+    It shows every running (or stopped) Pod in the entire cluster, not just in your current namespace. -A means All namespaces (same as --all-namespaces).
+    🔹 Why -A Is Important: By default, Kubernetes commands operate in one namespace only (usually default).
+        kubectl get pods                 // shows pods only in the current namespace
+     kubectl get pods -A -o wide         // shows more details
+    ✅ Filter by namespace:               kubectl get pods -n kube-system
+    ✅ Find failing pods :                kubectl get pods -A | grep -v Running
+    ✅ Check only specific namespaces:    kubectl get pods -n default
+
+    🔹 Real‑World Troubleshooting Example
+        ❌ Application is not accessible.
+        Steps:
+            1. kubectl get pods -A
+
+3. kubectl config get-contexts
+     It tells you which clusters, users, and namespaces your kubectl can connect to, and which one is active right now and configured in your kubeconfig file.
+     🔹 Why this command is important: In real‑world Kubernetes usage you often work with:
+        multiple clusters (dev / qa / prod)
+        multiple cloud providers (GKE / EKS / AKS / On‑prem)
+        multiple users or service accounts
+    This command helps you: avoid operating in the wrong cluster, verify your current kubectl context, safely switch between environments.
+    ⚠️ Many production incidents happen because someone ran a command in the wrong context.
+    ✅ kubectl commands always run in the active context unless overridden. 
+    🔹 What is a Kubernetes Context?
+        A context is a combination of:
+            Cluster → where the API server is
+            User → who you are
+            Namespace → default scope
+    🔹 Switch to a Different Context:    kubectl config use-context prod-context
+        Verify:                           kubectl config current-context
+    🔹 Use Context Temporarily (Safe Practice):   kubectl --context=qa-context get pods
+            ✅ Avoids accidental changes
+            ✅ Recommended for production operations
+    🔹 Real‑World Scenario: You intend to scale a deployment in dev, but accidentally scale prod.
+            ✅ First thing to check:    kubectl config get-contexts
+            ✅ Confirm active context before executing commands.
+
+4.  What is a Namespace?
+    A namespace is a Kubernetes resource used to logically isolate workloads inside a single cluster. 
+    What namespaces control?
+        Resource names (can repeat across namespaces)
+        Access control (RBAC)
+        Quotas & limits
+        Resource organization (dev, qa, prod)
+
+    ✅ Common namespaces:  kubectl get namespaces
+        output: default, kube-system, kube-public, monitoring, prod.
+
+
