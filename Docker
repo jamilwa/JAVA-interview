@@ -52,19 +52,25 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
     example of sample dockerFile
 
        FROM openjdk:18.0-slim
-       COPY target/*.jar app.jar
+       WORKDIR /app                                      // Creates or switches to directory /app inside the container. Equivalent to: cd /app. Avoids hard‑coded paths.
+       COPY target/*.jar app.jar                         // Copies your built JAR file from the host machine into the container. Renames it to app.jar
        EXPOSE 5000
-       ENTRYPOINT ["java","-jar","/app.jar"]
+       ENTRYPOINT ["java","-jar","/app.jar"]            // Defines the main command that runs when the container starts. Starts the Java application
 
 
    Every Docker image starts from a base image, and the base image which we are making use of in 1st line of dockerfile is open JDK. We want to run a Java application, 
    and to be able to do that we need a JDK. We are making use of a repository called OpenJDK and we are using a tag 18.0-slim. 
    Now what do we want to run? As part of the image, we would want to run a spring boot application. When we build a Spring boot project, the application jar will be 
    created in the target folder. So in the local machine from the target folder, we want to copy the jar file into the Docker image with a specific name. That's why we
-   are making use of the copy command in 2nd line. So we are copying the jar which is present in the target folder as app dot jar into the docker image. 
+   are making use of the copy command in 2nd line. So we are copying the jar which is present in the target folder as app.jar into the docker image. 
    Next, we are informing Docker about the port that the container listens on at runtime. The application we are creating listens on port 5000, so we are exposing port 5000. 
    The last command which is present in here is Entrypoint. We want to configure a command that will be run at container launch. When a container is created from 
    this Docker image, we want to launch the application, That's why we are executing the command ["java","-jar","/app.jar"].
+
+    ✅ Best Practices (Recommended Improvements)
+       1️⃣ Use JRE instead of JDK (Smaller Image):     FROM eclipse-temurin:17-jre-alpine
+       2️⃣ Add JVM Options (Production‑Friendly):      ENTRYPOINT ["java","-Xms256m","-Xmx512m","-jar","app.jar"]    // Prevents memory issues. Recommended in containers
+       
 
 
 docker image ls                                                                           //   this will list the all the images present in my local machine. 
