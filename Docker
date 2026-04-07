@@ -70,14 +70,14 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
        1️⃣ Use JRE instead of JDK (Smaller Image):     FROM eclipse-temurin:17-jre-alpine
        2️⃣ Add JVM Options (Production‑Friendly):      ENTRYPOINT ["java","-Xms256m","-Xmx512m","-jar","app.jar"]    // Prevents memory issues. Recommended in containers
 
-   example of multi stage docker file
+   A multi‑stage Dockerfile where the application is built using a Maven image and then copied into a lightweight Java runtime image, resulting in a smaller, faster,
+   and more secure container suitable for Kubernetes. example of multi stage docker file
        #STAGE 1
        FROM maven:3.9-eclipse-temurin-17 AS build           // Names this stage build so you can reference it later. This image is heavy, so it won’t go to production
        WORKDIR /app
        COPY pom.xml .                     // Copies only pom.xml first. Enables Docker layer caching. If dependencies don't change, Maven won’t re‑download them again
        COPY src ./src                     // Copies application source code. Triggers rebuild only when code changes. 
        RUN mvn clean package -DskipTests  // Builds the jar file inside /app/target/GreetDocker-0.0.1-SNAPSHOT.jar
-       #Base machine
 
        #STAGE 2
        FROM eclipse-temurin:17-jre-alpine  // Uses JRE only (no compiler), Alpine Linux → very small image, Best practice for Java containers, Much smaller than Maven image.
@@ -92,6 +92,27 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
           3️⃣ Clean runtime image makes Secure & Kubernetes‑ready image
           4️⃣ exec ENTRYPOINT makes Graceful shutdown support
           5️⃣ JRE instead of JDK Less memory and attack surface
+
+
+   Distroless images contain only what’s needed to run your app—no shell, no package manager, no utilities. Distroless enforces immutable, secure containers.
+   Advantages are Smaller image, Faster startup, Reduced attack surface, Kubernetes‑friendly.  example
+    # STAGE 1 - no changes
+    # STAGE 2 – Runtime (Distroless)
+    FROM gcr.io/distroless/java17-debian12
+    WORKDIR /app
+    COPY --from=build /app/target/myApp.jar app.jar
+    EXPOSE 8080
+    ENTRYPOINT ["java","-jar","/app/app.jar"]
+
+    ✅ Build & Run
+       docker build -t greet-app:distroless .
+       docker run -p 8080:8080 greet-app:distroless
+
+   ✅ Use Distroless in prod
+   ✅ Use Alpine in dev
+
+
+
 
 
 docker image ls                                                                           //   this will list the all the images present in my local machine. 
