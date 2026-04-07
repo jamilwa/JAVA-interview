@@ -57,7 +57,6 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
        EXPOSE 5000
        ENTRYPOINT ["java","-jar","/app.jar"]            // Defines the main command that runs when the container starts. Starts the Java application
 
-
    Every Docker image starts from a base image, and the base image which we are making use of in 1st line of dockerfile is open JDK. We want to run a Java application, 
    and to be able to do that we need a JDK. We are making use of a repository called OpenJDK and we are using a tag 18.0-slim. 
    Now what do we want to run? As part of the image, we would want to run a spring boot application. When we build a Spring boot project, the application jar will be 
@@ -70,7 +69,29 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
     ✅ Best Practices (Recommended Improvements)
        1️⃣ Use JRE instead of JDK (Smaller Image):     FROM eclipse-temurin:17-jre-alpine
        2️⃣ Add JVM Options (Production‑Friendly):      ENTRYPOINT ["java","-Xms256m","-Xmx512m","-jar","app.jar"]    // Prevents memory issues. Recommended in containers
-       
+
+   example of multi stage docker file
+       #STAGE 1
+       FROM maven:3.9-eclipse-temurin-17 AS build           // Names this stage build so you can reference it later. This image is heavy, so it won’t go to production
+       WORKDIR /app
+       COPY pom.xml .                     // Copies only pom.xml first. Enables Docker layer caching. If dependencies don't change, Maven won’t re‑download them again
+       COPY src ./src                     // Copies application source code. Triggers rebuild only when code changes. 
+       RUN mvn clean package -DskipTests  // Builds the jar file inside /app/target/GreetDocker-0.0.1-SNAPSHOT.jar
+       #Base machine
+
+       #STAGE 2
+       FROM eclipse-temurin:17-jre-alpine  // Uses JRE only (no compiler), Alpine Linux → very small image, Best practice for Java containers, Much smaller than Maven image.
+       WORKDIR /app
+       COPY --from=build /app/target/myApp.jar app.jar  //Copies only JAR from build stage. Leaves Maven, source code, caches behind. This is where multi‑stage magic happens.
+       EXPOSE 8080
+       ENTRYPOINT ["java","-jar", "app.jar"]
+
+       ✅ Advantages of multi stage Dockerfile
+          1️⃣ Multi‑stage builds smaller final image
+          2️⃣ Layer caching enables Faster rebuilds
+          3️⃣ Clean runtime image makes Secure & Kubernetes‑ready image
+          4️⃣ exec ENTRYPOINT makes Graceful shutdown support
+          5️⃣ JRE instead of JDK Less memory and attack surface
 
 
 docker image ls                                                                           //   this will list the all the images present in my local machine. 
