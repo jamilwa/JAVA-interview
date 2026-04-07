@@ -70,8 +70,9 @@ Lets understand this command          docker container run -d -p 5000:5000 in28m
        1️⃣ Use JRE instead of JDK (Smaller Image):     FROM eclipse-temurin:17-jre-alpine
        2️⃣ Add JVM Options (Production‑Friendly):      ENTRYPOINT ["java","-Xms256m","-Xmx512m","-jar","app.jar"]    // Prevents memory issues. Recommended in containers
 
-   A multi‑stage Dockerfile where the application is built using a Maven image and then copied into a lightweight Java runtime image, resulting in a smaller, faster,
-   and more secure container suitable for Kubernetes. example of multi stage docker file
+   
+    Multi‑stage builds reduce image size and improve security by separating build and runtime. A multi‑stage Dockerfile where the application is built using a Maven image 
+    and then copied into a lightweight Java runtime image, resulting in a smaller, faster, and more secure container suitable for Kubernetes. example 
        #STAGE 1
        FROM maven:3.9-eclipse-temurin-17 AS build           // Names this stage build so you can reference it later. This image is heavy, so it won’t go to production
        WORKDIR /app
