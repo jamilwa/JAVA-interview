@@ -1571,3 +1571,61 @@ Priority       Low (overridden by Qualifier)                   High (overrides P
         Scaling: Adjust the number of replicas based on the load.
         Security: Set up security measures like network policies, secrets management, etc.
 
+54.  How to Optimize Database Interactions in Spring Boot for Better Performance
+		Database operations are often the biggest performance bottleneck. Below are real‑world, proven optimization strategies.
+		1. Use Connection Pooling.
+			Spring Boot uses HikariCP by default. 
+			✅ Recommended settings:
+				spring.datasource.hikari.maximum-pool-size=20
+				spring.datasource.hikari.minimum-idle=5
+				spring.datasource.hikari.connection-timeout=30000
+
+			✅ Benefits:
+				Reuse DB connections
+				Reduce connection creation overhead
+				Improve throughput
+
+		2. Use Proper Indexing in Database. It provides Huge performance gains for large tables. Ensure indexes on:
+				Foreign keys
+				Columns used in WHERE, JOIN, ORDER BY
+
+		3. Fetch Only Required Data (Avoid SELECT *). It Reduces Memory usage, Network I/O
+				❌ Inefficient: 					List<Order> orders = orderRepository.findAll();
+				✅ Optimized using projections:		@Query("SELECT o.id, o.total FROM Order o")
+													List<OrderSummary> findOrderSummaries();
+
+		4. Avoid N+1 Query Problem (Very Common Issue). 
+				❌ Problem:					orders.forEach(o -> o.getItems().size());
+				✅ Fix using JOIN FETCH:	@Query("SELECT o FROM Order o JOIN FETCH o.items")
+											List<Order> findOrdersWithItems();
+				✅ Prevents dozens or hundreds of unnecessary queries.
+
+		5. Use Pagination for Large Data Sets
+			❌ Never load massive tables into memory.
+			✅ Use:		Page<Order> orders = orderRepository.findAll(PageRequest.of(0, 20));
+			✅ Improves: Response time, Memory usage, User experience
+
+		6. Enable Second‑Level Cache (When Applicable)
+			Using Hibernate + Redis / Ehcache:
+			Example:	spring.jpa.properties.hibernate.cache.use_second_level_cache=true
+			It is Best for Read‑heavy applications, frequently accessed reference data.
+			⚠️ Avoid caching highly volatile data.
+		
+		7. Batch Inserts and Updates
+			Enable batching:  	spring.jpa.properties.hibernate.jdbc.batch_size=50
+			It is Great for Bulk operations, Data migrations, Large imports
+
+		8. Use Read‑Only Transactions When Possible. Its Benefits are Lower transaction overhead, Database optimizations kick in.
+
+			@Transactional(readOnly = true)
+			public List<Order> getOrders() {
+			    return orderRepository.findAll();
+			}
+
+		9. Avoid Excessive Logging in SQL. excessive logging hurts performance severely, so Disable SQL logs in production
+				spring.jpa.show-sql=false
+
+
+
+
+
