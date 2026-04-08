@@ -1,0 +1,36 @@
+Java 11 focused on cleanup, standardization, performance, and productivity.
+🔹 1. Standardized HTTP Client (JEP 321)
+    The incubator HTTP client from Java 9/10 became standard.
+    HttpClient client = HttpClient.newHttpClient();
+    HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create("https://example.com"))
+        .build();
+
+  ✅ Supports HTTP/1.1 & HTTP/2
+  ✅ Async and sync calls
+  ✅ Replaces HttpURLConnection
+
+🔹 2. New String Methods
+    " ".isBlank();          // true
+    "Java\n".strip();       // removes whitespace
+    "Java".repeat(3);       // JavaJavaJava
+    "Hi\nHello".lines();    // Stream of lines
+
+🔹 3. Lambda Enhancements (var in Lambdas)
+      Allows var in lambda parameters.
+        (var x, var y) -> x + y
+
+🔹 4. Files API Enhancements
+      Easy read/write helpers.
+      String content = Files.readString(path);
+      Files.writeString(path, "Hello Java 11");
+
+🔹 5. Removal of Java EE & CORBA Modules
+      Removed from JDK: JAXB, JAX‑WS, CORBA, Activation
+
+🔹 6. Performance & Garbage Collection
+      Improved G1 GC
+      Better container (Docker) awareness
+      Reduced memory footprint
+      Important for microservices
+
