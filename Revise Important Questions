@@ -26,7 +26,7 @@
 
 3. Access modifiers (DopSop)
         Default (Package-Private): accessible only within its own package.    DOP
-        Protected: accessible in subclasses of other packages.  ProSOP
+        Protected: accessible in subclasses of other packages.  SOP
 
 4. How to make collection threadsafe
 	1. Using Synchronized Collections : Java provides synchronized wrappers for collections through the Collections.synchronizedXXX methods like 
