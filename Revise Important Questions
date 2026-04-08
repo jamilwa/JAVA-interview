@@ -873,19 +873,51 @@ Constructors using new operator (TreeSet::new)
 		    return ResponseEntity.badRequest().body(error);
 		}
 		
-	how to handle multiple validation errors at once in a list within this JSON response?
+6.	how to handle multiple validation errors at once in a list within this JSON response?
 		When a user submits a form and multiple fields fail validation (e.g., "Email is invalid" AND "Password is too short"), you don't want to just send back the first
 		error you find. A good API returns a list of all violations so the frontend can highlight every problematic field at once.
-		​To do this, we modify our ErrorResponse to include a list of specific field errors.
-		​1. The Enhanced Error Model
-		​We'll add a list of ValidationError objects to our main response.
-		public record ErrorResponse(
-		    int status, 
-		    String message, 
-		    List<FieldViolation> errors
-		) {
-		    public record FieldViolation(String field, String message) {}
+		​@ControllerAdvice
+		public class GlobalExceptionHandler {
+		
+		    @ExceptionHandler(MethodArgumentNotValidException.class)
+		    public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
+		        List<ErrorResponse.FieldViolation> violations = ex.getBindingResult()						// Map all field errors into our custom list
+		            .getFieldErrors()
+		            .stream()
+		            .map(err -> new ErrorResponse.FieldViolation(err.getField(), err.getDefaultMessage()))
+		            .collect(Collectors.toList());
+		
+		        ErrorResponse error = new ErrorResponse(
+		            HttpStatus.BAD_REQUEST.value(),
+		            "Validation Failed",
+		            violations
+		        );
+		
+		        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+		    }
 		}
+
+	The Resulting JSON: If a user tries to register with an empty username and a short password, they get this clean, structured response:
+		{
+		  "status": 400,
+		  "message": "Validation Failed",
+		  "errors": [
+		    {
+		      "field": "username",
+		      "message": "Username cannot be empty"
+		    },
+		    {
+		      "field": "password",
+		      "message": "Password must be at least 8 characters"
+		    }
+		  ]
+		}
+
+
+	Why this is the "Gold Standard"
+		• ​UX Friendly: The frontend can map the field name directly to the UI input.
+		• ​Reduced Latency: The user doesn't have to submit the form 5 times to find 5 different errors.
+		• ​Scalable: You can add more metadata (like error codes or suggested values) without breaking the structure.
 
 
 6. Logging (Critical in Production), Log once, inside handler. Never log in controller & handler both
