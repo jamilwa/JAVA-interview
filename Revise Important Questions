@@ -920,10 +920,103 @@ Constructors using new operator (TreeSet::new)
 		• ​Scalable: You can add more metadata (like error codes or suggested values) without breaking the structure.
 
 
-6. Logging (Critical in Production), Log once, inside handler. Never log in controller & handler both
+7. Logging (Critical in Production), Log once, inside handler. Never log in controller & handler both
 	private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+	Key points: @RestControllerAdvice automatically serializes returned objects to JSON.
 
-Key points: @RestControllerAdvice automatically serializes returned objects to JSON.
+38. how to trigger these validations using Jakarta Bean Validation annotations like @NotNull or @Size?
+		​1. Annotating the DTO
+		​	example: UserRegistrationDto. Each annotation defines a specific rule and the message to return if that rule is broken
+				import jakarta.validation.constraints.*;
+				
+				public record UserRegistrationDto(
+				    @NotBlank(message = "Username is required")
+				    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
+				    String username,
+				
+				    @Email(message = "Please provide a valid email address")
+				    @NotEmpty(message = "Email cannot be empty")
+				    String email,
+				
+				    @Pattern(regexp = "^(?=.*[0-9]).{8,}$", message = "Password must be 8+ chars and contain a number")
+				    String password,
+				
+				    @Min(value = 18, message = "You must be at least 18 years old")
+				    int age
+				) {}
+
+		2. Triggering Validation in the Controller: ​Spring validates the incoming request body by using the @Valid annotation in your Controller method. example:
+				@RestController
+				@RequestMapping("/api/users")
+				public class UserController {
+				
+				    @PostMapping("/register")
+				    public ResponseEntity<String> register(@Valid @RequestBody UserRegistrationDto dto) {
+				        // If validation fails, the GlobalExceptionHandler we built 
+				        // intercepts the request before it even reaches this line.
+				        return ResponseEntity.ok("User registered successfully!");
+				    }
+				}
+
+
+39. Sometimes standard annotations aren't enough (e.g., checking if a username already exists in the database). For that, you can create Custom Validators by 
+	implementing ConstraintValidator.
+	1. how to create a custom @UniqueUsername annotation that checks your database? 
+		It involves two parts: a custom annotation and a validator class.
+			​1. Create the Annotation. We use @Constraint to tell Spring which class will handle the actual logic.
+				import jakarta.validation.Constraint;
+				import jakarta.validation.Payload;
+				import java.lang.annotation.*;
+				
+				@Target({ElementType.FIELD}) 								// Can be applied to fields
+				@Retention(RetentionPolicy.RUNTIME)
+				@Constraint(validatedBy = UniqueUsernameValidator.class) 	// The logic class
+				public @interface UniqueUsername {
+				    String message() default "Username is already taken";
+				    Class<?>[] groups() default {};
+				    Class<? extends Payload>[] payload() default {};
+				}
+
+			2. Create the Validator class. ​
+				The validator class implements ConstraintValidator. Because it is a Spring-managed component, you can autowire your repository directly into it.
+				import jakarta.validation.ConstraintValidator;
+				import jakarta.validation.ConstraintValidatorContext;
+				import org.springframework.beans.factory.annotation.Autowired;
+				
+				public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, String> {
+				    @Autowired
+				    private UserRepository userRepository;
+				
+				    @Override
+				    public boolean isValid(String username, ConstraintValidatorContext context) {
+				        if (username == null) return true; 												// Let @NotNull handle nulls
+				        return !userRepository.existsByUsername(username);								// Return true if the user does NOT exist in the DB
+				    }
+					}
+
+			3. Use it in your DTO
+				​Now you can use @UniqueUsername just like any standard Jakarta annotation.
+				public record UserRegistrationDto(
+				    @UniqueUsername
+				    @NotBlank(message = "Username cannot be empty")
+				    String username,
+				
+				    @Email(message = "Invalid email")
+				    String email
+				) {}
+
+
+	• ​Clean Controllers: Your controller doesn't need an if(service.exists(name)) check; the @Valid trigger handles it automatically.
+	• ​Reusable: You can use @UniqueUsername on Registration DTOs, Profile Update DTOs, or Admin DTOs.
+	• ​Consistent Errors: Since it's part of the validation flow, it will automatically be caught by the GlobalExceptionHandler we built earlier, returning a nice JSON error
+		list to the frontend.
+
+	​Summary of the Flow
+	• ​Request hits the Controller.
+	• ​@Valid triggers the validation.
+	• ​UniqueUsernameValidator queries the database.
+	• ​If it fails, MethodArgumentNotValidException is thrown.
+	• ​@ControllerAdvice catches it and returns a clean JSON response.
 
 
 39. What is singleTon desing pattern
