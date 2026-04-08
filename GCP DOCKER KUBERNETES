@@ -107,7 +107,44 @@
 
 
             
+7. What is BigQuery in GCP?
+    BigQuery is Google Cloud Platform’s fully managed, serverless, distributed data warehouse designed for large‑scale data analytics.
+    In simple terms: BigQuery is used to run SQL queries on massive datasets (GBs–PBs) very fast, without managing servers or databases.
+    🔹 Key Characteristics of BigQuery
+        ✅ Serverless (no infrastructure to manage)
+        ✅ Handles terabytes to petabytes of data
+        ✅ Uses standard SQL
+        ✅ Columnar storage
+        ✅ Extremely fast for read‑heavy analytical queries
+        ✅ Pay‑as‑you‑query or flat‑rate pricing
 
+    What BigQuery Is Typically Used For
+        Data warehousing, Analytics & reporting, Business intelligence (BI), Log analysis, Event analytics, ML data preparation.
+    Examples: Website clickstream analysis, Sales and revenue analytics, IoT data analysis, Marketing campaign analysis.
+
+✅ How BigQuery Is Different from Regular SQL Databases
+    1. Purpose: Analytics vs Transactions (MOST IMPORTANT)
+            Aspect            BigQuery                        Regular SQL DB
+            Designed for    Analytics (OLAP)                Transactions (OLTP)
+            Query type      Large scans, aggregations       Small row‑based queries
+            Typical         usersAnalysts, data teams       Applications, APIs
+    2. BigQuery can query billions of rows in seconds
+       Regular SQL databases slow down at that scale
+    3. Architecture Differences
+            Regular SQL Databases                               BigQuery
+        Row‑based storage                                    Columnar storage    
+        Runs on fixed servers                                Serverless
+        You manage: CPU, Memory, Disk, Replication           Google manages everything
+
+
+
+
+
+
+Distributed execution engine
+
+✅ Columnar storage = faster aggregations
+✅ Only reads required columns (less I/O)
 
 ---------------------------------------------------------KUBERNETES---------------------------------------------------------
 run below command in powershell
