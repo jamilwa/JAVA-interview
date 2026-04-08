@@ -586,12 +586,15 @@ Constructors using new operator (TreeSet::new)
 						executor.submit(() -> System.out.println("Task executed"));
 
 	Virtual Threads (Project Loom).
+		A virtual thread is a lightweight thread. It is managed by the JVM rather than the OS and allows applications to scale to millions of concurrent
+		tasks while using simple blocking code. Virtual threads reduce the cost of thread creation. making them ideal for web services and microservices.
+		VT is Best for I/O-bound tasks: (Database calls, API requests, Kafka consuming)
+
 		Before Java 21, every Java thread was a "Platform Thread" (a 1:1 wrapper around an expensive OS thread). If you created 10,000 threads, your system would crash.
 		With Virtual Threads, you can create millions of threads because they are managed by the JVM, not the OS.
-		Best for I/O-bound tasks: (Database calls, API requests, Kafka consuming)
 
 		For simple tasks, Runnable is better than extending Thread because it preserves the inheritance hierarchy. However, for a production microservice, 
-		I prefer using ExecutorService with Virtual Threads (in Java 21). This allows us to handle massive I/O concurrency without the overhead of context-switching
+		I prefer using ExecutorService with Virtual Threads. This allows us to handle massive I/O concurrency without the overhead of context-switching
 		between expensive OS platform threads.
 
 		example:
@@ -1625,6 +1628,16 @@ Priority       Low (overridden by Qualifier)                   High (overrides P
 		9. Avoid Excessive Logging in SQL. excessive logging hurts performance severely, so Disable SQL logs in production
 				spring.jpa.show-sql=false
 
+
+55.  What is Dependency Injection?
+		DI is a design pattern where an object’s dependencies are provided by the framework (Spring) rather than being created directly by the object itself.
+		DI promotes loose coupling, testability, maintainability, and adherence to SOLID principles, enabling scalable and clean application design in Spring Boot.
+		In Spring Boot, DI is primarily achieved using:
+			@Component, @Service, @Repository
+			@Autowired (or constructor injection)
+			@Configuration + @Bean
+
+56. 
 
 
 
