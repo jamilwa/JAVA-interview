@@ -1,0 +1,53 @@
+Java 17 brought modern language features, strong encapsulation, and security/performance improvements.
+
+🔹 1. Sealed Classes ⭐
+      Controls which classes can extend or implement others.
+      example:
+        public sealed class Shape permits Circle, Rectangle { }
+
+
+      ✅ Better domain modeling
+      ✅ Safer inheritance hierarchies
+      ✅ Helpful for pattern matching
+
+🔹 2. Pattern Matching for instanceof
+      Avoids explicit casting.
+      example:
+        if (obj instanceof String s) {
+          System.out.println(s.length());
+        }
+
+🔹 3. Records ⭐
+      Immutable data‑carrier classes.
+      example:
+        Javapublic record User(String name, int age) {}
+
+      ✅ Auto‑generated: constructor, getters, equals(), hashCode(), toString()
+      ✅ Ideal for DTOs, API models
+
+🔹 4. Switch Expressions
+      example:
+        String result = switch (day) {
+          case MON, FRI -> "Weekday";
+          case SAT, SUN -> "Weekend";
+        };
+
+🔹 5. Text Blocks
+        Multi‑line strings without escapes.
+        example:
+          String json = """
+            {
+              "name": "Java",
+              "version": 17
+            }  """;
+
+
+        ✅ Great for: SQL, JSON, HTML
+
+🔹 6. Garbage Collector Updates
+      Improved G1 GC
+      ZGC & Shenandoah more mature (low‑latency)
+
+      ✅ Better performance for large heaps
+
+
