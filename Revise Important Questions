@@ -841,38 +841,51 @@ Constructors using new operator (TreeSet::new)
 
 5. Handle Validation Errors
 	public class UserRequest {
+	    @NotBlank
+	    private String name;
+	
+	    @Email
+	    private String email;
+	
+	    // getters/setters
+		}
 
-    @NotBlank
-    private String name;
 
-    @Email
-    private String email;
-
-    // getters/setters
-	}
-
-
-@ExceptionHandler(MethodArgumentNotValidException.class)
-public ResponseEntity<ApiError> handleValidationException(
-        MethodArgumentNotValidException ex,
-        HttpServletRequest request
-) {
-    String message = ex.getBindingResult()
-            .getFieldErrors()
-            .stream()
-            .map(err -> err.getField() + ": " + err.getDefaultMessage())
-            .collect(Collectors.joining(", "));
-
-    ApiError error = new ApiError(
-            HttpStatus.BAD_REQUEST.value(),
-            HttpStatus.BAD_REQUEST.getReasonPhrase(),
-            message,
-            "VALIDATION_FAILED",
-            request.getRequestURI()
-    );
-
-    return ResponseEntity.badRequest().body(error);
-}
+		@ExceptionHandler(MethodArgumentNotValidException.class)
+		public ResponseEntity<ApiError> handleValidationException(
+		        MethodArgumentNotValidException ex,
+		        HttpServletRequest request
+		) {
+		    String message = ex.getBindingResult()
+		            .getFieldErrors()
+		            .stream()
+		            .map(err -> err.getField() + ": " + err.getDefaultMessage())
+		            .collect(Collectors.joining(", "));
+		
+		    ApiError error = new ApiError(
+		            HttpStatus.BAD_REQUEST.value(),
+		            HttpStatus.BAD_REQUEST.getReasonPhrase(),
+		            message,
+		            "VALIDATION_FAILED",
+		            request.getRequestURI()
+		    );
+		
+		    return ResponseEntity.badRequest().body(error);
+		}
+		
+	how to handle multiple validation errors at once in a list within this JSON response?
+		When a user submits a form and multiple fields fail validation (e.g., "Email is invalid" AND "Password is too short"), you don't want to just send back the first
+		error you find. A good API returns a list of all violations so the frontend can highlight every problematic field at once.
+		​To do this, we modify our ErrorResponse to include a list of specific field errors.
+		​1. The Enhanced Error Model
+		​We'll add a list of ValidationError objects to our main response.
+		public record ErrorResponse(
+		    int status, 
+		    String message, 
+		    List<FieldViolation> errors
+		) {
+		    public record FieldViolation(String field, String message) {}
+		}
 
 
 6. Logging (Critical in Production), Log once, inside handler. Never log in controller & handler both
