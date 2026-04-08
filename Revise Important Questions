@@ -161,7 +161,7 @@ public class DemoComparator {
 			BinaryOperator<Integer> add = (a, b) -> a + b;
 			System.out.println(add.apply(5, 10)); // 15
 
-9.  A method reference can be used to point the following types of methods −
+9.  A method reference can be used to point the following types of methods − (CoInS)
 Static methods
 Instance methods
 Constructors using new operator (TreeSet::new)
