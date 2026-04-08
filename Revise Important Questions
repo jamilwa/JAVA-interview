@@ -69,7 +69,7 @@
 		frequently read and write data.
 
 
-6.(AIIMS)   			            	ArrayList				              LinkedList
+6.(AIIMS)   			    ArrayList				                   LinkedList
 Access                   	Fast (O1)				                    Slow (On)
 Insert/Delete in middle  	Slow (On)                            		Faster  
 Iteration                	Fast because contiguous memory       		Slower becuase scattered nodes in memory 
