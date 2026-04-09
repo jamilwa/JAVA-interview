@@ -1867,8 +1867,38 @@ Priority       Low (overridden by Qualifier)                   High (overrides P
 			• ​Auto-Cleanup: Redis handles the deletion of old keys automatically via TTL.
 			• ​Scalability: If you have 10 instances of your microservice, they all point to the same Redis cluster to stay "in sync."
 
-58. 
+58. How docker images deployed in aws
+	Deploying Docker images to AWS usually involves a three-step workflow: Build, Store, and Run.
+​	To do this use Amazon ECR (to store the image) and Amazon ECS with Fargate (to run the image).
+	​1. The High-Level Workflow
+		• ​Build: create Docker image locally or in a CI/CD pipeline (like GitHub Actions).
+		• ​Push: upload the image to Amazon ECR (Elastic Container Registry), which is like a private Docker Hub.
+		• ​Run: a compute service like ECS (Elastic Container Service) or EKS (Kubernetes) to pull that image and start it as a container.
+	​
+			Service				  Best For					  		Management Level
+		 AWS App Runner      Simple web apps & APIs.		   	Fully Managed (Easiest)
+		 Amazon ECS			 Standard microservices.		   	Managed (Balanced)
+		 Amazon EKS			 Complex Kubernetes setups.	   		High Control (Advanced)
+		 AWS Lambda			 Short-lived, event-driven tasks. 	Serverless
 
+	2. Step-by-Step Deployment (ECS Fargate): ​Fargate is the most popular choice because it is Serverless, meaning you don't have to manage the underlying EC2 servers. 
+		​Step A:- Create a Task Definition. ​This is a JSON blueprint that tells AWS:
+				• ​Which ECR image to use.
+				• ​How much CPU and Memory to allocate.
+				• ​Which Port to open (e.g., 8080).
+				• ​Environment variables (DB URLs, API keys).
+		​Step B: Create a Cluster: 
+				​A logical grouping of your services. In Fargate, this is just a name and a configuration.
+		​Step C: Create a Service
+				​The "Service" ensures that your container stays running. If a container crashes, the Service automatically starts a new one to replace it. 
+				This is also where you attach an Application Load Balancer (ALB) to handle incoming web traffic.
+	3. Deployment via CI/CD
+		​In a production environment, you don't manually push images. You use a pipeline:
+			• ​Code Commit: Developer pushes code to Git.
+			• ​AWS CodeBuild: Automatically runs docker build and docker push to ECR.
+			• ​AWS CodeDeploy: Updates the ECS Service to use the new image version (often using Blue/Green deployment to ensure zero downtime).
+
+59. 
 
 
 
