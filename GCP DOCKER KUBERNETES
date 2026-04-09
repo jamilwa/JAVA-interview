@@ -16,6 +16,8 @@
 
 🔹 Related Commands (Very Useful)
     ✅ Login to a new account:  gcloud auth login
+		gcloud auth login → for humans using the CLI
+		application-default login → for applications & SDKs
     ✅ Activate service account (for automation):  gcloud auth activate-service-account --key-file=service-account-key.json
     ✅ Remove an account: gcloud auth revoke user@example.com
 
