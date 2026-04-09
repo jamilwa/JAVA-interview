@@ -356,40 +356,37 @@ Distributed execution engine
 
 
 6. kubectl get svc
-	this command means “Show me all Services in the current namespace.” 
-	kubectl get svc lists all Kubernetes Services in a namespace, showing how applications are exposed and discovered inside or outside the cluster. Services provide
-	stable networking and load balancing for Pods, forming the foundation of Kubernetes‑native microservices communication.
+	✅ this command means “Show me all Services in the current namespace.” 
+	✅ kubectl get svc lists all Kubernetes Services in a namespace, showing how applications are exposed and discovered inside or outside the cluster. Services provide
+		stable networking and load balancing for Pods, forming the foundation of Kubernetes‑native microservices communication.
 
-	A Service (svc) is the Kubernetes object that:
+	✅ A Service (svc) is the Kubernetes object that:
 		Provides a stable network endpoint(name + virtual IP), Load‑balances traffic to Pods, Enables service discovery via DNS. Pods come and go, but 	Services stay.
-	Service Types You’ll See
-		✅ ClusterIP : The default Service type, Exposes your app only inside the cluster, Assigned a virtual IP reachable by other Pods. Used for service‑to‑service
+	✅ Service Types You’ll See
+		 1. ClusterIP : The default Service type, Exposes your app only inside the cluster, Assigned a virtual IP reachable by other Pods. Used for service‑to‑service
 						communication, microservices backends, Databases, Internal APIs. Use ClusterIP by default. Expose externally only when required.
 						Traffic flow: Pod → Service (ClusterIP) → Pod(s)
 						How it’s accessed: using DNS name: order-service.default.svc.cluster.local     or    http://order-service:8080
 						
-		⚠️ NodePort	 :  Exposes a Service on each node’s IP at a high port, Port range: 30000–32767. Used for Local dev (Minikube/Kind), Demos / quick tests, Temporary debugging
+		 2. NodePort :  Exposes a Service on each node’s IP at a high port, Port range: 30000–32767. Used for Local dev (Minikube/Kind), Demos / quick tests, Temporary debugging
 						Traffic flow: Client → NodeIP:NodePort → Service → Pod(s)
 						Not recommended for production internet traffic. Use only for dev/debug.
 						Example: http://<node-ip>:30080
 						
-		✅ LoadBalancer : Asks the cloud provider to provision an external load balancer, Assigns a public or private external IP.
-						  Used in production cloud environments. 
-						  Traffic flow: Client → Cloud LB → Service → Pod(s)
+		 3. LoadBalancer : Asks the cloud provider to provision an external load balancer, Assigns a public or private external IP.
+						   Used in production cloud environments. 
+						   Traffic flow: Client → Cloud LB → Service → Pod(s)
 
-				
-		
-
-	For deeper inspection: 
+	✅ for deeper inspection: 
 		kubectl describe svc order-service
 		kubectl get endpoints order-service
-	By default "kubectl get svc" shows services in the current namespace.
-	All namespaces: kubectl get svc -A
-	Specific namespace: kubectl get svc -n prod
-	Very Common Follow‑up Commands
-		kubectl get svc -o wide        # more networking info
-		kubectl get svc api-gateway   # single service
-		kubectl yaml svc order-service
+	✅ By default "kubectl get svc" shows services in the current namespace.
+	✅ All namespaces: kubectl get svc -A
+	✅ Specific namespace: kubectl get svc -n prod
+	✅ Very Common Follow‑up Commands
+			kubectl get svc -o wide        		# more networking info
+			kubectl get svc api-gateway   		# single service
+			kubectl yaml svc order-service
 
 7. 
 
