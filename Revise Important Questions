@@ -1791,7 +1791,84 @@ Priority       Low (overridden by Qualifier)                   High (overrides P
 		 POST			No				Usually creates a new resource. Five POSTs = five new records.
 		 PATCH		    No/Maybe		Depends on the implementation (e.g., "increment age by 1" is not idempotent).
 
-57. 
+	How to Implement the Idempotency Key
+​		The industry standard for making non-idempotent operations (like POST) safe is using an Idempotency Key (usually a UUID) passed in the header.
+​		The Workflow:
+			• ​Client generates a unique key: Idempotency-Key: abc-123.
+			• ​Server receives the request and checks a cache (like Redis) for that key.
+			• ​If key exists: Return the cached response immediately.
+			• ​If key doesn't exist: 
+			• ​Start a database transaction.
+			• ​Process the request.
+			• ​Store the result in the cache linked to the key.
+			• ​Commit and return the response.
+	
+	Code Concept (Spring Boot Filter): ​You can use a simple interceptor to handle this globally:
+		public void handleRequest(String idempotencyKey) {
+		    if (cache.contains(idempotencyKey)) {
+		        return cache.get(idempotencyKey); // Already processed!
+		    }
+		       // Process logic here...
+		      cache.put(idempotencyKey, result);
+			}
+
+
+57. how to implement an Idempotency Layer using Redis and Spring Boot?
+		In Spring Boot, we typically use Redis. Since Redis is fast and supports automatic expiration (TTL), it's perfect for storing request keys temporarily to 
+		prevent duplicate processing.
+		​1. The Architecture: ​The flow involves an interceptor or a filter that checks the Idempotency-Key header before the request reaches your Controller.
+		​2. Implementation Steps
+			​Step A: Define the Response Wrapper
+					​We need to store the original response in Redis so we can replay it if the client retries.
+					public record CachedResponse(int statusCode, String body) implements Serializable {}
+
+			Step B: The Idempotency Interceptor
+​					This interceptor checks Redis. If the key exists, it returns the cached data.
+					@Component
+					public class IdempotencyInterceptor implements HandlerInterceptor {
+					    @Autowired
+					    private RedisTemplate<String, Object> redisTemplate;
+					
+					    @Override
+					    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+					        String key = request.getHeader("Idempotency-Key");
+					        
+					        if (key == null || key.isBlank()) {
+					            return true; 						// Or enforce it by throwing an exception
+					        }
+					
+					        CachedResponse cached = (CachedResponse) redisTemplate.opsForValue().get(key);
+					        
+					        if (cached != null) {
+					            // Replay the cached response
+					            response.setStatus(cached.statusCode());
+					            response.getWriter().write(cached.body());
+					            response.setContentType("application/json");
+					            return false; // Stop the request here!
+					        }
+					
+					        return true;
+					    }
+					}
+
+		3. Handling the "In-Progress" State
+​			A common pitfall is the Race Condition: what if a second request arrives while the first one is still being processed?
+			​To solve this, we use a "Processing" flag or a distributed lock in Redis:
+			• ​Request 1 arrives: Sets key abc-123 with value PROCESSING (with a short 10-second TTL).
+			• ​Request 2 arrives: Sees PROCESSING and returns 409 Conflict (Please wait).
+			• ​Request 1 finishes: Updates the key abc-123 with the actual Final Result (and a longer TTL, e.g., 24 hours).
+		​4. Best Practices for Idempotency
+			• ​Key Source: The client (Frontend/Mobile) should generate the UUID. If the server generates it, the client can't use it for retries.
+			• ​Scope: Only apply this to mutating operations (POST, PATCH).
+			• ​Expiration: Don't keep keys forever. Usually, 24 to 48 hours is enough for retry windows.
+			• ​Atomic Operations: Use Redis setIfAbsent (SETNX) to ensure that the check-and-set happens in one atomic step.
+		5. Why use Redis instead of a Database?
+			• ​Performance: Checking a DB for every single request adds significant latency.
+			• ​Auto-Cleanup: Redis handles the deletion of old keys automatically via TTL.
+			• ​Scalability: If you have 10 instances of your microservice, they all point to the same Redis cluster to stay "in sync."
+
+58. 
+
 
 
 
