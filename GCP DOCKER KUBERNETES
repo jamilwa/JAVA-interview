@@ -94,7 +94,7 @@
             
 5.   gcloud services list --available  
         ✅ It shows which Google Cloud services you can enable in your project. 
-        Once you find the service you need: gcloud services enable compute.googleapis.com                //This allows you to start using that service in the project.
+        	Once you find the service you need: gcloud services enable compute.googleapis.com              //This allows you to start using that service in the project.
         ✅ List enabled services (active):                gcloud services list
         ✅ Describe a specific service:                   gcloud services describe compute.googleapis.com
         🔹 Filter Available Services
