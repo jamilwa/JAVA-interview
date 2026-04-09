@@ -1,3 +1,13 @@
+0. glcoud init
+	gcloud init is the first command you run after installing the Google Cloud CLI.
+	It performs initial configuration so your local machine can securely interact with Google Cloud Platform. 
+	What gcloud init Does: “Configure my local environment so I can use Google Cloud.”
+	It helps you: 
+		Authenticate with Google Cloud
+			Select a project
+			Set default region and zone
+			Create a usable CLI configuration
+
 1. gcloud auth list
     gcloud auth list displays all Google Cloud accounts that are currently authenticated on your local machine and shows which account is active. who am I?
     In simple terms: It tells you who is logged in to the gcloud CLI. it allows you to Check active account
