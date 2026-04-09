@@ -224,3 +224,26 @@ run below command in powershell
         output: default, kube-system, kube-public, monitoring, prod.
 
 
+5. GKE steps to follow to deploy a microservice
+        1.  gcloud services enable container.googleapis.com artifactregistry.googleapis.com 
+        2.  set environment variables like PROJECT_ID, REGION, ZONE, CLUSTER, REPO, APP. 
+        		gcloud config set project $PROJECT_ID 
+        		gcloud config set compute/zone $ZONE 
+        3.  Create GKE cluster 
+        		gcloud container clusters create %CLUSTER% --num-nodes=2 --machine-type=e2-medium --zone %ZONE%
+        4.  Get kubeconfig credentials 
+        		gcloud container clusters get-credentials %CLUSTERS% --zone %ZONE%
+        		kubectl get nodes
+        5.  Create Artifact Registry repo: 
+        		gcloud artifacts repositories create %REPO% --repository-format=docker --location=%REGION% 
+        6.  Configure Docker auth: 
+        		gcloud auth configure-docker %REGION%-docker.pkg.dev 
+        7.  create image format and build and push image
+        		set IMAGE_V1="%REGION%-docker.pkg.dev/%PROJECT_ID%/%REPO%/%APP%:v1" 
+        		docker build -t %IMAGE_V1% . 
+        		docker push %IMAGE_V1% 
+        8.  Deploy microservice to GKE 
+        		Create deployment.yaml
+        		service.yaml for loadbalancing
+        		hpa.yaml
+		
