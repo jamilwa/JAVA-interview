@@ -243,7 +243,32 @@ run below command in powershell
         		docker build -t %IMAGE_V1% . 
         		docker push %IMAGE_V1% 
         8.  Deploy microservice to GKE 
-        		Create deployment.yaml
-        		service.yaml for loadbalancing
-        		hpa.yaml
+        		1. deployment.yaml - How your application runs
+					A Deployment defines how your application should run inside the cluster. It Ensures the desired number of pods is always running, Restarts failed pods,
+					Supports rolling updates and rollbacks. Kubernetes keeps 3 pods running at all times. It answers questions like:
+						Which container image to run?
+						How many copies (pods) should run?
+						How to update the app without downtime?
+						What if a pod crashes?
+				
+        		2. service.yaml	- How users access your application
+					Pods have Dynamic IPs, Short lifetimes, So you cannot rely on pod IPs to reach your app.
+					A Service.yaml provides a stable network endpoint and Load balancing across pods.
+					It Exposes your application inside or outside the cluster. 
+					Routes traffic to healthy pods. Load-balances requests automatically
+
+        		3. hpa.yaml - How your app scales automatically
+					Traffic is not constant:
+						Peak hours → high CPU
+						Off hours → waste resources
+					HPA (Horizontal Pod Autoscaler) automatically adjusts pod count and Monitors metrics (CPU/memory).
+
+				✅ Real-world analogy
+					Think of a restaurant:
+						Deployment → Kitchen staff (how many cooks, replacement if someone leaves)
+						Service → Reception counter (customers don’t go directly to kitchen)
+						HPA → Hiring/removing cooks based on crowd
+
+
+					
 		
