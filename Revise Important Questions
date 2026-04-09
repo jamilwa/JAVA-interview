@@ -1898,7 +1898,34 @@ Priority       Low (overridden by Qualifier)                   High (overrides P
 			• ​AWS CodeBuild: Automatically runs docker build and docker push to ECR.
 			• ​AWS CodeDeploy: Updates the ECS Service to use the new image version (often using Blue/Green deployment to ensure zero downtime).
 
-59. 
+59. OAUTH2
+	OAuth 2.0 is the industry-standard protocol for authorization. It allows a website to access resources (like your profile or contacts) from another service
+	(like Google or GitHub) without you ever having to give them your password. ​Think of it like a Valet Key: You give the valet a special key that only allows them to
+	drive the car for parking, but doesn't let them open the trunk or glovebox.
+		​1. The Key Players
+			• ​Resource Owner: You (the user).
+			• ​Client: The app you are using (e.g., Spotify).
+			• ​Server: The service holding your account (e.g., Google).
+			• ​Resource Server: The API that has your data (e.g., Google Contacts).
+		​2. The Standard Flow (Authorization Code Grant)
+		​	• ​The Request: You click "Login with Google" on Spotify. Spotify redirects you to Google.
+			• ​The Consent: Google asks, "Do you want to give Spotify access to your email?" You click Yes.
+			• ​The Authorization Code: Google redirects you back to Spotify with a temporary Code.
+			• ​The Token Exchange: Spotify takes that code and sends it to Google’s server "behind the scenes" along with a secret key.
+			• ​The Access Token: Google verifies the code and gives Spotify an Access Token.
+			• ​The Data: Spotify uses that token to talk to the Google Contacts API and get your info.
+		​3. Why go through all these steps?
+			• ​Security: Sending the token via the browser (URL redirect) is risky because it could be intercepted or leaked in browser history.
+			• ​The Secret: By using an Authorization Code, the actual token exchange happens "Server-to-Server," which is much more secure.
+		​4. Scope: The "Permission List". The Scope is a parameter that defines exactly what the app can do.
+			• ​scope=read_profile: Can see your name.
+			• ​scope=send_mail: Can actually send emails on your behalf.
+			• ​Best Practice: Always use "Least Privilege"—only ask for the scopes you absolutely need.
+		​5. OAuth vs. OpenID Connect (OIDC)
+			​You will often see these two together.
+				• ​OAuth 2.0 is for Authorization (What can the app do?).
+				• ​OIDC is an identity layer on top of OAuth for Authentication (Who is the user?). It introduces the ID Token, which contains the user's profile info.
+
 
 
 
