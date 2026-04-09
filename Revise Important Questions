@@ -1926,6 +1926,68 @@ Priority       Low (overridden by Qualifier)                   High (overrides P
 				• ​OAuth 2.0 is for Authorization (What can the app do?).
 				• ​OIDC is an identity layer on top of OAuth for Authentication (Who is the user?). It introduces the ID Token, which contains the user's profile info.
 
+60. how to implement an OAuth 2.0 client in Spring Boot using spring-boot-starter-oauth2-client
+	1. Add the Dependency
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+
+	2. Configure Your Provider: Just add your credentials to application.yml. Spring has built-in defaults for common providers like Google, GitHub, and Facebook.
+		spring:
+		  security:
+		    oauth2:
+		      client:
+		        registration:
+		          google:
+		            client-id: YOUR_GOOGLE_CLIENT_ID
+		            client-secret: YOUR_GOOGLE_CLIENT_SECRET
+		            scope:
+		              - profile
+		              - email
+
+	3. Security Configuration: ​This configuration ensures that any protected resource will automatically redirect unauthenticated users to the Google login page.
+		//  (HCd AhrRP Any Authe Ors Jcwd)
+		@Configuration
+		@EnableWebSecurity
+		public class SecurityConfig {
+		
+		@Bean
+		SecurityFilterChain securityFilter(HttpSecurity http) throws Exception{
+			http.csrf(csrf -> csrf.disable())
+			.authorizeHttpRequests(auth -> auth.requestMatchers("login", "register").permitAll()
+			.anyRequest().authenticated())
+			.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+			
+			return http.build();
+		}
+		}
+
+
+	4. Accessing User Data: ​Once the user logs in, Spring populates an OAuth2User principal. You can inject this directly into your Controller to see who logged in.
+		@RestController
+		public class UserController {
+		
+		    @GetMapping("/user")
+		    public Map<String, Object> getUser(@AuthenticationPrincipal OAuth2User principal) {
+		        // This contains the attributes returned by Google (name, email, picture, etc.)
+		        return principal.getAttributes();
+		    }
+		}
+
+
+	5. How it works behind the scenes
+		• ​Intercept: A user tries to visit /user. Spring sees they aren't logged in.
+		• ​Redirect: Spring redirects the browser to Google's authorization URL (automatically built using your client-id).
+		• ​Callback: After the user approves, Google sends the code back to /login/oauth2/code/google (a default endpoint Spring maintains).
+		• ​Exchange: Spring's OAuth2UserService sends that code to Google to get the access_token.
+		• ​Finalize: Spring creates a SecurityContext for the user, and they are now "Logged In."
+		
+		​Why this is better than manual implementation?
+			• ​State Management: Spring automatically handles the state parameter to prevent Cross-Site Request Forgery (CSRF).
+			• ​Token Refresh: If you configure it correctly, Spring can automatically use Refresh Tokens to keep the session alive without asking the user to log in again.
+			• ​Extensibility: You can easily add a second provider (like GitHub) just by adding three lines to your YAML file.
+
 
 
 
