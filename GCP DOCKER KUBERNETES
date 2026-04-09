@@ -406,6 +406,9 @@ Distributed execution engine
 
 5. GKE steps to follow to deploy a microservice
         1.  gcloud services enable container.googleapis.com artifactregistry.googleapis.com 
+				if you get any error in step 1 like FAILED PRECONDITION: Billing account for project is not found. Then run gcloud init again -> Pick configuration 
+				to use: select Re-initilialize this config -> select account: select the email from which GCP is logged in -> select the correct project id from 
+				list(project id can be found in GCP https://console.cloud.google.com/welcome). setup REGION, ZONE and then run the step 1 command again. 
         2.  set environment variables like PROJECT_ID, REGION, ZONE, CLUSTER, REPO, APP. 
         		gcloud config set project $PROJECT_ID 
         		gcloud config set compute/zone $ZONE 
