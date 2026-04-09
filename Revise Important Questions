@@ -1775,7 +1775,24 @@ Priority       Low (overridden by Qualifier)                   High (overrides P
 			@Autowired (or constructor injection)
 			@Configuration + @Bean
 
-56. 
+56. Idempotency - Idempotency is the property where an operation can be performed multiple times without changing the result.
+​		example: 
+	​		• ​A client sends a POST /payments request.
+			• ​The server processes it and charges the user.
+			• ​The network drops before the server can send a "Success" message.
+			• ​The client (or a retry logic) sends the request again.
+			​Without idempotency, the user is charged twice. With idempotency, the server recognizes the second request and says, "I already did this; here is the receipt."
+​	
+	HTTP Methods & Idempotency
+		Method		Idempotent?			Description
+		 GET			Yes				Fetching data 10 times doesn't change the data.
+		 PUT			Yes				Replacing a resource with the same data results in the same state.
+		 DELETE			Yes				Deleting something that is already gone results in it still being gone.
+		 POST			No				Usually creates a new resource. Five POSTs = five new records.
+		 PATCH		    No/Maybe		Depends on the implementation (e.g., "increment age by 1" is not idempotent).
+
+57. 
+
 
 
 
