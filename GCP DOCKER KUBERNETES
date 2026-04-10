@@ -187,6 +187,40 @@
 	Best Practices
 		✅ Confirm before deleting:  gcloud run services describe credit-service --region %REGION%
 		
+9.  gcloud artifacts docker images list us-central1-docker.pkg.dev/PROJECT_ID/REPOSITORY
+	this command Lists all Docker images stored in a specific Artifact Registry repository in Google Cloud.
+	This command is commonly used to: 
+		Verify that images were pushed successfully
+		Audit what images exist before cleanup
+		Debug deployment or CI/CD issues
+
+10. gcloud artifacts docker images delete IMAGE_URL
+		1️⃣ Delete a Specific Image Version (Recommended), Using digest (SAFE, precise).
+			gcloud artifacts docker images delete us-central1-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE@sha256:abc123
+
+		Why this is best practice
+			✅ Deletes only one immutable version
+			✅ Does NOT affect other tags
+			✅ Safe for production cleanup
+			✅ Used in CI/CD and GitOps workflows
+		🔄 Typical Safe Workflow (Before Deleting)
+			✅ Step 1: List images: gcloud artifacts docker images list us-central1-docker.pkg.dev/PROJECT_ID/REPOSITORY
+			✅ Step 2: List tags and digests: gcloud artifacts docker tags list us-central1-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE
+			✅ Step 3: Confirm not in use
+				Cloud Run: gcloud run services list --region us-central1
+				GKE : kubectl get deployments -A | grep IMAGE
+			✅ Step 4: Delete by digest: gcloud artifacts docker images delete IMAGE_URL@sha256:...
+			
+11. Cleanup/Delete commands
+		kubectl delete hpa spring-lab-hpa 
+		kubectl delete svc spring-lab-svc 
+		kubectl delete deploy spring-lab 
+		kubectl delete cm app-config 
+		kubectl delete secret app-secret 
+		gcloud container clusters delete $CLUSTER --zone $ZONE --quiet 				// --quiet  it will not prompt to confirm.
+		gcloud artifacts repositories delete $REPO --location=$REGION --quiet 
+
+
 
 
 ---------------------------------------------------------KUBERNETES---------------------------------------------------------
