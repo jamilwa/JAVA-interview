@@ -124,9 +124,7 @@
 6. gcloud compute zones list
     ✅ It tells you which zones exist in GCP and whether they are available to deploy resources.
     ✅ List zones in a specific region:         gcloud compute zones list --filter="region:(asia-south1)"
-
-
-            
+         
 7. What is BigQuery in GCP?
     BigQuery is Google Cloud Platform’s fully managed, serverless, distributed data warehouse designed for large‑scale data analytics.
     In simple terms: BigQuery is used to run SQL queries on massive datasets (GBs–PBs) very fast, without managing servers or databases.
@@ -167,10 +165,29 @@
     
         BigQuery is more flexible for evolving datasets.
 
-Distributed execution engine
+    Distributed execution engine
 
-✅ Columnar storage = faster aggregations
-✅ Only reads required columns (less I/O)
+   ✅ Columnar storage = faster aggregations
+   ✅ Only reads required columns (less I/O)
+
+8. gcloud run services delete credit-service --platform managed --region %REGION%
+	--platform managed means it is Fully Managed Cloud Run, not Cloud Run for Anthos or GKE‑based Cloud Run
+	This flag removes ambiguity and is best practice in scripts. 
+	When you delete a Cloud Run service, GCP removes:
+		✅ Service configuration
+		✅ All revisions
+		✅ Routing rules
+		✅ Autoscaling settings
+		✅ IAM service bindings (on that service)
+	What is NOT deleted:
+		✅ Container images in Artifact Registry
+		✅ Logs (retained per retention policy)
+		✅ IAM roles at project level
+
+	Best Practices
+		✅ Confirm before deleting:  gcloud run services describe credit-service --region %REGION%
+		
+
 
 ---------------------------------------------------------KUBERNETES---------------------------------------------------------
 0. 1️⃣ Problems Kubernetes Solves (Before vs After)
