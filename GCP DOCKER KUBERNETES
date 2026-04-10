@@ -112,6 +112,14 @@
                     roles/serviceusage.admin → to enable services
                     Without permissions: PERMISSION_DENIED
         Always verify: gcloud config list project
+5. gcloud container clusters create labgke --num-nodes=2 --machine-type=e2-medium -zone us-central1-a
+	if you get error like RESOURCE_EXHAUSTED, GCE_QUOTA_EXCEEDED. go to GCP -> billing -> manage billing accounts -> your projects -> Under billing account select
+	My billing account for your project -> scroll down till bottom and click activate.
+	run the command 5 again. if you get error like ResponseError: Already exists. Then run below command to delete the existing cluster
+		gcloud container clusters delete labgke --zone us-central1-a
+	run command 5 again. cluster is created but you have a CRITICAL: ACTION REQUIRED: gke-gcloud-auth-plugin was not found message. then run below commands
+		gcloud components install kubectl
+		gcloud container clusters get-credentials labgke --zone us-central1-a
 
 6. gcloud compute zones list
     ✅ It tells you which zones exist in GCP and whether they are available to deploy resources.
@@ -158,12 +166,6 @@
         Supports nested & repeated fields
     
         BigQuery is more flexible for evolving datasets.
-    
-
-
-
-
-
 
 Distributed execution engine
 
